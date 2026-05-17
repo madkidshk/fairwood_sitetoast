@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>無餡西多保衛聯盟 · 鴨蛋派</title>
+<style>
+/* ====== "Lovable / Framer template" feel — 一個茶記街坊用 AI 起嘅 site ======
+   作者：林伯（@uncle_lam_1962）· 用咗 Lovable，揀咗 default 'Editorial' template，
+   執咗少少色，加咗自己嘅故事。設計：誠懇、template-y、字多、過度認真。*/
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+HK:wght@500;700;900&family=Noto+Sans+HK:wght@400;500;700&display=swap');
+
+:root{
+  --paper:#fbf6ec;
+  --paper-2:#f3ead4;
+  --ink:#1f1812;
+  --ink-soft:#5a4a3a;
+  --orange:#e87618;
+  --orange-deep:#a8500a;
+  --yolk:#f4b942;
+  --line:#d6c8a8;
+}
+*{ box-sizing: border-box; }
+body{
+  margin:0; padding:0;
+  font-family:"Noto Serif HK", serif;
+  background: var(--paper); color: var(--ink);
+  line-height:1.6;
+}
+
+/* template-style top banner — 好多 AI builder default 都有 */
+.top-banner{
+  background: var(--ink); color: var(--yolk);
+  text-align:center; padding: 8px;
+  font-family:"Noto Sans HK", sans-serif; font-size:13px; letter-spacing:.1em;
+}
+.top-banner strong{ color:#fff; }
+
+/* nav */
+.nav{
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 24px 64px; border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+.brand{ font-family:"Noto Serif HK", serif; font-weight:900; font-size:24px;}
+.brand .logo{
+  display:inline-block; width:36px; height:36px; background: var(--orange); border-radius:50%;
+  vertical-align:middle; margin-right:10px; position:relative;
+}
+.brand .logo::after{
+  content:""; position:absolute; left:50%; top:50%; transform: translate(-50%,-50%);
+  width:18px; height:18px; background: var(--yolk); border-radius:50%;
+}
+.nav .links{ font-family:"Noto Sans HK",sans-serif; font-size:15px; display:flex; gap:24px;}
+.nav .links a{ color: var(--ink); text-decoration:none;}
+.nav .links a:hover{ color: var(--orange-deep);}
+.nav .vote{
+  background: var(--orange); color:#fff; padding: 10px 20px; text-decoration:none;
+  font-family:"Noto Sans HK", sans-serif; font-weight:700; font-size:14px;
+  border-radius: 4px;
+}
+
+/* hero */
+.hero{
+  padding: 100px 64px 64px;
+  max-width: 1100px; margin: 0 auto;
+}
+.hero .eyebrow{
+  font-family:"Noto Sans HK", sans-serif;
+  font-size:13px; letter-spacing:.25em; color: var(--orange-deep);
+  text-transform: uppercase; margin-bottom: 24px;
+}
+.hero h1{
+  font-family:"Noto Serif HK", serif; font-weight:900;
+  font-size: 84px; line-height:1.05; letter-spacing:-.02em;
+  margin:0; max-width: 900px;
+}
+.hero h1 em{ font-style: italic; color: var(--orange-deep); font-weight:900;}
+.hero .lead{
+  font-size: 22px; line-height:1.55; margin-top: 32px;
+  max-width: 720px; color: var(--ink-soft);
+}
+.hero .sig{
+  margin-top: 32px; font-family:"Noto Sans HK", sans-serif;
+  font-size:14px; color: var(--ink-soft); letter-spacing:.1em;
+}
+.hero .sig::before{ content:""; display:inline-block; width:32px; height:1px; background:var(--ink-soft); vertical-align:middle; margin-right:10px;}
+
+/* big hero image — looks like stock food photography placeholder */
+.hero-photo{
+  margin: 56px auto 0; max-width: 1100px;
+  height: 480px; background:
+    repeating-linear-gradient(45deg, #e0c98a 0 14px, #d3b86c 14px 28px);
+  border: 1px solid var(--line);
+  display:flex; align-items:flex-end; justify-content:flex-start;
+  padding: 24px;
+  font-family:"Noto Sans HK", sans-serif; font-size:13px; color: var(--ink-soft);
+}
+.hero-photo .caption{ background:rgba(255,255,255,.85); padding: 8px 16px; border-radius:4px;}
+
+/* manifesto */
+.section{ padding: 96px 64px; max-width: 900px; margin: 0 auto;}
+.section.wide{ max-width: 1100px;}
+.section h2{
+  font-family:"Noto Serif HK", serif; font-weight:900;
+  font-size: 56px; line-height:1.1; letter-spacing:-.02em;
+  margin: 0 0 16px;
+}
+.section .kicker{ font-family:"Noto Sans HK",sans-serif; font-size:13px; color: var(--orange-deep); letter-spacing:.25em; text-transform:uppercase; margin-bottom:16px;}
+.section p{ font-size:19px; line-height:1.8; color: var(--ink); margin: 0 0 20px;}
+.section p strong{ background: linear-gradient(transparent 65%, var(--yolk) 65% 90%, transparent 90%); padding:0 2px;}
+
+/* 3 reasons grid */
+.reasons{
+  display:grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+  margin: 48px 0 0;
+}
+.reasons .reason{
+  background: var(--paper-2); padding: 32px;
+  border-radius: 8px;
+}
+.reasons .num{
+  font-family:"Noto Serif HK", serif; font-weight:900;
+  color: var(--orange); font-size: 64px; line-height:1;
+}
+.reasons h4{
+  font-family:"Noto Serif HK", serif; font-weight:900;
+  font-size:24px; margin: 12px 0 8px;
+}
+.reasons p{ font-size:15px; line-height:1.55; color: var(--ink-soft); margin:0;}
+
+/* testimonial block — like a default Lovable testimonials section */
+.test{
+  background: var(--paper-2); padding: 80px 64px;
+}
+.test .wrap{ max-width: 900px; margin: 0 auto;}
+.test .kicker{ font-family:"Noto Sans HK",sans-serif; font-size:13px; color: var(--orange-deep); letter-spacing:.25em; text-transform:uppercase; margin-bottom:24px;}
+.test blockquote{
+  font-family:"Noto Serif HK", serif; font-weight:500;
+  font-size: 32px; line-height:1.45; margin: 0;
+  font-style: italic;
+}
+.test .who{ font-family:"Noto Sans HK",sans-serif; font-size:14px; color: var(--ink-soft); margin-top: 24px;}
+.test .who strong{ color: var(--ink); font-weight:700; }
+
+/* CTA section */
+.cta-sec{ background: var(--ink); color: var(--paper); padding: 96px 64px; text-align:center;}
+.cta-sec h2{ font-family:"Noto Serif HK", serif; font-weight:900; font-size:64px; line-height:1.1; margin:0; letter-spacing:-.02em;}
+.cta-sec h2 em{ color: var(--yolk); font-style: italic;}
+.cta-sec p{ font-size:18px; max-width:600px; margin: 24px auto 40px; color: #c9b89a;}
+.cta-sec .button{
+  display:inline-block; background: var(--orange); color:#fff;
+  font-family:"Noto Sans HK", sans-serif; font-weight:700; font-size:18px;
+  padding: 16px 32px; text-decoration:none; border-radius:4px;
+}
+
+/* footer */
+.foot{
+  padding: 32px 64px; text-align:center;
+  font-family:"Noto Sans HK", sans-serif; font-size:13px; color: var(--ink-soft);
+  border-top: 1px solid var(--line);
+}
+.foot .made{ font-size:11px; opacity:.7; margin-top:8px;}
+
+/* badge — "submitted to Fairwood" */
+.submitted{
+  position: fixed; right: 16px; bottom: 16px;
+  background:#fff; border: 1px solid var(--line); padding: 8px 14px;
+  font-family:"Noto Sans HK", sans-serif; font-size:12px; color: var(--ink-soft);
+  border-radius: 999px; box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  z-index: 100; display:flex; align-items:center; gap:8px;
+}
+.submitted::before{ content:"✓"; color:#2f6b48; font-weight:700;}
+</style>
+</head>
+<body>
+
+<div class="top-banner">🦆 <strong>傳統原味派 · 撐你撐到尾</strong> · 已交大快活．SITE ID #2106 · 等緊每日 6PM 上架</div>
+
+<nav class="nav">
+  <div class="brand"><span class="logo"></span>無餡西多保衛聯盟</div>
+  <div class="links">
+    <a href="#about">關於</a>
+    <a href="#why">三大理由</a>
+    <a href="#history">歷史</a>
+    <a href="#testimonial">街坊心聲</a>
+  </div>
+  <a href="master-site.html" class="vote">為鴨蛋派投一票 →</a>
+</nav>
+
+<section class="hero" id="about">
+  <div class="eyebrow">第 1 章 · 大排檔西多嘅真．身世</div>
+  <h1>西多本來就<em>冇餡</em>。<br>係近年人哋亂加嘢。</h1>
+  <p class="lead">
+    我喺旺角茶記做咗 38 年伙計，由細食到大。傳統大排檔嘅港式西多，從來都係：兩片麵包，浸鴨蛋漿，落 Pan 慢火煎，淋糖漿同煉奶。咁就係正宗。冇人會夾花生醬，冇人會夾朱古力。因為咁樣會掩蓋鴨蛋本身嘅香。
+  </p>
+  <div class="sig">林伯 · 旺角茶記 38 年 · 撐大快活經典無餡西多</div>
+</section>
+
+<div class="hero-photo">
+  <div class="caption">📷 西多士．煎 Pan 上．鴨蛋漿浸足三十秒 · 我影嘅</div>
+</div>
+
+<section class="section" id="why">
+  <div class="kicker">第 2 章</div>
+  <h2>大快活做啱咗三樣嘢。</h2>
+  <p>
+    大快活今次推「Site 多士」campaign，講真我一開始覺得後生仔玩嘢。但細心睇佢個產品 brief，原來佢哋係好認真咁去 <strong>守傳統</strong>：
+  </p>
+
+  <div class="reasons">
+    <div class="reason">
+      <div class="num">01</div>
+      <h4>用鴨蛋唔係雞蛋</h4>
+      <p>鴨蛋蛋黃比例高，落 Pan 煎之後特別香。市面好多連鎖店為咗慳成本用雞蛋，呢樣大快活做啱咗。</p>
+    </div>
+    <div class="reason">
+      <div class="num">02</div>
+      <h4>煎 Pan 唔係油炸</h4>
+      <p>油炸嘅西多會索油，食兩件已經攰。慢火煎 Pan，麵包外脆內軟，鴨蛋漿唔會 over-cooked。</p>
+    </div>
+    <div class="reason">
+      <div class="num">03</div>
+      <h4>堅持無餡</h4>
+      <p>無餡西多嘅靈魂係麵包＋蛋漿＋糖漿煉奶。加花生醬會搶味。大快活推花生版本我尊重，但傳統一定要守。</p>
+    </div>
+  </div>
+</section>
+
+<section class="test" id="testimonial">
+  <div class="wrap">
+    <div class="kicker">第 3 章 · 街坊心聲</div>
+    <blockquote>
+      「我食咗 50 年西多。冇花生果隻先係真。<br>
+      花生果隻係新嘢，得閒先食下。日日食，仲係要傳統。」
+    </blockquote>
+    <div class="who"><strong>陳生</strong> · 大角咀街坊 · 每朝飲早茶必點西多</div>
+  </div>
+</section>
+
+<section class="section" id="history">
+  <div class="kicker">第 4 章 · 歷史考據</div>
+  <h2>由 1950 年代講起。</h2>
+  <p>
+    港式西多起源自 1950 年代香港大排檔，係本地廚師將法式 French Toast (Pain Perdu) 改良。當年物資短缺，唔會夾餡 ── <strong>夾餡係近 20 年連鎖店為咗賣貴啲先加上去嘅</strong>。
+  </p>
+  <p>
+    真正茶記師傅同我講過：「西多嘅靈魂係蛋香同麵包嘅口感。你加咗花生醬，啲人食嘅係花生醬，唔係西多。」
+  </p>
+  <p>
+    所以今次大快活同時推出「無餡」同「花生」兩個版本，我覺得佢哋係好聰明 ── 但我個人會永遠揀無餡。<strong>因為咁先係尊重歷史。</strong>
+  </p>
+</section>
+
+<section class="cta-sec">
+  <h2>揀<em>鴨蛋派</em>。<br>守住一份港味。</h2>
+  <p>呢個 site 係我用 AI 起嘅，第一次用，唔係好識。如果你都係撐傳統，幫我去大快活個 Master Site 投一票，等花生派輸到面青。</p>
+  <a href="master-site.html" class="button">▸ 去 Master Site 投鴨蛋派一票</a>
+</section>
+
+<footer class="foot">
+  © 2026 · 無餡西多保衛聯盟（個人非牟利）· 一個用 Lovable + Claude 起嘅 site
+  <div class="made">交咗去大快活「Site 多士」campaign · Submission ID #2106 · 已通過 AI 初審</div>
+</footer>
+
+<div class="submitted">已交大快活 Site 多士 · ID 2106</div>
+
+</body>
+</html>

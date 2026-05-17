@@ -1,0 +1,1136 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SITE 多士大對決 · Visual-first Layout · 大快活</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ============================================================
+   VISUAL-FIRST REDESIGN — base on wireframe-for-ai.html structure
+   keep 7-frame skeleton, replace text-boxes with photo / mascot /
+   color-block / oversized typography. Drives off styles.css tokens.
+   ============================================================ */
+
+*{ box-sizing: border-box; }
+html, body{ margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: "Noto Sans HK", sans-serif; }
+img{ display: block; max-width: 100%; }
+a{ color: inherit; text-decoration: none; }
+
+/* paper grain on everything */
+body::before{
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(120,80,30,.06), transparent 45%),
+    radial-gradient(circle at 88% 82%, rgba(120,80,30,.05), transparent 45%),
+    repeating-linear-gradient(0deg, rgba(60,40,20,.02) 0 1px, transparent 1px 3px);
+  mix-blend-mode: multiply;
+}
+.shell{ position: relative; z-index: 2; }
+
+/* ============ NAV BAR (sticky) ============ */
+.vf-nav{
+  position: sticky; top: 0; z-index: 50;
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
+  padding: 12px 32px;
+  display: flex; align-items: center; gap: 20px;
+}
+.vf-nav .logo{ display: flex; align-items: center; gap: 12px; }
+.vf-nav .logo img{ width: 40px; height: auto; }
+.vf-nav .logo strong{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 20px; letter-spacing: -.01em; }
+.vf-nav .logo span{ font-family:"DM Mono", monospace; font-size: 10px; color: var(--ink-soft); letter-spacing: .18em; }
+.vf-nav .links{ display: flex; gap: 22px; margin-left: auto; font-family:"DM Mono", monospace; font-size: 12px; letter-spacing: .15em; }
+.vf-nav .links a:hover{ color: var(--fairwood-deep); }
+.vf-live{
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--ink); color: var(--peanut-lime);
+  padding: 6px 12px; font-family:"DM Mono", monospace; font-size: 10px; letter-spacing: .18em;
+}
+.vf-live::before{ content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--peanut-lime); animation: pulse 1.4s infinite; }
+@keyframes pulse{ 50%{ opacity: .35; } }
+.vf-cta{
+  background: var(--fairwood); color: var(--ink);
+  padding: 10px 18px;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 14px;
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform .15s, box-shadow .15s;
+}
+.vf-cta:hover{ transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--ink); }
+
+/* ===================================================
+   FRAME 01 · HERO — photo-led, typography overlay
+   =================================================== */
+.f1{
+  position: relative;
+  display: grid; grid-template-columns: 1.05fr 1fr;
+  min-height: 92vh;
+  border-bottom: 2px solid var(--ink);
+  overflow: hidden;
+}
+.f1-photo{
+  position: relative;
+  background:
+    linear-gradient(135deg, rgba(240,138,0,.85) 0%, rgba(196,109,0,.6) 100%),
+    url("assets/ref-fairwood-westoast.png");
+  background-size: cover, 140%;
+  background-position: center, center 38%;
+  background-repeat: no-repeat, no-repeat;
+  background-blend-mode: multiply, normal;
+  filter: contrast(1.05) saturate(1.1);
+}
+.f1-photo::after{
+  content: ""; position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(135deg, rgba(26,20,16,.04) 0 4px, transparent 4px 9px);
+  mix-blend-mode: multiply;
+}
+.f1-stamp{
+  position: absolute; top: 40px; left: 40px;
+  background: rgba(245,236,217,.94);
+  border: 3px solid var(--stamp); color: var(--stamp);
+  padding: 8px 18px;
+  font-family:"Reggae One", serif; font-size: 22px; letter-spacing: .04em;
+  transform: rotate(-5deg);
+  box-shadow: 4px 4px 0 rgba(26,20,16,.15);
+  z-index: 3;
+}
+.f1-photo-caption{
+  position: absolute; bottom: 32px; left: 40px; right: 40px;
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
+  z-index: 3;
+}
+.f1-photo-caption .num{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  color: var(--paper); font-size: 96px; line-height: .85; letter-spacing: -.04em;
+  text-shadow: 4px 4px 0 rgba(26,20,16,.4);
+}
+.f1-photo-caption .num small{ display: block; font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .25em; color: var(--paper); margin-top: 12px; font-weight: 400; opacity: .85; }
+.f1-photo-caption .meta{
+  font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .2em;
+  color: var(--paper); text-align: right; max-width: 220px; line-height: 1.6;
+}
+.f1-photo-caption .meta strong{ color: var(--duck); font-weight: 700; }
+
+.f1-content{
+  background: var(--paper);
+  padding: 56px 56px 40px;
+  display: flex; flex-direction: column; justify-content: center; gap: 28px;
+  position: relative;
+}
+.f1-kicker{
+  display: inline-flex; align-items: center; gap: 14px;
+  font-family:"DM Mono", monospace; font-size: 12px; letter-spacing: .25em;
+  color: var(--fairwood-deep);
+}
+.f1-kicker::before{ content: ""; width: 32px; height: 2px; background: var(--fairwood); }
+
+.f1-title{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: clamp(56px, 6vw, 96px); line-height: .92;
+  letter-spacing: -.035em; margin: 0;
+}
+.f1-title .o{ color: var(--fairwood); }
+.f1-title .p{ color: var(--peanut-hot); }
+.f1-title .vs{
+  display: inline-block;
+  font-family:"Noto Serif HK", serif; font-style: italic; font-weight: 700;
+  font-size: .55em; color: var(--ink-soft);
+  transform: rotate(-4deg); padding: 0 8px;
+  vertical-align: middle;
+}
+.f1-lead{
+  font-family:"Noto Serif HK", serif; font-weight: 500;
+  font-size: 17px; line-height: 1.55; max-width: 520px; color: var(--ink-soft);
+  margin: 0;
+}
+.f1-cta-row{
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.f1-cta-primary{
+  background: var(--ink); color: var(--fairwood);
+  padding: 18px 28px;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 18px;
+  border: 2px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--fairwood);
+  transition: transform .15s, box-shadow .15s;
+}
+.f1-cta-primary:hover{ transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--fairwood); }
+.f1-cta-secondary{
+  font-family:"DM Mono", monospace; font-size: 12px; letter-spacing: .15em;
+  color: var(--ink); border-bottom: 2px solid var(--ink); padding-bottom: 3px;
+}
+
+/* mascot peek */
+.f1-mascot{
+  position: absolute; right: -40px; bottom: -20px;
+  width: 200px; height: auto; z-index: 4;
+  filter: drop-shadow(0 12px 20px rgba(0,0,0,.18));
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+
+@media (max-width: 900px){
+  .f1{ grid-template-columns: 1fr; min-height: auto; }
+  .f1-photo{ min-height: 60vh; }
+  .f1-mascot{ width: 130px; right: -10px; bottom: -10px; }
+}
+
+/* ===================================================
+   FRAME 02 · FACTION TABS — split-screen big placards
+   =================================================== */
+.f2{
+  position: relative;
+  display: grid; grid-template-columns: 1fr 64px 1fr;
+  align-items: stretch;
+  border-bottom: 2px solid var(--ink);
+  background: var(--ink);
+}
+.faction-pl{
+  position: relative; cursor: pointer;
+  min-height: 480px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 40px;
+  overflow: hidden;
+  border-right: 2px solid var(--ink);
+  transition: filter .25s;
+}
+.faction-pl.duck{
+  background:
+    linear-gradient(135deg, rgba(255,201,76,.65) 0%, rgba(196,109,0,.7) 100%),
+    radial-gradient(circle at 60% 55%, var(--duck) 0%, var(--fairwood) 38%, var(--fairwood-deep) 85%);
+}
+.faction-pl.peanut{
+  background:
+    linear-gradient(135deg, rgba(196,102,31,.7) 0%, rgba(58,28,12,.85) 100%),
+    radial-gradient(circle at 40% 60%, var(--fairwood-light) 0%, var(--peanut-hot) 55%, var(--peanut) 95%);
+  border-right: none;
+  color: var(--paper);
+}
+.faction-pl:hover{ filter: brightness(1.08); }
+
+.faction-pl::after{
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    repeating-linear-gradient(135deg, rgba(0,0,0,.04) 0 4px, transparent 4px 9px);
+  mix-blend-mode: multiply;
+}
+
+.faction-top{
+  position: relative; z-index: 2;
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.faction-emoji{
+  font-size: 88px; line-height: 1;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.25));
+}
+.faction-corner-stamp{
+  background: var(--paper); color: var(--ink);
+  border: 2px solid var(--ink);
+  padding: 6px 14px;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 13px;
+  transform: rotate(6deg);
+  box-shadow: 3px 3px 0 rgba(0,0,0,.2);
+}
+.faction-pl.duck .faction-corner-stamp{ color: var(--fairwood-deep); }
+.faction-pl.peanut .faction-corner-stamp{ color: var(--peanut-hot); }
+
+.faction-mid{ position: relative; z-index: 2; margin: 24px 0; }
+.faction-pl h2{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: clamp(56px, 5.5vw, 84px); line-height: .9;
+  letter-spacing: -.035em; margin: 0;
+  color: var(--ink);
+}
+.faction-pl.peanut h2{ color: var(--paper); }
+.faction-pl .sub{
+  font-family:"DM Mono", monospace; font-size: 12px; letter-spacing: .18em;
+  margin-top: 16px; color: rgba(26,20,16,.7);
+}
+.faction-pl.peanut .sub{ color: rgba(245,236,217,.7); }
+
+.faction-bottom{
+  position: relative; z-index: 2;
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 16px;
+}
+.faction-count{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 96px; line-height: .85; letter-spacing: -.04em;
+  color: var(--ink);
+}
+.faction-pl.peanut .faction-count{ color: var(--paper); }
+.faction-count small{
+  display: block; font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .2em;
+  margin-top: 8px; font-weight: 400; opacity: .65;
+}
+.faction-go{
+  background: var(--ink); color: var(--fairwood);
+  padding: 14px 22px;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 15px;
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--paper);
+  transition: transform .15s, box-shadow .15s;
+}
+.faction-pl.peanut .faction-go{ background: var(--paper); color: var(--peanut); box-shadow: 4px 4px 0 var(--ink); }
+.faction-go:hover{ transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--paper); }
+.faction-pl.peanut .faction-go:hover{ box-shadow: 6px 6px 0 var(--ink); }
+
+/* central VS column */
+.f2-vs{
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.f2-vs-medal{
+  width: 88px; height: 88px;
+  background: var(--stamp); color: var(--paper);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+  font-family:"Reggae One", serif;
+  box-shadow: 0 0 0 4px var(--stamp), 0 12px 24px rgba(0,0,0,.5);
+  transform: rotate(-6deg);
+}
+.f2-vs-medal .v{ font-size: 32px; letter-spacing: -.04em; }
+.f2-vs-medal .d{ font-family:"DM Mono", monospace; font-size: 8px; letter-spacing: .25em; opacity: .85; margin-top: 3px; }
+
+@media (max-width: 900px){
+  .f2{ grid-template-columns: 1fr; }
+  .f2-vs{ padding: 16px 0; }
+  .faction-pl{ border-right: none; border-bottom: 2px solid var(--ink); }
+}
+
+/* ===================================================
+   FRAME 03 · SITE CAROUSEL — magazine-style preview
+   =================================================== */
+.f3{
+  padding: 80px 32px 96px;
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
+}
+.f3-inner{ max-width: 1440px; margin: 0 auto; }
+.f3-head{
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+.f3-head h3{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: clamp(40px, 4.5vw, 64px); line-height: .95; margin: 0; letter-spacing: -.03em;
+}
+.f3-head h3 .e{ color: var(--fairwood-deep); }
+.f3-head .meta{ font-family:"DM Mono", monospace; font-size: 12px; letter-spacing: .15em; color: var(--ink-soft); max-width: 320px; line-height: 1.7; }
+
+.f3-controls{ display: flex; align-items: center; gap: 16px; }
+.f3-counter{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 24px; }
+.f3-counter span{ color: var(--fairwood-deep); }
+.f3-arr{
+  width: 52px; height: 52px;
+  background: var(--ink); color: var(--fairwood);
+  border: 3px solid var(--fairwood);
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 22px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: transform .15s;
+}
+.f3-arr:hover{ transform: scale(1.08); }
+
+.f3-card{
+  display: grid; grid-template-columns: 1.8fr 1fr;
+  border: 2.5px solid var(--ink);
+  background: var(--paper);
+  box-shadow: 14px 14px 0 var(--fairwood);
+  overflow: hidden;
+  min-height: 460px;
+}
+.f3-art{
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(245,236,217,0) 60%, rgba(245,236,217,.92) 100%),
+    repeating-linear-gradient(45deg, var(--paper-deep) 0 6px, var(--paper) 6px 14px);
+  padding: 48px 56px;
+  display: flex; flex-direction: column; justify-content: center;
+  border-right: 2px solid var(--ink);
+}
+.f3-art-tag{
+  position: absolute; top: 22px; left: 22px;
+  background: var(--ink); color: var(--peanut-lime);
+  padding: 6px 14px;
+  font-family:"DM Mono", monospace; font-size: 10px; letter-spacing: .25em;
+}
+.f3-art-stamp{
+  position: absolute; top: 22px; right: 22px;
+  border: 2.5px solid var(--stamp); color: var(--stamp);
+  background: rgba(255,255,255,.7);
+  padding: 6px 14px;
+  font-family:"Reggae One", serif; font-size: 16px; letter-spacing: .03em;
+  transform: rotate(-4deg);
+}
+.f3-art h4{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: clamp(40px, 4.5vw, 72px); line-height: .92;
+  letter-spacing: -.035em; color: var(--peanut); margin: 0;
+}
+.f3-art h4 strong{ color: var(--ink); }
+.f3-art .essay{
+  margin-top: 22px; font-family:"Noto Serif HK", serif; font-style: italic; font-weight: 500;
+  font-size: 17px; line-height: 1.6; max-width: 540px; color: var(--ink-soft);
+}
+.f3-art .sig{
+  margin-top: 28px; font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .15em; color: var(--ink-soft);
+}
+.f3-art .sig::before{ content: ""; display: inline-block; width: 32px; height: 1px; background: var(--ink-soft); vertical-align: middle; margin-right: 10px; }
+
+.f3-meta{
+  background: var(--paper);
+  display: flex; flex-direction: column;
+  padding: 32px 28px;
+  gap: 16px;
+}
+.f3-meta-author{
+  display: flex; align-items: center; gap: 12px;
+  padding-bottom: 14px; border-bottom: 1px dashed var(--line);
+}
+.f3-meta-avatar{
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--duck), var(--fairwood-deep));
+  border: 2px solid var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.f3-meta-author .who{ font-family:"Noto Serif HK", serif; font-weight: 700; font-size: 14px; line-height: 1.2; }
+.f3-meta-author .who small{ display: block; font-family:"DM Mono", monospace; font-size: 10px; color: var(--ink-soft); letter-spacing: .12em; font-weight: 400; margin-top: 3px; }
+
+.f3-stats{ display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.f3-stat{
+  background: var(--paper-deep);
+  border: 1.5px solid var(--ink);
+  padding: 14px;
+}
+.f3-stat .n{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 36px; line-height: 1; letter-spacing: -.03em; }
+.f3-stat .n.up{ color: var(--fairwood-deep); }
+.f3-stat .l{ font-family:"DM Mono", monospace; font-size: 10px; letter-spacing: .18em; color: var(--ink-soft); margin-top: 6px; }
+
+.f3-meta-tags{ display: flex; flex-wrap: wrap; gap: 6px; }
+.f3-tag{
+  font-family:"DM Mono", monospace; font-size: 10px; letter-spacing: .12em;
+  padding: 4px 9px; border: 1px solid var(--line); color: var(--ink-soft);
+}
+
+.f3-open{
+  margin-top: auto;
+  background: var(--ink); color: var(--fairwood);
+  padding: 14px;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 16px;
+  text-align: center; letter-spacing: -.01em;
+  border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--fairwood-deep);
+  transition: transform .15s, box-shadow .15s;
+}
+.f3-open:hover{ transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--fairwood-deep); }
+
+/* peek of next cards strip */
+.f3-peek{
+  margin-top: 36px;
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px;
+}
+.f3-peek-card{
+  aspect-ratio: 4 / 3;
+  border: 2px solid var(--ink); padding: 14px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  background: var(--paper-deep);
+  cursor: pointer;
+  transition: transform .15s;
+}
+.f3-peek-card:hover{ transform: translateY(-3px); }
+.f3-peek-card .n{ font-family:"DM Mono", monospace; font-size: 10px; color: var(--ink-soft); letter-spacing: .18em; }
+.f3-peek-card .t{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 16px; line-height: 1.15; }
+.f3-peek-card .v{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 22px; color: var(--fairwood-deep); }
+
+@media (max-width: 900px){
+  .f3-card{ grid-template-columns: 1fr; }
+  .f3-art{ border-right: none; border-bottom: 2px solid var(--ink); padding: 32px; }
+  .f3-peek{ grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ===================================================
+   FRAME 04 · HOWTO 4 STEPS — icon-first big blocks
+   =================================================== */
+.f4{
+  padding: 80px 32px;
+  background: var(--ink); color: var(--paper);
+  border-bottom: 2px solid var(--ink);
+}
+.f4-inner{ max-width: 1440px; margin: 0 auto; }
+.f4-head{
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 32px;
+  margin-bottom: 56px; flex-wrap: wrap;
+}
+.f4-head h2{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: clamp(56px, 6vw, 96px); line-height: .9; margin: 0; letter-spacing: -.035em;
+}
+.f4-head h2 .o{ color: var(--fairwood); }
+.f4-head .pull{
+  font-family:"Noto Serif HK", serif; font-style: italic; font-weight: 500;
+  font-size: 20px; line-height: 1.45; max-width: 380px; color: rgba(245,236,217,.7);
+}
+.f4-head .pull strong{ color: var(--peanut-lime); font-style: normal; font-weight: 700; }
+
+.f4-steps{
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border: 2px solid var(--paper);
+}
+.f4-step{
+  padding: 36px 28px;
+  border-right: 2px solid var(--paper);
+  display: flex; flex-direction: column; gap: 16px;
+  position: relative;
+  min-height: 340px;
+  background: var(--ink);
+  transition: background .2s;
+}
+.f4-step:last-child{ border-right: none; }
+.f4-step.final{ background: var(--fairwood); color: var(--ink); }
+.f4-step:hover{ background: rgba(240,138,0,.12); }
+.f4-step.final:hover{ background: var(--fairwood-deep); color: var(--paper); }
+
+.f4-step-num{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 88px; line-height: .85; letter-spacing: -.06em;
+  color: var(--fairwood);
+}
+.f4-step.final .f4-step-num{ color: var(--ink); }
+.f4-step-icon{
+  font-size: 64px; line-height: 1;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.3));
+  margin-top: -8px;
+}
+.f4-step h3{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 26px; line-height: 1.05; margin: 0; letter-spacing: -.02em;
+}
+.f4-step .cap{
+  margin-top: auto;
+  font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .12em;
+  line-height: 1.6; color: rgba(245,236,217,.65);
+}
+.f4-step.final .cap{ color: rgba(26,20,16,.7); }
+.f4-step .cap strong{ color: var(--peanut-lime); font-weight: 700; }
+.f4-step.final .cap strong{ color: var(--ink); }
+
+.f4-step-arrow{
+  position: absolute; top: 50%; right: -16px; transform: translateY(-50%);
+  background: var(--paper); color: var(--ink);
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 22px;
+  z-index: 5;
+}
+.f4-step:last-of-type .f4-step-arrow{ display: none; }
+
+@media (max-width: 900px){
+  .f4-steps{ grid-template-columns: 1fr 1fr; }
+  .f4-step{ border-right: 2px solid var(--paper); border-bottom: 2px solid var(--paper); }
+  .f4-step:nth-child(2n){ border-right: none; }
+  .f4-step-arrow{ display: none; }
+}
+
+/* ===================================================
+   FRAME 05 · SUBMIT FORM — mascot+illustration left,
+   compact form right
+   =================================================== */
+.f5{
+  position: relative;
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-bottom: 2px solid var(--ink);
+  background: var(--paper);
+  min-height: 580px;
+}
+.f5-art{
+  position: relative;
+  padding: 56px 48px;
+  background:
+    linear-gradient(160deg, var(--fairwood-light) 0%, var(--fairwood) 55%, var(--fairwood-deep) 100%);
+  display: flex; flex-direction: column; justify-content: space-between;
+  overflow: hidden;
+  border-right: 2px solid var(--ink);
+}
+.f5-art::before{
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    repeating-linear-gradient(135deg, rgba(0,0,0,.04) 0 5px, transparent 5px 12px),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,.25), transparent 35%);
+}
+.f5-art-kicker{
+  position: relative; z-index: 2;
+  display: inline-flex; align-items: center; gap: 14px;
+  font-family:"DM Mono", monospace; font-size: 12px; letter-spacing: .25em;
+  color: var(--ink); font-weight: 700;
+}
+.f5-art-kicker::before{ content: ""; width: 32px; height: 2px; background: var(--ink); }
+
+.f5-art h2{
+  position: relative; z-index: 2;
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: clamp(48px, 5vw, 80px); line-height: .9;
+  letter-spacing: -.035em; margin: 16px 0 0; color: var(--ink);
+}
+.f5-art h2 em{ font-style: italic; color: var(--paper); }
+
+.f5-trust{
+  position: relative; z-index: 2;
+  margin-top: 24px;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 18px;
+  font-family:"Noto Sans HK", sans-serif; font-size: 13px;
+  color: var(--ink); font-weight: 500;
+}
+.f5-trust span{ display: flex; align-items: center; gap: 8px; }
+.f5-trust span::before{
+  content: "✓"; color: var(--paper); font-weight: 900;
+  background: var(--ink); width: 20px; height: 20px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 11px; flex-shrink: 0;
+}
+
+.f5-mascot{
+  position: absolute; right: -30px; bottom: -10px;
+  width: 280px; height: auto; z-index: 3;
+  filter: drop-shadow(0 16px 28px rgba(0,0,0,.25));
+  transform: rotate(-6deg);
+  pointer-events: none;
+}
+.f5-coupon{
+  position: absolute; right: 30%; bottom: 30%; z-index: 4;
+  background: var(--paper); color: var(--ink);
+  border: 2.5px dashed var(--ink);
+  padding: 14px 22px;
+  font-family:"Reggae One", serif; font-size: 24px;
+  transform: rotate(-12deg);
+  box-shadow: 6px 6px 0 rgba(0,0,0,.2);
+}
+.f5-coupon small{
+  display: block; font-family:"DM Mono", monospace; font-size: 10px;
+  letter-spacing: .2em; margin-top: 4px; font-weight: 400;
+}
+
+.f5-form{
+  padding: 56px 48px;
+  display: flex; flex-direction: column; gap: 18px;
+  background: var(--paper);
+}
+.f5-form-eyebrow{
+  font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .22em;
+  color: var(--fairwood-deep);
+}
+.f5-form-h{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 36px; line-height: 1; margin: 4px 0 12px; letter-spacing: -.025em;
+}
+.f5-form-row label{
+  display: block;
+  font-family:"DM Mono", monospace; font-size: 10px; letter-spacing: .18em;
+  font-weight: 700; color: var(--ink-soft); margin-bottom: 6px;
+}
+.f5-form-fac{ display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.f5-fac-btn{
+  border: 2px solid var(--ink); background: var(--paper);
+  padding: 14px 16px;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 15px;
+  text-align: center;
+  cursor: pointer; transition: all .15s;
+}
+.f5-fac-btn:hover{ background: var(--paper-deep); }
+.f5-fac-btn.active.duck{ background: var(--fairwood); color: var(--ink); }
+.f5-fac-btn.active.peanut{ background: var(--peanut-hot); color: var(--paper); }
+
+.f5-form-input{
+  border: 2px solid var(--ink); background: var(--paper);
+  padding: 12px 14px;
+  font-family:"DM Mono", monospace; font-size: 13px; color: var(--ink);
+  width: 100%;
+}
+.f5-form-input::placeholder{ color: var(--ink-soft); opacity: .6; }
+.f5-form-grid2{ display: grid; grid-template-columns: 1.4fr 1fr; gap: 12px; }
+
+.f5-submit{
+  margin-top: 8px;
+  background: var(--ink); color: var(--fairwood);
+  padding: 18px;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 17px;
+  border: 2px solid var(--ink); box-shadow: 5px 5px 0 var(--fairwood);
+  cursor: pointer; transition: transform .15s, box-shadow .15s;
+}
+.f5-submit:hover{ transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--fairwood); }
+
+@media (max-width: 900px){
+  .f5{ grid-template-columns: 1fr; }
+  .f5-art{ border-right: none; border-bottom: 2px solid var(--ink); min-height: 380px; }
+}
+
+/* ===================================================
+   FRAME 06 · QUICK BAND — 3 magazine-cover cards
+   =================================================== */
+.f6{
+  padding: 80px 32px;
+  background: var(--paper-deep);
+  border-bottom: 2px solid var(--ink);
+}
+.f6-inner{ max-width: 1440px; margin: 0 auto; }
+.f6-head{
+  margin-bottom: 40px;
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 20px;
+}
+.f6-head h2{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: clamp(40px, 4.5vw, 64px); line-height: .95; margin: 0; letter-spacing: -.03em;
+}
+.f6-head .sub{ font-family:"DM Mono", monospace; font-size: 12px; letter-spacing: .18em; color: var(--ink-soft); }
+
+.f6-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.f6-card{
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border: 2.5px solid var(--ink);
+  overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 28px;
+  cursor: pointer;
+  transition: transform .2s;
+}
+.f6-card:hover{ transform: translateY(-4px); }
+.f6-card.rules{
+  background:
+    linear-gradient(170deg, rgba(245,236,217,.7) 0%, rgba(184,54,42,.55) 100%),
+    repeating-linear-gradient(135deg, var(--paper) 0 10px, var(--paper-deep) 10px 20px);
+}
+.f6-card.schools{
+  background: linear-gradient(160deg, var(--ink) 0%, #2a1f15 100%);
+  color: var(--paper);
+}
+.f6-card.prize{
+  background:
+    linear-gradient(135deg, var(--fairwood-light) 0%, var(--fairwood) 60%, var(--fairwood-deep) 100%);
+}
+
+.f6-card-icon{
+  font-size: 88px; line-height: 1;
+  filter: drop-shadow(0 8px 14px rgba(0,0,0,.25));
+}
+.f6-card-cat{
+  font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .22em;
+  color: var(--ink-soft);
+}
+.f6-card.schools .f6-card-cat{ color: var(--duck); }
+.f6-card.prize .f6-card-cat{ color: var(--ink); opacity: .7; }
+
+.f6-card h3{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 36px; line-height: .95; margin: 8px 0 4px; letter-spacing: -.025em;
+}
+.f6-card .blurb{
+  font-family:"Noto Serif HK", serif; font-style: italic; font-weight: 500;
+  font-size: 14px; line-height: 1.5; color: var(--ink-soft);
+}
+.f6-card.schools .blurb{ color: rgba(245,236,217,.7); }
+.f6-card.prize .blurb{ color: var(--ink); opacity: .8; }
+
+.f6-card-stat{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 64px; line-height: .85; letter-spacing: -.04em;
+}
+.f6-card.schools .f6-card-stat{ color: var(--fairwood); }
+.f6-card-stat small{
+  display: block; font-family:"DM Mono", monospace; font-size: 10px; letter-spacing: .2em;
+  font-weight: 400; margin-top: 6px; opacity: .65;
+}
+
+.f6-card-cta{
+  font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .15em;
+  font-weight: 700;
+  border-top: 1.5px solid currentColor; padding-top: 8px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+@media (max-width: 900px){
+  .f6-grid{ grid-template-columns: 1fr; }
+}
+
+/* ===================================================
+   FRAME 07 · FOOTER — oversized typographic statement
+   =================================================== */
+.f7{
+  position: relative;
+  background: var(--ink); color: var(--paper);
+  padding: 80px 32px 48px;
+  overflow: hidden;
+}
+.f7::before{
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(circle at 88% 30%, rgba(240,138,0,.18), transparent 45%),
+    repeating-linear-gradient(135deg, rgba(245,236,217,.02) 0 4px, transparent 4px 9px);
+}
+.f7-inner{ max-width: 1440px; margin: 0 auto; position: relative; z-index: 2; }
+.f7-big{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: clamp(80px, 14vw, 220px); line-height: .82;
+  letter-spacing: -.05em; margin: 0;
+}
+.f7-big .o{ color: var(--fairwood); }
+.f7-big .stem{
+  display: inline-block;
+  background: var(--fairwood); color: var(--ink); padding: 0 16px;
+  transform: rotate(-2deg);
+}
+
+.f7-foot{
+  margin-top: 56px;
+  display: grid; grid-template-columns: 1fr auto auto; gap: 40px;
+  border-top: 1px solid rgba(245,236,217,.18); padding-top: 28px;
+  align-items: flex-end;
+}
+.f7-foot .legacy{
+  font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .18em; color: rgba(245,236,217,.45); line-height: 1.8;
+}
+.f7-foot .legacy strong{ color: var(--peanut-lime); font-weight: 700; }
+.f7-foot .meta{
+  font-family:"DM Mono", monospace; font-size: 10px; letter-spacing: .2em; color: rgba(245,236,217,.5); text-align: right; line-height: 1.6;
+}
+.f7-mascot-shadow{
+  position: absolute; right: -40px; bottom: -40px;
+  width: 320px; height: auto; opacity: .12; z-index: 1;
+  pointer-events: none;
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 900px){
+  .f7-foot{ grid-template-columns: 1fr; gap: 16px; }
+  .f7-foot .meta{ text-align: left; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ============ NAV ============ -->
+  <nav class="vf-nav">
+    <a class="logo" href="#">
+      <img src="assets/ah-wood.png" alt="阿活">
+      <div>
+        <strong>SITE 多士大對決</strong>
+        <span>BY 大快活</span>
+      </div>
+    </a>
+    <div class="links">
+      <a href="#carousel">戰況</a>
+      <a href="#howto">點玩</a>
+      <a href="#schools">學界</a>
+      <a href="#prize">獎品</a>
+    </div>
+    <span class="vf-live">LIVE · DAY 09 / 21</span>
+    <a href="#submit" class="vf-cta">▸ 交 SITE</a>
+  </nav>
+
+  <!-- ============ FRAME 01 · HERO ============ -->
+  <section class="f1" id="hero">
+    <div class="f1-photo">
+      <div class="f1-stamp">真．正宗</div>
+      <div class="f1-photo-caption">
+        <div class="num">952<small>SITES SUBMITTED</small></div>
+        <div class="meta">06.02 → 06.23 · 2026<br><strong>每日 18:00 上架</strong></div>
+      </div>
+    </div>
+    <div class="f1-content">
+      <div class="f1-kicker">FAIRWOOD × 全港網民 · DAY 09 / 21</div>
+      <h1 class="f1-title">
+        傳統<span class="o">鴨蛋</span>香<br>
+        <span class="vs">vs.</span><br>
+        邪惡<span class="p">花生</span>醬。
+      </h1>
+      <p class="f1-lead">用 AI 起個 Site 撐你揀嘅西多．邊派 Site 多邊派贏．唔識 code 都得 — scroll 落去睇 4 步教學。</p>
+      <div class="f1-cta-row">
+        <a href="#submit" class="f1-cta-primary">▸ 我已起好個 SITE</a>
+        <a href="#howto" class="f1-cta-secondary">↓ 教學 4 步</a>
+      </div>
+      <img src="assets/ah-wood.png" alt="" class="f1-mascot">
+    </div>
+  </section>
+
+  <!-- ============ FRAME 02 · FACTION TABS ============ -->
+  <section class="f2">
+    <a class="faction-pl duck" href="#duck">
+      <div class="faction-top">
+        <div class="faction-emoji">🦆</div>
+        <div class="faction-corner-stamp">真．正宗</div>
+      </div>
+      <div class="faction-mid">
+        <h2>傳統<br>鴨蛋派</h2>
+        <div class="sub">CLASSIC DUCK EGG · NO FILLING</div>
+      </div>
+      <div class="faction-bottom">
+        <div class="faction-count">470<small>SITES · +38 TODAY</small></div>
+        <span class="faction-go">▸ 揀鴨蛋</span>
+      </div>
+    </a>
+    <div class="f2-vs">
+      <div class="f2-vs-medal">
+        <span class="v">VS</span>
+        <span class="d">DAY 09</span>
+      </div>
+    </div>
+    <a class="faction-pl peanut" href="#peanut">
+      <div class="faction-top">
+        <div class="faction-emoji">🥜</div>
+        <div class="faction-corner-stamp">邪惡新派</div>
+      </div>
+      <div class="faction-mid">
+        <h2>邪惡<br>花生派</h2>
+        <div class="sub">EVIL PEANUT BUTTER · MOLTEN</div>
+      </div>
+      <div class="faction-bottom">
+        <div class="faction-count">482<small>SITES · +44 TODAY</small></div>
+        <span class="faction-go">▸ 揀花生</span>
+      </div>
+    </a>
+  </section>
+
+  <!-- ============ FRAME 03 · SITE CAROUSEL ============ -->
+  <section class="f3" id="carousel">
+    <div class="f3-inner">
+      <div class="f3-head">
+        <div>
+          <h3><span class="e">🦆</span> 鴨蛋派．<br>今日精選</h3>
+          <p class="meta">每日 18:00 上架 · 6 個 site / 派 / 日 · 24:00 截票</p>
+        </div>
+        <div class="f3-controls">
+          <button class="f3-arr">‹</button>
+          <span class="f3-counter"><span>01</span> / 06</span>
+          <button class="f3-arr">›</button>
+        </div>
+      </div>
+
+      <div class="f3-card">
+        <div class="f3-art">
+          <span class="f3-art-tag">LOVABLE · DAY 04</span>
+          <span class="f3-art-stamp">真．正宗</span>
+          <h4>無餡先係<br><strong>正宗西多。</strong></h4>
+          <p class="essay">"大排檔嘅西多本來就冇餡。係近年人哋亂加嘢。鴨蛋黃多，比雞蛋香 — 你食過先知。"</p>
+          <div class="sig">林伯 · 茶記伙計 · 旺角</div>
+        </div>
+        <div class="f3-meta">
+          <div class="f3-meta-author">
+            <div class="f3-meta-avatar">🦆</div>
+            <div class="who">無餡西多保衛聯盟<small>@uncle_lam_1962</small></div>
+          </div>
+          <div class="f3-stats">
+            <div class="f3-stat"><div class="n up">93</div><div class="l">▸ 票數</div></div>
+            <div class="f3-stat"><div class="n">4.8★</div><div class="l">▸ 評分</div></div>
+          </div>
+          <div class="f3-meta-tags">
+            <span class="f3-tag">EDITORIAL</span>
+            <span class="f3-tag">SERIF</span>
+            <span class="f3-tag">茶記味</span>
+            <span class="f3-tag">D04</span>
+          </div>
+          <a class="f3-open" href="team-duck.html">▸ OPEN SITE</a>
+        </div>
+      </div>
+
+      <!-- peek strip of upcoming -->
+      <div class="f3-peek">
+        <div class="f3-peek-card">
+          <span class="n">D03 · NEXT</span>
+          <div class="t">鴨蛋香<br>萬歲。</div>
+          <span class="v">87</span>
+        </div>
+        <div class="f3-peek-card">
+          <span class="n">D02</span>
+          <div class="t">無餡就<br>係靈魂。</div>
+          <span class="v">76</span>
+        </div>
+        <div class="f3-peek-card">
+          <span class="n">D01</span>
+          <div class="t">原味<br>派宣言。</div>
+          <span class="v">71</span>
+        </div>
+        <div class="f3-peek-card">
+          <span class="n">D05</span>
+          <div class="t">茶記<br>後援會。</div>
+          <span class="v">64</span>
+        </div>
+        <div class="f3-peek-card">
+          <span class="n">D06</span>
+          <div class="t">陳師傅<br>講西多。</div>
+          <span class="v">58</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FRAME 04 · HOWTO 4 STEPS ============ -->
+  <section class="f4" id="howto">
+    <div class="f4-inner">
+      <div class="f4-head">
+        <h2>無腦 <span class="o">4 步</span><br>5 分鐘起 SITE。</h2>
+        <p class="pull">唔識 code？<br>由你打字、<strong>AI 同你起埋</strong> — 阿公阿婆都做到。</p>
+      </div>
+      <div class="f4-steps">
+        <div class="f4-step">
+          <div class="f4-step-num">01</div>
+          <div class="f4-step-icon">🦆🥜</div>
+          <h3>揀派。</h3>
+          <div class="cap">🦆 鴨蛋 OR 🥜 花生。<br><strong>揀咗唔可以再揀對家。</strong></div>
+          <div class="f4-step-arrow">→</div>
+        </div>
+        <div class="f4-step">
+          <div class="f4-step-num">02</div>
+          <div class="f4-step-icon">💬</div>
+          <h3>打字起 site。</h3>
+          <div class="cap">Lovable / Claude / v0 / Bolt<br><strong>免費．自動 host。</strong></div>
+          <div class="f4-step-arrow">→</div>
+        </div>
+        <div class="f4-step">
+          <div class="f4-step-num">03</div>
+          <div class="f4-step-icon">🔗</div>
+          <h3>Copy URL。</h3>
+          <div class="cap">AI 起完，按 Publish。<br><strong>Copy xxx.lovable.app。</strong></div>
+          <div class="f4-step-arrow">→</div>
+        </div>
+        <div class="f4-step final">
+          <div class="f4-step-num">04</div>
+          <div class="f4-step-icon">📮</div>
+          <h3>貼喺下面。<br>交。</h3>
+          <div class="cap">Scroll 落「交 Site」。<br><strong>貼 URL．完。</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FRAME 05 · SUBMIT FORM ============ -->
+  <section class="f5" id="submit">
+    <div class="f5-art">
+      <div class="f5-art-kicker">▸ SUBMIT YOUR SITE</div>
+      <h2>即場交 Site<br><em>六點上架。</em></h2>
+      <div class="f5-trust">
+        <span>AI 過審 30 秒</span>
+        <span>小編 approve</span>
+        <span>每日 6PM 上架</span>
+        <span>送 $10 西多券</span>
+      </div>
+      <div class="f5-coupon">$10 OFF<small>FAIRWOOD APP</small></div>
+      <img src="assets/ah-wood.png" alt="" class="f5-mascot">
+    </div>
+
+    <form class="f5-form" onsubmit="event.preventDefault();">
+      <div class="f5-form-eyebrow">▸ 1 分鐘搞掂</div>
+      <h3 class="f5-form-h">交 Site 表單</h3>
+
+      <div class="f5-form-row">
+        <label>▸ 揀陣營</label>
+        <div class="f5-form-fac">
+          <button type="button" class="f5-fac-btn active duck">🦆 傳統鴨蛋派</button>
+          <button type="button" class="f5-fac-btn peanut">🥜 邪惡花生派</button>
+        </div>
+      </div>
+
+      <div class="f5-form-row">
+        <label>▸ 你個 SITE URL</label>
+        <input class="f5-form-input" type="url" placeholder="https://my-site.lovable.app">
+      </div>
+
+      <div class="f5-form-grid2">
+        <div class="f5-form-row">
+          <label>▸ EMAIL</label>
+          <input class="f5-form-input" type="email" placeholder="you@school.edu.hk">
+        </div>
+        <div class="f5-form-row">
+          <label>▸ 學校 (Optional)</label>
+          <input class="f5-form-input" type="text" placeholder="皇仁書院">
+        </div>
+      </div>
+
+      <button type="submit" class="f5-submit">▸ 投我一票．SUBMIT</button>
+    </form>
+  </section>
+
+  <!-- ============ FRAME 06 · QUICK BAND ============ -->
+  <section class="f6">
+    <div class="f6-inner">
+      <div class="f6-head">
+        <h2>更多戰場。</h2>
+        <span class="sub">▸ QUICK ACCESS · 3 LINKS</span>
+      </div>
+      <div class="f6-grid">
+        <a class="f6-card rules" href="完整比賽規則.html">
+          <div class="f6-card-icon">📜</div>
+          <div>
+            <div class="f6-card-cat">RULES & FAQ</div>
+            <h3>玩法<br>+ 規則。</h3>
+            <p class="blurb">5 條規則 + 8 條 FAQ — 我哋已經幫你諗咗。</p>
+          </div>
+          <div class="f6-card-stat">5+8<small>RULES + FAQ</small></div>
+          <div class="f6-card-cta"><span>▸ 完整規則</span><span>→</span></div>
+        </a>
+
+        <a class="f6-card schools" href="#schools" id="schools">
+          <div class="f6-card-icon">🎓</div>
+          <div>
+            <div class="f6-card-cat">SCHOOL LEAGUE</div>
+            <h3>學界<br>戰報。</h3>
+            <p class="blurb">108 學校 + Top 10 排行 — 你校排第幾？</p>
+          </div>
+          <div class="f6-card-stat">108<small>SCHOOLS LIVE</small></div>
+          <div class="f6-card-cta"><span>▸ 開 DASHBOARD</span><span>→</span></div>
+        </a>
+
+        <a class="f6-card prize" href="#prize" id="prize">
+          <div class="f6-card-icon">🏆</div>
+          <div>
+            <div class="f6-card-cat">GRAND PRIZE</div>
+            <h3>獎品<br>大放送。</h3>
+            <p class="blurb">大獎：全年 365 件西多 — 一日一件，食足一年。</p>
+          </div>
+          <div class="f6-card-stat">365<small>件西多 / 1 名</small></div>
+          <div class="f6-card-cta"><span>▸ 睇晒獎品</span><span>→</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FRAME 07 · FOOTER ============ -->
+  <footer class="f7">
+    <div class="f7-inner">
+      <h2 class="f7-big">食得夠<br><span class="stem">STEM</span><span class="o">。</span></h2>
+      <div class="f7-foot">
+        <div class="legacy">
+          食得夠尖 (2024) · 食得夠 GYM (2025) · <strong>食得夠 STEM (2026)</strong>
+        </div>
+        <div class="meta">
+          SITE 多士大對決 · 大快活 2026 STEM CAMPAIGN<br>
+          © FAIRWOOD FAST FOOD GROUP
+        </div>
+        <div class="meta">
+          hi@fairwood.hk<br>
+          @fairwoodhk
+        </div>
+      </div>
+    </div>
+    <img src="assets/ah-wood.png" alt="" class="f7-mascot-shadow">
+  </footer>
+
+</div>
+
+<script>
+// faction button toggle (visual only)
+document.querySelectorAll('.f5-fac-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.f5-fac-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>

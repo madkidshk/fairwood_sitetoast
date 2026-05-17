@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<title>熔岩花生實驗室</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans HK", system-ui, sans-serif; background:#0a0604; color:#f5ecd9; line-height:1.5; overflow-x:hidden}
+body::before{content:""; position:fixed; inset:0; background:radial-gradient(ellipse at 30% 20%, rgba(240,138,0,.2), transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(196,102,31,.25), transparent 50%); pointer-events:none}
+.shell{max-width:1280px; margin:0 auto; padding:0 64px; position:relative; z-index:2}
+.nav{display:flex; justify-content:space-between; align-items:center; padding:24px 0; border-bottom:1px solid rgba(245,236,217,.1)}
+.brand{font-weight:900; font-size:20px; letter-spacing:.02em; display:flex; align-items:center; gap:10px}
+.brand .lab{background:linear-gradient(135deg,#f08a00,#c4661f); padding:4px 10px; border-radius:4px; color:#1a1410; font-family:monospace; font-size:11px; letter-spacing:.2em}
+.menu{display:flex; gap:24px; font-size:13px; font-family:monospace; letter-spacing:.1em; color:rgba(245,236,217,.7)}
+.menu a{color:inherit; text-decoration:none}
+.cta{background:#f08a00; color:#1a1410; padding:10px 20px; font-weight:700; font-size:13px; text-decoration:none; border-radius:6px; box-shadow:0 6px 20px rgba(240,138,0,.4)}
+.hero{padding:120px 0 80px; text-align:center; position:relative}
+.tag{display:inline-block; background:rgba(196,102,31,.2); color:#ffb454; padding:6px 16px; font-family:monospace; font-size:11px; letter-spacing:.25em; border-radius:999px; border:1px solid #c4661f; margin-bottom:40px}
+.molten{width:320px; height:200px; margin:0 auto 56px; position:relative; background:linear-gradient(180deg, #c4661f 0%, #8b3a14 100%); border-radius:8px; box-shadow:inset 0 -20px 60px rgba(0,0,0,.4), 0 30px 80px rgba(196,102,31,.5)}
+.molten::before{content:""; position:absolute; left:50%; top:30%; transform:translateX(-50%); width:60%; height:60%; background:radial-gradient(ellipse at 50% 0%, #c4661f 0%, #6b3a14 60%, transparent 90%); border-radius:50%; animation:ooze 4s ease-in-out infinite}
+.molten::after{content:""; position:absolute; left:30%; bottom:-15px; width:40%; height:24px; background:#c4661f; border-radius:0 0 50% 50%; box-shadow:0 8px 20px rgba(196,102,31,.6); animation:drip 4s ease-in-out infinite}
+@keyframes ooze{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.05)}}
+@keyframes drip{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+.hero h1{font-size:140px; line-height:.85; letter-spacing:-.05em; font-weight:900; margin-bottom:40px; background:linear-gradient(180deg, #ffb454, #c4661f 50%, #8b3a14); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
+.hero h1 em{font-style:italic}
+.hero .lead{font-size:22px; line-height:1.6; max-width:720px; margin:0 auto 48px; color:rgba(245,236,217,.75)}
+.hero .lead strong{color:#ffb454}
+.hero .vote{display:inline-flex; align-items:center; gap:12px; background:linear-gradient(135deg, #f08a00, #c46d00); color:#1a1410; padding:22px 48px; font-size:18px; font-weight:900; text-decoration:none; border-radius:999px; box-shadow:0 14px 40px rgba(240,138,0,.5)}
+.hero .vote .arrow{width:28px; height:28px; background:#1a1410; color:#f08a00; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px}
+.grid{padding:64px 0; display:grid; grid-template-columns:repeat(3, 1fr); gap:16px}
+.card{background:rgba(245,236,217,.04); border:1px solid rgba(245,236,217,.08); border-radius:16px; padding:24px; backdrop-filter:blur(10px)}
+.card .label{font-family:monospace; font-size:10px; letter-spacing:.22em; color:#c4661f; margin-bottom:12px}
+.card h3{font-size:24px; margin-bottom:8px; font-weight:900; color:#ffb454}
+.card p{font-size:14px; line-height:1.6; color:rgba(245,236,217,.65)}
+.foot{padding:32px 0; border-top:1px solid rgba(245,236,217,.1); font-size:11px; font-family:monospace; letter-spacing:.15em; color:rgba(245,236,217,.4); display:flex; justify-content:space-between}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="nav">
+    <div class="brand">熔岩花生<span class="lab">LAB · 005</span></div>
+    <div class="menu"><a>實驗</a><a>數據</a><a>論文</a><a>聯絡</a></div>
+    <a href="#" class="cta">▸ JOIN LAB</a>
+  </nav>
+
+  <section class="hero">
+    <div class="tag">▸ 觀塘 R&D · 2026.06</div>
+    <div class="molten"></div>
+    <h1>花生<br><em>熔岩。</em></h1>
+    <p class="lead">切開先見斷面 — 花生醬從中間慢慢流出嚟。<strong>呢個先係 2026 嘅西多。</strong>傳統嘅未夠刺激。</p>
+    <a href="#" class="vote">▸ 投熔岩花生一票<span class="arrow">→</span></a>
+  </section>
+
+  <section class="grid">
+    <div class="card"><div class="label">▸ EXPERIMENT 01</div><h3>三層夾心</h3><p>麵包 + 花生醬 + 麵包 + 花生醬 + 麵包．切開斷面，五層分明。</p></div>
+    <div class="card"><div class="label">▸ EXPERIMENT 02</div><h3>溫度 65°C</h3><p>花生醬要剛剛好 65°C 先夠流動性．低咗就硬，高咗就太稀。</p></div>
+    <div class="card"><div class="label">▸ EXPERIMENT 03</div><h3>1:2 比例</h3><p>麵包 1 份花生醬 2 份．呢個比例嘅入口感最 cinematic。</p></div>
+  </section>
+
+  <footer class="foot"><span>© 2026 熔岩花生實驗室 · @molten_pb · 觀塘</span><span>BUILT WITH BOLT.NEW · 4K READY</span></footer>
+</div>
+</body>
+</html>

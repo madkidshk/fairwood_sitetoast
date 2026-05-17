@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<title>邪惡花生實況</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans HK", system-ui, sans-serif; background:#000; color:#fff; line-height:1.5}
+body::before{content:""; position:fixed; inset:0; background:radial-gradient(ellipse at 20% 30%, rgba(196,102,31,.3), transparent 50%); pointer-events:none}
+.shell{max-width:1280px; margin:0 auto; padding:0 48px}
+.nav{display:flex; justify-content:space-between; align-items:center; padding:18px 0; border-bottom:1px solid rgba(255,255,255,.1)}
+.brand{font-weight:900; font-size:18px; display:flex; align-items:center; gap:10px}
+.brand .live{display:inline-flex; align-items:center; gap:6px; background:#ff3a55; color:#fff; padding:4px 10px; border-radius:4px; font-family:monospace; font-size:11px; letter-spacing:.15em}
+.brand .live::before{content:""; width:6px; height:6px; border-radius:50%; background:#fff; animation:p 1s infinite}
+@keyframes p{50%{opacity:.3}}
+.menu{display:flex; gap:24px; font-size:13px; font-family:monospace; letter-spacing:.1em; color:rgba(255,255,255,.6)}
+.menu a{color:inherit; text-decoration:none}
+.cta{background:linear-gradient(135deg,#c4661f,#ff3a55); color:#fff; padding:8px 18px; font-weight:700; font-size:13px; text-decoration:none; border-radius:6px; box-shadow:0 4px 16px rgba(255,58,85,.4)}
+.stream{padding:32px 0; display:grid; grid-template-columns:1fr 320px; gap:24px}
+.video{background:#1a1410; border:1px solid rgba(255,255,255,.1); border-radius:12px; overflow:hidden; aspect-ratio:16/9; position:relative; display:flex; align-items:center; justify-content:center; box-shadow:0 24px 64px rgba(196,102,31,.3)}
+.video::before{content:""; position:absolute; inset:0; background:radial-gradient(circle at 50% 50%, rgba(196,102,31,.3), transparent 60%)}
+.video .em{font-size:160px; filter:drop-shadow(0 10px 24px rgba(0,0,0,.6))}
+.video .live-tag{position:absolute; top:14px; left:14px; background:#ff3a55; color:#fff; padding:4px 10px; font-family:monospace; font-size:11px; letter-spacing:.15em; border-radius:4px; display:inline-flex; align-items:center; gap:6px}
+.video .live-tag::before{content:""; width:5px; height:5px; border-radius:50%; background:#fff; animation:p 1s infinite}
+.video .viewer{position:absolute; top:14px; right:14px; background:rgba(0,0,0,.6); color:#fff; padding:4px 10px; font-family:monospace; font-size:11px; backdrop-filter:blur(8px); border-radius:4px}
+.chat{background:#0d0a06; border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:8px; height:480px; overflow:hidden}
+.chat h3{font-family:monospace; font-size:11px; letter-spacing:.18em; color:#c4661f; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,.1)}
+.msg{font-size:13px; line-height:1.4}
+.msg .u{font-weight:700; color:#c9e635; margin-right:6px}
+.msg .u.s{color:#ff3a55}
+.below{padding:32px 0; display:grid; grid-template-columns:2fr 1fr; gap:32px}
+.below h1{font-family:"Noto Serif HK",serif; font-size:80px; line-height:.9; font-weight:900; letter-spacing:-.04em; margin-bottom:24px}
+.below h1 em{font-style:italic; color:#c4661f}
+.below .lead{font-size:18px; line-height:1.6; color:rgba(255,255,255,.75); margin-bottom:32px}
+.below .lead strong{color:#c9e635}
+.cta-big{display:inline-flex; align-items:center; gap:12px; background:linear-gradient(135deg, #ff3a55, #c4661f); color:#fff; padding:18px 36px; font-size:16px; font-weight:900; text-decoration:none; border-radius:999px; box-shadow:0 14px 40px rgba(255,58,85,.4)}
+.cta-big .a{background:#fff; color:#ff3a55; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px}
+.stats{display:flex; flex-direction:column; gap:12px}
+.stat{padding:18px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:12px}
+.stat .l{font-family:monospace; font-size:10px; letter-spacing:.2em; color:#c4661f; margin-bottom:6px}
+.stat .v{font-family:"Noto Serif HK",serif; font-weight:900; font-size:36px; line-height:.9; letter-spacing:-.03em}
+.stat .v.lime{color:#c9e635}
+.stat .v.hot{color:#ff3a55}
+.foot{padding:24px 0; font-size:10px; letter-spacing:.2em; color:rgba(255,255,255,.3); border-top:1px solid rgba(255,255,255,.1); display:flex; justify-content:space-between; font-family:monospace}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="nav">
+    <div class="brand">邪惡花生實況<span class="live">● LIVE</span></div>
+    <div class="menu"><a>頻道</a><a>剪輯</a><a>聊天</a><a>關於</a></div>
+    <a href="#" class="cta">▸ 訂閱 + 投票</a>
+  </nav>
+
+  <section class="stream">
+    <div class="video">
+      <div class="live-tag">● LIVE · D06</div>
+      <div class="viewer">👁 2,847 viewers</div>
+      <div class="em">🌋</div>
+    </div>
+    <aside class="chat">
+      <h3>▸ LIVE CHAT · 2,847 在線</h3>
+      <div class="msg"><span class="u s">@MOD</span>歡迎收看．今晚煎花生熔岩西多 ✨</div>
+      <div class="msg"><span class="u">@cm_lover</span>花生派萬歲！</div>
+      <div class="msg"><span class="u">@dse_2026</span>仲記得 chef 上次嗰個三層 ❤️</div>
+      <div class="msg"><span class="u">@yuen_long_pb</span>溫度幾多度啦？🌡️</div>
+      <div class="msg"><span class="u">@molten_chef</span>65°C 啱啱好</div>
+      <div class="msg"><span class="u s">@MOD</span>SUB ❤️ 已 vote 邪惡花生！</div>
+      <div class="msg"><span class="u">@anti_duck</span>鴨蛋黨食 cope</div>
+      <div class="msg"><span class="u">@pb_4ever</span>send chef 嗰 link 我跟住整 🥜</div>
+      <div class="msg"><span class="u">@kln_west</span>大快活幾時上架呢條 stream?</div>
+      <div class="msg"><span class="u">@tsuen_wan</span>+1 訂閱</div>
+      <div class="msg"><span class="u s">@MOD</span>下面個 link 投花生 🟧</div>
+      <div class="msg"><span class="u">@new_member</span>剛剛加入聯盟 ✊</div>
+    </aside>
+  </section>
+
+  <section class="below">
+    <div>
+      <h1>邪惡 = <em>好食。</em></h1>
+      <p class="lead">花生醬越多越邪惡，<strong>越邪惡越好食。</strong>傳統嘅西多冇 character — 我哋要呢種：流出嚟、滴落 plate、攞起仲拉絲。</p>
+      <a href="#" class="cta-big">▸ 訂閱 + 投花生派<span class="a">→</span></a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="l">▸ TOTAL VIEWS</div><div class="v lime">94.2K</div></div>
+      <div class="stat"><div class="l">▸ VOTES TONIGHT</div><div class="v hot">+61</div></div>
+      <div class="stat"><div class="l">▸ DAY</div><div class="v">D06</div></div>
+    </div>
+  </section>
+
+  <footer class="foot"><span>© 2026 · 邪惡花生實況 · @evil_pb_live · 屯門</span><span>BUILT W/ BOLT · 24/7 STREAM</span></footer>
+</div>
+</body>
+</html>

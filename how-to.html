@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>點起一個 SITE 多士？· 大快活官方教學</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+body{ background:#0f0a07; color:#f2e7d0; font-family:"Noto Sans HK", sans-serif; margin:0;}
+.shell{ max-width: 1280px; margin: 0 auto; padding: 0 32px 80px;}
+
+/* nav (same as master) */
+.nav{
+  display:flex; align-items:center; gap:24px;
+  padding: 18px 0; border-bottom: 1px solid #2a1f15;
+}
+.logo{ display:flex; align-items:center; gap:10px; font-family:"Noto Serif HK", serif; font-weight:900; font-size:22px;}
+.logo .mark{ width:36px; height:36px; background: var(--fairwood); border-radius: 8px; display:flex; align-items:center; justify-content:center; color:#fff; font-family:"Reggae One", serif; font-size:20px;}
+.logo .by{ font-family:"DM Mono", monospace; font-size:12px; color:#8a7a5e; letter-spacing:.15em; margin-left:10px;}
+.nav .links{ display:flex; gap:28px; margin-left: auto; font-family:"DM Mono",monospace; font-size:14px; letter-spacing:.12em;}
+.nav .links a{ color:#c9b89a; text-decoration:none;}
+.nav .links a.on{ color: var(--fairwood); }
+.nav .cta{ background: var(--fairwood); color:#1a1410; padding: 10px 20px; font-family:"Reggae One", serif; font-size:18px; border-radius: 6px; text-decoration:none; box-shadow: 4px 4px 0 #1a1410;}
+
+/* hero */
+.hero{ padding: 80px 0 40px; }
+.hero .kicker{ font-family:"DM Mono",monospace; font-size:15px; letter-spacing:.25em; color: var(--fairwood); margin-bottom: 24px;}
+.hero h1{
+  font-family:"Noto Serif HK", serif; font-weight:900;
+  font-size: 120px; line-height:.95; letter-spacing:-.03em; margin: 0;
+}
+.hero h1 .hl{ color: var(--fairwood); background: linear-gradient(transparent 70%, rgba(240,138,0,.25) 70% 90%, transparent 90%); padding: 0 8px;}
+.hero .lead{
+  font-family:"Noto Serif HK", serif; font-weight:500;
+  font-size: 28px; line-height: 1.5; max-width: 900px; margin: 32px 0 0; color: #c9b89a;
+}
+.hero .meta{ margin-top: 32px; display:flex; gap:12px; flex-wrap:wrap;}
+.hero .meta .pill{ border: 1.5px solid #3a2c1e; padding: 8px 16px; border-radius: 999px; font-family:"DM Mono",monospace; font-size:14px; letter-spacing:.12em; color:#c9b89a;}
+
+/* dispel myth */
+.myth{
+  margin-top: 48px; padding: 36px 40px;
+  background: var(--fairwood); color: var(--ink);
+  border-radius: 4px; display:flex; gap:32px; align-items:center;
+}
+.myth .left{ font-family:"Reggae One", serif; font-size: 48px; line-height:1; flex:0 0 320px; transform: rotate(-2deg);}
+.myth .right{ flex:1; font-size: 22px; line-height: 1.5; font-weight:500;}
+.myth .right strong{ background:#1a1410; color: var(--fairwood); padding: 2px 8px;}
+
+/* 3-step */
+.steps{ margin-top: 96px;}
+.steps h2{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 64px; margin: 0; letter-spacing:-.02em;}
+.steps .sub{ font-family:"DM Mono",monospace; font-size:14px; color:#8a7a5e; letter-spacing:.18em; margin: 12px 0 0;}
+.step-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px;}
+.step-card{
+  background: #15100b; border: 2px solid #3a2c1e; padding: 36px 32px;
+  position: relative;
+}
+.step-card .n{
+  position:absolute; top:-20px; left: 24px;
+  background: var(--fairwood); color: var(--ink);
+  font-family:"Reggae One", serif; font-size:28px;
+  padding: 4px 20px; transform: rotate(-2deg);
+}
+.step-card h3{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 40px; margin: 24px 0 12px; line-height:1.05;}
+.step-card p{ font-size: 16px; line-height:1.55; color:#c9b89a; margin: 0;}
+.step-card .visual{
+  margin-top: 24px; padding: 16px;
+  background: #0f0a07; border: 1px dashed #3a2c1e;
+  min-height: 180px;
+}
+
+/* tool comparison */
+.tools{ margin-top: 96px;}
+.tools h2{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 64px; margin: 0; letter-spacing:-.02em;}
+.tools .sub{ font-family:"DM Mono",monospace; font-size:14px; color:#8a7a5e; letter-spacing:.18em; margin: 12px 0 0;}
+.tool-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px;}
+.tool-card{
+  background: #15100b; border: 2px solid #3a2c1e; padding: 28px 24px;
+  display:flex; flex-direction:column;
+}
+.tool-card .top{ display:flex; align-items:center; gap: 14px; margin-bottom: 20px;}
+.tool-card .icon{
+  width: 56px; height: 56px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:"Reggae One", serif; font-size: 28px;
+  border-radius: 12px; color:#fff;
+}
+.tool-card .icon.lovable{ background: linear-gradient(135deg, #ff7043, #ff3d7f); }
+.tool-card .icon.claude{ background: linear-gradient(135deg, #d97757, #8b3a1f); }
+.tool-card .icon.v0{ background: #000; border: 1px solid #fff;}
+.tool-card .icon.bolt{ background: linear-gradient(135deg, #38bdf8, #1e40af); }
+.tool-card .name{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 28px; line-height:1;}
+.tool-card .url{ font-family:"DM Mono", monospace; font-size: 12px; color:#8a7a5e; margin-top: 4px; letter-spacing:.1em;}
+.tool-card .blurb{ font-size: 15px; line-height: 1.5; color: #c9b89a; margin: 0 0 20px; flex: 1;}
+.tool-card .specs{ display:grid; grid-template-columns: 1fr 1fr; gap: 6px; font-family:"DM Mono", monospace; font-size: 11px; color:#8a7a5e; letter-spacing:.08em;}
+.tool-card .specs .row{ display:flex; justify-content:space-between; padding: 4px 0; border-top: 1px solid #2a1f15;}
+.tool-card .specs .row span:last-child{ color: var(--fairwood); font-weight:700; }
+.tool-card.featured{ border-color: var(--fairwood); position:relative;}
+.tool-card.featured::before{
+  content: "★ 推薦"; position:absolute; top: -12px; right: 16px;
+  background: var(--fairwood); color: var(--ink);
+  font-family:"DM Mono", monospace; font-size: 12px; letter-spacing:.15em;
+  padding: 4px 10px;
+}
+
+/* prompt sandbox */
+.prompts{ margin-top: 96px;}
+.prompts h2{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 64px; margin: 0; letter-spacing:-.02em;}
+.prompts .sub{ font-family:"DM Mono",monospace; font-size:14px; color:#8a7a5e; letter-spacing:.18em; margin: 12px 0 0;}
+.prompt-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px;}
+.prompt{
+  border: 2px solid #3a2c1e; background: #15100b;
+  position:relative;
+}
+.prompt.duck{ border-color: var(--fairwood); }
+.prompt.peanut{ border-color: var(--peanut-hot); }
+.prompt .head{
+  padding: 20px 24px; border-bottom: 1px solid #2a1f15;
+  display:flex; align-items:center; gap: 14px;
+}
+.prompt.duck .head{ background: rgba(240,138,0,.1); }
+.prompt.peanut .head{ background: rgba(236,72,153,.1); }
+.prompt .head .emoji{ font-size: 36px;}
+.prompt .head h4{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 28px; margin: 0; line-height:1.1;}
+.prompt .head .tag{ font-family:"DM Mono", monospace; font-size: 11px; color:#8a7a5e; letter-spacing:.12em; margin-top: 4px;}
+.prompt .copy-btn{
+  margin-left: auto; background: transparent; border: 1.5px solid #3a2c1e;
+  color:#c9b89a; padding: 8px 14px; cursor:pointer;
+  font-family:"DM Mono", monospace; font-size: 12px; letter-spacing:.12em;
+}
+.prompt.duck .copy-btn{ border-color: var(--fairwood); color: var(--fairwood);}
+.prompt.peanut .copy-btn{ border-color: var(--peanut-hot); color: var(--peanut-hot);}
+.prompt .body{
+  padding: 24px;
+  font-family:"DM Mono", monospace; font-size: 14px; line-height: 1.6;
+  color: #d9c8a8; white-space: pre-wrap;
+}
+.prompt .body .var{ background: rgba(255,255,255,.08); padding: 1px 6px; color: var(--peanut-lime); }
+
+/* FAQ */
+.faq{ margin-top: 96px;}
+.faq h2{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 64px; margin: 0; letter-spacing:-.02em;}
+.faq-item{
+  border-top: 1px solid #2a1f15; padding: 28px 0;
+  display:grid; grid-template-columns: 1fr 2fr; gap: 32px;
+}
+.faq-item:last-child{ border-bottom: 1px solid #2a1f15; }
+.faq-item .q{ font-family:"Noto Serif HK", serif; font-weight:700; font-size: 22px; color:#fff; line-height:1.3;}
+.faq-item .q::before{ content:"Q "; color: var(--fairwood); font-family:"DM Mono",monospace; font-size: 16px; letter-spacing:.15em;}
+.faq-item .a{ font-size: 16px; line-height: 1.65; color:#c9b89a; margin:0;}
+.faq-item .a strong{ color: #fff; }
+
+/* CTA */
+.cta{
+  margin-top: 96px; padding: 64px;
+  background: var(--fairwood); color: var(--ink);
+  text-align:center;
+}
+.cta h2{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 80px; margin:0; line-height:1; letter-spacing:-.02em;}
+.cta .button{
+  display:inline-block; background: var(--ink); color: var(--fairwood);
+  font-family:"Reggae One", serif; font-size: 28px;
+  padding: 18px 36px; text-decoration:none; margin-top: 32px;
+  box-shadow: 8px 8px 0 rgba(0,0,0,.2);
+}
+
+/* Footer */
+.foot{ margin-top: 64px; padding-top: 32px; border-top: 1px solid #2a1f15; display:flex; justify-content:space-between; font-family:"DM Mono",monospace; font-size: 12px; color:#8a7a5e; letter-spacing:.15em;}
+
+/* video placeholder */
+.video-card{
+  margin-top: 32px; aspect-ratio: 16/9; background: #15100b;
+  border: 2px solid #3a2c1e;
+  display:flex; align-items:center; justify-content:center;
+  flex-direction:column; gap:16px; color:#8a7a5e;
+  background-image: repeating-linear-gradient(45deg, #15100b 0 20px, #1a1410 20px 40px);
+}
+.video-card .play{
+  width: 80px; height: 80px; border-radius:50%;
+  background: var(--fairwood); color: var(--ink);
+  display:flex; align-items:center; justify-content:center;
+  font-size: 36px;
+}
+.video-card .label{ font-family:"DM Mono",monospace; font-size:14px; letter-spacing:.2em;}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <nav class="nav">
+    <div class="logo">
+      <span class="mark">快</span>
+      <span>SITE 多士</span>
+      <span class="by">官方教學</span>
+    </div>
+    <div class="links">
+      <a href="master-site.html">戰況</a>
+      <a href="#" class="on">點玩</a>
+      <a href="team-duck.html">🦆 鴨蛋派</a>
+      <a href="team-peanut.html">🥜 花生派</a>
+    </div>
+    <a href="#submit" class="cta">我已起好 Site →</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="kicker">官方教學 · OFFICIAL HOW-TO · 5 分鐘起 SITE</div>
+    <h1>唔識 code？<br><span class="hl">由你打字</span>，<br>AI 同你起埋。</h1>
+    <p class="lead">
+      我哋揀咗 4 個免費 AI 起 site 工具，每一個都會自動畀你一條 link ── 你完全唔需要識「部署」、「host」、「domain」呢啲嘢。打字就得。
+    </p>
+    <div class="meta">
+      <span class="pill">⏱ 5 分鐘搞掂</span>
+      <span class="pill">💰 全部免費</span>
+      <span class="pill">📱 手機都做到</span>
+      <span class="pill">🧑‍🦳 阿公阿婆都得</span>
+    </div>
+
+    <!-- big myth-buster -->
+    <div class="myth">
+      <div class="left">＂Host 唔到網頁＂？</div>
+      <div class="right">
+        係 2020 年嘅嘢喇 — 而家所有 AI 起 site 工具，<strong>build 完即刻畀你一條 URL</strong>，例如 <code>my-peanut-site.lovable.app</code>。<br>
+        你嘅工作只係：將條 URL copy 落大快活個 Google Form。完。
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 steps -->
+  <section class="steps">
+    <h2>三步入伍</h2>
+    <div class="sub">▸ HOW TO ENTER · 由零到 SITE LIVE</div>
+
+    <div class="step-grid">
+      <div class="step-card">
+        <div class="n">STEP 01</div>
+        <h3>揀一個 AI 工具</h3>
+        <p>下面 4 個都得．揀任何一個，開戶口（用 Google sign in 就 OK）。</p>
+        <div class="visual">
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <div style="background: linear-gradient(135deg, #ff7043, #ff3d7f); padding: 8px 14px; border-radius: 8px; font-weight:700; color:#fff; font-size:13px;">Lovable</div>
+            <div style="background: linear-gradient(135deg, #d97757, #8b3a1f); padding: 8px 14px; border-radius: 8px; font-weight:700; color:#fff; font-size:13px;">Claude</div>
+            <div style="background: #000; border:1px solid #fff; padding: 8px 14px; border-radius: 8px; font-weight:700; color:#fff; font-size:13px;">v0</div>
+            <div style="background: linear-gradient(135deg, #38bdf8, #1e40af); padding: 8px 14px; border-radius: 8px; font-weight:700; color:#fff; font-size:13px;">Bolt</div>
+          </div>
+          <div style="font-family:'DM Mono',monospace; font-size:12px; color:#8a7a5e; margin-top:16px; letter-spacing:.1em;">▸ click 入去 → Sign in with Google → 開新 project</div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="n">STEP 02</div>
+        <h3>打字 / 貼 prompt</h3>
+        <p>下面有我哋寫好嘅 prompt template（鴨蛋派 / 花生派各一），直接 copy 貼入去就得。AI 1 分鐘出畫面。</p>
+        <div class="visual" style="background:#000; color: var(--peanut-lime); font-family:'DM Mono',monospace; font-size:11px; padding: 16px; line-height: 1.6;">
+          <span style="color:#8a7a5e;">› user @ AI ~/site $</span><br>
+          幫我起一個 landing page<br>
+          撐大快活花生醬西多，<br>
+          要有 marquee、blink、<br>
+          5 大理由、投票 widget…<br>
+          <span style="background: var(--fairwood); color:#000; padding: 0 4px;">▮</span>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="n">STEP 03</div>
+        <h3>Copy URL → 交 Form</h3>
+        <p>AI 起完，右上角會有「Publish」/「Share」掣 ── 按一下，攞條 URL 貼入大快活個 Google Form。完。</p>
+        <div class="visual" style="display:flex; flex-direction:column; gap:10px; padding: 20px;">
+          <div style="background:#0f0a07; border:1px solid #3a2c1e; padding: 10px 14px; border-radius: 6px; font-family:'DM Mono',monospace; font-size:11px; color:#c9b89a; display:flex; align-items:center; gap:8px;">
+            <span style="color:#2f6b48;">🔗</span> my-peanut-site.lovable.app
+            <span style="margin-left:auto; background: var(--fairwood); color:#000; padding: 2px 8px; font-size: 9px;">COPY</span>
+          </div>
+          <div style="text-align:center; font-family:'DM Mono',monospace; font-size:14px; color: var(--fairwood);">↓ 貼入</div>
+          <div style="background:#0f0a07; border:1px solid var(--fairwood); padding: 10px 14px; border-radius: 6px; font-family:'DM Mono',monospace; font-size:11px; color: var(--fairwood);">
+            📮 大快活 Google Form
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="play">▶</div>
+      <div class="label">🎬 90 秒 教學片 · BY 大快活官方 · COMING SOON</div>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section class="tools">
+    <h2>4 個推薦工具</h2>
+    <div class="sub">▸ 全部免費 · 全部自動 host · 全部交到大快活</div>
+    <div class="tool-grid">
+      <div class="tool-card featured">
+        <div class="top">
+          <div class="icon lovable">L</div>
+          <div>
+            <div class="name">Lovable</div>
+            <div class="url">lovable.dev</div>
+          </div>
+        </div>
+        <p class="blurb">最易上手．打中文 prompt 都得．完成自動畀 <code>xxx.lovable.app</code> link．適合素人。</p>
+        <div class="specs">
+          <div class="row" style="grid-column:1/-1;"><span>免費版</span><span>每月 5 個 project</span></div>
+          <div class="row" style="grid-column:1/-1;"><span>需要 sign in</span><span>Google 一 click</span></div>
+          <div class="row" style="grid-column:1/-1;"><span>自動 host</span><span>✓ YES</span></div>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="top">
+          <div class="icon claude">C</div>
+          <div>
+            <div class="name">Claude Artifact</div>
+            <div class="url">claude.ai</div>
+          </div>
+        </div>
+        <p class="blurb">同 ChatGPT 一樣傾偈式建站．Publish 後 link 係 <code>claude.site/xxx</code>．適合鍾意 Meme 嘅 user。</p>
+        <div class="specs">
+          <div class="row" style="grid-column:1/-1;"><span>免費版</span><span>每日有限額</span></div>
+          <div class="row" style="grid-column:1/-1;"><span>需要 sign in</span><span>Email / Google</span></div>
+          <div class="row" style="grid-column:1/-1;"><span>自動 host</span><span>✓ YES</span></div>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="top">
+          <div class="icon v0">v0</div>
+          <div>
+            <div class="name">v0 by Vercel</div>
+            <div class="url">v0.dev</div>
+          </div>
+        </div>
+        <p class="blurb">出 component-style，幾靚仔．適合鍾意 minimal design 嘅鴨蛋派 user．link 係 <code>xxx.vercel.app</code>。</p>
+        <div class="specs">
+          <div class="row" style="grid-column:1/-1;"><span>免費版</span><span>每月 200 message</span></div>
+          <div class="row" style="grid-column:1/-1;"><span>需要 sign in</span><span>GitHub / Google</span></div>
+          <div class="row" style="grid-column:1/-1;"><span>自動 host</span><span>✓ YES</span></div>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="top">
+          <div class="icon bolt">⚡</div>
+          <div>
+            <div class="name">Bolt.new</div>
+            <div class="url">bolt.new</div>
+          </div>
+        </div>
+        <p class="blurb">出嘅嘢比較鬼馬．適合花生派整 Y2K chaos．link 係 <code>xxx.bolt.host</code> 或者 Netlify。</p>
+        <div class="specs">
+          <div class="row" style="grid-column:1/-1;"><span>免費版</span><span>每日 token 限額</span></div>
+          <div class="row" style="grid-column:1/-1;"><span>需要 sign in</span><span>GitHub / Google</span></div>
+          <div class="row" style="grid-column:1/-1;"><span>自動 host</span><span>✓ YES</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- READY PROMPTS -->
+  <section class="prompts">
+    <h2>兩派 Prompt．直接 copy</h2>
+    <div class="sub">▸ 貼入任何上面嘅 AI 工具 · 換低色字部分 · 1 分鐘出 site</div>
+
+    <div class="prompt-grid">
+      <div class="prompt duck">
+        <div class="head">
+          <div class="emoji">🦆</div>
+          <div>
+            <h4>傳統鴨蛋派．Prompt Template</h4>
+            <div class="tag">FOR DUCK EGG SUPPORTERS</div>
+          </div>
+          <button class="copy-btn" onclick="copyPrompt(this)">⎘ COPY</button>
+        </div>
+        <div class="body">幫我起一個 single-page landing page，用茶記/大排檔 nostalgia 風格，
+撐大快活「傳統鴨蛋無餡西多」，重點：
+
+1. Hero 大字標題：<span class="var">「無餡先係正宗西多」</span>
+2. 三個 reason cards：
+   ① 鴨蛋蛋黃多，比雞蛋香
+   ② 煎 Pan 慢火唔索油
+   ③ 加餡會掩蓋蛋香
+3. 一個 quote block：<span class="var">「我食咗 50 年西多，
+   冇花生先係真。」— 陳生 · 大角咀街坊</span>
+4. Footer 加大 CTA：「為鴨蛋派投一票」
+   link 到 <span class="var">{大快活 Google Form URL}</span>
+
+配色：茶記紙黃 + 快活橙 + 印章紅。
+字體：serif（Noto Serif HK），唔好用 Inter。
+要有港式茶記、誠懇、唔好太 Y2K。</div>
+      </div>
+
+      <div class="prompt peanut">
+        <div class="head">
+          <div class="emoji">🥜</div>
+          <div>
+            <h4>邪惡花生派．Prompt Template</h4>
+            <div class="tag">FOR PEANUT BUTTER STANS</div>
+          </div>
+          <button class="copy-btn" onclick="copyPrompt(this)">⎘ COPY</button>
+        </div>
+        <div class="body">幫我起一個 chaotic Y2K / GeoCities style 嘅 landing page，
+撐大快活「全新花生醬西多」，要極 Meme 感：
+
+1. Top marquee：<span class="var">「花生派必勝！邪惡花生派萬歲！」</span>
+2. 一個閃 blinky 大字：<span class="var">「花生醬係靈魂！」</span>
+3. Visitor counter（fake 都得）
+4. 一個 5 大理由 list，用 🥜 做 bullet
+5. 一個假民意調查 widget，花生派 97% vs 鴨蛋派 3%
+6. 一個 fake meme placeholder（drake meme style）
+7. 巨型 CTA button：「我要投花生派一票」
+   link 到 <span class="var">{大快活 Google Form URL}</span>
+
+配色：螢光粉 + 黃 + 黑．字體：Comic Sans / VT323。
+要有 marquee、blink、彩虹漸變、ridge border、emoji 過剩。
+越騎呢越好．越唔正經越啱。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <h2>常見問題</h2>
+    <div class="faq-item">
+      <div class="q">我用 iPhone 做唔做到？</div>
+      <p class="a">做到。Lovable、Claude、v0 都有 mobile-friendly 嘅 web 版。<strong>用電腦會易啲</strong>，但用手機都完全得 ── 平台會自動 resize 個 preview。</p>
+    </div>
+    <div class="faq-item">
+      <div class="q">如果 AI 起嘅 site 唔啱我意，可以改嗎？</div>
+      <p class="a">可以。再打多句「將 hero 改大啲」、「轉做粉紅色」、「加多個花生 emoji」── AI 會即場改。<strong>傾偈式建站</strong>，唔需要識 code。</p>
+    </div>
+    <div class="faq-item">
+      <div class="q">個 AI 工具會唔會收錢？</div>
+      <p class="a">免費版夠用。Lovable 每月 5 個 free project，Claude 每日有 free message。<strong>起一個 site 唔會超出免費額</strong>。我哋唔會推銷你買 plan。</p>
+    </div>
+    <div class="faq-item">
+      <div class="q">如果條 link 之後失效（例如我 delete 咗 project）點算？</div>
+      <p class="a">大快活喺 6 月 23 日宣佈勝方之前，會幫你個 site 做 archive 截圖留底，<strong>戰況計分板照計</strong>。但建議大家比賽期間唔好刪 site 啦。</p>
+    </div>
+    <div class="faq-item">
+      <div class="q">交個 site 之後幾耐先見到上架？</div>
+      <p class="a">每日 6PM 一次大 update。如果你今日 6PM 前交，AI 過 + 小編快速人手 check，<strong>當日 6PM Master Site 上架</strong>，戰況計分板即時跳動。</p>
+    </div>
+    <div class="faq-item">
+      <div class="q">如果我 AI prompt 寫得唔好，個 site 出嚟好醜，會唔會無效？</div>
+      <p class="a">唔會。<strong>越騎呢、越素人，越易 viral</strong>。今次 campaign 唔係比靚仔，係比熱情。你都見到「邪惡花生派」嗰個 demo site 都係故意做到好醜怪。</p>
+    </div>
+    <div class="faq-item">
+      <div class="q">大快活有冇官方教學片睇？</div>
+      <p class="a">有 ── Phase 1（5 月底）會出一條 90 秒 reel，由大快活廚師示範「煎件西多嘅同時，AI 起件 Site」（雙重食字）。<strong>同時 release IG/FB/YouTube</strong>。</p>
+    </div>
+    <div class="faq-item">
+      <div class="q">學界組點 verify 我係咩學校？</div>
+      <p class="a">交 Form 時揀學校 + 用學校 email 註冊（學生 / 校友），<strong>系統會 cross-check</strong>。小編每日抽樣人手 verify．如果作假，會踢出榜。</p>
+    </div>
+  </section>
+
+  <!-- BIG CTA -->
+  <section class="cta" id="submit">
+    <h2>已起好你嘅 Site？</h2>
+    <a href="#" class="button">▸ 交去大快活 Google Form</a>
+  </section>
+
+  <footer class="foot">
+    <span>SITE 多士 · 教學頁 · v1.0 · 2026</span>
+    <span>有問題？hi@fairwood.hk</span>
+  </footer>
+
+</div>
+
+<script>
+function copyPrompt(btn){
+  const text = btn.closest('.prompt').querySelector('.body').innerText;
+  navigator.clipboard.writeText(text);
+  btn.innerHTML = '✓ COPIED';
+  setTimeout(()=> btn.innerHTML='⎘ COPY', 1800);
+}
+</script>
+
+</body>
+</html>

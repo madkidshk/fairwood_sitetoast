@@ -1,0 +1,1331 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SITE 多士大對決 · V2 · 大快活</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ============ V2 Base ============ */
+body{
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Sans HK", sans-serif;
+  margin: 0;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(120,80,30,.05), transparent 50%),
+    radial-gradient(circle at 88% 82%, rgba(120,80,30,.04), transparent 50%);
+}
+*{ box-sizing: border-box;}
+img{ max-width: 100%; display: block;}
+a{ color: inherit; text-decoration: none;}
+
+/* ============ FLOATING SIDE NAV (vertical right) ============ */
+.side-nav{
+  position: fixed; top: 50%; right: 16px; transform: translateY(-50%);
+  z-index: 100;
+  width: 52px;
+  background: var(--ink); color: var(--paper);
+  border: 2px solid var(--fairwood);
+  box-shadow: -4px 4px 0 var(--fairwood);
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 12px 6px;
+}
+.sn-brand{
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding-bottom: 14px; border-bottom: 1px solid rgba(245,236,217,.15);
+  width: 100%;
+}
+.sn-brand img{ width: 32px; height: 32px;}
+.sn-brand span{
+  writing-mode: vertical-rl; text-orientation: upright;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 11px;
+  color: var(--fairwood); letter-spacing: .15em;
+  margin-top: 4px;
+}
+.sn-live{
+  background: var(--peanut-lime); color: var(--ink);
+  padding: 4px 6px; font-family:"DM Mono", monospace; font-size: 9px;
+  letter-spacing: .12em; font-weight: 700;
+  writing-mode: vertical-rl; text-orientation: mixed;
+}
+.sn-link{
+  writing-mode: vertical-rl; text-orientation: upright;
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 14px; color: var(--paper);
+  padding: 8px 4px; letter-spacing: .1em;
+  border-radius: 4px;
+  transition: background .15s;
+}
+.sn-link:hover{ background: rgba(240,138,0,.15); color: var(--fairwood);}
+.sn-cta{
+  margin-top: auto;
+  background: var(--fairwood); color: var(--ink);
+  padding: 14px 8px;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 12px;
+  text-align: center; line-height: 1.2; letter-spacing: -.01em;
+  border: 2px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--paper);
+  width: 100%; box-sizing: border-box;
+}
+.sn-cta:hover{ transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--paper);}
+
+/* Back-to-top (bottom right, BUT inside the side-nav slot) */
+.back-top-v2{
+  position: fixed; bottom: 24px; right: 80px;
+  z-index: 99;
+  background: var(--paper); color: var(--ink);
+  width: 44px; height: 44px;
+  border: 2px solid var(--ink); cursor: pointer;
+  font-family:"Noto Serif HK", serif; font-size: 22px; font-weight: 900;
+  box-shadow: 3px 3px 0 var(--ink);
+  display: none; align-items: center; justify-content: center;
+}
+.back-top-v2.visible{ display: flex;}
+
+/* Push site content left to avoid side-nav overlap */
+body{ padding-right: 80px;}
+
+@media (max-width: 900px){
+  body{ padding-right: 0;}
+  .side-nav{
+    top: auto; bottom: 0; right: 0; left: 0; width: auto;
+    flex-direction: row; padding: 8px 12px; gap: 8px;
+    border-top: 2px solid var(--fairwood); border-right: none; border-bottom: none; border-left: none;
+    box-shadow: 0 -4px 0 var(--fairwood);
+  }
+  .sn-brand{ flex-direction: row; padding: 0; border: none; width: auto; gap: 6px;}
+  .sn-brand span{ writing-mode: horizontal-tb; font-size: 14px; margin-top: 0;}
+  .sn-live{ display: none;}
+  .sn-link{ writing-mode: horizontal-tb; font-size: 13px;}
+  .sn-cta{ writing-mode: horizontal-tb; padding: 8px 14px; margin: 0;}
+  .back-top-v2{ right: 16px; bottom: 80px;}
+}
+
+/* ============ HERO V2 — slim ============ */
+.v2-hero{
+  padding: 28px 32px 8px;
+  position: relative;
+}
+.v2-hero-inner{ max-width: 1480px; margin: 0 auto;}
+.hero-toast{ display: flex; align-items: center; justify-content: center;}
+.hero-toast img{ width: 100%; max-width: 460px; height: auto; filter: drop-shadow(0 16px 32px rgba(0,0,0,.18));}
+
+.hero-strip{ display: block; }
+.v2-title-slim{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: clamp(40px, 4.5vw, 64px); line-height: 1; margin: 10px 0 14px;
+  letter-spacing: -.025em;
+}
+.v2-title-slim .y{ color: var(--fairwood);}
+.v2-title-slim .p{ color: var(--peanut-hot);}
+.v2-title-slim .vs{ display: inline-block; font-style: italic; font-weight: 700; font-size: .55em; color: var(--ink-soft); transform: rotate(-3deg); padding: 0 6px; vertical-align: middle;}
+.hero-strip .v2-lead{
+  margin: 0;
+  font-family:"Noto Sans HK", sans-serif; font-size: 15px; line-height: 1.55; max-width: 640px;
+}
+.hero-strip-right{
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: center;
+  background: var(--ink); color: var(--paper);
+  padding: 18px 24px;
+  border: 2px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--fairwood);
+}
+.hsr-side{ display: flex; align-items: center; gap: 12px;}
+.hsr-side.p{ justify-content: flex-end;}
+.hsr-emoji{ font-size: 32px; line-height: 1;}
+.hsr-side strong{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 40px; line-height: 1; letter-spacing: -.03em; display: block;}
+.hsr-side.d strong{ color: var(--fairwood);}
+.hsr-side.p strong{ color: var(--fairwood-light);}
+.hsr-side small{ display: block; font-family:"DM Mono", monospace; font-size: 10px; letter-spacing: .15em; color: rgba(245,236,217,.65); margin-top: 4px;}
+.hsr-vs{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 28px; color: var(--fairwood); letter-spacing: -.04em; transform: rotate(-4deg);}
+
+@media (max-width: 900px){
+  .hero-strip{ grid-template-columns: 1fr; gap: 20px;}
+}
+
+/* ============ Sticky thin nav ============ */
+.v2-nav{
+  position: sticky; top: 0; z-index: 50;
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
+  padding: 14px 32px;
+  display: flex; align-items: center; gap: 24px;
+}
+.v2-logo{ display: flex; align-items: center; gap: 10px;}
+.v2-logo .ah{ width: 36px; height: 36px;}
+.v2-logo strong{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 18px; letter-spacing: -.01em;}
+.v2-logo span{ font-family:"DM Mono", monospace; font-size: 10px; color: var(--ink-soft); letter-spacing: .18em;}
+.v2-nav-links{ display: flex; gap: 28px; margin-left: auto; font-family:"DM Mono", monospace; font-size: 12px; letter-spacing: .12em; color: var(--ink);}
+.v2-nav-links a:hover{ color: var(--fairwood-deep);}
+.v2-live{
+  display: flex; align-items: center; gap: 8px;
+  background: var(--ink); color: var(--peanut-lime);
+  padding: 5px 12px;
+  font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .15em;
+}
+.v2-live::before{ content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--peanut-lime); animation: pulse 1.5s infinite;}
+.v2-cta{
+  background: var(--fairwood); color: var(--ink);
+  padding: 10px 18px;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 14px;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform .15s;
+}
+.v2-cta:hover{ transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--ink);}
+@keyframes pulse{ 50%{ opacity: .4;}}
+
+/* ============ HERO V2 — full bleed ============ */
+.v2-hero{
+  padding: 48px 32px 0;
+  position: relative;
+  overflow: hidden;
+}
+.v2-hero-inner{ max-width: 1480px; margin: 0 auto; position: relative;}
+
+.v2-kicker{
+  display: inline-flex; align-items: center; gap: 14px;
+  font-family:"DM Mono", monospace; font-size: 13px; letter-spacing: .25em;
+  color: var(--fairwood-deep); margin-bottom: 18px;
+}
+.v2-kicker::before{ content: ""; width: 36px; height: 2px; background: var(--fairwood);}
+
+.v2-title{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: clamp(56px, 8vw, 128px); line-height: .9;
+  letter-spacing: -.045em; margin: 0;
+  color: var(--ink);
+}
+.v2-title .y{ color: var(--fairwood); display: inline-block;}
+.v2-title .p{ color: var(--peanut-hot); display: inline-block;}
+.v2-title .vs{
+  font-family:"Noto Serif HK", serif; font-style: italic;
+  display: inline-block; padding: 0 14px;
+  transform: rotate(-3deg);
+  color: var(--ink-soft);
+  font-size: .65em;
+  font-weight: 700;
+}
+
+.v2-lead{
+  margin: 24px 0 0;
+  font-family:"Noto Serif HK", serif; font-weight: 500;
+  font-size: 18px; line-height: 1.5; max-width: 720px;
+  color: var(--ink-soft);
+}
+.v2-lead a{ color: var(--fairwood-deep); font-weight: 700; border-bottom: 2px solid var(--fairwood); padding-bottom: 1px;}
+
+/* hero food placards */
+.v2-placards{
+  margin-top: 40px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  position: relative;
+  max-width: 920px;
+}
+.placard{
+  border: 2.5px solid var(--ink);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .25s;
+}
+.placard.duck{ box-shadow: -8px 8px 0 var(--fairwood); transform: rotate(-1deg);}
+.placard.peanut{ box-shadow: 8px 8px 0 var(--peanut-hot); transform: rotate(1deg);}
+.placard:hover{ transform: scale(1.02);}
+
+.placard-art{
+  aspect-ratio: 16 / 9;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.placard.duck .placard-art{
+  background:
+    radial-gradient(circle at 60% 38%, var(--duck) 0%, var(--fairwood) 35%, var(--fairwood-deep) 80%, #6b3a14 100%);
+}
+.placard.peanut .placard-art{
+  background:
+    radial-gradient(circle at 40% 60%, var(--fairwood-light) 0%, var(--peanut-hot) 50%, var(--peanut) 95%);
+}
+.placard-art::before{
+  content: ""; position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(135deg, rgba(0,0,0,.02) 0 4px, transparent 4px 8px);
+  mix-blend-mode: multiply;
+}
+
+/* toast illustration in CSS */
+.toast-illus{
+  position: relative;
+  width: 60%; aspect-ratio: 1 / 1;
+  z-index: 2;
+}
+.toast-illus .bread{
+  position: absolute; inset: 12% 8%;
+  background: linear-gradient(165deg, #f4b942 0%, #d4842f 60%, #8c4e1a 100%);
+  border-radius: 12px;
+  box-shadow:
+    inset 0 -8px 24px rgba(0,0,0,.25),
+    0 12px 32px rgba(0,0,0,.18);
+}
+.toast-illus .bread::before{
+  content: ""; position: absolute; inset: 6px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,.15) 100%);
+}
+.toast-illus.duck .yolk{
+  position: absolute; top: 30%; left: 35%;
+  width: 32%; aspect-ratio: 1;
+  background: radial-gradient(circle at 35% 35%, #ffd76b 0%, #f4a030 70%, #c46d00 100%);
+  border-radius: 50%;
+  box-shadow:
+    inset -4px -4px 12px rgba(0,0,0,.2),
+    inset 4px 4px 8px rgba(255,255,255,.3),
+    0 6px 16px rgba(0,0,0,.18);
+}
+.toast-illus.peanut .pb-blob{
+  position: absolute; top: 32%; left: 28%;
+  width: 50%; aspect-ratio: 1;
+  background: radial-gradient(ellipse at 40% 40%, #c47e3a 0%, #8b4513 60%, #5a2c0a 100%);
+  border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+  box-shadow:
+    inset -3px -3px 8px rgba(0,0,0,.25),
+    0 6px 14px rgba(0,0,0,.22);
+}
+
+.placard-corner-stamp{
+  position: absolute; top: 16px; right: 16px;
+  background: var(--paper); color: var(--ink);
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 14px; padding: 5px 14px;
+  border: 2px solid var(--ink);
+  transform: rotate(8deg);
+  z-index: 5;
+}
+.placard.duck .placard-corner-stamp{ color: var(--fairwood-deep);}
+.placard.peanut .placard-corner-stamp{ color: var(--peanut-hot);}
+
+.placard-bottom{
+  background: var(--paper);
+  border-top: 2px solid var(--ink);
+  padding: 20px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.placard-name{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 26px; line-height: 1.1;}
+.placard.duck .placard-name{ color: var(--fairwood-deep);}
+.placard.peanut .placard-name{ color: var(--peanut-hot);}
+.placard-meta{ font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .12em; color: var(--ink-soft); margin-top: 4px;}
+.placard-stat{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 36px; line-height: 1; color: var(--ink); letter-spacing: -.02em;
+}
+
+.hero-vs-medal{
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-4deg);
+  width: 96px; height: 96px;
+  background: var(--ink); color: var(--fairwood);
+  border-radius: 50%;
+  border: 3px solid var(--fairwood);
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  box-shadow: 6px 6px 0 var(--peanut-hot);
+  z-index: 10;
+}
+.hero-vs-medal .v{ font-size: 36px; letter-spacing: -.04em; line-height: 1;}
+.hero-vs-medal .d{ font-family:"DM Mono", monospace; font-size: 9px; letter-spacing: .15em; opacity: .75; margin-top: 2px;}
+
+/* Live battle bar — full bleed strip */
+.v2-live-strip{
+  margin-top: 40px;
+  background: var(--ink); color: var(--paper);
+  padding: 18px 32px;
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 32px; align-items: center;
+}
+.lsb-side{ display: flex; align-items: center; gap: 14px;}
+.lsb-side.p{ justify-content: flex-end;}
+.lsb-emoji{ font-size: 32px; line-height: 1;}
+.lsb-side strong{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 42px; line-height: 1; letter-spacing: -.03em; display: block;}
+.lsb-side.d strong{ color: var(--fairwood);}
+.lsb-side.p strong{ color: var(--fairwood-light);}
+.lsb-side small{ display: block; font-family:"DM Mono", monospace; font-size: 11px; color: rgba(245,236,217,.7); letter-spacing: .15em; margin-top: 4px;}
+.lsb-side em{ font-style: normal; font-family:"DM Mono", monospace; font-size: 12px; color: var(--peanut-lime); letter-spacing: .12em;}
+.lsb-bar{ position: relative; height: 22px; background: rgba(245,236,217,.1); overflow: hidden; min-width: 280px;}
+.lsb-bar-d{ position: absolute; left: 0; top: 0; bottom: 0; background: var(--fairwood); transition: width .8s;}
+.lsb-bar-p{ position: absolute; right: 0; top: 0; bottom: 0; background: var(--fairwood-light); transition: width .8s;}
+.lsb-bar-marker{ position: absolute; left: 49.4%; top: -6px; bottom: -6px; width: 2px; background: var(--paper); transform: translateX(-1px);}
+
+/* ============ VERSUS V2 — vertical stacked sections ============ */
+.versus-v2{
+  margin-top: 56px;
+  position: relative;
+}
+.versus-v2-intro{
+  max-width: 1480px; margin: 0 auto; padding: 0 32px 32px;
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 32px;
+}
+.versus-v2-intro h2{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 72px; line-height: 1; margin: 0; letter-spacing: -.03em;}
+.versus-v2-intro p{ font-family:"DM Mono", monospace; font-size: 13px; letter-spacing: .15em; color: var(--ink-soft); max-width: 360px; line-height: 1.7;}
+
+.faction-band{
+  padding: 56px 32px;
+  position: relative;
+}
+.faction-band.duck{ background: linear-gradient(180deg, var(--paper) 0%, #f0e2c2 100%); border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink);}
+.faction-band.peanut{ background: linear-gradient(180deg, #3d2418 0%, #2a1a10 100%); color: var(--paper); border-bottom: 2px solid var(--ink);}
+
+.faction-band-inner{ max-width: 1480px; margin: 0 auto; position: relative;}
+
+.fb-header{
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap; gap: 16px;
+}
+.fb-header h3{
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 56px; line-height: 1; margin: 0; letter-spacing: -.03em;
+}
+.faction-band.peanut .fb-header h3{ color: var(--fairwood-light);}
+.fb-header .fb-sub{ font-family:"DM Mono", monospace; font-size: 12px; letter-spacing: .15em; color: var(--ink-soft); margin-top: 8px;}
+.faction-band.peanut .fb-header .fb-sub{ color: rgba(245,236,217,.6);}
+
+.fb-controls{ display: flex; align-items: center; gap: 16px;}
+.fb-controls .fb-counter{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 28px;}
+.fb-controls .fb-counter span{ color: var(--fairwood-deep);}
+.faction-band.peanut .fb-controls .fb-counter span{ color: var(--fairwood-light);}
+.fb-arr{
+  background: var(--ink); color: var(--fairwood);
+  width: 52px; height: 52px;
+  border: 3px solid var(--fairwood); cursor: pointer;
+  font-family:"Noto Serif HK", serif; font-size: 28px; font-weight: 900; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .15s;
+}
+.faction-band.peanut .fb-arr{ background: var(--paper); color: var(--peanut-hot); border-color: var(--peanut-hot);}
+.fb-arr:hover{ transform: scale(1.08);}
+
+/* Card deck — peek prev/next */
+.fb-deck{
+  position: relative;
+  overflow: hidden;
+}
+.fb-track{
+  display: flex; gap: 24px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overflow-x: auto;
+  padding: 8px 0 24px;
+  scroll-padding: 0;
+}
+.fb-track::-webkit-scrollbar{ display: none;}
+.fb-card{
+  flex: 0 0 calc(100% - 0px);
+  max-width: 1120px;
+  scroll-snap-align: center;
+  background: var(--paper);
+  border: 2.5px solid var(--ink);
+  display: grid; grid-template-columns: 1.5fr 1fr;
+  overflow: hidden;
+  transition: transform .25s;
+  margin: 0 auto;
+  min-height: 360px;
+}
+.faction-band.peanut .fb-card{ background: var(--paper);}
+.fb-card:hover{ transform: translateY(-3px);}
+
+.fb-card-art{
+  position: relative;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  padding: 32px 40px;
+  min-height: 360px;
+}
+/* Duck variants */
+.art-classic{ background: var(--paper);}
+.art-classic .art-h1{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 64px; line-height: .95; color: var(--peanut); letter-spacing: -.03em;}
+.art-classic .art-p{ font-family:"Noto Serif HK", serif; font-weight: 500; font-size: 16px; line-height: 1.55; color: var(--ink-soft); margin-top: 16px;}
+.art-classic .art-stamp{
+  position: absolute; top: 24px; right: 24px;
+  border: 2.5px solid var(--stamp); color: var(--stamp); padding: 6px 14px;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 13px;
+  transform: rotate(-5deg); background: rgba(255,255,255,.7);
+}
+
+.art-archive{ background: var(--paper-deep); border-right: 4px solid var(--fairwood);}
+.art-archive .art-tag{ font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .25em; color: var(--fairwood-deep);}
+.art-archive .art-h1{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 64px; line-height: .95; margin-top: 14px; letter-spacing: -.03em;}
+.art-archive .art-essay{ font-family:"Noto Serif HK", serif; font-style: italic; font-size: 17px; line-height: 1.6; color: var(--ink-soft); margin-top: 18px;}
+
+.art-quote{ background: var(--paper); text-align: center; padding: 40px;}
+.art-quote .art-q{ font-family:"Noto Serif HK", serif; font-weight: 700; font-style: italic; font-size: 40px; line-height: 1.15; letter-spacing: -.01em;}
+.art-quote .art-c{ font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .2em; color: var(--ink-soft); margin-top: 20px;}
+
+.art-truth{ background: var(--paper);}
+.art-truth .art-h1{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 64px; line-height: .95; color: var(--fairwood-deep); letter-spacing: -.03em;}
+.art-truth .art-list{ margin-top: 18px; display: flex; flex-direction: column; gap: 8px; font-family:"DM Mono", monospace; font-size: 13px; color: var(--ink-soft);}
+
+.art-jin{ background: linear-gradient(135deg, #fff7e0 0%, #f5d984 100%);}
+.art-jin .art-h1{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 80px; line-height: .9; color: var(--peanut); letter-spacing: -.03em;}
+.art-jin .art-tag{ font-family:"DM Mono", monospace; font-size: 13px; letter-spacing: .2em; margin-top: 14px; color: var(--fairwood-deep);}
+
+.art-only{ background: var(--paper);}
+.art-only .art-h1{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 88px; line-height: .85; color: var(--ink); letter-spacing: -.05em;}
+.art-only .art-tag{ font-family:"DM Mono", monospace; font-size: 12px; letter-spacing: .25em; margin-top: 16px; color: var(--fairwood-deep);}
+
+/* Peanut variants */
+.art-y2k{
+  background: linear-gradient(135deg, var(--peanut-hot) 0%, #8b3a2a 100%);
+  color: #fff;
+}
+.art-y2k .art-marquee{
+  position: absolute; top: 0; left: 0; right: 0;
+  background: #000; color: var(--peanut-lime);
+  padding: 7px 0; font-family:"VT323", monospace; font-size: 18px;
+  letter-spacing: .15em; text-align: center; white-space: nowrap;
+}
+.art-y2k .art-h1-chaos{
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 88px; line-height: .9;
+  color: var(--peanut-lime); text-shadow: 4px 4px 0 #000, 8px 8px 0 var(--peanut-hot);
+  transform: rotate(-3deg); letter-spacing: -.03em;
+}
+.art-y2k .art-blink{
+  display: inline-block; margin-top: 24px;
+  background: #ff0; color: #000; padding: 5px 14px;
+  font-family:"Noto Sans HK", sans-serif; font-weight: 900; font-size: 14px;
+  animation: vblink 1s steps(2) infinite;
+}
+@keyframes vblink{ 50%{ opacity: 0;}}
+
+.art-molten{ background: linear-gradient(135deg, #ff8a3d 0%, var(--peanut-hot) 100%); color: #fff;}
+.art-molten .art-pill{ display: inline-block; background: #fff; color: var(--peanut-hot); padding: 5px 14px; font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .2em;}
+.art-molten .art-h1{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 80px; line-height: .9; color: #fff; margin-top: 18px; text-shadow: 3px 3px 0 rgba(0,0,0,.2); letter-spacing: -.03em;}
+.art-molten .art-p{ font-family:"Noto Sans HK", sans-serif; font-size: 16px; line-height: 1.55; color: rgba(255,255,255,.9); margin-top: 18px;}
+
+.art-gang{ background: repeating-linear-gradient(45deg, #f78a5c 0 26px, var(--peanut-hot) 26px 52px); color: #fff;}
+.art-gang .art-bar{ position: absolute; top: 0; left: 0; right: 0; background: var(--ink); color: var(--peanut-lime); padding: 8px; font-family:"DM Mono", monospace; font-size: 13px; letter-spacing: .15em; text-align: center;}
+.art-gang .art-h1-pink{ font-family:"Reggae One", "Noto Serif HK", serif; font-size: 88px; line-height: 1; color: #fff; text-shadow: 4px 4px 0 #000; transform: rotate(-2deg); letter-spacing: -.01em;}
+.art-gang .art-check{ background: rgba(0,0,0,.4); color: #fff; padding: 14px 18px; font-family:"DM Mono", monospace; font-size: 13px; line-height: 1.75; margin-top: 18px;}
+
+.art-pixel{ background: var(--ink); color: var(--peanut-lime); font-family:"VT323", monospace;}
+.art-pixel .art-bar{ position: absolute; top: 0; left: 0; right: 0; background: var(--peanut-hot); color: #fff; padding: 8px; font-family:"VT323", monospace; font-size: 16px; letter-spacing: .15em; text-align: center;}
+.art-pixel .art-h1{ font-family:"VT323", monospace; font-size: 88px; line-height: .9; color: var(--peanut-lime); letter-spacing: .05em;}
+.art-pixel .art-counter{ margin-top: 18px; display: inline-block; background: #000; color: var(--peanut-lime); border: 2px solid var(--peanut-lime); padding: 6px 14px; font-family:"VT323", monospace; font-size: 18px;}
+
+.art-life{ background: linear-gradient(135deg, #ff8a3d 0%, #d44a1e 100%); color: #fff;}
+.art-life .art-pill{ display: inline-block; background: #fff; color: var(--peanut-hot); padding: 5px 14px; font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .2em;}
+.art-life .art-h1{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 80px; line-height: .9; color: #fff; margin-top: 18px; letter-spacing: -.03em;}
+
+.art-supreme{ background: linear-gradient(135deg, var(--peanut-hot) 0%, var(--peanut) 100%); color: #fff;}
+.art-supreme .art-bar{ position: absolute; top: 0; left: 0; right: 0; background: var(--ink); color: var(--peanut-lime); padding: 8px; font-family:"DM Mono", monospace; font-size: 13px; letter-spacing: .2em; text-align: center;}
+.art-supreme .art-h1{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 80px; line-height: .9; color: #fff; letter-spacing: -.03em;}
+
+/* Card meta panel */
+.fb-card-meta{
+  background: var(--paper);
+  padding: 28px 32px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  border-left: 2.5px solid var(--ink);
+  gap: 16px;
+}
+.faction-band.peanut .fb-card-meta{ background: var(--paper); color: var(--ink);}
+.fb-card-meta .fb-card-title{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 30px; line-height: 1.1; margin: 0; letter-spacing: -.01em;}
+.fb-card-meta .fb-card-author{ font-family:"DM Mono", monospace; font-size: 12px; color: var(--ink-soft); letter-spacing: .12em; margin-top: 8px;}
+.fb-card-meta .fb-card-stats{
+  display: flex; flex-direction: column; gap: 14px;
+  margin-top: 18px;
+}
+.fb-card-meta .fb-row{ display: flex; justify-content: space-between; align-items: center; font-family:"DM Mono", monospace; font-size: 13px; color: var(--ink-soft);}
+.fb-card-meta .fb-row strong{ color: var(--ink); font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 24px; letter-spacing: -.01em;}
+.fb-card-meta .fb-row.votes strong{ color: var(--fairwood-deep);}
+
+.fb-open{
+  background: var(--ink); color: var(--fairwood);
+  padding: 14px 22px;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 16px;
+  letter-spacing: .03em;
+  display: inline-flex; align-items: center; gap: 10px;
+  box-shadow: 4px 4px 0 var(--fairwood);
+  transition: transform .15s;
+}
+.fb-card:hover .fb-open{ transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--fairwood);}
+
+/* VS divider between factions */
+.vs-divider-strip{
+  background: var(--fairwood); color: var(--ink);
+  padding: 16px 32px;
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+}
+.vs-divider-strip .vs-num{ font-size: 36px; line-height: 1; letter-spacing: -.04em;}
+.vs-divider-strip .vs-vs{ font-size: 48px; transform: rotate(-3deg); padding: 0 14px; line-height: 1; letter-spacing: -.04em;}
+.vs-divider-strip .vs-lbl{ font-family:"DM Mono", monospace; font-size: 13px; letter-spacing: .25em; opacity: .7;}
+
+.swipe-hint{
+  text-align: center; margin-top: 12px;
+  font-family:"DM Mono", monospace; font-size: 11px; color: var(--ink-soft);
+  letter-spacing: .15em;
+}
+.faction-band.peanut .swipe-hint{ color: rgba(245,236,217,.6);}
+.swipe-hint kbd{ background: var(--paper-deep); padding: 2px 8px; border: 1px solid var(--ink-soft); font-family:"DM Mono", monospace; font-size: 11px;}
+
+/* Sections shared */
+.v2-section{
+  max-width: 1480px; margin: 0 auto;
+  padding: 96px 32px;
+}
+.v2-section h2{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 72px; line-height: 1; margin: 0 0 16px; letter-spacing: -.03em;}
+.v2-section h2 .accent{ color: var(--fairwood);}
+
+/* Quick CTA back-to-top + go-submit floating */
+.floating-cta{
+  position: fixed; bottom: 24px; right: 24px;
+  z-index: 100;
+  display: flex; flex-direction: column; gap: 10px; align-items: flex-end;
+}
+.floating-cta .fc-btn{
+  background: var(--ink); color: var(--fairwood);
+  padding: 12px 18px;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 14px;
+  box-shadow: 4px 4px 0 var(--fairwood);
+  cursor: pointer; border: none;
+  transition: transform .15s;
+}
+.floating-cta .fc-btn:hover{ transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--fairwood);}
+.floating-cta .fc-up{ background: var(--paper); color: var(--ink); box-shadow: 4px 4px 0 var(--ink); width: 48px; height: 48px; padding: 0; font-size: 22px;}
+
+/* Footer V2 */
+.v2-foot{
+  background: var(--ink); color: var(--paper);
+  padding: 80px 32px 48px;
+  margin-top: 96px;
+}
+.v2-foot-inner{ max-width: 1480px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: flex-end;}
+.v2-foot-big{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 120px; line-height: .9; letter-spacing: -.04em;
+  color: var(--paper);
+}
+.v2-foot-big .y{ color: var(--fairwood);}
+.v2-foot-big .p{ color: var(--peanut-hot);}
+.v2-foot-meta{
+  font-family:"DM Mono", monospace; font-size: 12px; color: rgba(245,236,217,.55);
+  letter-spacing: .15em; line-height: 1.8; text-align: right;
+}
+
+/* TAB SWITCH version */
+.vs-tabs-wrap{
+  max-width: 1480px; margin: 0 auto; padding: 0 32px;
+}
+.vs-tabs{
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  position: relative;
+  margin-bottom: 0;
+}
+.vs-tab{
+  background: var(--paper-deep);
+  border: 2.5px solid var(--ink);
+  padding: 22px 28px;
+  cursor: pointer;
+  text-align: center;
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  transition: all .2s;
+  font-family: inherit;
+  color: var(--ink);
+  position: relative;
+  min-height: 96px;
+}
+.vs-tab:nth-child(1){ border-right: none;}
+.vs-tab:nth-child(2){ border-left: none;}
+.vs-tab-content{ display: flex; flex-direction: column; gap: 4px; align-items: flex-start;}
+.vs-tab:hover{ background: var(--paper);}
+.vs-tab.active{
+  background: var(--fairwood); color: var(--ink);
+  z-index: 2;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.vs-tab[data-side="peanut"].active{ background: var(--peanut-hot); color: #fff;}
+.vs-tab-emoji{ font-size: 48px; line-height: 1;}
+.vs-tab-name{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 28px; line-height: 1.1; letter-spacing: -.01em;}
+.vs-tab-stat{ font-family:"DM Mono", monospace; font-size: 13px; letter-spacing: .1em; color: var(--ink-soft); margin-top: 4px;}
+.vs-tab.active .vs-tab-stat{ color: rgba(0,0,0,.65);}
+.vs-tab[data-side="peanut"].active .vs-tab-stat{ color: rgba(255,255,255,.85);}
+.vs-tab-stat strong{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 18px; letter-spacing: -.01em;}
+.vs-tab-stat em{ font-style: normal; color: var(--peanut-lime); font-weight: 700;}
+.vs-tab.active .vs-tab-stat em{ color: var(--ink); font-weight: 900;}
+.vs-tab[data-side="peanut"].active .vs-tab-stat em{ color: var(--peanut-lime);}
+.vs-tab-cta{
+  margin-left: auto;
+  background: var(--fairwood); color: var(--ink);
+  padding: 8px 16px;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 16px;
+  letter-spacing: -.01em;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform .15s;
+  flex: 0 0 auto;
+}
+.vs-tab:hover .vs-tab-cta{ transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--ink);}
+.vs-tab[data-side="peanut"] .vs-tab-cta{ background: var(--peanut-hot); color: #fff;}
+.vs-tab.active .vs-tab-cta{ background: var(--ink); color: var(--fairwood); box-shadow: 3px 3px 0 var(--paper);}
+.vs-tab[data-side="peanut"].active .vs-tab-cta{ background: var(--ink); color: var(--peanut-lime); box-shadow: 3px 3px 0 var(--paper);}
+
+.vs-tab-vs{
+  display: none;
+}
+
+.vs-panel{
+  display: none;
+  padding: 36px 0 56px;
+  border: 2.5px solid var(--ink); border-top: none;
+  background: var(--paper);
+}
+.vs-panel.active{ display: block;}
+.vs-panel .fb-header{ padding: 0 32px;}
+.vs-panel .fb-deck{ padding: 0 32px;}
+
+@media (max-width: 900px){
+  .vs-tabs{ grid-template-columns: 1fr; }
+  .vs-tab{ border-right: 2.5px solid var(--ink) !important; border-left: 2.5px solid var(--ink) !important;}
+  .vs-tab:nth-child(2){ flex-direction: row; text-align: left;}
+  .vs-tab-vs{ display: none;}
+}
+
+/* Howto V2 */
+.howto-v2-head{
+  display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap;
+  gap: 24px; margin-bottom: 56px;
+}
+.howto-v2-head h2{ margin-top: 8px;}
+.howto-v2-grid{
+  display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap: 16px;
+  align-items: stretch;
+}
+.ht-step-v2{
+  background: var(--paper-deep);
+  border: 2px solid var(--ink);
+  padding: 28px 26px;
+  position: relative;
+  box-shadow: 4px 4px 0 var(--fairwood);
+}
+.ht-step-v2.final{ background: var(--fairwood); box-shadow: 4px 4px 0 var(--ink);}
+.ht-n{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 56px; line-height: .9; color: var(--fairwood); letter-spacing: -.04em;
+}
+.ht-step-v2.final .ht-n{ color: var(--ink);}
+.ht-step-v2 h4{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 26px; line-height: 1.1; margin: 14px 0 10px; letter-spacing: -.01em;}
+.ht-step-v2 p{ margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink-soft);}
+.ht-step-v2.final p{ color: var(--ink);}
+.ht-step-v2 code{ background: var(--ink); color: var(--fairwood); padding: 1px 6px; font-family:"DM Mono", monospace; font-size: 12px;}
+.ht-arrow{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 36px; color: var(--fairwood-deep);
+  display: flex; align-items: center;
+}
+.howto-v2-note{
+  margin-top: 32px; padding: 16px 22px;
+  background: var(--paper-deep);
+  border-left: 3px solid var(--fairwood);
+  display: flex; align-items: center; gap: 14px;
+  font-family:"DM Mono", monospace; font-size: 13px; color: var(--ink-soft); line-height: 1.5; letter-spacing: .08em;
+}
+.howto-v2-note span{ font-size: 22px;}
+.howto-v2-note a{ color: var(--fairwood-deep); font-weight: 700; border-bottom: 1.5px solid var(--fairwood);}
+
+/* Submit V2 */
+.submit-band{ background: var(--ink); color: var(--paper); padding-top: 96px; padding-bottom: 96px; margin-top: 48px; max-width: none; padding-left: 32px; padding-right: 32px;}
+.submit-band > *{ max-width: 1480px; margin-left: auto; margin-right: auto;}
+.submit-v2-grid{
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
+}
+.submit-v2-left h2{ font-size: 64px; margin: 14px 0 24px;}
+.submit-v2-left p{ font-size: 18px; line-height: 1.55; color: rgba(245,236,217,.85); margin: 0;}
+.submit-v2-trust{
+  margin-top: 36px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  font-family:"DM Mono", monospace; font-size: 12px; letter-spacing: .12em;
+  color: var(--peanut-lime);
+}
+.submit-v2-form{
+  background: var(--paper); color: var(--ink);
+  padding: 36px 40px;
+  border: 2px solid var(--fairwood);
+  box-shadow: 8px 8px 0 var(--fairwood);
+  display: flex; flex-direction: column; gap: 18px;
+}
+.sf-row label{ display: block; font-family:"DM Mono", monospace; font-size: 11px; color: var(--fairwood-deep); letter-spacing: .15em; margin-bottom: 6px;}
+.sf-row input{ width: 100%; padding: 14px 16px; background: var(--paper-deep); border: 2px solid var(--ink); font-family:"DM Mono", monospace; font-size: 14px; color: var(--ink); box-sizing: border-box;}
+.sf-row input:focus{ outline: 2px solid var(--fairwood); outline-offset: 2px;}
+.sf-faction{ display: grid; grid-template-columns: 1fr 1fr; gap: 8px;}
+.sf-fac-btn{
+  padding: 14px; background: var(--paper-deep); border: 2px solid var(--ink); cursor: pointer;
+  font-family:"Noto Serif HK", serif; font-weight: 700; font-size: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sf-fac-btn:has(input:checked){ background: var(--fairwood); color: var(--ink);}
+.sf-fac-btn.p:has(input:checked){ background: var(--peanut-hot); color: #fff;}
+.sf-fac-btn input{ accent-color: var(--fairwood);}
+.sf-btn{
+  margin-top: 8px; padding: 18px; background: var(--ink); color: var(--fairwood);
+  border: none; cursor: pointer;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 22px;
+  box-shadow: 4px 4px 0 var(--fairwood);
+  transition: transform .15s;
+}
+.sf-btn:hover{ transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--fairwood);}
+
+/* Quick band — 3 sister access cards */
+.quick-band{
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.qb-card{
+  background: var(--paper-deep);
+  border: 2px solid var(--ink);
+  padding: 36px 28px;
+  display: flex; flex-direction: column; gap: 10px;
+  text-decoration: none; color: var(--ink);
+  box-shadow: 6px 6px 0 var(--fairwood);
+  transition: transform .15s;
+}
+.qb-card:hover{ transform: translate(-2px,-2px); box-shadow: 8px 8px 0 var(--fairwood);}
+.qb-icon{ font-size: 52px; line-height: 1;}
+.qb-card strong{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 28px; line-height: 1.1; letter-spacing: -.01em;}
+.qb-card small{ font-family:"DM Mono", monospace; font-size: 12px; color: var(--ink-soft); letter-spacing: .12em;}
+.qb-card.prize{ background: var(--fairwood); box-shadow: 6px 6px 0 var(--ink);}
+
+@media (max-width: 900px){
+  .howto-v2-grid{ grid-template-columns: 1fr;}
+  .ht-arrow{ display: none;}
+  .submit-v2-grid{ grid-template-columns: 1fr;}
+  .quick-band{ grid-template-columns: 1fr;}
+}
+
+@media (max-width: 900px){
+  .v2-placards{ grid-template-columns: 1fr;}
+  .v2-live-strip{ grid-template-columns: 1fr; gap: 14px;}
+  .fb-card{ grid-template-columns: 1fr;}
+  .fb-card-meta{ border-left: none; border-top: 2px solid var(--ink);}
+  .versus-v2-intro{ flex-direction: column; align-items: flex-start;}
+  .v2-foot-inner{ grid-template-columns: 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- FLOATING SIDE NAV (right vertical) -->
+<aside class="side-nav">
+  <a href="#howto" class="sn-link">點玩</a>
+  <a href="master-site.html#schools" class="sn-link">學界</a>
+  <a href="master-site.html#prize" class="sn-link">獎品</a>
+  <a href="#submit" class="sn-cta">▸ 交<br>SITE</a>
+</aside>
+
+
+<!-- HERO V2 — SITE IS THE KV -->
+<section class="v2-hero">
+  <div class="v2-hero-inner">
+    <div class="hero-strip">
+      <div class="hero-strip-left">
+        <div class="v2-kicker">FAIRWOOD × 全港網民 · 06.02 → 06.23 · 2026</div>
+        <h1 class="v2-title-slim">SITE 多士大對決：<br>傳統<span class="y">鴨蛋</span>香 <span class="vs">vs.</span> 邪惡<span class="p">花生</span>醬</h1>
+        <p class="v2-lead">用 AI 起一個 Site 撐你揀嘅西多．邊派 Site 多邊派贏．每日 18:00 update．<strong style="color: var(--fairwood-deep);">唔識 code 都得</strong> ── <a href="#howto">下面 4 步教學</a>．</p>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- VERSUS V2 — SITES ARE THE KV -->
+<section class="versus-v2" id="versus" style="margin-top: 0;">
+  <div class="vs-tabs-wrap">
+    <!-- TABS -->
+    <div class="vs-tabs">
+      <button class="vs-tab active" data-side="duck" onclick="switchFaction('duck')">
+        <span class="vs-tab-emoji">🦆</span>
+        <div class="vs-tab-content">
+          <div class="vs-tab-name">傳統鴨蛋派</div>
+          <div class="vs-tab-stat"><strong>470</strong> sites · <em>+38</em></div>
+        </div>
+        <span class="vs-tab-cta">揀鴨蛋 ▸</span>
+      </button>
+      <button class="vs-tab" data-side="peanut" onclick="switchFaction('peanut')">
+        <span class="vs-tab-emoji">🥜</span>
+        <div class="vs-tab-content">
+          <div class="vs-tab-name">邪惡花生派</div>
+          <div class="vs-tab-stat"><strong>482</strong> sites · <em>+44</em></div>
+        </div>
+        <span class="vs-tab-cta">揀花生 ▸</span>
+      </button>
+      <div class="vs-tab-vs">VS</div>
+    </div>
+
+    <!-- PANELS -->
+    <div class="vs-panel active" id="panel-duck">
+      <div class="fb-header">
+        <div>
+          <h3 style="color: var(--fairwood-deep);">🦆 傳統鴨蛋派．今日精選</h3>
+          <div class="fb-sub" style="color: var(--ink-soft);">▸ 6 個 KOL + 大快活揀出嘅 site · 撳右邊揀下個</div>
+        </div>
+        <div class="fb-controls">
+          <button class="fb-arr" onclick="cycleDeck('duck',-1)" aria-label="Prev">‹</button>
+          <span class="fb-counter"><span id="duck-cur">1</span> / 6</span>
+          <button class="fb-arr" onclick="cycleDeck('duck',1)" aria-label="Next">›</button>
+        </div>
+      </div>
+      <div class="fb-deck">
+        <div class="fb-track" id="duck-track">
+
+          <a class="fb-card" href="team-duck.html" target="_blank">
+            <div class="fb-card-art art-classic">
+              <div class="art-stamp">真．正宗</div>
+              <div>
+                <div class="art-h1">無餡先係<br>正宗西多。</div>
+                <p class="art-p">大排檔嘅西多本來就<em>冇餡</em>．係近年人哋亂加嘢。</p>
+              </div>
+            </div>
+            <div class="fb-card-meta">
+              <div>
+                <h4 class="fb-card-title">無餡西多保衛聯盟</h4>
+                <div class="fb-card-author">@uncle_lam_1962 · 茶記伙計 · 旺角</div>
+                <div class="fb-card-stats">
+                  <div class="fb-row votes"><span>票數</span><strong>93</strong></div>
+                  <div class="fb-row"><span>評分</span><strong>4.8 ★</strong></div>
+                  <div class="fb-row"><span>留咗 Day</span><strong>D04</strong></div>
+                </div>
+              </div>
+              <a class="fb-open" href="team-duck.html" target="_blank">▸ OPEN SITE</a>
+            </div>
+          </a>
+
+          <a class="fb-card" href="#" target="_blank">
+            <div class="fb-card-art art-archive">
+              <div>
+                <div class="art-tag">EST. 1972 · 茶記檔案</div>
+                <div class="art-h1">大排檔正宗<br>考據檔案。</div>
+                <p class="art-essay">一份 4,000 字 essay，從 1950s 法式 French Toast 講到 2026．認真到大學論文 level。</p>
+              </div>
+            </div>
+            <div class="fb-card-meta">
+              <div>
+                <h4 class="fb-card-title">大排檔正宗考據</h4>
+                <div class="fb-card-author">@uncle_chau · 中環打工仔</div>
+                <div class="fb-card-stats">
+                  <div class="fb-row votes"><span>票數</span><strong>64</strong></div>
+                  <div class="fb-row"><span>評分</span><strong>4.6 ★</strong></div>
+                  <div class="fb-row"><span>留咗 Day</span><strong>D06</strong></div>
+                </div>
+              </div>
+              <a class="fb-open" href="#" target="_blank">▸ OPEN SITE</a>
+            </div>
+          </a>
+
+          <a class="fb-card" href="#" target="_blank">
+            <div class="fb-card-art art-quote">
+              <div>
+                <div class="art-q">「我食咗 50 年西多。<br>冇花生先係真。」</div>
+                <div class="art-c">— 陳生 · 大角咀街坊</div>
+              </div>
+            </div>
+            <div class="fb-card-meta">
+              <div>
+                <h4 class="fb-card-title">無餡至尊 Manifesto</h4>
+                <div class="fb-card-author">@yeungyeung · 深水埗茶友</div>
+                <div class="fb-card-stats">
+                  <div class="fb-row votes"><span>票數</span><strong>45</strong></div>
+                  <div class="fb-row"><span>評分</span><strong>4.5 ★</strong></div>
+                  <div class="fb-row"><span>留咗 Day</span><strong>D02</strong></div>
+                </div>
+              </div>
+              <a class="fb-open" href="#" target="_blank">▸ OPEN SITE</a>
+            </div>
+          </a>
+
+          <a class="fb-card" href="#" target="_blank">
+            <div class="fb-card-art art-truth">
+              <div>
+                <div class="art-h1">鴨蛋香<br>= 真理。</div>
+                <div class="art-list">
+                  <span>01 · 鴨蛋蛋黃比例高 35%</span>
+                  <span>02 · 鴨蛋富含 Omega-3</span>
+                  <span>03 · 煎 Pan 嘅 Maillard 反應</span>
+                </div>
+              </div>
+            </div>
+            <div class="fb-card-meta">
+              <div>
+                <h4 class="fb-card-title">鴨蛋香 = 真理</h4>
+                <div class="fb-card-author">@taikwoklok · 油麻地</div>
+                <div class="fb-card-stats">
+                  <div class="fb-row votes"><span>票數</span><strong>38</strong></div>
+                  <div class="fb-row"><span>評分</span><strong>4.3 ★</strong></div>
+                  <div class="fb-row"><span>留咗 Day</span><strong>D05</strong></div>
+                </div>
+              </div>
+              <a class="fb-open" href="#" target="_blank">▸ OPEN SITE</a>
+            </div>
+          </a>
+
+          <a class="fb-card" href="#" target="_blank">
+            <div class="fb-card-art art-jin">
+              <div>
+                <div class="art-h1">煎 Pan<br>萬歲。</div>
+                <div class="art-tag">▸ 慢火 · 唔索油</div>
+              </div>
+            </div>
+            <div class="fb-card-meta">
+              <div>
+                <h4 class="fb-card-title">煎 Pan 萬歲</h4>
+                <div class="fb-card-author">@chankakit · 油麻地</div>
+                <div class="fb-card-stats">
+                  <div class="fb-row votes"><span>票數</span><strong>29</strong></div>
+                  <div class="fb-row"><span>評分</span><strong>4.4 ★</strong></div>
+                  <div class="fb-row"><span>留咗 Day</span><strong>D03</strong></div>
+                </div>
+              </div>
+              <a class="fb-open" href="#" target="_blank">▸ OPEN SITE</a>
+            </div>
+          </a>
+
+          <a class="fb-card" href="#" target="_blank">
+            <div class="fb-card-art art-only">
+              <div>
+                <div class="art-h1">DUCK<br>EGG<br>ONLY.</div>
+                <div class="art-tag">EST. 1972 · 守傳統</div>
+              </div>
+            </div>
+            <div class="fb-card-meta">
+              <div>
+                <h4 class="fb-card-title">DUCK EGG ONLY</h4>
+                <div class="fb-card-author">@duck_society · 牛池灣</div>
+                <div class="fb-card-stats">
+                  <div class="fb-row votes"><span>票數</span><strong>24</strong></div>
+                  <div class="fb-row"><span>評分</span><strong>4.7 ★</strong></div>
+                  <div class="fb-row"><span>留咗 Day</span><strong>D07</strong></div>
+                </div>
+              </div>
+              <a class="fb-open" href="#" target="_blank">▸ OPEN SITE</a>
+            </div>
+          </a>
+
+        </div>
+        <div class="swipe-hint">▸ <kbd>swipe</kbd> 左右 / <kbd>‹</kbd> <kbd>›</kbd> 揀下個 site</div>
+      </div>
+    </div>
+
+    <div class="vs-panel" id="panel-peanut">
+      <div class="fb-header">
+        <div>
+          <h3 style="color: var(--peanut-hot);">🥜 邪惡花生派．今日精選</h3>
+          <div class="fb-sub" style="color: var(--ink-soft);">▸ 6 個 KOL + 大快活揀出嘅 site · 撳右邊揀下個</div>
+        </div>
+        <div class="fb-controls">
+          <button class="fb-arr" onclick="cycleDeck('peanut',-1)" aria-label="Prev">‹</button>
+          <span class="fb-counter"><span id="peanut-cur">1</span> / 6</span>
+          <button class="fb-arr" onclick="cycleDeck('peanut',1)" aria-label="Next">›</button>
+        </div>
+      </div>
+      <div class="fb-deck">
+        <div class="fb-track" id="peanut-track">
+
+          <a class="fb-card" href="team-peanut.html" target="_blank">
+            <div class="fb-card-art art-y2k">
+              <div class="art-marquee">★ JOIN PEANUT GANG ★ JOIN PEANUT GANG ★</div>
+              <div>
+                <div class="art-h1-chaos">花生係<br>靈魂！</div>
+                <div class="art-blink">★ 點解你仲未入伍？★</div>
+              </div>
+            </div>
+            <div class="fb-card-meta">
+              <div>
+                <h4 class="fb-card-title">花生係靈魂！(官方總部)</h4>
+                <div class="fb-card-author">@peanutbutter_god · 皇仁書院 DSE</div>
+                <div class="fb-card-stats">
+                  <div class="fb-row votes"><span>票數</span><strong>127</strong></div>
+                  <div class="fb-row"><span>評分</span><strong>4.9 ★</strong></div>
+                  <div class="fb-row"><span>留咗 Day</span><strong>D04</strong></div>
+                </div>
+              </div>
+              <a class="fb-open" href="team-peanut.html" target="_blank">▸ OPEN SITE</a>
+            </div>
+          </a>
+
+          <a class="fb-card" href="#" target="_blank">
+            <div class="fb-card-art art-molten">
+              <div>
+                <div class="art-pill">★ MOLTEN MOVEMENT</div>
+                <div class="art-h1">流心爆漿<br>協會。</div>
+                <p class="art-p">將花生流心拍成 Marvel 預告片．大快活營銷 dept 學嘢。</p>
+              </div>
+            </div>
+            <div class="fb-card-meta">
+              <div>
+                <h4 class="fb-card-title">流心爆漿協會</h4>
+                <div class="fb-card-author">@iampeanutbutter · 浸大傳理</div>
+                <div class="fb-card-stats">
+                  <div class="fb-row votes"><span>票數</span><strong>71</strong></div>
+                  <div class="fb-row"><span>評分</span><strong>4.8 ★</strong></div>
+                  <div class="fb-row"><span>留咗 Day</span><strong>D06</strong></div>
+                </div>
+              </div>
+              <a class="fb-open" href="#" target="_blank">▸ OPEN SITE</a>
+            </div>
+          </a>
+
+          <a class="fb-card" href="#" target="_blank">
+            <div class="fb-card-art art-gang">
+              <div class="art-bar">PEANUT GANG · 入會須知</div>
+              <div>
+                <div class="art-h1-pink">花生<br>GANG</div>
+                <div class="art-check">☑ 識食花生<br>☑ 撐大快活<br>☑ 嬲到鴨蛋派</div>
+              </div>
+            </div>
+            <div class="fb-card-meta">
+              <div>
+                <h4 class="fb-card-title">花生 GANG · 入會須知</h4>
+                <div class="fb-card-author">@mavismavis · 浸大學生</div>
+                <div class="fb-card-stats">
+                  <div class="fb-row votes"><span>票數</span><strong>52</strong></div>
+                  <div class="fb-row"><span>評分</span><strong>4.5 ★</strong></div>
+                  <div class="fb-row"><span>留咗 Day</span><strong>D03</strong></div>
+                </div>
+              </div>
+              <a class="fb-open" href="#" target="_blank">▸ OPEN SITE</a>
+            </div>
+          </a>
+
+          <a class="fb-card" href="#" target="_blank">
+            <div class="fb-card-art art-pixel">
+              <div class="art-bar">▌▌▌ PB·HK·2026 ▌▌▌</div>
+              <div>
+                <div class="art-h1">PB<br>FOREVER.</div>
+                <div class="art-counter">👁 042,069 visitors</div>
+              </div>
+            </div>
+            <div class="fb-card-meta">
+              <div>
+                <h4 class="fb-card-title">花生人類學會</h4>
+                <div class="fb-card-author">@hkug_food · 連登 user</div>
+                <div class="fb-card-stats">
+                  <div class="fb-row votes"><span>票數</span><strong>44</strong></div>
+                  <div class="fb-row"><span>評分</span><strong>4.2 ★</strong></div>
+                  <div class="fb-row"><span>留咗 Day</span><strong>D05</strong></div>
+                </div>
+              </div>
+              <a class="fb-open" href="#" target="_blank">▸ OPEN SITE</a>
+            </div>
+          </a>
+
+          <a class="fb-card" href="#" target="_blank">
+            <div class="fb-card-art art-life">
+              <div>
+                <div class="art-pill">★ 流心 = 真理</div>
+                <div class="art-h1">花生<br>人生。</div>
+              </div>
+            </div>
+            <div class="fb-card-meta">
+              <div>
+                <h4 class="fb-card-title">花生人生</h4>
+                <div class="fb-card-author">@flying_peanut · 城大商學</div>
+                <div class="fb-card-stats">
+                  <div class="fb-row votes"><span>票數</span><strong>37</strong></div>
+                  <div class="fb-row"><span>評分</span><strong>4.6 ★</strong></div>
+                  <div class="fb-row"><span>留咗 Day</span><strong>D08</strong></div>
+                </div>
+              </div>
+              <a class="fb-open" href="#" target="_blank">▸ OPEN SITE</a>
+            </div>
+          </a>
+
+          <a class="fb-card" href="#" target="_blank">
+            <div class="fb-card-art art-supreme">
+              <div class="art-bar">⚠ 警告 · 邪惡 ⚠</div>
+              <div>
+                <div class="art-h1">PEANUT<br>SUPREME.</div>
+              </div>
+            </div>
+            <div class="fb-card-meta">
+              <div>
+                <h4 class="fb-card-title">PEANUT SUPREME 宣言</h4>
+                <div class="fb-card-author">@taipo_peanut · 大埔街坊</div>
+                <div class="fb-card-stats">
+                  <div class="fb-row votes"><span>票數</span><strong>31</strong></div>
+                  <div class="fb-row"><span>評分</span><strong>4.4 ★</strong></div>
+                  <div class="fb-row"><span>留咗 Day</span><strong>D07</strong></div>
+                </div>
+              </div>
+              <a class="fb-open" href="#" target="_blank">▸ OPEN SITE</a>
+            </div>
+          </a>
+
+        </div>
+        <div class="swipe-hint">▸ <kbd>swipe</kbd> 左右 / <kbd>‹</kbd> <kbd>›</kbd> 揀下個 site</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOWTO V2 — 4 steps compact -->
+<section class="v2-section" id="howto">
+  <div class="howto-v2-head">
+    <div>
+      <div class="v2-kicker">▸ 點玩 · IN 4 STEPS</div>
+      <h2>無腦 4 步<br><span class="accent">起 + 交 Site。</span></h2>
+    </div>
+    <a href="#submit" class="v2-cta" style="font-size: 16px; padding: 14px 22px;">▸ 跳去交 Site</a>
+  </div>
+
+  <div class="howto-v2-grid">
+    <div class="ht-step-v2">
+      <div class="ht-n">01</div>
+      <h4>揀派</h4>
+      <p>🦆 鴨蛋 OR 🥜 花生．揀咗就唔可以再揀對家．</p>
+    </div>
+    <div class="ht-arrow">→</div>
+    <div class="ht-step-v2">
+      <div class="ht-n">02</div>
+      <h4>用 AI 起 site</h4>
+      <p>Lovable · Claude · v0 · Bolt．<strong>免費．自動 host．</strong></p>
+    </div>
+    <div class="ht-arrow">→</div>
+    <div class="ht-step-v2">
+      <div class="ht-n">03</div>
+      <h4>Copy 條 URL</h4>
+      <p>AI 起完，按 Publish / Share．Copy <code>xxx.lovable.app</code>．</p>
+    </div>
+    <div class="ht-arrow">→</div>
+    <div class="ht-step-v2 final">
+      <div class="ht-n">04</div>
+      <h4>貼喺下面交</h4>
+      <p>scroll 落「即場交 Site」section．貼 URL．完．</p>
+    </div>
+  </div>
+
+  <div class="howto-v2-note">
+    <span>★</span>
+    <p>需要更詳細嘅 prompt 模版 / 兩派風格指引？ <a href="master-site.html#howto">睇 V1 嘅完整 4 步 wizard →</a></p>
+  </div>
+</section>
+
+<!-- SUBMIT V2 — single big card -->
+<section class="v2-section submit-band" id="submit">
+  <div class="submit-v2-grid">
+    <div class="submit-v2-left">
+      <div class="v2-kicker" style="color: var(--paper);">▸ SUBMIT YOUR SITE</div>
+      <h2 style="color: var(--paper);">即場交 Site<br><span style="color: var(--fairwood);">六點上架。</span></h2>
+      <p>
+        AI 1 分鐘掃描 → 小編 6PM 前 final approve → 即日 18:00 上架．成功就送 <strong style="background: var(--fairwood); color: var(--ink); padding: 2px 8px;">$10 大快活 App 西多券</strong>．
+      </p>
+      <div class="submit-v2-trust">
+        <span>✓ AI 過審 30 秒</span>
+        <span>✓ 小編 final approve</span>
+        <span>✓ 每日 6PM 上架</span>
+        <span>✓ 即時送 $10 券</span>
+      </div>
+    </div>
+
+    <form class="submit-v2-form" onsubmit="return submitV2(event)">
+      <div class="sf-row">
+        <label>▸ 揀陣營</label>
+        <div class="sf-faction">
+          <label class="sf-fac-btn d"><input type="radio" name="faction" value="duck" required> 🦆 傳統鴨蛋派</label>
+          <label class="sf-fac-btn p"><input type="radio" name="faction" value="peanut"> 🥜 邪惡花生派</label>
+        </div>
+      </div>
+      <div class="sf-row">
+        <label>▸ 你個 SITE URL</label>
+        <input type="url" required placeholder="https://my-site.lovable.app">
+      </div>
+      <div class="sf-row" style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 10px;">
+        <div>
+          <label>▸ EMAIL（收 $10 券）</label>
+          <input type="email" required placeholder="you@example.com">
+        </div>
+        <div>
+          <label>▸ 學校 (Optional)</label>
+          <input type="text" placeholder="皇仁書院">
+        </div>
+      </div>
+      <button type="submit" class="sf-btn">▸ 投我一票 · SUBMIT</button>
+    </form>
+  </div>
+</section>
+
+<!-- Rules & schools quick access -->
+<section class="v2-section">
+  <div class="quick-band">
+    <a href="master-site.html#rules" class="qb-card">
+      <span class="qb-icon">📜</span>
+      <strong>玩法 + 規則</strong>
+      <small>5 條規則 + 8 條 FAQ</small>
+    </a>
+    <a href="master-site.html#schools" class="qb-card">
+      <span class="qb-icon">🎓</span>
+      <strong>學界戰報 Dashboard</strong>
+      <small>108 學校 + Top 10 排行</small>
+    </a>
+    <a href="master-site.html#prize" class="qb-card prize">
+      <span class="qb-icon">🏆</span>
+      <strong>獎品大放送</strong>
+      <small>大獎：全年 365 件西多</small>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="v2-foot">
+  <div class="v2-foot-inner">
+    <div class="v2-foot-big">
+      食得<br>夠 <span class="y">S</span><span class="p">T</span><span class="y">E</span><span class="p">M</span>。
+    </div>
+    <div class="v2-foot-meta">
+      SITE 多士大對決 · V2<br>
+      大快活 2026 STEM CAMPAIGN<br>
+      © FAIRWOOD FAST FOOD GROUP<br><br>
+      食得夠尖 (2024) · 食得夠 GYM (2025) · 食得夠 STEM (2026)
+    </div>
+  </div>
+</footer>
+
+<!-- Floating back-to-top -->
+<button class="back-top-v2" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Top">↑</button>
+
+<script>
+window.addEventListener('scroll', () => {
+  const btn = document.querySelector('.back-top-v2');
+  if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+});
+
+function switchFaction(side){
+  document.querySelectorAll('.vs-tab').forEach(t => t.classList.toggle('active', t.dataset.side === side));
+  document.querySelectorAll('.vs-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + side));
+}
+
+function submitV2(e){
+  e.preventDefault();
+  alert('🎉 提交成功！\n\nAI 分析緊你個 site... 6PM 前小編 final approve．\n收 confirm email + $10 西多券！');
+  e.target.reset();
+  return false;
+}
+function cycleDeck(side, dir){
+  const track = document.getElementById(side + '-track');
+  if (!track) return;
+  const cards = track.querySelectorAll('.fb-card');
+  const cardWidth = cards[0]?.offsetWidth + 24 || 800;
+  track.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
+  setTimeout(() => updateDeckCounter(side), 400);
+}
+function updateDeckCounter(side){
+  const track = document.getElementById(side + '-track');
+  if (!track) return;
+  const cards = track.querySelectorAll('.fb-card');
+  const cardWidth = cards[0]?.offsetWidth + 24 || 800;
+  const idx = Math.round(track.scrollLeft / cardWidth);
+  const el = document.getElementById(side + '-cur');
+  if (el) el.textContent = Math.min(idx + 1, cards.length);
+}
+['duck', 'peanut'].forEach(side => {
+  const track = document.getElementById(side + '-track');
+  if (track) track.addEventListener('scroll', () => updateDeckCounter(side));
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<title>Wireframe · 大快活 SITE 多士大對決 · For Higgsfield / Lovable Brief</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+HK:wght@400;500;700&display=swap');
+
+*{box-sizing:border-box;}
+body{
+  margin:0; padding:48px;
+  font-family:"Inter", "Noto Sans HK", sans-serif;
+  background:#f0f0f0; color:#222;
+}
+.frame{
+  background:#fff; border:2px solid #000;
+  max-width:1280px; margin:0 auto 48px;
+  padding:0;
+  box-shadow:8px 8px 0 #000;
+}
+.frame-tag{
+  background:#000; color:#fff; padding:8px 16px;
+  font-size:11px; letter-spacing:.2em; font-weight:700;
+  display:flex; justify-content:space-between;
+}
+.frame-tag span:last-child{ opacity:.6;}
+.frame-body{ padding:0;}
+
+/* generic box styles */
+.box{ border:1.5px dashed #777; padding:12px; font-size:11px; color:#555; min-height:40px; display:flex; align-items:center; justify-content:center; text-align:center;}
+.box.solid{ border:1.5px solid #000;}
+.box.fill-black{ background:#000; color:#fff;}
+.box.fill-orange{ background:#f08a00; color:#000; border-color:#000;}
+.box.fill-peanut{ background:#c4661f; color:#fff; border-color:#000;}
+.box.fill-grey{ background:#eee; color:#333;}
+.label{ font-weight:700; letter-spacing:.05em; color:#000;}
+.note{ font-size:10px; color:#888; font-style:italic;}
+
+/* HERO */
+.wf-hero{ padding:24px 32px; display:grid; grid-template-columns:1fr 64px; gap:24px;}
+.wf-hero-main{ display:flex; flex-direction:column; gap:14px;}
+.wf-kicker{ font-size:10px; letter-spacing:.18em; color:#888;}
+.wf-h1{ font-size:42px; line-height:1; font-weight:900; letter-spacing:-.02em;}
+.wf-h1 .o{ color:#f08a00;}
+.wf-h1 .p{ color:#c4661f;}
+.wf-h1 .vs{ font-style:italic; font-weight:500; color:#888; font-size:24px; padding:0 6px;}
+.wf-lead{ font-size:14px; color:#555; max-width:640px; line-height:1.5;}
+.wf-sidenav{
+  background:#000; color:#fff;
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  padding:16px 4px;
+}
+.wf-sidenav .nav-item{
+  writing-mode:vertical-rl; text-orientation:upright;
+  font-size:11px; font-weight:700; padding:8px 0; letter-spacing:.1em;
+}
+.wf-sidenav .nav-cta{
+  background:#f08a00; color:#000; padding:8px 4px;
+  font-size:10px; font-weight:900; text-align:center; line-height:1.2; margin-top:auto;
+  width:100%;
+}
+
+/* TABS */
+.wf-tabs{ display:grid; grid-template-columns:1fr 1fr; gap:0;}
+.wf-tab{
+  border:2px solid #000; padding:18px 24px;
+  display:flex; align-items:center; gap:14px;
+}
+.wf-tab:first-child{ border-right:none;}
+.wf-tab.active{ background:#f08a00;}
+.wf-tab.peanut.active{ background:#c4661f; color:#fff;}
+.wf-tab .emoji{ font-size:32px;}
+.wf-tab .name{ font-size:18px; font-weight:900;}
+.wf-tab .stat{ font-size:11px; color:#666; letter-spacing:.1em;}
+.wf-tab.active .stat{ color:rgba(0,0,0,.65);}
+.wf-tab .cta{ margin-left:auto; background:#000; color:#f08a00; padding:6px 12px; font-size:12px; font-weight:900;}
+.wf-tab.active .cta{ background:#000; color:#f08a00;}
+
+/* SITE CARD */
+.wf-site-panel{ padding:24px 32px; border:2px solid #000; border-top:none;}
+.wf-deck-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;}
+.wf-deck-head h3{ font-size:18px; margin:0; font-weight:900;}
+.wf-deck-controls{ display:flex; align-items:center; gap:8px;}
+.wf-arr{ width:28px; height:28px; border:1.5px solid #000; background:#fff; font-weight:900; display:flex; align-items:center; justify-content:center;}
+.wf-counter{ font-size:12px; font-weight:700;}
+
+.wf-card{
+  border:2px solid #000;
+  display:grid; grid-template-columns:1.5fr 1fr;
+  min-height:260px;
+}
+.wf-card-art{
+  background:repeating-linear-gradient(45deg, #f7f7f7 0 8px, #fff 8px 16px);
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+  padding:24px;
+}
+.wf-card-art .hero-block{
+  background:#fff; border:1.5px solid #000;
+  padding:18px 24px; text-align:center; max-width:80%;
+}
+.wf-card-art .hero-block .title{ font-size:24px; font-weight:900; line-height:1.05;}
+.wf-card-art .hero-block .sub{ font-size:11px; color:#666; margin-top:6px;}
+.wf-card-art .corner-tag{
+  position:absolute; top:12px; right:12px;
+  background:#000; color:#fff; padding:3px 10px;
+  font-size:9px; font-weight:700; letter-spacing:.1em;
+}
+.wf-card-meta{
+  padding:20px 24px; border-left:2px solid #000;
+  display:flex; flex-direction:column; gap:10px;
+}
+.wf-card-title{ font-size:16px; font-weight:900;}
+.wf-card-author{ font-size:11px; color:#666;}
+.wf-card-rows{ display:flex; flex-direction:column; gap:6px; font-size:11px; margin-top:6px;}
+.wf-card-row{ display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px dotted #ccc;}
+.wf-card-row strong{ font-weight:900;}
+.wf-card-open{
+  background:#000; color:#f08a00; padding:8px 14px;
+  font-size:12px; font-weight:900; text-align:center; margin-top:auto;
+}
+
+/* HOWTO */
+.wf-howto{ padding:32px; border-top:2px solid #000;}
+.wf-howto-title{ font-size:32px; font-weight:900; margin:0 0 8px;}
+.wf-howto-steps{ display:grid; grid-template-columns:1fr 16px 1fr 16px 1fr 16px 1fr; gap:8px; margin-top:16px; align-items:stretch;}
+.wf-step{
+  border:1.5px solid #000; padding:14px;
+  font-size:11px;
+  background:#fff;
+}
+.wf-step.final{ background:#f08a00;}
+.wf-step .n{ font-size:32px; font-weight:900; line-height:.9;}
+.wf-step .title{ font-size:13px; font-weight:900; margin:6px 0 4px;}
+.wf-step .desc{ font-size:10px; color:#555; line-height:1.4;}
+.wf-arrow{ display:flex; align-items:center; font-size:18px; font-weight:900;}
+
+/* SUBMIT */
+.wf-submit{ background:#000; color:#fff; padding:32px; display:grid; grid-template-columns:1fr 1fr; gap:36px; border-top:2px solid #000;}
+.wf-submit-left h2{ font-size:32px; font-weight:900; margin:8px 0;}
+.wf-submit-left h2 .o{ color:#f08a00;}
+.wf-submit-left p{ font-size:13px; line-height:1.5; color:#ccc;}
+.wf-submit-trust{ display:grid; grid-template-columns:1fr 1fr; gap:4px; font-size:11px; color:#b6ff5c; margin-top:16px;}
+.wf-form{ background:#fff; color:#000; padding:24px; display:flex; flex-direction:column; gap:12px;}
+.wf-form-row label{ display:block; font-size:10px; font-weight:700; color:#f08a00; letter-spacing:.1em; margin-bottom:4px;}
+.wf-form-input{ border:1.5px solid #000; padding:8px 10px; font-size:11px; background:#f7f7f7;}
+.wf-form-fac{ display:grid; grid-template-columns:1fr 1fr; gap:6px;}
+.wf-form-fac-btn{ border:1.5px solid #000; padding:8px; font-size:11px; text-align:center; font-weight:700;}
+.wf-form-btn{ background:#000; color:#f08a00; padding:12px; font-size:14px; font-weight:900; text-align:center; margin-top:4px;}
+
+/* QUICK band */
+.wf-quick{ padding:24px 32px; display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;}
+.wf-quick-card{ border:1.5px solid #000; padding:18px; box-shadow:4px 4px 0 #f08a00;}
+.wf-quick-card.gold{ background:#f08a00;}
+.wf-quick-card .icon{ font-size:24px;}
+.wf-quick-card strong{ display:block; font-size:14px; font-weight:900; margin:6px 0 4px;}
+.wf-quick-card small{ font-size:10px; color:#666;}
+.wf-quick-card.gold small{ color:#333;}
+
+/* FOOTER */
+.wf-foot{ background:#000; color:#fff; padding:32px; display:flex; justify-content:space-between; align-items:flex-end;}
+.wf-foot .big{ font-size:42px; font-weight:900; line-height:.9; letter-spacing:-.02em;}
+.wf-foot .big .o{ color:#f08a00;}
+.wf-foot .meta{ font-size:10px; color:#888; text-align:right; line-height:1.6;}
+
+/* Notes panel */
+.notes{
+  background:#fff; border:2px dashed #000; padding:24px 32px; margin:0 auto 48px; max-width:1280px;
+}
+.notes h2{ margin:0 0 8px; font-size:18px;}
+.notes p{ margin:6px 0; font-size:13px; line-height:1.6; color:#444;}
+.notes ul{ margin:8px 0 0; padding-left:18px; font-size:13px; line-height:1.7;}
+.notes strong{ color:#f08a00;}
+</style>
+</head>
+<body>
+
+<div class="notes">
+  <h2>📋 WIREFRAME · 大快活 SITE 多士大對決 · For AI Layout Generation</h2>
+  <p>Hand-off to Higgsfield / Lovable / v0 → 跟住呢個 wireframe structure 生 polished design．</p>
+  <ul>
+    <li><strong>Above-the-fold：</strong>細 title + 兩派 site preview tabs（site 係 KV）+ 右邊垂直 sidenav</li>
+    <li><strong>Faction tab：</strong>click 換 carousel ── 每邊 6 個 site 做 swipe browse</li>
+    <li><strong>Below：</strong>4 步 howto / 即場 submit form / quick band 跳去 規則 + 學界 + 獎品</li>
+    <li><strong>Colour：</strong>快活橙 #f08a00（accent）· 茶記紙黃 #f5ecd9（背景）· 花生啡 #c4661f（peanut）· 墨黑 #1a1410</li>
+    <li><strong>Font：</strong>大字 Noto Serif HK 900；body Noto Sans HK；mono DM Mono</li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<div class="frame">
+  <div class="frame-tag"><span>FRAME 01 · HERO</span><span>1280 × auto</span></div>
+  <div class="frame-body wf-hero">
+    <div class="wf-hero-main">
+      <div class="wf-kicker">FAIRWOOD × 全港網民 · 06.02 → 06.23 · 2026</div>
+      <div class="wf-h1">SITE 多士大對決：<br>傳統<span class="o">鴨蛋</span>香 <span class="vs">vs.</span> 邪惡<span class="p">花生</span>醬</div>
+      <div class="wf-lead">用 AI 起一個 Site 撐你揀嘅西多．邊派 Site 多邊派贏．每日 18:00 update．唔識 code 都得 ── 下面 4 步教學．</div>
+      <div class="note">↑ Headline ~42px Noto Serif HK 900 · lead 14-15px</div>
+    </div>
+    <div class="wf-sidenav">
+      <div class="nav-item">點玩</div>
+      <div class="nav-item">學界</div>
+      <div class="nav-item">獎品</div>
+      <div class="nav-cta">▸ 交<br>SITE</div>
+    </div>
+  </div>
+</div>
+
+<!-- FACTION TABS -->
+<div class="frame">
+  <div class="frame-tag"><span>FRAME 02 · FACTION TABS (active = clickable, switch carousel)</span><span>—</span></div>
+  <div class="frame-body" style="padding:24px;">
+    <div class="wf-tabs">
+      <div class="wf-tab active">
+        <span class="emoji">🦆</span>
+        <div>
+          <div class="name">傳統鴨蛋派</div>
+          <div class="stat">470 sites · +38</div>
+        </div>
+        <span class="cta">揀鴨蛋 ▸</span>
+      </div>
+      <div class="wf-tab peanut">
+        <span class="emoji">🥜</span>
+        <div>
+          <div class="name">邪惡花生派</div>
+          <div class="stat">482 sites · +44</div>
+        </div>
+        <span class="cta">揀花生 ▸</span>
+      </div>
+    </div>
+    <div class="note" style="margin-top:8px;">↑ Click tab → switch carousel below · active tab has solid colour fill + box-shadow</div>
+  </div>
+</div>
+
+<!-- SITE CAROUSEL -->
+<div class="frame">
+  <div class="frame-tag"><span>FRAME 03 · SITE CAROUSEL (one card visible, swipe / arrow to next)</span><span>—</span></div>
+  <div class="frame-body wf-site-panel">
+    <div class="wf-deck-head">
+      <h3>🦆 傳統鴨蛋派．今日精選</h3>
+      <div class="wf-deck-controls">
+        <div class="wf-arr">‹</div>
+        <span class="wf-counter">1 / 6</span>
+        <div class="wf-arr">›</div>
+      </div>
+    </div>
+    <div class="wf-card">
+      <div class="wf-card-art">
+        <div class="corner-tag">真．正宗</div>
+        <div class="hero-block">
+          <div class="title">無餡先係<br>正宗西多。</div>
+          <div class="sub">大排檔嘅西多本來就冇餡．係近年人哋亂加嘢。</div>
+        </div>
+      </div>
+      <div class="wf-card-meta">
+        <div class="wf-card-title">無餡西多保衛聯盟</div>
+        <div class="wf-card-author">@uncle_lam_1962 · 茶記伙計 · 旺角</div>
+        <div class="wf-card-rows">
+          <div class="wf-card-row"><span>票數</span><strong>93</strong></div>
+          <div class="wf-card-row"><span>評分</span><strong>4.8 ★</strong></div>
+          <div class="wf-card-row"><span>留咗 Day</span><strong>D04</strong></div>
+        </div>
+        <div class="wf-card-open">▸ OPEN SITE</div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:8px;">↑ Card art (left 60%): real site screenshot / hero illustration · meta panel (right 40%): title / author / stats / OPEN button</div>
+  </div>
+</div>
+
+<!-- HOWTO 4 STEPS -->
+<div class="frame">
+  <div class="frame-tag"><span>FRAME 04 · 點玩 4 步</span><span>—</span></div>
+  <div class="frame-body wf-howto">
+    <h2 class="wf-howto-title">無腦 4 步</h2>
+    <div class="note">↑ 32px headline · 4 cards + arrows</div>
+    <div class="wf-howto-steps">
+      <div class="wf-step">
+        <div class="n">01</div>
+        <div class="title">揀派</div>
+        <div class="desc">🦆 鴨蛋 OR 🥜 花生．揀咗唔可以再揀對家．</div>
+      </div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step">
+        <div class="n">02</div>
+        <div class="title">用 AI 起 site</div>
+        <div class="desc">Lovable / Claude / v0 / Bolt．免費．自動 host．</div>
+      </div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step">
+        <div class="n">03</div>
+        <div class="title">Copy URL</div>
+        <div class="desc">AI 起完，按 Publish．Copy xxx.lovable.app．</div>
+      </div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step final">
+        <div class="n">04</div>
+        <div class="title">貼喺下面交</div>
+        <div class="desc">scroll 落「交 Site」section．貼 URL．完．</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUBMIT -->
+<div class="frame">
+  <div class="frame-tag"><span>FRAME 05 · SUBMIT FORM</span><span>—</span></div>
+  <div class="frame-body wf-submit">
+    <div class="wf-submit-left">
+      <div class="wf-kicker" style="color:#f08a00;">▸ SUBMIT YOUR SITE</div>
+      <h2>即場交 Site<br><span class="o">六點上架。</span></h2>
+      <p>AI 1 分鐘掃描 → 小編 6PM 前 final approve → 即日 18:00 上架．成功就送 $10 大快活 App 西多券．</p>
+      <div class="wf-submit-trust">
+        <span>✓ AI 過審 30 秒</span>
+        <span>✓ 小編 approve</span>
+        <span>✓ 每日 6PM 上架</span>
+        <span>✓ 送 $10 券</span>
+      </div>
+    </div>
+    <div class="wf-form">
+      <div class="wf-form-row">
+        <label>▸ 揀陣營</label>
+        <div class="wf-form-fac">
+          <div class="wf-form-fac-btn">🦆 傳統鴨蛋派</div>
+          <div class="wf-form-fac-btn">🥜 邪惡花生派</div>
+        </div>
+      </div>
+      <div class="wf-form-row">
+        <label>▸ 你個 SITE URL</label>
+        <div class="wf-form-input">https://my-site.lovable.app</div>
+      </div>
+      <div style="display:grid; grid-template-columns:1.4fr 1fr; gap:6px;">
+        <div class="wf-form-row">
+          <label>▸ EMAIL</label>
+          <div class="wf-form-input"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="433a2c3603263b222e332f266d202c2e">[email&#160;protected]</a></div>
+        </div>
+        <div class="wf-form-row">
+          <label>▸ 學校 (Optional)</label>
+          <div class="wf-form-input">皇仁書院</div>
+        </div>
+      </div>
+      <div class="wf-form-btn">▸ 投我一票 · SUBMIT</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK BAND -->
+<div class="frame">
+  <div class="frame-tag"><span>FRAME 06 · QUICK ACCESS (3 cards link to rules / schools / prize)</span><span>—</span></div>
+  <div class="frame-body wf-quick">
+    <div class="wf-quick-card">
+      <div class="icon">📜</div>
+      <strong>玩法 + 規則</strong>
+      <small>5 條規則 + 8 條 FAQ</small>
+    </div>
+    <div class="wf-quick-card">
+      <div class="icon">🎓</div>
+      <strong>學界戰報 Dashboard</strong>
+      <small>108 學校 + Top 10 排行</small>
+    </div>
+    <div class="wf-quick-card gold">
+      <div class="icon">🏆</div>
+      <strong>獎品大放送</strong>
+      <small>大獎：全年 365 件西多</small>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="frame">
+  <div class="frame-tag"><span>FRAME 07 · FOOTER</span><span>—</span></div>
+  <div class="frame-body wf-foot">
+    <div class="big">食得<br>夠 <span class="o">STEM</span>。</div>
+    <div class="meta">
+      SITE 多士大對決 · 大快活 2026 STEM CAMPAIGN<br>
+      © FAIRWOOD FAST FOOD GROUP<br>
+      食得夠尖 (2024) · 食得夠 GYM (2025) · 食得夠 STEM (2026)
+    </div>
+  </div>
+</div>
+
+<div class="notes">
+  <h2>🧰 Hand-off Checklist</h2>
+  <ul>
+    <li>給 Higgsfield／AI builder：呢張 wireframe + KV prompt（之前 chat 入面）+ 完整 deck（24 張）</li>
+    <li>內容 reference：兩個 demo site（team-duck.html / team-peanut.html）+ 完整比賽規則 PDF</li>
+    <li>Backend code：scripts/scrape-schools.gs（Google Apps Script）── 學校 email + AI 過審</li>
+    <li>Tell the AI builder: "follow this wireframe 1:1 for structure but use polished modern food editorial visuals for the toast hero and site preview cards"</li>
+  </ul>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

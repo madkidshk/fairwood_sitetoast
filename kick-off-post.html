@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<title>SITE 多士大對決 · Kick-off Post</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+HK:wght@500;700;900&family=Reggae+One&family=DM+Mono:wght@400;500&family=VT323&display=swap');
+
+:root{
+  --paper:#f5ecd9;
+  --paper-deep:#ecdcb8;
+  --ink:#1a1410;
+  --fairwood:#f08a00;
+  --fairwood-deep:#c46d00;
+  --duck:#ffc94c;
+  --peanut-hot:#ec4899;
+  --peanut-lime:#c9e635;
+  --stamp:#b8362a;
+  --line:#2d231a;
+}
+*{ box-sizing: border-box; }
+body{ margin:0; padding:40px; background:#222; min-height:100vh; display:flex; align-items:center; justify-content:center; font-family:"Noto Sans HK", sans-serif;}
+
+.post{
+  width: 1080px; height: 1350px;
+  background: var(--paper);
+  position:relative; overflow:hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+
+/* paper grain */
+.post::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(120,80,30,.08), transparent 45%),
+    radial-gradient(circle at 82% 78%, rgba(120,80,30,.06), transparent 45%),
+    repeating-linear-gradient(0deg, rgba(60,40,20,.025) 0 1px, transparent 1px 3px);
+  mix-blend-mode:multiply;
+  z-index: 1;
+}
+
+.post > *{ position: relative; z-index: 2;}
+
+/* CRT bar */
+.crt-bar{
+  background: var(--ink); color: var(--fairwood);
+  font-family:"VT323",monospace; font-size:24px; letter-spacing:.18em;
+  padding: 14px 40px;
+  display:flex; align-items:center; gap: 18px;
+}
+.crt-bar .dot{ width:12px; height:12px; background: var(--fairwood); border-radius:50%; box-shadow: 0 0 10px var(--fairwood);}
+.crt-bar .right{ margin-left: auto; opacity:.7; font-size: 18px;}
+
+/* Top branding row */
+.brand-row{
+  padding: 36px 56px 0;
+  display:flex; align-items:center; gap: 16px;
+}
+.brand-row .ah{ width: 64px; height: auto;}
+.brand-row .word{ font-family:"Noto Serif HK", serif; font-weight:900; font-size:24px; color: var(--ink); line-height:1;}
+.brand-row .word small{ display:block; font-family:"DM Mono",monospace; font-size:13px; color:var(--ink-soft); letter-spacing:.22em; font-weight:400; margin-top:4px;}
+.brand-row .stamp{
+  margin-left: auto;
+  border: 3px solid var(--stamp); color: var(--stamp);
+  font-family:"Reggae One", serif; font-size:22px;
+  padding: 6px 16px; transform: rotate(-3deg);
+  letter-spacing:.05em;
+}
+
+/* Main title */
+.title{
+  padding: 28px 56px 0;
+}
+.title .kicker{
+  font-family:"DM Mono",monospace; font-size:18px; letter-spacing:.25em; color: var(--fairwood-deep);
+  margin-bottom: 20px;
+  display:flex; align-items:center; gap:12px;
+}
+.title .kicker::before{ content:""; width:36px; height:2px; background: var(--fairwood);}
+.title h1{
+  font-family:"Noto Serif HK", serif; font-weight:900;
+  font-size: 200px; line-height: .9; letter-spacing:-.04em;
+  margin: 0; color: var(--ink);
+}
+.title h1 .hl{ color: var(--fairwood); }
+.title h1 .stamp-box{
+  display:inline-block; position:relative;
+  background: var(--ink); color: var(--fairwood);
+  padding: 0 20px;
+  transform: rotate(-2deg);
+}
+
+/* VS visual */
+.vs-row{
+  margin: 32px 56px 0;
+  background: var(--ink); color: var(--paper);
+  display:grid; grid-template-columns: 1fr 80px 1fr; align-items: center;
+  padding: 24px 32px;
+  position:relative;
+}
+.vs-row .side{ display:flex; align-items:center; gap: 14px;}
+.vs-row .side.right{ justify-content:flex-end;}
+.vs-row .emoji{ font-size: 64px; line-height: 1;}
+.vs-row .label{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 36px; line-height: 1; }
+.vs-row .label small{ display:block; font-family:"DM Mono",monospace; font-size: 13px; letter-spacing:.18em; margin-top: 6px; font-weight:400;}
+.vs-row .label.duck{ color: var(--fairwood); }
+.vs-row .label.peanut{ color: var(--peanut-hot); }
+.vs-row .vs-center{
+  text-align: center;
+  font-family:"Reggae One", serif; font-size: 64px; color: var(--paper);
+}
+
+/* Mid info row */
+.info-strip{
+  margin: 28px 56px 0;
+  display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+}
+.info-cell{
+  border: 2.5px solid var(--line);
+  padding: 20px 22px;
+  background: rgba(255,255,255,.4);
+}
+.info-cell .num{
+  font-family:"Reggae One", serif; font-size: 56px; line-height:1; color: var(--fairwood);
+}
+.info-cell .lbl{
+  font-family:"Noto Serif HK", serif; font-weight:900; font-size: 22px; line-height:1.1;
+  margin-top: 6px;
+}
+.info-cell .desc{
+  font-family:"DM Mono", monospace; font-size: 12px; color: var(--ink-soft); letter-spacing:.1em;
+  margin-top: 4px;
+}
+
+/* CTA bar */
+.cta-bar{
+  margin: 32px 56px 0;
+  background: var(--fairwood); color: var(--ink);
+  padding: 28px 36px;
+  display:flex; align-items:center; gap: 24px;
+  position:relative;
+  box-shadow: 12px 12px 0 var(--ink);
+}
+.cta-bar .left{ flex: 1;}
+.cta-bar .arrow{
+  font-family:"Reggae One", serif; font-size: 80px; line-height: 1;
+  transform: rotate(-4deg);
+}
+.cta-bar .ttl{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 38px; line-height:1.1; margin:0;}
+.cta-bar .url{
+  font-family:"DM Mono", monospace; font-size: 22px;
+  background: var(--ink); color: var(--fairwood); padding: 8px 16px; display: inline-block; margin-top: 10px; letter-spacing:.05em;
+}
+
+/* Bottom strip */
+.bottom-row{
+  position:absolute; bottom: 0; left: 0; right: 0;
+  display:flex; align-items:flex-end;
+}
+.bottom-row .launch{
+  flex:1; padding: 32px 56px 36px;
+}
+.bottom-row .launch .date{
+  font-family:"Reggae One", serif; font-size: 64px; color: var(--ink); line-height:1; letter-spacing:.02em;
+}
+.bottom-row .launch .sub{
+  font-family:"DM Mono", monospace; font-size: 14px; color: var(--ink-soft); letter-spacing:.18em; margin-top: 8px;
+}
+.bottom-row .ah-corner{
+  position: relative; height: 320px; width: 280px;
+  flex: 0 0 280px;
+}
+.bottom-row .ah-corner img{
+  position: absolute; bottom: -8px; right: 0;
+  width: 280px; height: auto;
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,.15));
+}
+.bottom-row .ah-corner .speech{
+  position: absolute; top: 0; right: 130px;
+  background: #fff; border: 3px solid var(--ink); padding: 12px 18px;
+  font-family:"Reggae One", serif; font-size: 24px; color: var(--ink); line-height: 1.1;
+  transform: rotate(-3deg);
+  max-width: 240px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.bottom-row .ah-corner .speech::after{
+  content:""; position:absolute; bottom: -16px; right: 30px;
+  width: 0; height: 0;
+  border: 12px solid transparent;
+  border-top-color: var(--ink);
+}
+.bottom-row .ah-corner .speech::before{
+  content:""; position:absolute; bottom: -12px; right: 34px;
+  width: 0; height: 0;
+  border: 8px solid transparent;
+  border-top-color: #fff;
+  z-index: 1;
+}
+
+/* Background pattern accents */
+.duck-pat{
+  position:absolute; width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,201,76,.5), transparent 70%);
+  top: 240px; right: -80px;
+  filter: blur(1px);
+}
+.peanut-pat{
+  position:absolute; width: 260px; height: 260px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(236,72,153,.35), transparent 70%);
+  top: 480px; left: -60px;
+  filter: blur(1px);
+}
+
+/* Hashtags */
+.hashtags{
+  position:absolute; bottom: 360px; right: 56px;
+  display: flex; flex-direction: column; gap: 6px; align-items: flex-end;
+  font-family:"DM Mono",monospace; font-size: 14px; color: var(--ink-soft); letter-spacing:.1em;
+}
+.hashtags .tag{
+  background: rgba(255,255,255,.6); padding: 4px 12px;
+  border: 1.5px solid var(--line);
+}
+</style>
+</head>
+<body>
+
+<article class="post">
+
+  <div class="duck-pat"></div>
+  <div class="peanut-pat"></div>
+
+  <div class="crt-bar">
+    <div class="dot"></div>
+    <span>FAIRWOOD · SITE 多士大對決 · KICK-OFF</span>
+    <span class="right">EST. 2026</span>
+  </div>
+
+  <div class="brand-row">
+    <img class="ah" src="assets/ah-wood.png" alt="阿活">
+    <div class="word">大快活<small>FAIRWOOD HK · 2026 CAMPAIGN</small></div>
+    <div class="stamp">食得夠 STEM</div>
+  </div>
+
+  <div class="title">
+    <div class="kicker">大快活 × 全港網民 × AI · 全新登場</div>
+    <h1>
+      SITE多士<br>
+      <span class="stamp-box">大對決</span>
+    </h1>
+  </div>
+
+  <div class="vs-row">
+    <div class="side">
+      <span class="emoji">🦆</span>
+      <div class="label duck">傳統鴨蛋香<small>無餡正宗派</small></div>
+    </div>
+    <div class="vs-center">VS</div>
+    <div class="side right">
+      <div class="label peanut" style="text-align:right;">邪惡花生醬<small>流心爆漿派</small></div>
+      <span class="emoji">🥜</span>
+    </div>
+  </div>
+
+  <div class="info-strip">
+    <div class="info-cell">
+      <div class="num">21</div>
+      <div class="lbl">日大戰</div>
+      <div class="desc">6 月 2 日 → 6 月 23 日</div>
+    </div>
+    <div class="info-cell">
+      <div class="num">5'</div>
+      <div class="lbl">用 AI 起 Site</div>
+      <div class="desc">Lovable · Claude · v0 · Bolt</div>
+    </div>
+    <div class="info-cell">
+      <div class="num">$10</div>
+      <div class="lbl">參與獎</div>
+      <div class="desc">大快活 App 西多券</div>
+    </div>
+  </div>
+
+  <div class="cta-bar">
+    <div class="left">
+      <h3 class="ttl">用 AI 起個 Site，<br>撐你揀嘅西多 →</h3>
+      <span class="url">sitedosi.fairwood.com.hk</span>
+    </div>
+    <div class="arrow">▸</div>
+  </div>
+
+  <div class="hashtags">
+    <span class="tag">#SITE多士大對決</span>
+    <span class="tag">#食得夠STEM</span>
+    <span class="tag">#大快活</span>
+    <span class="tag">#AI起Site</span>
+  </div>
+
+  <div class="bottom-row">
+    <div class="launch">
+      <div class="date">06·02 START!</div>
+      <div class="sub">▸ 邊派 SITE 多 · 邊派贏</div>
+    </div>
+    <div class="ah-corner">
+      <div class="speech">你揀邊個 Site？</div>
+      <img src="assets/ah-wood.png" alt="阿活">
+    </div>
+  </div>
+
+</article>
+
+</body>
+</html>

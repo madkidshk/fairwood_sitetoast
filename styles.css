@@ -1,0 +1,126 @@
+/* ============ Design tokens ============ */
+:root {
+  --paper: #f5ecd9;
+  --paper-deep: #ecdcb8;
+  --ink: #1a1410;
+  --ink-soft: #4a3d31;
+  --fairwood: #f08a00;        /* 快活橙 · 主品牌色 */
+  --fairwood-deep: #c46d00;
+  --fairwood-light: #ffb454;
+  --stamp: #b8362a;            /* 印章紅 · accent */
+  --duck: #ffc94c;             /* 鴨蛋黃 */
+  --duck-deep: #c98a00;
+  --peanut: #6b3a14;
+  --peanut-hot:#c4661f;       /* 花生殼啡 · 同快活橙系 harmonize */
+  --peanut-lime: #c9e635;
+  --leaf: #2f6b48;
+  --line: #2d231a;
+}
+
+/* ============ Fonts ============ */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+HK:wght@500;700;900&family=Noto+Sans+HK:wght@400;500;700;900&family=VT323&family=DM+Mono:wght@400;500&family=Reggae+One&display=swap');
+
+/* ============ Deck base ============ */
+html, body { margin:0; padding:0; background:#000; }
+deck-stage section {
+  width:1920px; height:1080px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Sans HK", sans-serif;
+  position:relative;
+  overflow:hidden;
+  box-sizing:border-box;
+}
+
+/* ===== reusable bits ===== */
+.serif { font-family: "Noto Serif HK", serif; }
+.mono  { font-family: "DM Mono", ui-monospace, monospace; }
+.crt   { font-family: "VT323", monospace; }
+.reggae{ font-family: "Reggae One", serif; }
+
+.paper-grain::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(120,80,30,.06), transparent 40%),
+    radial-gradient(circle at 88% 82%, rgba(120,80,30,.05), transparent 45%),
+    repeating-linear-gradient(0deg, rgba(60,40,20,.025) 0 1px, transparent 1px 3px);
+  mix-blend-mode:multiply;
+}
+
+.slide-pad { padding: 96px 120px; box-sizing:border-box; }
+.slide-num {
+  position:absolute; bottom:40px; right:60px;
+  font-family:"DM Mono",monospace; font-size:18px; letter-spacing:.1em;
+  color: var(--ink-soft); opacity:.7;
+}
+.slide-tag {
+  position:absolute; top:48px; left:120px;
+  font-family:"DM Mono",monospace; font-size:18px; letter-spacing:.2em;
+  color: var(--fairwood-deep); text-transform:uppercase;
+  display:flex; align-items:center; gap:14px;
+}
+.slide-tag::before{ content:""; width:36px; height:2px; background:var(--fairwood); }
+
+.brand-mark{
+  position:absolute; top:34px; right:60px;
+  display:flex; align-items:center; gap:14px;
+}
+.brand-mark .fw-ah-wood{
+  width:52px; height:auto; display:block;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.15));
+}
+.brand-mark .word{ font-family:"Noto Serif HK", serif; font-weight:900; font-size:18px; line-height:1; color: var(--ink); letter-spacing:.02em;}
+.brand-mark .word small{ display:block; font-family:"DM Mono", monospace; font-size:10px; color: var(--ink-soft); letter-spacing:.18em; margin-top:5px; font-weight:400;}
+
+/* dark variant for sec-head slides */
+.sec-head .brand-mark .word{ color: var(--paper); }
+.sec-head .brand-mark .word small{ color: var(--duck); }
+
+/* Cover hero ah-wood character */
+.cover-ah-wood{
+  position:absolute; right:60px; bottom:80px;
+  width: 380px; height:auto;
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,.18));
+  z-index: 2;
+}
+
+/* Bottom menu stripe (Fairwood neon-sign feel) */
+.fw-stripe{
+  position:absolute; bottom:0; left:0; right:0; height:14px;
+  background:
+    repeating-linear-gradient(90deg,
+      var(--fairwood) 0 60px,
+      var(--ink) 60px 64px,
+      var(--paper-deep) 64px 124px,
+      var(--ink) 124px 128px);
+  opacity:.85;
+}
+.fw-stripe.dark{
+  background:
+    repeating-linear-gradient(90deg,
+      var(--fairwood) 0 60px,
+      #0a0805 60px 64px,
+      #2a1f15 64px 124px,
+      #0a0805 124px 128px);
+}
+
+/* ===== stamp ===== */
+.stamp {
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:8px 18px;
+  border: 3px solid var(--stamp); color: var(--stamp);
+  font-family: "Reggae One", serif; letter-spacing:.05em;
+  transform: rotate(-3deg);
+  background: rgba(255,255,255,.4);
+}
+
+/* ===== rule lines ===== */
+.rule { height:2px; background: var(--line); }
+
+/* ===== chips / pills ===== */
+.chip{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px 14px; border:1.5px solid var(--line);
+  border-radius:999px; font-size:18px; font-weight:600;
+  background:rgba(255,255,255,.3);
+}

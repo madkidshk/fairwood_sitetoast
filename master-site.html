@@ -1,0 +1,2254 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SITE 多士大對決 · 大快活 · 全港揀 Site 大戰</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+body{ background: var(--paper); color: var(--ink); font-family:"Noto Sans HK", sans-serif; margin:0; background-image: radial-gradient(circle at 12% 18%, rgba(120,80,30,.04), transparent 40%), radial-gradient(circle at 88% 82%, rgba(120,80,30,.04), transparent 45%);}
+.ms-shell{ max-width: 1440px; margin: 0 auto; padding: 0 32px 80px;}
+
+/* ---- topbar ---- */
+.ms-nav{
+  display:flex; align-items:center; gap:24px;
+  padding: 18px 0; border-bottom: 2px solid var(--ink);
+}
+.ms-logo{
+  display:flex; align-items:center; gap:10px;
+  font-family:"Noto Serif HK", serif; font-weight:900; font-size:22px;
+}
+.ms-logo .mark{
+  width:48px; height:48px; display:flex; align-items:center; justify-content:center;
+}
+.ms-logo .mark img{ width:100%; height: auto; display:block; filter: drop-shadow(0 2px 6px rgba(240,138,0,.3)); }
+.ms-logo .by{ font-family:"DM Mono", monospace; font-size:12px; color: var(--ink-soft); letter-spacing:.15em; margin-left:10px;}
+.ms-nav .links{ display:flex; gap:28px; margin-left: auto; font-family:"DM Mono",monospace; font-size:14px; letter-spacing:.12em;}
+.ms-nav .links a{ color: var(--ink-soft); text-decoration:none;}
+.ms-nav .links a:hover{ color: var(--fairwood); }
+.ms-nav .cta{
+  background: var(--fairwood); color:#1a1410; padding: 10px 20px;
+  font-family:"Reggae One", serif; font-size:18px;
+  border-radius: 6px; text-decoration:none;
+  transform: rotate(-1deg); display:inline-block;
+  box-shadow: 4px 4px 0 #1a1410;
+}
+.ms-nav .cta:hover{ background: var(--fairwood-light); }
+
+.ms-live{
+  margin-left: 12px;
+  font-family:"DM Mono",monospace; font-size:13px; color: var(--peanut-lime); letter-spacing:.15em;
+  display:flex; align-items:center; gap:8px;
+}
+.ms-live::before{ content:""; width:8px;height:8px;background:var(--peanut-lime);border-radius:50%; box-shadow:0 0 10px var(--peanut-lime); animation: pulse 1.4s infinite;}
+@keyframes pulse{ 50%{ opacity:.4; } }
+
+/* ---- hero ---- */
+.ms-hero{ padding: 80px 0 40px; }
+.ms-hero .kicker{
+  font-family:"DM Mono",monospace; font-size:15px; letter-spacing:.25em;
+  color: var(--fairwood); margin-bottom: 24px;
+}
+.ms-hero h1{
+  font-family:"Noto Serif HK", serif; font-weight:900;
+  font-size: 128px; line-height:.95; letter-spacing:-.03em;
+  margin: 0;
+}
+.ms-hero h1 .y{ color: var(--fairwood); }
+.ms-hero h1 .p{ color: var(--peanut-hot); }
+.ms-hero .lead{
+  font-family:"Noto Serif HK", serif; font-weight:500;
+  font-size: 32px; line-height: 1.4; max-width: 900px;
+  margin: 32px 0 0; color: var(--ink-soft);
+}
+.ms-hero .meta-row{
+  display:flex; gap: 16px; margin-top: 40px; align-items:center;
+  font-family:"DM Mono",monospace; font-size:14px; letter-spacing:.15em; color: var(--ink-soft);
+}
+.ms-hero .meta-row .pill{
+  border: 1.5px solid rgba(45,35,26,.2); padding: 6px 14px; border-radius:999px;
+}
+
+/* ---- Live Battle Meter ---- */
+.bm{
+  margin-top: 32px; padding: 48px;
+  border: 2px solid rgba(45,35,26,.25); background: rgba(255,255,255,.5);
+  border-radius: 4px;
+  display:grid; grid-template-columns: 1fr 1fr; gap: 48px;
+  position: relative;
+}
+.bm .day-tag{
+  position:absolute; top:-14px; left:48px;
+  background: var(--ink); padding: 0 16px;
+  font-family:"DM Mono",monospace; font-size:13px; letter-spacing:.2em;
+  color: var(--ink-soft);
+}
+.bm .corner-update{
+  position:absolute; top:-14px; right:48px;
+  background: var(--ink); padding: 0 16px;
+  font-family:"DM Mono",monospace; font-size:13px; letter-spacing:.2em;
+  color: var(--peanut-lime);
+}
+.bm-side{ display:flex; flex-direction:column; gap:14px;}
+.bm-side .label{ font-family:"DM Mono",monospace; font-size:18px; letter-spacing:.18em; display:flex; gap:10px; align-items:center;}
+.bm-side .label .emoji{ font-size:28px; line-height:1;}
+.bm-side.d .label{ color: var(--fairwood); }
+.bm-side.p .label{ color: var(--peanut-hot); }
+.bm-side .count{
+  font-family:"Noto Serif HK", serif; font-weight:900;
+  font-size: 168px; line-height:.85; letter-spacing:-.05em;
+}
+.bm-side.d .count{ color: var(--fairwood); }
+.bm-side.p .count{ color: var(--peanut-hot); text-align: right;}
+.bm-side .count .small{ font-size: 36px; opacity:.5; margin-left: 10px;}
+.bm-side .delta{ font-family:"DM Mono",monospace; font-size:16px; letter-spacing:.12em; color: var(--ink-soft);}
+.bm-side.d .delta strong{ color: var(--fairwood); }
+.bm-side.p .delta strong{ color: var(--peanut-hot); }
+.bm-side.p{ align-items:flex-end; text-align:right;}
+
+.bm-bar{
+  grid-column: 1 / -1;
+  height: 40px; background: #e8d9b8; border: 2px solid rgba(45,35,26,.25);
+  display:flex; overflow:hidden; position:relative;
+  border-radius: 4px;
+}
+.bm-bar .d{ background: var(--fairwood); width:48%; transition: width .6s;}
+.bm-bar .p{ background: var(--peanut-hot); width:52%; transition: width .6s;}
+.bm-bar .marker{
+  position:absolute; left:50%; top:-10px; bottom:-10px; width:3px; background: var(--paper);
+  transform: translateX(-50%);
+}
+.bm-bar .marker::before, .bm-bar .marker::after{
+  content:""; position:absolute; left:50%; width:8px; height:8px; background:var(--paper);
+  transform: translateX(-50%) rotate(45deg);
+}
+.bm-bar .marker::before{ top:-6px; }
+.bm-bar .marker::after{ bottom:-6px; }
+
+/* ---- Section heading ---- */
+.sec{
+  margin-top: 96px; padding-top: 32px;
+  border-top: 2px solid var(--ink);
+}
+.sec h2{
+  font-family:"Noto Serif HK", serif; font-weight:900;
+  font-size: 64px; margin: 0; letter-spacing:-.02em; line-height:1;
+}
+.sec .sub{ font-family:"DM Mono",monospace; font-size:14px; color: var(--ink-soft); letter-spacing:.18em; margin-top:12px;}
+.sec-row{ display:flex; align-items:baseline; justify-content:space-between;}
+.sec-row .tabs{ display:flex; gap:8px; font-family:"DM Mono",monospace; font-size:13px;}
+.sec-row .tabs button{
+  background: transparent; border: 1.5px solid rgba(45,35,26,.2); color: var(--ink-soft);
+  padding: 8px 16px; cursor:pointer; letter-spacing:.12em;
+}
+.sec-row .tabs button.on{ background: var(--fairwood); color:#1a1410; border-color: var(--fairwood);}
+
+/* ---- Gallery ---- */
+.gallery{
+  margin-top: 32px;
+  display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+}
+.site-card{
+  aspect-ratio: 4/3; background: #e8d9b8; border: 2px solid var(--ink);
+  position:relative; overflow:hidden; cursor:pointer;
+  transition: transform .2s;
+}
+.site-card:hover{ transform: translateY(-4px); border-color: var(--fairwood);}
+.site-card .preview{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  font-family:"VT323",monospace; font-size:40px;
+}
+.site-card.d .preview{ background: linear-gradient(135deg, #5a3a0e, #2a1f15); color: var(--fairwood);}
+.site-card.p .preview{ background: linear-gradient(135deg, #5a1a3a, #2a1f15); color: var(--peanut-hot);}
+.site-card.peanut-loud .preview{
+  background:
+    repeating-linear-gradient(45deg, #ff80ec 0 10px, #ff4fcb 10px 20px);
+  color: var(--ink);
+}
+.site-card.duck-photo .preview{
+  background:
+    repeating-linear-gradient(45deg, #e0c98a 0 8px, #d3b86c 8px 16px);
+  color: var(--ink);
+}
+.site-card .ribbon{
+  position:absolute; top:10px; left:10px; padding: 3px 10px;
+  font-family:"DM Mono",monospace; font-size:11px; background:#000; color: var(--ink);
+  letter-spacing:.1em;
+}
+.site-card .ribbon.featured{ background: var(--fairwood); color: var(--ink); }
+.site-card .title{
+  position:absolute; bottom:0; left:0; right:0;
+  padding: 12px;
+  background: linear-gradient(transparent, rgba(0,0,0,.85));
+  font-family:"Noto Sans HK",sans-serif; font-size:14px; color: var(--ink);
+}
+.site-card .title .h{ font-weight:700; font-size:16px;}
+.site-card .title .author{ font-size:11px; color: var(--ink-soft); margin-top:2px; font-family:"DM Mono",monospace;}
+
+/* ============ Compact Hero (Gen-Z / Threads style) ============ */
+.ms-hero-compact{
+  padding: 56px 0 24px;
+  border-bottom: 2px solid var(--ink);
+}
+.hero-kicker-row{
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+  margin-bottom: 24px;
+}
+.hero-kicker-row .kicker{
+  font-family:"DM Mono",monospace; font-size: 13px; letter-spacing: .22em;
+  color: var(--fairwood-deep);
+}
+.hero-quickstats{ display: flex; gap: 8px;}
+.hero-quickstats .pill{
+  border: 1.5px solid rgba(45,35,26,.3); padding: 5px 12px; border-radius: 999px;
+  font-family:"DM Mono",monospace; font-size: 12px; letter-spacing: .1em; color: var(--ink);
+}
+.title-compact{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 64px; line-height: 1.0; letter-spacing: -.025em;
+  margin: 0;
+}
+.title-compact .hl-orange{ color: var(--fairwood);}
+.title-original{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 80px; line-height: .95; letter-spacing: -.03em;
+  margin: 8px 0 0;
+}
+.title-original .y{ color: var(--fairwood);}
+.title-original .p{ color: var(--peanut-hot);}
+
+.hero-split{
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center;
+  margin-top: 8px;
+  position: relative;
+}
+.hero-visuals{
+  position: relative;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.toast-card{
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  overflow: hidden;
+  position: relative;
+}
+.toast-card.duck-toast{ box-shadow: -6px 6px 0 var(--fairwood);}
+.toast-card.peanut-toast{ box-shadow: 6px 6px 0 var(--peanut-hot);}
+.toast-photo{
+  aspect-ratio: 1 / 1;
+  position: relative;
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+  border-bottom: 2px solid var(--ink);
+  overflow: hidden;
+}
+.duck-toast .toast-photo{
+  background:
+    radial-gradient(circle at 60% 40%, var(--duck) 0%, var(--fairwood) 50%, var(--fairwood-deep) 100%);
+}
+.peanut-toast .toast-photo{
+  background:
+    radial-gradient(circle at 40% 60%, var(--fairwood-light) 0%, var(--peanut-hot) 60%, var(--peanut) 100%);
+}
+.toast-emoji{
+  font-size: 120px; line-height: 1;
+  filter: drop-shadow(4px 4px 0 rgba(0,0,0,.15));
+  transform: rotate(-8deg);
+}
+.peanut-toast .toast-emoji{ transform: rotate(12deg);}
+.toast-tag{
+  position: absolute; top: 12px; right: 12px;
+  background: var(--ink); color: var(--fairwood);
+  padding: 4px 12px;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 14px;
+  letter-spacing: .05em;
+}
+.peanut-toast .toast-tag{ background: var(--peanut); color: var(--paper);}
+.toast-photo-cap{
+  position: absolute; bottom: 10px; left: 0; right: 0; text-align: center;
+  font-family:"DM Mono", monospace; font-size: 10px; color: rgba(255,255,255,.85);
+  letter-spacing: .12em;
+}
+.toast-meta{
+  padding: 14px 18px;
+}
+.toast-meta strong{
+  display: block;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 17px;
+  letter-spacing: -.01em;
+}
+.duck-toast .toast-meta strong{ color: var(--fairwood-deep);}
+.peanut-toast .toast-meta strong{ color: var(--peanut-hot);}
+.toast-meta span{
+  display: block;
+  font-family:"DM Mono", monospace; font-size: 11px; color: var(--ink-soft);
+  letter-spacing: .1em;
+  margin-top: 4px;
+}
+.hero-vs-tag{
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-6deg);
+  width: 76px; height: 76px;
+  background: var(--ink); color: var(--fairwood);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 28px;
+  border: 3px solid var(--fairwood);
+  box-shadow: 4px 4px 0 var(--peanut-hot);
+  z-index: 5;
+}
+
+@media (max-width: 900px){
+  .hero-split{ grid-template-columns: 1fr;}
+}
+.lead-compact{
+  font-family:"Noto Sans HK", sans-serif;
+  font-size: 16px; line-height: 1.5; color: var(--ink-soft);
+  margin: 18px 0 0; max-width: 880px;
+}
+.lead-compact a{ color: var(--fairwood-deep); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1.5px;}
+
+/* CSS for new versus matchup (cleaner) */
+.vs-meter{
+  display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 28px;
+  align-items: center;
+  padding: 20px 32px;
+  background: var(--ink); color: var(--paper);
+  margin: 32px 0;
+}
+.vs-m-side{ display: flex; align-items: center; gap: 14px;}
+.vs-m-side.p{ justify-content: flex-end;}
+.vs-m-emoji{ font-size: 32px; line-height: 1;}
+.vs-m-side strong{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 40px; line-height: 1; display: block; letter-spacing: -.02em;}
+.vs-m-side.d strong{ color: var(--fairwood);}
+.vs-m-side.p strong{ color: var(--fairwood-light);}
+.vs-m-side small{ display: block; font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .15em; color: rgba(245,236,217,.7); margin-top: 4px;}
+.vs-m-side .delta{ font-family:"DM Mono", monospace; font-style: normal; font-size: 12px; color: var(--peanut-lime); letter-spacing: .12em;}
+.vs-m-bar{ position: relative; height: 14px; background: rgba(245,236,217,.1); border-radius: 2px; overflow: hidden;}
+.vs-mb-d{ position:absolute; left: 0; top: 0; bottom: 0; background: var(--fairwood); transition: width .6s;}
+.vs-mb-p{ position:absolute; right: 0; top: 0; bottom: 0; background: var(--fairwood-light); transition: width .6s;}
+.vs-mb-marker{ position:absolute; left: 49.4%; top: -4px; bottom: -4px; width: 2px; background: var(--paper); transform: translateX(-1px);}
+
+.vs-grid{
+  display: grid; grid-template-columns: 1fr; gap: 32px;
+  position: relative;
+}
+.vs-col{
+  background: var(--paper-deep);
+  border: 2px solid var(--ink);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.vs-col.duck{ box-shadow: -8px 8px 0 var(--fairwood);}
+.vs-col.peanut{ box-shadow: 8px 8px 0 var(--peanut-hot);}
+
+.vs-col-h{
+  padding: 14px 22px;
+  background: var(--ink); color: var(--paper);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.vs-col-h h3{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 18px; margin: 0;}
+.vs-col.duck .vs-col-h h3{ color: var(--fairwood);}
+.vs-col.peanut .vs-col-h h3{ color: var(--fairwood-light);}
+.vs-cycler{ display: flex; align-items: center; gap: 8px; font-family:"DM Mono", monospace; font-size: 12px; color: var(--paper); letter-spacing: .1em;}
+.vs-arr{
+  background: transparent; color: var(--paper); border: 1.5px solid rgba(245,236,217,.4);
+  width: 28px; height: 28px; cursor: pointer; font-family:"Noto Serif HK", serif; font-size: 16px; font-weight: 900; line-height: 1; display: flex; align-items: center; justify-content: center;
+}
+.vs-arr:hover{ background: var(--fairwood); color: var(--ink); border-color: var(--fairwood);}
+.vs-idx{ min-width: 40px; text-align: center; color: var(--fairwood);}
+
+.vs-stage{ position: relative; min-height: 360px;}
+.vs-card{
+  display: none;
+  text-decoration: none; color: var(--ink);
+  background: var(--paper);
+  grid-template-columns: 1.4fr 1fr;
+}
+.vs-card.show{ display: grid;}
+.vs-browser{
+  position: absolute; top: 10px; left: 14px; right: 14px;
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(45,35,26,.15);
+  border-radius: 6px;
+  font-family:"DM Mono", monospace; font-size: 11px; color: var(--ink-soft);
+  z-index: 3;
+}
+.vs-browser .dot{ width: 9px; height: 9px; border-radius: 50%; background: rgba(45,35,26,.2);}
+.vs-browser .dot:nth-child(1){ background: #ff5f57;}
+.vs-browser .dot:nth-child(2){ background: #febc2e;}
+.vs-browser .dot:nth-child(3){ background: #28c840;}
+.vs-url{ margin-left: 8px; flex: 1; background: var(--paper); padding: 3px 10px; border-radius: 3px; letter-spacing: .05em;}
+
+.vs-prev{
+  min-height: 320px;
+  padding: 32px 40px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.vs-prev h4{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 44px; line-height: 1.0; margin: 0; letter-spacing: -.02em;}
+.vs-prev p{ font-size: 14px; line-height: 1.55; color: var(--ink-soft); margin: 14px 0 0;}
+.vs-prev p em{ font-style: normal; background: linear-gradient(transparent 70%, rgba(240,138,0,.25) 70% 92%, transparent 92%); padding: 0 4px;}
+
+/* Duck variants */
+.vs-prev.duck-classic{
+  background: var(--paper);
+  background-image: radial-gradient(circle at 12% 18%, rgba(120,80,30,.05), transparent 50%);
+}
+.vs-prev.duck-classic h4{ color: var(--peanut);}
+.vs-stamp{
+  position: absolute; top: 20px; right: 20px;
+  border: 2px solid var(--stamp); color: var(--stamp);
+  padding: 4px 12px;
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 12px; transform: rotate(-4deg);
+  background: rgba(255,255,255,.6);
+}
+.vs-points{ margin-top: 16px; display: flex; flex-direction: column; gap: 4px; font-family:"DM Mono", monospace; font-size: 12px; color: var(--ink-soft); letter-spacing: .05em;}
+
+.vs-prev.duck-archive{
+  background: var(--paper);
+  border-left: 4px solid var(--fairwood);
+}
+.vs-prev.duck-archive h4{ color: var(--ink);}
+.vs-archive-tag{ font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .25em; color: var(--fairwood-deep); margin-bottom: 12px;}
+.vs-essay{ font-style: italic;}
+
+.vs-prev.duck-min{ background: var(--paper); text-align: center;}
+.vs-min-q{ font-family:"Noto Serif HK", serif; font-weight: 700; font-style: italic; font-size: 32px; line-height: 1.2; color: var(--ink);}
+.vs-min-c{ font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .2em; color: var(--ink-soft); margin-top: 14px;}
+
+.vs-prev.duck-essay{ background: var(--paper);}
+.vs-prev.duck-essay h4{ color: var(--fairwood-deep);}
+.vs-list{ margin-top: 16px; display: flex; flex-direction: column; gap: 6px; font-family:"DM Mono", monospace; font-size: 12px; color: var(--ink-soft);}
+
+/* Peanut variants */
+.vs-prev.peanut-y2k{
+  background: linear-gradient(135deg, var(--peanut-hot), #8b3a2a);
+  color: #fff;
+}
+.vs-prev.peanut-y2k h4.chaos{
+  font-family:"Noto Serif HK", serif; font-size: 56px;
+  color: var(--peanut-lime); text-shadow: 3px 3px 0 #000, 6px 6px 0 var(--peanut-hot);
+  transform: rotate(-3deg); letter-spacing: -.02em;
+}
+.vs-marquee{
+  position: absolute; top: 0; left: 0; right: 0;
+  background: #000; color: var(--peanut-lime);
+  padding: 6px 0;
+  font-family:"VT323", monospace; font-size: 16px; letter-spacing: .15em;
+  text-align: center; white-space: nowrap;
+}
+.vs-blink{
+  margin-top: 18px; display: inline-block;
+  background: #ff0; color: #000;
+  padding: 4px 12px;
+  font-family:"Noto Sans HK", sans-serif; font-weight: 900; font-size: 13px;
+  animation: vsblink 1s steps(2) infinite;
+  align-self: flex-start;
+}
+@keyframes vsblink{ 50%{ opacity: 0;}}
+
+.vs-prev.peanut-grad{ background: linear-gradient(135deg, #ff8a3d, var(--peanut-hot)); color: #fff;}
+.vs-prev.peanut-grad h4{ color: #fff; text-shadow: 2px 2px 0 rgba(0,0,0,.2);}
+.vs-prev.peanut-grad p{ color: rgba(255,255,255,.9);}
+.vs-tag-pill{ display: inline-block; align-self: flex-start; background: #fff; color: var(--peanut-hot); padding: 4px 14px; font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .15em; margin-bottom: 14px;}
+
+.vs-prev.peanut-stripe{
+  background: repeating-linear-gradient(45deg, #f78a5c 0 20px, var(--peanut-hot) 20px 40px);
+  color: #fff;
+}
+.vs-prev.peanut-stripe h4{ color: #fff; text-shadow: 3px 3px 0 #000; font-family:"Reggae One", serif;}
+.vs-stripe-bar{
+  position: absolute; top: 0; left: 0; right: 0;
+  background: var(--ink); color: var(--peanut-lime);
+  padding: 6px 0;
+  font-family:"DM Mono", monospace; font-size: 12px; letter-spacing: .15em;
+  text-align: center;
+}
+.vs-check{ background: rgba(0,0,0,.3); color: #fff; padding: 10px 14px; font-family:"DM Mono", monospace; font-size: 12px; line-height: 1.7; margin-top: 16px; align-self: flex-start;}
+
+.vs-prev.peanut-pixel{ background: var(--ink); color: var(--peanut-lime); font-family:"VT323", monospace;}
+.vs-prev.peanut-pixel h4{ font-family:"VT323", monospace; font-size: 56px; color: var(--peanut-lime); letter-spacing: .05em;}
+.vs-pixel-bar{ position: absolute; top: 0; left: 0; right: 0; background: var(--peanut-hot); color: #fff; padding: 6px 0; font-family:"VT323", monospace; font-size: 14px; letter-spacing: .15em; text-align: center;}
+.vs-counter{ margin-top: 14px; align-self: flex-start; background: #000; color: var(--peanut-lime); border: 2px solid var(--peanut-lime); padding: 4px 10px; font-family:"VT323", monospace; font-size: 16px; letter-spacing: .1em;}
+
+.vs-meta{ padding: 24px 28px; background: var(--paper); border-left: 2px solid var(--ink); display: flex; flex-direction: column; justify-content: space-between; gap: 12px;}
+.vs-meta-top{ display: flex; flex-direction: column; gap: 8px;}
+.vs-title{ font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 28px; line-height: 1.15;}
+.vs-author{ font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .1em; color: var(--ink-soft);}
+.vs-stats{ display: flex; justify-content: space-between; align-items: center; margin-top: 4px; font-family:"DM Mono", monospace; font-size: 12px;}
+.vs-votes{ color: var(--fairwood-deep); font-weight: 700; letter-spacing: .08em;}
+.vs-open{ background: var(--ink); color: var(--fairwood); padding: 4px 10px; letter-spacing: .15em; font-weight: 700;}
+.vs-card:hover .vs-open{ background: var(--fairwood); color: var(--ink);}
+
+.vs-floating-badge{
+  position: absolute; top: 200px; left: 50%; transform: translate(-50%, -50%) rotate(-3deg);
+  background: var(--ink); color: var(--fairwood);
+  width: 92px; height: 92px;
+  border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-family:"Noto Serif HK", serif; box-shadow: 4px 4px 0 var(--peanut-hot);
+  z-index: 5;
+  border: 3px solid var(--fairwood);
+}
+.vs-fb-vs{ font-weight: 900; font-size: 32px; line-height: 1; letter-spacing: -.02em;}
+.vs-fb-day{ font-family:"DM Mono", monospace; font-size: 9px; letter-spacing: .15em; opacity: .8; margin-bottom: 4px;}
+
+.vs-vertical-divider{
+  display: flex; align-items: center; gap: 18px;
+  margin: 8px 0;
+}
+.vs-vd-line{ flex: 1; height: 2px; background: var(--ink);}
+.vs-vd-badge{
+  font-family:"Noto Serif HK", serif; font-weight: 900; font-size: 24px;
+  letter-spacing: .05em; color: var(--ink);
+  padding: 8px 22px;
+  background: var(--fairwood);
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--peanut-hot);
+  transform: rotate(-1.5deg);
+}
+
+@media (max-width: 900px){
+  .vs-grid{ grid-template-columns: 1fr;}
+  .vs-card{ grid-template-columns: 1fr;}
+  .vs-meta{ border-left: none; border-top: 2px solid var(--ink);}
+}
+
+/* ---- Highlights (featured sites at top) ---- */
+.highlights-wrap{
+  margin-top: 28px;
+  position: relative;
+}
+.highlights{
+  display: flex; gap: 20px; overflow-x: auto; overflow-y: hidden;
+  padding-bottom: 16px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--fairwood) var(--paper-deep);
+}
+.highlights::-webkit-scrollbar{ height: 8px;}
+.highlights::-webkit-scrollbar-track{ background: var(--paper-deep);}
+.highlights::-webkit-scrollbar-thumb{ background: var(--fairwood); border-radius: 4px;}
+.hl-arrow{
+  position: absolute; top: 40%; width: 48px; height: 48px;
+  background: var(--ink); color: var(--fairwood);
+  border: none; cursor: pointer;
+  font-family:"Noto Serif HK", serif; font-size: 28px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+  box-shadow: 4px 4px 0 var(--fairwood);
+  transition: transform .15s;
+}
+.hl-arrow:hover{ transform: scale(1.1);}
+.hl-arrow.prev{ left: -24px;}
+.hl-arrow.next{ right: -24px;}
+.hl-card{
+  border: 2px solid var(--ink);
+  background: rgba(255,255,255,.5);
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+  cursor: pointer; text-decoration: none; color: inherit;
+  transition: transform .2s;
+  flex: 0 0 360px;
+  scroll-snap-align: start;
+}
+.hl-card.main{ flex: 0 0 480px;}
+.hl-card:hover{ transform: translateY(-3px); box-shadow: 8px 8px 0 var(--ink);}
+.hl-card .preview{
+  aspect-ratio: 16/10;
+  border-bottom: 2px solid var(--ink);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  font-family:"VT323", monospace; color: #fff;
+}
+.hl-card .preview.duck{ background: linear-gradient(135deg, var(--duck), var(--fairwood-deep)); color: var(--ink); font-size: 64px;}
+.hl-card .preview.peanut{
+  background:
+    repeating-linear-gradient(45deg, #ff80ec 0 18px, #ff4fcb 18px 36px);
+  color: #fff;
+  font-family:"Reggae One", serif; font-size: 56px; text-shadow: 3px 3px 0 #000;
+}
+.hl-card .preview.peanut-loud{
+  background: linear-gradient(135deg, var(--peanut-hot), #6e0840);
+  color: var(--peanut-lime); font-size: 72px;
+}
+.hl-card .preview.duck-photo{
+  background: repeating-linear-gradient(45deg, #e0c98a 0 14px, #d3b86c 14px 28px);
+  color: var(--ink); font-size: 28px;
+}
+.hl-card .featured-ribbon{
+  position: absolute; top: 12px; left: 12px;
+  background: var(--ink); color: var(--fairwood);
+  font-family:"Reggae One", serif; font-size: 16px;
+  padding: 4px 12px;
+  transform: rotate(-3deg);
+  letter-spacing:.05em;
+  box-shadow: 3px 3px 0 var(--fairwood);
+}
+.hl-card .faction-pill{
+  position: absolute; bottom: 12px; right: 12px;
+  background: rgba(0,0,0,.85); color: #fff;
+  padding: 4px 12px; font-family:"DM Mono", monospace; font-size: 12px;
+  letter-spacing: .1em;
+}
+.hl-card .body{
+  padding: 18px 22px 22px;
+  display: flex; flex-direction: column; gap: 8px;
+  flex: 1;
+}
+.hl-card h3{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 26px; line-height: 1.1; margin: 0; color: var(--ink);
+}
+.hl-card .author{
+  font-family:"DM Mono", monospace; font-size: 12px;
+  color: var(--ink-soft); letter-spacing: .1em;
+}
+.hl-card .author strong{ color: var(--fairwood-deep); font-weight:700;}
+.hl-card .quote{
+  font-family:"Noto Serif HK", serif; font-style: italic;
+  font-size: 14px; line-height: 1.55; color: var(--ink-soft);
+  border-left: 3px solid var(--fairwood);
+  padding: 4px 0 4px 12px;
+  margin-top: 4px;
+}
+.hl-card .meta{
+  margin-top: auto; padding-top: 12px;
+  border-top: 1px dashed rgba(45,35,26,.3);
+  display: flex; justify-content: space-between; align-items: center;
+  font-family:"DM Mono", monospace; font-size: 12px;
+  color: var(--ink-soft); letter-spacing: .1em;
+}
+.hl-card .meta .votes{ color: var(--fairwood-deep); font-weight: 700; font-size: 14px;}
+.hl-card .meta .open{
+  background: var(--fairwood); color: var(--ink);
+  padding: 4px 10px; font-weight: 700; letter-spacing:.15em;
+}
+
+/* main featured = larger */
+.hl-card.main .preview{ aspect-ratio: 16/11; font-size: 96px !important;}
+.hl-card.main h3{ font-size: 36px;}
+.hl-card.main .quote{ font-size: 17px;}
+.hl-card.main .featured-ribbon{ font-size: 18px; padding: 6px 16px;}
+
+/* ---- Schools leaderboard ---- */
+.split-row{ display:grid; grid-template-columns: 1.4fr 1fr; gap:48px; margin-top: 32px;}
+.school-board{ border: 2px solid var(--ink); padding: 24px; background: rgba(255,255,255,.5);}
+.school-board h4{ font-family:"DM Mono", monospace; color: var(--ink-soft); font-size:13px; letter-spacing:.2em; margin: 0 0 16px;}
+.school-board table{ width:100%; border-collapse:collapse;}
+.school-board td{ padding: 12px 0; border-bottom: 1px solid rgba(45,35,26,.35); font-size:15px; font-family:"DM Mono",monospace;}
+.school-board td:first-child{ color: var(--fairwood); width:40px; font-weight:700;}
+.school-board td:nth-child(2){ color: var(--ink); font-family:"Noto Sans HK", sans-serif; font-weight:600;}
+.school-board td:last-child{ text-align:right; color: var(--peanut-hot); font-weight:600;}
+.school-board tr:hover td{ background: rgba(255,138,0,.05);}
+
+/* ---- Prize / coupons preview ---- */
+.coupons{ display:grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 32px;}
+.coupon{
+  border: 2px dashed rgba(45,35,26,.3); padding: 24px;
+  background: rgba(255,255,255,.5); position:relative;
+}
+.coupon.featured{ background: var(--fairwood); color: var(--ink); border-color: var(--fairwood-deep);}
+.coupon .tag{
+  font-family:"DM Mono",monospace; font-size:12px; letter-spacing:.18em; color: var(--ink-soft);
+}
+.coupon.featured .tag{ color: var(--ink); opacity:.7; }
+.coupon h5{ font-family:"Noto Serif HK", serif; font-weight:900; font-size:24px; margin: 8px 0 6px; line-height:1.1;}
+.coupon p{ font-size:13px; color: var(--ink-soft); margin:0; line-height:1.5;}
+.coupon.featured p{ color: var(--ink); opacity:.8; }
+.coupon .price{ font-family:"Reggae One", serif; font-size:48px; line-height:1; margin-top: 12px; color: var(--fairwood);}
+.coupon.featured .price{ color: var(--ink); }
+
+/* ============ Rules banner + overlay (TXT modal) ============ */
+.rules-banner{
+  margin-top: 32px;
+  background: var(--ink); color: var(--paper);
+  padding: 32px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 24px;
+  box-shadow: 8px 8px 0 var(--fairwood);
+}
+.rules-banner h2{
+  font-family: "Noto Serif HK", serif; font-weight: 900;
+  font-size: 42px; line-height: 1; margin: 0; letter-spacing: -.02em;
+}
+.rules-banner .sub{ font-family: "DM Mono", monospace; font-size: 13px; color: var(--fairwood); letter-spacing: .15em; margin-top: 10px;}
+.rules-open-btn{
+  background: var(--fairwood); color: var(--ink); border: none;
+  cursor: pointer; padding: 16px 32px;
+  font-family: "Noto Serif HK", serif; font-weight: 900; font-size: 22px;
+  letter-spacing: .02em;
+  box-shadow: 6px 6px 0 var(--paper-deep);
+  transition: transform .15s;
+}
+.rules-open-btn:hover{ transform: translate(-2px,-2px); box-shadow: 8px 8px 0 var(--paper-deep);}
+
+.rules-overlay{
+  position: fixed; inset: 0;
+  background: rgba(26,20,16,.85);
+  z-index: 1000;
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 40px 20px;
+}
+.rules-overlay.open{ display: flex;}
+
+.rules-modal{
+  background: var(--paper);
+  max-width: 760px; width: 100%;
+  max-height: 90vh; overflow: hidden;
+  position: relative;
+  display: flex; flex-direction: column;
+  border: 2px solid var(--ink);
+  box-shadow: 12px 12px 0 var(--fairwood);
+}
+.rules-close{
+  position: absolute; top: 16px; right: 16px;
+  background: var(--ink); color: var(--fairwood);
+  border: none; cursor: pointer;
+  width: 40px; height: 40px;
+  font-family: "Noto Serif HK", serif; font-size: 22px; font-weight: 900;
+  z-index: 10;
+}
+.rules-modal-head{
+  padding: 32px 40px 20px;
+  border-bottom: 2px solid var(--ink);
+}
+.rules-modal-tag{ font-family: "DM Mono", monospace; font-size: 12px; color: var(--fairwood-deep); letter-spacing: .25em;}
+.rules-modal h2{
+  font-family: "Noto Serif HK", serif; font-weight: 900;
+  font-size: 36px; line-height: 1.1; margin: 8px 0 0;
+}
+.rules-text{
+  padding: 32px 40px;
+  overflow-y: auto;
+  margin: 0;
+  font-family: "DM Mono", "Courier New", monospace;
+  font-size: 14px; line-height: 1.7;
+  color: var(--ink);
+  white-space: pre-wrap;
+  background: rgba(255,255,255,.5);
+  flex: 1;
+}
+.rules-text a{ color: var(--fairwood-deep);}
+
+@media (max-width: 700px){
+  .rules-banner{ flex-direction: column; align-items: flex-start;}
+  .rules-banner h2{ font-size: 32px;}
+  .rules-modal h2{ font-size: 26px;}
+  .rules-text{ padding: 20px 24px; font-size: 12px;}
+}
+
+/* ============ Simple rules (3 cards) ============ */
+.simple-rules{
+  margin-top: 28px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.simple-card{
+  background: rgba(255,255,255,.5);
+  border: 2px solid var(--ink);
+  padding: 28px 28px 32px;
+  position: relative;
+}
+.simple-card .sr-num{
+  font-family: "Noto Serif HK", serif; font-weight: 900;
+  font-size: 64px; color: var(--fairwood); line-height: 1;
+  letter-spacing: -.02em;
+}
+.simple-card h3{
+  font-family: "Noto Serif HK", serif; font-weight: 900;
+  font-size: 24px; line-height: 1.2; margin: 14px 0 10px;
+}
+.simple-card p{ font-size: 15px; line-height: 1.6; color: var(--ink-soft); margin: 0;}
+
+.rules-warn{
+  margin-top: 24px; padding: 18px 24px;
+  background: rgba(184,54,42,.08); border-left: 3px solid var(--stamp);
+  font-size: 14px; line-height: 1.6; color: var(--ink); font-family: "Noto Sans HK", sans-serif;
+}
+.rules-warn strong{ color: var(--stamp); font-family: "Noto Serif HK", serif; font-weight: 900; display: inline-block; margin-right: 8px;}
+.rules-warn a{ color: var(--fairwood-deep); font-weight: 700; margin-left: 8px;}
+
+@media (max-width: 900px){
+  .simple-rules{ grid-template-columns: 1fr;}
+}
+
+/* ============ Rules / 玩法 section ============ */
+.rules-timeline{
+  margin-top: 32px;
+  background: rgba(255,255,255,.5); border: 2px solid var(--ink);
+  padding: 32px 40px;
+}
+.rt-row{
+  display: grid; grid-template-columns: 200px 1fr; gap: 32px; align-items: flex-start;
+  padding: 18px 0;
+  border-bottom: 1px dashed rgba(45,35,26,.25);
+}
+.rt-row:last-child{ border-bottom: none; padding-bottom: 0;}
+.rt-row:first-child{ padding-top: 0;}
+.rt-row .rt-date{
+  font-family: "DM Mono", monospace; font-size: 16px; font-weight: 700;
+  color: var(--ink-soft); letter-spacing: .1em;
+  padding-top: 4px;
+}
+.rt-row.active .rt-date{ color: var(--fairwood-deep);}
+.rt-row.final .rt-date{ color: var(--stamp); font-weight: 900;}
+.rt-row h4{
+  font-family: "Noto Serif HK", serif; font-weight: 900;
+  font-size: 22px; margin: 0 0 6px; line-height: 1.2;
+}
+.rt-row.final h4{ color: var(--stamp);}
+.rt-row p{ margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink-soft);}
+
+.rules-grid{
+  margin-top: 32px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.rule-card{
+  background: rgba(255,255,255,.5);
+  border: 2px solid var(--ink);
+  padding: 28px 28px 32px;
+  position: relative;
+}
+.rule-card.warn{ border-color: var(--stamp); background: rgba(184,54,42,.06);}
+.rule-card.prize{ background: var(--fairwood); color: var(--ink); box-shadow: 6px 6px 0 var(--ink);}
+.rule-tag{
+  position: absolute; top: -14px; left: 20px;
+  background: var(--ink); color: var(--fairwood);
+  font-family: "DM Mono", monospace; font-size: 12px; letter-spacing: .2em;
+  padding: 4px 14px;
+}
+.rule-card.warn .rule-tag{ background: var(--stamp); color: #fff;}
+.rule-card.prize .rule-tag{ background: var(--ink); color: var(--fairwood);}
+.rule-card h4{
+  font-family: "Noto Serif HK", serif; font-weight: 900;
+  font-size: 26px; line-height: 1.15; margin: 12px 0 16px;
+}
+.rule-card ul, .rule-card ol{
+  margin: 0; padding-left: 24px;
+  font-size: 14px; line-height: 1.65; color: var(--ink);
+}
+.rule-card.prize ul{ color: var(--ink);}
+.rule-card li{ margin: 4px 0;}
+.rule-card li strong{ background: var(--ink); color: var(--fairwood); padding: 1px 6px; font-weight: 700;}
+.rule-card.warn li{ color: var(--ink);}
+.rule-card.warn li::marker{ color: var(--stamp);}
+.rule-card.prize li strong{ background: var(--paper-deep); color: var(--ink);}
+.rule-note{
+  margin: 14px 0 0; padding: 8px 12px;
+  background: var(--paper-deep);
+  font-family: "DM Mono", monospace; font-size: 12px; color: var(--ink-soft);
+  letter-spacing: .08em; line-height: 1.5;
+}
+.rule-card.prize .rule-note{ background: rgba(0,0,0,.08); color: var(--ink); opacity: .8;}
+
+.rules-faq{
+  margin-top: 28px;
+  background: var(--paper-deep);
+  border-left: 3px solid var(--fairwood);
+  padding: 20px 28px;
+}
+.rules-faq summary{
+  cursor: pointer; font-family: "Noto Serif HK", serif;
+  font-size: 18px; color: var(--ink); padding: 4px 0;
+  list-style: none;
+}
+.rules-faq summary::-webkit-details-marker{ display: none;}
+.rules-faq summary:hover{ color: var(--fairwood-deep);}
+.rules-faq[open] summary{ color: var(--fairwood-deep); margin-bottom: 18px;}
+.rules-faq-grid{
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+}
+.rules-faq-grid .q{
+  background: rgba(255,255,255,.55); padding: 14px 18px;
+  border: 1px solid rgba(45,35,26,.2);
+  font-size: 14px; line-height: 1.6; color: var(--ink-soft);
+}
+.rules-faq-grid .q strong{ color: var(--ink); display: block; margin-bottom: 4px; font-family: "Noto Serif HK", serif; font-size: 15px;}
+
+@media (max-width: 900px){
+  .rules-grid{ grid-template-columns: 1fr;}
+  .rt-row{ grid-template-columns: 1fr;}
+  .rules-faq-grid{ grid-template-columns: 1fr;}
+}
+
+/* ---- Prize section (redesigned) ---- */
+.grand-prize{
+  margin-top: 32px;
+  background: var(--ink); color: var(--paper);
+  padding: 48px 56px;
+  position: relative;
+  display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center;
+  box-shadow: 12px 12px 0 var(--fairwood);
+}
+.gp-ribbon{
+  position: absolute; top: -16px; left: 48px;
+  background: var(--fairwood); color: var(--ink);
+  font-family: "Noto Serif HK", serif; font-weight: 900; font-size: 22px;
+  padding: 6px 22px; letter-spacing: .15em;
+  transform: rotate(-2deg);
+  box-shadow: 4px 4px 0 var(--paper-deep);
+}
+.gp-lbl{ font-family:"DM Mono", monospace; font-size: 14px; color: var(--fairwood); letter-spacing: .25em;}
+.gp-title{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 84px; line-height: .95; margin: 16px 0 24px; letter-spacing: -.02em;
+}
+.gp-title .gp-hl{ color: var(--fairwood); background: linear-gradient(transparent 70%, rgba(240,138,0,.25) 70% 92%, transparent 92%); padding: 0 8px;}
+.gp-meta{ display: flex; flex-direction: column; gap: 8px; font-family:"DM Mono", monospace; font-size: 14px; color: rgba(245,236,217,.75); letter-spacing: .1em;}
+.gp-visual{ text-align: center;}
+.gp-num{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 280px; line-height: .85; color: var(--fairwood); letter-spacing: -.05em;
+}
+.gp-num-lbl{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 28px; line-height: 1.1; color: var(--paper); margin-top: 12px;
+}
+.gp-num-lbl small{ display:block; font-family:"DM Mono", monospace; font-size: 11px; letter-spacing: .25em; color: var(--fairwood); margin-top: 6px;}
+
+.prize-grid{
+  margin-top: 32px;
+  display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+.prize-card{
+  background: rgba(255,255,255,.5); border: 2px solid var(--ink);
+  padding: 28px 24px;
+  position: relative; overflow: hidden;
+}
+.prize-tag{
+  font-family:"DM Mono", monospace; font-size: 11px; color: var(--fairwood-deep);
+  letter-spacing: .2em; margin-bottom: 12px;
+}
+.prize-card h4{
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 26px; line-height: 1.1; margin: 0 0 12px;
+}
+.prize-card p{ font-size: 14px; line-height: 1.55; color: var(--ink-soft); margin: 0;}
+.prize-card p strong{ background: var(--ink); color: var(--fairwood); padding: 1px 6px; font-weight: 700;}
+.prize-stat{
+  position: absolute; bottom: 16px; right: 20px;
+  font-family:"Noto Serif HK", serif; font-weight: 900;
+  font-size: 56px; line-height: 1; color: var(--fairwood); opacity: .85;
+  letter-spacing: -.02em;
+}
+
+.prize-footnote{
+  margin-top: 28px; padding: 16px 24px;
+  background: var(--paper-deep);
+  border-left: 3px solid var(--fairwood);
+  font-family:"DM Mono", monospace; font-size: 12px; color: var(--ink-soft);
+  letter-spacing: .08em; line-height: 1.6;
+}
+
+/* ---- Back to top button ---- */
+.back-top{
+  position: fixed; bottom: 24px; right: 24px;
+  width: 56px; height: 56px;
+  background: var(--ink); color: var(--fairwood);
+  border: none; cursor: pointer;
+  font-family:"Noto Serif HK", serif; font-size: 28px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 4px 4px 0 var(--fairwood);
+  z-index: 100;
+  opacity: 0; pointer-events: none;
+  transition: all .3s;
+}
+.back-top.visible{ opacity: 1; pointer-events: auto;}
+.back-top:hover{ transform: translateY(-2px);}
+
+/* ---- Footer ---- */
+.ms-foot{ margin-top: 96px; padding: 48px 0 0; border-top: 2px solid var(--ink); display:flex; justify-content:space-between; align-items:flex-end; font-family:"DM Mono",monospace; font-size:13px; color: var(--ink-soft); letter-spacing:.15em;}
+.ms-foot .big{
+  font-family:"Noto Serif HK", serif; font-weight:900; font-size:80px; color: var(--ink); line-height:.9; letter-spacing:-.02em;
+}
+.ms-foot .big .y{ color: var(--fairwood); }
+.ms-foot .big .p{ color: var(--peanut-hot); }
+
+/* ---- Story card export preview ---- */
+.story-row{
+  margin-top: 32px;
+  display:grid; grid-template-columns: 1fr 1.6fr; gap: 32px; align-items: center;
+}
+.story-card{
+  aspect-ratio: 9/16; max-width: 340px;
+  background: var(--paper-deep); border: 2px solid var(--fairwood);
+  padding: 32px 28px; position:relative; overflow:hidden;
+  color: var(--ink);
+}
+.story-card .day{ font-family:"DM Mono",monospace; font-size:14px; color: var(--fairwood); letter-spacing:.2em;}
+.story-card h3{ font-family:"Noto Serif HK", serif; font-weight:900; font-size:48px; line-height:.95; margin: 16px 0 0;}
+.story-card .stats{ margin-top: 32px; padding: 20px; background: var(--paper); border: 1px dashed rgba(45,35,26,.25);}
+.story-card .stats .row{ display:flex; justify-content:space-between; padding: 6px 0; font-size:14px;}
+.story-card .stats .row.d{ color: var(--fairwood); }
+.story-card .stats .row.p{ color: var(--peanut-hot); }
+.story-card .stats .row .n{ font-family:"DM Mono",monospace; font-weight:700;}
+.story-card .punch{ position:absolute; bottom:24px; left:24px; right:24px; font-family:"Reggae One",serif; font-size:24px; color: var(--peanut-lime); transform: rotate(-2deg);}
+.story-info h3{ font-family:"Noto Serif HK", serif; font-weight:900; font-size:48px; line-height:1.05; margin: 0;}
+.story-info p{ font-size:18px; color: var(--ink-soft); line-height:1.55; max-width:600px; margin-top:16px;}
+
+/* ============ Wizard (4-step prompt builder) ============ */
+.wiz{ margin-top: 36px; display: flex; flex-direction: column; gap: 28px;}
+.wiz-step{
+  display: grid; grid-template-columns: 80px 1fr; gap: 24px; align-items: start;
+}
+.wiz-n{
+  font-family: "Noto Serif HK", serif; font-weight: 900;
+  font-size: 64px; line-height: .9; color: var(--fairwood);
+  letter-spacing: -.04em;
+}
+.wiz-q{
+  grid-column: 2;
+  font-family: "Noto Serif HK", serif; font-weight: 900;
+  font-size: 30px; line-height: 1.15;
+  margin-bottom: 18px;
+}
+.wiz-step .wiz-options,
+.wiz-step .wiz-text{
+  grid-column: 2;
+}
+
+.wiz-options{
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.wiz-options.style{ grid-template-columns: repeat(3, 1fr);}
+.wiz-options.tools{ grid-template-columns: repeat(4, 1fr);}
+
+.wiz-opt{
+  background: var(--paper); border: 2.5px solid var(--ink);
+  padding: 22px 20px; text-align: center; cursor: pointer;
+  font-family: "Noto Serif HK", serif; font-weight: 900;
+  font-size: 22px; line-height: 1.2;
+  color: var(--ink);
+  transition: all .15s;
+  text-decoration: none;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.wiz-opt:hover{ transform: translateY(-3px); background: var(--paper-deep);}
+.wiz-opt small{ font-family: "DM Mono", monospace; font-weight: 400; font-size: 12px; color: var(--ink-soft); letter-spacing: .1em; margin-top: 2px;}
+.wiz-opt .emoji{ font-size: 36px; line-height: 1; margin-bottom: 6px;}
+.wiz-opt.selected{
+  background: var(--fairwood); color: var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  transform: translateY(-2px);
+}
+.wiz-opt.selected small{ color: var(--ink); opacity: .8;}
+
+.wiz-opt.tool{ padding: 18px 14px; gap: 4px;}
+.wiz-opt.tool .tool-icon{
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: "Noto Serif HK", serif; font-weight: 900; font-size: 22px; color: #fff;
+  margin-bottom: 8px;
+}
+.wiz-opt.tool .tool-icon.lovable{ background: linear-gradient(135deg, #ff7043, #ff3d7f);}
+.wiz-opt.tool .tool-icon.claude{ background: linear-gradient(135deg, #d97757, #8b3a1f);}
+.wiz-opt.tool .tool-icon.v0{ background: #000; border: 1px solid #fff;}
+.wiz-opt.tool .tool-icon.bolt{ background: linear-gradient(135deg, #38bdf8, #1e40af);}
+.wiz-opt.tool .tool-host{
+  font-family: "DM Mono", monospace; font-size: 10px; color: var(--fairwood-deep);
+  letter-spacing: .08em; margin-top: 4px; font-weight: 400;
+}
+.wiz-opt.tool.selected .tool-host{ color: var(--ink); opacity: .7;}
+
+.wiz-text{
+  width: 100%; padding: 16px 20px;
+  background: var(--paper); border: 2.5px solid var(--ink);
+  font-family: "Noto Serif HK", serif; font-size: 18px;
+  color: var(--ink);
+  resize: vertical;
+  min-height: 70px;
+  box-sizing: border-box;
+}
+.wiz-text:focus{ outline: 2px solid var(--fairwood); outline-offset: 2px;}
+
+/* output panel */
+.wiz-output{
+  margin-top: 40px;
+  background: var(--ink); color: var(--paper);
+  padding: 32px 36px;
+  box-shadow: 12px 12px 0 var(--fairwood);
+  position: relative;
+}
+.wiz-output-head{ display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap;}
+.wiz-output-tag{ font-family: "DM Mono", monospace; font-size: 12px; color: var(--fairwood); letter-spacing: .25em;}
+.wiz-output h3{ font-family: "Noto Serif HK", serif; font-weight: 900; font-size: 28px; margin: 6px 0 0; line-height: 1.1;}
+.wiz-copy{
+  background: var(--fairwood); color: var(--ink); border: none; cursor: pointer;
+  font-family: "Noto Serif HK", serif; font-weight: 900; font-size: 18px;
+  padding: 12px 22px; letter-spacing: .05em;
+  box-shadow: 4px 4px 0 var(--paper-deep);
+  transition: transform .15s;
+}
+.wiz-copy:hover{ transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--paper-deep);}
+.wiz-prompt{
+  margin: 20px 0 0;
+  padding: 24px;
+  background: rgba(255,255,255,.06); border: 1px dashed rgba(245,236,217,.3);
+  font-family: "DM Mono", monospace; font-size: 14px; line-height: 1.7;
+  color: var(--paper);
+  white-space: pre-wrap;
+  max-height: 360px; overflow: auto;
+  letter-spacing: .02em;
+}
+.wiz-go{
+  display: inline-flex; align-items: center; gap: 12px;
+  margin-top: 20px;
+  background: var(--fairwood); color: var(--ink);
+  font-family: "Noto Serif HK", serif; font-weight: 900; font-size: 22px;
+  padding: 14px 28px; text-decoration: none;
+  box-shadow: 6px 6px 0 var(--paper);
+  pointer-events: none; opacity: .5;
+}
+.wiz-output.ready .wiz-go{ pointer-events: auto; opacity: 1;}
+.wiz-output.ready .wiz-go:hover{ transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--paper);}
+
+.wiz-launch-row{
+  display: flex; align-items: center; gap: 16px;
+  margin-top: 20px; padding: 16px 22px;
+  background: rgba(255,255,255,.06); border: 1px dashed rgba(245,236,217,.3);
+  font-family: "DM Mono", monospace; font-size: 13px; color: var(--paper);
+  letter-spacing: .05em;
+}
+.wiz-launch-step{ flex: 1;}
+.wiz-launch-step strong{ color: var(--fairwood);}
+.wiz-arrow{ color: var(--fairwood); font-size: 20px; font-weight: 700;}
+
+@media (max-width: 900px){
+  .wiz-options, .wiz-options.style, .wiz-options.tools{ grid-template-columns: 1fr 1fr;}
+  .wiz-step{ grid-template-columns: 1fr;}
+  .wiz-q, .wiz-options, .wiz-text{ grid-column: 1;}
+}
+
+/* ============ HOW-TO SECTION (in-page) ============ */
+.howto-wrap{
+  margin-top: 64px;
+  background: linear-gradient(180deg, #1a1410, #15100b);
+  border: 2px solid var(--fairwood);
+  padding: 56px;
+  position: relative;
+}
+.howto-wrap::before{
+  content:"▸ 5 分鐘起 Site · OFFICIAL HOW-TO";
+  position:absolute; top:-13px; left: 48px;
+  background: var(--paper); padding: 0 16px;
+  font-family:"DM Mono", monospace; font-size: 14px; color: var(--fairwood); letter-spacing:.2em;
+}
+.howto-head{ display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:32px;}
+.howto-head h2{
+  font-family:"Noto Serif HK", serif; font-weight:900; font-size: 72px; line-height:1; margin: 0;
+  letter-spacing:-.02em;
+}
+.howto-head h2 .hl{ color: var(--fairwood); background: linear-gradient(transparent 70%, rgba(240,138,0,.2) 70% 90%, transparent 90%); padding: 0 6px;}
+.howto-head .myth{
+  flex: 0 0 480px;
+  background: var(--fairwood); color: var(--ink);
+  padding: 18px 22px; font-weight:600; font-size: 16px; line-height: 1.5;
+  transform: rotate(-1.5deg); box-shadow: 4px 4px 0 rgba(0,0,0,.4);
+}
+.howto-head .myth strong{ background: var(--ink); color: var(--fairwood); padding: 2px 8px;}
+
+/* 3-step strip */
+.ht-steps{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px;}
+.ht-step{ background: var(--paper); border: 1.5px solid rgba(45,35,26,.2); padding: 24px; position:relative;}
+.ht-step .n{
+  position:absolute; top: -14px; left: 20px; background: var(--fairwood); color: var(--ink);
+  font-family:"Reggae One", serif; font-size: 18px; padding: 2px 14px; transform: rotate(-2deg);
+}
+.ht-step h4{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 26px; margin: 12px 0 8px; line-height: 1.15;}
+.ht-step p{ font-size: 14px; line-height: 1.5; color: var(--ink-soft); margin: 0;}
+.ht-step .visual{ margin-top: 16px; padding: 12px; background: var(--paper-deep); border: 1px dashed rgba(45,35,26,.25); min-height: 80px; font-family:"DM Mono", monospace; font-size: 11px; color: var(--peanut-lime);}
+
+/* 4 tools */
+.ht-tools{ margin-top: 40px;}
+.ht-tools-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom: 16px;}
+.ht-tools-head h3{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 32px; margin: 0;}
+.ht-tools-head .note{ font-family:"DM Mono", monospace; font-size: 12px; color: var(--ink-soft); letter-spacing:.15em;}
+.ht-tools-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 12px;}
+.ht-tool{
+  background: var(--paper); border: 1.5px solid rgba(45,35,26,.2); padding: 20px;
+  display:flex; flex-direction:column; gap:10px; text-decoration:none; color: inherit;
+  transition: all .15s;
+}
+.ht-tool:hover{ border-color: var(--fairwood); transform: translateY(-2px);}
+.ht-tool .head{ display:flex; align-items:center; gap: 12px;}
+.ht-tool .icon{ width:44px; height:44px; border-radius: 10px; display:flex; align-items:center; justify-content:center; font-family:"Reggae One", serif; font-size: 22px; color: var(--ink);}
+.ht-tool .icon.lovable{ background: linear-gradient(135deg, #ff7043, #ff3d7f);}
+.ht-tool .icon.claude{ background: linear-gradient(135deg, #d97757, #8b3a1f);}
+.ht-tool .icon.v0{ background:#000; border:1px solid #fff;}
+.ht-tool .icon.bolt{ background: linear-gradient(135deg, #38bdf8, #1e40af);}
+.ht-tool .name{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 20px; line-height:1.1;}
+.ht-tool .url{ font-family:"DM Mono", monospace; font-size: 10px; color: var(--fairwood); letter-spacing:.1em; margin-top: 2px;}
+.ht-tool .blurb{ font-size: 13px; line-height: 1.5; color: var(--ink-soft); margin: 0;}
+.ht-tool .specs{ font-family:"DM Mono", monospace; font-size: 10px; color: var(--ink-soft); letter-spacing:.08em; padding-top: 10px; border-top: 1px solid rgba(45,35,26,.18); display:flex; flex-direction:column; gap: 2px;}
+.ht-tool .specs strong{ color: var(--fairwood); font-weight:700;}
+.ht-tool.featured{ border-color: var(--fairwood); position:relative;}
+.ht-tool.featured::before{
+  content:"★"; position:absolute; top: 8px; right: 12px; color: var(--fairwood); font-size: 16px;
+}
+
+/* prompt sandbox */
+.ht-prompts{ display:grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px;}
+.ht-prompt{ background: var(--paper); border: 1.5px solid rgba(45,35,26,.2); padding: 0; position:relative; overflow:hidden;}
+.ht-prompt.duck{ border-color: var(--fairwood);}
+.ht-prompt.peanut{ border-color: var(--peanut-hot);}
+.ht-prompt .head{ padding: 16px 20px; border-bottom: 1px solid rgba(45,35,26,.18); display:flex; align-items:center; gap: 12px;}
+.ht-prompt.duck .head{ background: rgba(240,138,0,.08);}
+.ht-prompt.peanut .head{ background: rgba(236,72,153,.08);}
+.ht-prompt .head .emoji{ font-size: 24px;}
+.ht-prompt .head h4{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 18px; margin: 0; flex:1; line-height:1.2;}
+.ht-prompt .head .tag{ font-family:"DM Mono", monospace; font-size: 10px; color: var(--ink-soft); letter-spacing:.1em; display:block; margin-top: 2px;}
+.ht-prompt .copy{
+  background: transparent; border: 1px solid currentColor; color: inherit;
+  padding: 6px 12px; cursor:pointer; font-family:"DM Mono", monospace; font-size: 11px; letter-spacing:.1em;
+}
+.ht-prompt.duck .copy{ color: var(--fairwood);}
+.ht-prompt.peanut .copy{ color: var(--peanut-hot);}
+.ht-prompt .body{ padding: 16px 20px; font-family:"DM Mono", monospace; font-size: 12px; line-height: 1.65; color: var(--ink-soft); white-space: pre-wrap; max-height: 280px; overflow: auto;}
+.ht-prompt .body .var{ background: rgba(255,255,255,.08); padding: 1px 6px; color: var(--peanut-lime);}
+
+.ht-faq{ margin-top: 40px; display:grid; grid-template-columns: repeat(2, 1fr); gap: 14px;}
+.ht-faq .q{ background: var(--paper); border: 1px solid rgba(45,35,26,.18); padding: 14px 18px; font-size: 14px; line-height: 1.5; color: var(--ink-soft);}
+.ht-faq .q strong{ color: var(--fairwood); font-family:"DM Mono", monospace; font-size: 11px; letter-spacing:.12em; display:block; margin-bottom: 4px;}
+
+@media (max-width: 1100px){
+  .ht-steps, .ht-tools-grid, .ht-prompts, .ht-faq{ grid-template-columns: 1fr;}
+}
+</style>
+</head>
+<template id="__bundler_thumbnail">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<rect width="100" height="100" fill="#0f0a07"/>
+<text x="50" y="46" font-family="serif" font-weight="900" font-size="22" fill="#f08a00" text-anchor="middle">SITE</text>
+<text x="50" y="72" font-family="serif" font-weight="900" font-size="22" fill="#c4661f" text-anchor="middle">多士</text>
+</svg>
+</template>
+<body>
+
+<div class="ms-shell">
+
+  <nav class="ms-nav">
+    <div class="ms-logo">
+      <span class="mark"><img src="assets/ah-wood.png" alt="阿活"></span>
+      <span>SITE 多士大對決</span>
+      <span class="by">BY 大快活 · FAIRWOOD HK</span>
+    </div>
+    <div class="ms-live">LIVE · DAY 09 / 21</div>
+    <div class="links">
+      <a href="#battle">戰況</a>
+      <a href="#versus" style="color: var(--fairwood);">★ 對決</a>
+      <a href="#howto">點玩</a>
+      <a href="#gallery">所有 Sites</a>
+      <a href="#schools">學界</a>
+      <a href="#prize">獎品</a>
+      <a href="team-duck.html">🦆 鴨蛋派</a>
+      <a href="team-peanut.html">🥜 花生派</a>
+    </div>
+    <a href="#howto" class="cta">▸ 我要交 Site</a>
+  </nav>
+
+  <!-- HERO · visual-led -->
+  <section class="ms-hero-compact" id="battle">
+    <div class="hero-kicker-row">
+      <div class="kicker">FAIRWOOD × 全港網民 · 06 / 02 → 06 / 23 · 2026</div>
+      <div class="hero-quickstats">
+        <span class="pill">📮 1,108</span>
+        <span class="pill">✅ 952</span>
+        <span class="pill">⏰ Next 18:00</span>
+      </div>
+    </div>
+    <div class="hero-split">
+      <div class="hero-text">
+        <h1 class="title-original">傳統<span class="y">鴨蛋</span>香<br>VS<br>邪惡<span class="p">花生</span>醬</h1>
+        <p class="lead-compact">用 AI 起一個 Site，撐你揀嘅西多．邊派 Site 多邊派贏．每日 18:00 update．<strong style="color: var(--fairwood-deep);">唔識 code 都得</strong> ── <a href="#howto">下面有 step-by-step 教學</a></p>
+      </div>
+      <div class="hero-visuals">
+        <!-- duck toast photo placeholder -->
+        <div class="toast-card duck-toast">
+          <div class="toast-photo">
+            <span class="toast-emoji">🍞</span>
+            <span class="toast-tag">鴨蛋</span>
+            <span class="toast-photo-cap">[ 大快活鴨蛋西多 photo ]</span>
+          </div>
+          <div class="toast-meta">
+            <strong>🦆 傳統鴨蛋香</strong>
+            <span>無餡．煎 Pan．茶記正宗</span>
+          </div>
+        </div>
+        <!-- peanut toast photo placeholder -->
+        <div class="toast-card peanut-toast">
+          <div class="toast-photo">
+            <span class="toast-emoji">🥜</span>
+            <span class="toast-tag">花生</span>
+            <span class="toast-photo-cap">[ 花生流心西多 photo ]</span>
+          </div>
+          <div class="toast-meta">
+            <strong>🥜 邪惡花生醬</strong>
+            <span>流心．爆漿．新世代</span>
+          </div>
+        </div>
+        <div class="hero-vs-tag">VS</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERSUS · 雙派對戰 (cleaner) -->
+  <section class="versus" id="versus">
+    <!-- Slim live meter -->
+    <div class="vs-meter">
+      <div class="vs-m-side d">
+        <span class="vs-m-emoji">🦆</span>
+        <div><strong>470</strong><small>傳統鴨蛋派</small></div>
+        <em class="delta">▴ +38 today</em>
+      </div>
+      <div class="vs-m-bar">
+        <div class="vs-mb-d" style="width:49.4%"></div>
+        <div class="vs-mb-p" style="width:50.6%"></div>
+        <div class="vs-mb-marker"></div>
+      </div>
+      <div class="vs-m-side p">
+        <em class="delta">▴ +44 today</em>
+        <div style="text-align:right;"><strong>482</strong><small>邪惡花生派</small></div>
+        <span class="vs-m-emoji">🥜</span>
+      </div>
+    </div>
+
+    <!-- Matchup grid -->
+    <div class="vs-grid">
+
+      <!-- DUCK column -->
+      <article class="vs-col duck">
+        <header class="vs-col-h">
+          <h3>🦆 鴨蛋派．今日精選</h3>
+          <div class="vs-cycler">
+            <button class="vs-arr" onclick="cycleVS('duck',-1)" aria-label="Prev">‹</button>
+            <span class="vs-idx"><span id="duck-idx">1</span> / 6</span>
+            <button class="vs-arr" onclick="cycleVS('duck',1)" aria-label="Next">›</button>
+          </div>
+        </header>
+        <div class="vs-stage" id="duck-stage">
+          <a class="vs-card show" data-i="0" href="team-duck.html" target="_blank">
+            <div class="vs-prev duck-classic">
+              <div class="vs-browser">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="vs-url">unsanedimsum.lovable.app</span>
+            </div>
+              <div class="vs-stamp">真．正宗</div>
+              <h4>無餡先係<br>正宗西多。</h4>
+              <p>大排檔嘅西多本來就<em>冇餡</em>。係近年人哋亂加嘢。</p>
+              <div class="vs-points"><span>★ 鴨蛋 = 香</span><span>★ 煎 Pan = 唔索油</span><span>★ 無餡 = 純粹</span></div>
+            </div>
+            <div class="vs-meta">
+              <div class="vs-meta-top">
+                <div class="vs-title">無餡西多保衛聯盟</div>
+                <div class="vs-author">@uncle_lam_1962 · 茶記伙計 · 旺角</div>
+              </div>
+              <div class="vs-stats"><span class="vs-votes">▴ 93 votes · 4.8 ★</span><span class="vs-open">OPEN ▸</span></div>
+            </div>
+          </a>
+
+          <a class="vs-card" data-i="1" href="#" target="_blank">
+            <div class="vs-prev duck-archive">
+              <div class="vs-archive-tag">EST. 1972 · 茶記檔案</div>
+              <h4>大排檔正宗<br>考據檔案。</h4>
+              <p class="vs-essay">一份 4,000 字 essay，從 1950s 法式 French Toast 講到 2026．認真到大學論文 level。</p>
+            </div>
+            <div class="vs-meta">
+              <div class="vs-meta-top">
+                <div class="vs-title">大排檔正宗考據</div>
+                <div class="vs-author">@uncle_chau · 中環打工仔</div>
+              </div>
+              <div class="vs-stats"><span class="vs-votes">▴ 64 votes · 4.6 ★</span><span class="vs-open">OPEN ▸</span></div>
+            </div>
+          </a>
+
+          <a class="vs-card" data-i="2" href="#" target="_blank">
+            <div class="vs-prev duck-min">
+              <div class="vs-min-q">「我食咗 50 年西多。<br>冇花生先係真。」</div>
+              <div class="vs-min-c">— 陳生．大角咀街坊</div>
+            </div>
+            <div class="vs-meta">
+              <div class="vs-meta-top">
+                <div class="vs-title">無餡至尊 Manifesto</div>
+                <div class="vs-author">@yeungyeung · 深水埗茶友</div>
+              </div>
+              <div class="vs-stats"><span class="vs-votes">▴ 45 votes · 4.5 ★</span><span class="vs-open">OPEN ▸</span></div>
+            </div>
+          </a>
+
+          <a class="vs-card" data-i="3" href="#" target="_blank">
+            <div class="vs-prev duck-essay">
+              <h4 style="color: var(--fairwood-deep);">鴨蛋香<br>= 真理。</h4>
+              <div class="vs-list">
+                <span>01 · 鴨蛋蛋黃比例高 35%</span>
+                <span>02 · 鴨蛋富含 Omega-3</span>
+                <span>03 · 煎 Pan 嘅 Maillard 反應</span>
+              </div>
+            </div>
+            <div class="vs-meta">
+              <div class="vs-meta-top">
+                <div class="vs-title">鴨蛋香 = 真理</div>
+                <div class="vs-author">@taikwoklok · 油麻地</div>
+              </div>
+              <div class="vs-stats"><span class="vs-votes">▴ 38 votes · 4.3 ★</span><span class="vs-open">OPEN ▸</span></div>
+            </div>
+          </a>
+
+          <a class="vs-card" data-i="4" href="#" target="_blank">
+            <div class="vs-prev duck-classic">
+              <h4>煎 Pan<br>萬歲。</h4>
+              <p>慢火煎 Pan，唔索油，麵包外脆內軟。<em>呢個係物理事實。</em></p>
+              <div class="vs-points"><span>★ 慢火 7 分鐘</span><span>★ 唔加油</span></div>
+            </div>
+            <div class="vs-meta">
+              <div class="vs-meta-top">
+                <div class="vs-title">煎 Pan 萬歲</div>
+                <div class="vs-author">@chankakit · 油麻地</div>
+              </div>
+              <div class="vs-stats"><span class="vs-votes">▴ 29 votes · 4.4 ★</span><span class="vs-open">OPEN ▸</span></div>
+            </div>
+          </a>
+
+          <a class="vs-card" data-i="5" href="#" target="_blank">
+            <div class="vs-prev duck-min">
+              <h4 style="font-size: 56px;">DUCK<br>EGG<br>ONLY.</h4>
+              <div class="vs-min-c">EST. 1972 · 守傳統</div>
+            </div>
+            <div class="vs-meta">
+              <div class="vs-meta-top">
+                <div class="vs-title">DUCK EGG ONLY</div>
+                <div class="vs-author">@duck_society · 牛池灣</div>
+              </div>
+              <div class="vs-stats"><span class="vs-votes">▴ 24 votes · 4.7 ★</span><span class="vs-open">OPEN ▸</span></div>
+            </div>
+          </a>
+        </div>
+      </article>
+
+      <!-- floating VS divider -->
+      <div class="vs-vertical-divider">
+        <div class="vs-vd-line"></div>
+        <div class="vs-vd-badge">VS · DAY 09 / 21</div>
+        <div class="vs-vd-line"></div>
+      </div>
+
+      <!-- PEANUT column -->
+      <article class="vs-col peanut">
+        <header class="vs-col-h">
+          <h3>邪惡花生派．今日精選 🥜</h3>
+          <div class="vs-cycler">
+            <button class="vs-arr" onclick="cycleVS('peanut',-1)" aria-label="Prev">‹</button>
+            <span class="vs-idx"><span id="peanut-idx">1</span> / 6</span>
+            <button class="vs-arr" onclick="cycleVS('peanut',1)" aria-label="Next">›</button>
+          </div>
+        </header>
+        <div class="vs-stage" id="peanut-stage">
+          <a class="vs-card show" data-i="0" href="team-peanut.html" target="_blank">
+            <div class="vs-browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="vs-url">peanut-god.claude.site ✨</span></div>
+            <div class="vs-prev peanut-y2k">
+              <div class="vs-marquee">★ JOIN PEANUT GANG ★ JOIN PEANUT GANG ★</div>
+              <h4 class="chaos">花生係<br>靈魂！</h4>
+              <div class="vs-blink">★ 點解你仲未入伍？★</div>
+            </div>
+            <div class="vs-meta">
+              <div class="vs-meta-top">
+                <div class="vs-title">花生係靈魂！(官方總部)</div>
+                <div class="vs-author">@peanutbutter_god · 皇仁書院 DSE</div>
+              </div>
+              <div class="vs-stats"><span class="vs-votes">▴ 127 votes · 4.9 ★</span><span class="vs-open">OPEN ▸</span></div>
+            </div>
+          </a>
+
+          <a class="vs-card" data-i="1" href="#" target="_blank">
+            <div class="vs-prev peanut-grad">
+              <div class="vs-tag-pill">★ MOLTEN MOVEMENT ★</div>
+              <h4>流心爆漿<br>協會。</h4>
+              <p>將花生流心拍成 Marvel 預告片．大快活營銷 dept 學嘢。</p>
+            </div>
+            <div class="vs-meta">
+              <div class="vs-meta-top">
+                <div class="vs-title">流心爆漿協會</div>
+                <div class="vs-author">@iampeanutbutter · 浸大傳理</div>
+              </div>
+              <div class="vs-stats"><span class="vs-votes">▴ 71 votes · 4.8 ★</span><span class="vs-open">OPEN ▸</span></div>
+            </div>
+          </a>
+
+          <a class="vs-card" data-i="2" href="#" target="_blank">
+            <div class="vs-prev peanut-stripe">
+              <div class="vs-stripe-bar">PEANUT GANG · 入會須知</div>
+              <h4>花生<br>GANG</h4>
+              <div class="vs-check">☑ 識食花生<br>☑ 撐大快活<br>☑ 嬲到鴨蛋派</div>
+            </div>
+            <div class="vs-meta">
+              <div class="vs-meta-top">
+                <div class="vs-title">花生 GANG · 入會須知</div>
+                <div class="vs-author">@mavismavis · 浸大學生</div>
+              </div>
+              <div class="vs-stats"><span class="vs-votes">▴ 52 votes · 4.5 ★</span><span class="vs-open">OPEN ▸</span></div>
+            </div>
+          </a>
+
+          <a class="vs-card" data-i="3" href="#" target="_blank">
+            <div class="vs-prev peanut-pixel">
+              <div class="vs-pixel-bar">▌▌▌ PB·HK·2026 ▌▌▌</div>
+              <h4>PB<br>FOREVER.</h4>
+              <div class="vs-counter">👁 042,069 visitors</div>
+            </div>
+            <div class="vs-meta">
+              <div class="vs-meta-top">
+                <div class="vs-title">花生人類學會</div>
+                <div class="vs-author">@hkug_food · 連登 user</div>
+              </div>
+              <div class="vs-stats"><span class="vs-votes">▴ 44 votes · 4.2 ★</span><span class="vs-open">OPEN ▸</span></div>
+            </div>
+          </a>
+
+          <a class="vs-card" data-i="4" href="#" target="_blank">
+            <div class="vs-prev peanut-grad">
+              <div class="vs-tag-pill">★ 流心 = 真理 ★</div>
+              <h4>花生<br>人生。</h4>
+              <p>由茶記阿姨講起 ── 點解佢都同意花生係 best。</p>
+            </div>
+            <div class="vs-meta">
+              <div class="vs-meta-top">
+                <div class="vs-title">花生人生</div>
+                <div class="vs-author">@flying_peanut · 城大商學</div>
+              </div>
+              <div class="vs-stats"><span class="vs-votes">▴ 37 votes · 4.6 ★</span><span class="vs-open">OPEN ▸</span></div>
+            </div>
+          </a>
+
+          <a class="vs-card" data-i="5" href="#" target="_blank">
+            <div class="vs-prev peanut-stripe">
+              <div class="vs-stripe-bar">⚠ 警告 · 邪惡 ⚠</div>
+              <h4>PEANUT<br>SUPREME.</h4>
+              <div class="vs-check">花生派宣言<br>by 大埔街坊</div>
+            </div>
+            <div class="vs-meta">
+              <div class="vs-meta-top">
+                <div class="vs-title">PEANUT SUPREME 宣言</div>
+                <div class="vs-author">@taipo_peanut · 大埔街坊</div>
+              </div>
+              <div class="vs-stats"><span class="vs-votes">▴ 31 votes · 4.4 ★</span><span class="vs-open">OPEN ▸</span></div>
+            </div>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="sec" id="gallery">
+    <div class="sec-row">
+      <div>
+        <h2>今日新上架 Sites</h2>
+        <div class="sub">▸ 87 件新作 · AI 過審 · 小編人手把關</div>
+      </div>
+      <div class="tabs">
+        <button class="on">全部</button>
+        <button>🦆 鴨蛋派</button>
+        <button>🥜 花生派</button>
+        <button>★ 編輯精選</button>
+      </div>
+    </div>
+    <div class="gallery">
+      <div class="site-card p peanut-loud">
+        <div class="preview">🥜✨🥜</div>
+        <div class="ribbon featured">★ FEATURED</div>
+        <div class="title">
+          <div class="h">花生係靈魂．jpg</div>
+          <div class="author">@PEANUT_KING_HK · 邪惡花生派</div>
+        </div>
+      </div>
+      <div class="site-card d duck-photo">
+        <div class="preview"></div>
+        <div class="ribbon">🦆 鴨蛋</div>
+        <div class="title">
+          <div class="h">煎 Pan 萬歲</div>
+          <div class="author">@chankakit_2008 · 傳統原味派</div>
+        </div>
+      </div>
+      <div class="site-card p">
+        <div class="preview">★ ★ ★</div>
+        <div class="ribbon">🥜 花生</div>
+        <div class="title">
+          <div class="h">PEANUT GANG ENTER</div>
+          <div class="author">@mavismavis · 邪惡花生派</div>
+        </div>
+      </div>
+      <div class="site-card d">
+        <div class="preview">DUCK<br>EGG</div>
+        <div class="ribbon">🦆 鴨蛋</div>
+        <div class="title">
+          <div class="h">無餡至尊 Manifesto</div>
+          <div class="author">@yeungyeung · 傳統原味派</div>
+        </div>
+      </div>
+      <div class="site-card d">
+        <div class="preview">茶記</div>
+        <div class="ribbon">🦆 鴨蛋</div>
+        <div class="title">
+          <div class="h">大排檔正宗考據</div>
+          <div class="author">@uncle_chau · 傳統原味派</div>
+        </div>
+      </div>
+      <div class="site-card p peanut-loud">
+        <div class="preview">PB!!!</div>
+        <div class="ribbon featured">★ FEATURED</div>
+        <div class="title">
+          <div class="h">流心爆漿協會</div>
+          <div class="author">@iampeanutbutter · 邪惡花生派</div>
+        </div>
+      </div>
+      <div class="site-card d duck-photo">
+        <div class="preview"></div>
+        <div class="ribbon">🦆 鴨蛋</div>
+        <div class="title">
+          <div class="h">鴨蛋香 = 真理</div>
+          <div class="author">@taikwoklok · 傳統原味派</div>
+        </div>
+      </div>
+      <div class="site-card p">
+        <div class="preview">🥜</div>
+        <div class="ribbon">🥜 花生</div>
+        <div class="title">
+          <div class="h">花生人類學</div>
+          <div class="author">@hkug_food · 邪惡花生派</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW-TO SECTION (簡化版 · 4 步生成 prompt) -->
+  <section class="sec" id="howto" style="border-top: none; padding-top: 0; margin-top: 32px;">
+    <div class="howto-wrap">
+      <div class="howto-head">
+        <h2>4 步起好一個 Site<br><span class="hl">完全 0 經驗都得</span></h2>
+        <div class="myth">
+          <strong>跟住 4 步揀</strong>，下面會自動幫你寫好 prompt．<br>
+          Copy 去 AI builder · 1 分鐘出 site · 自動 host．<br>
+          ▾ 直接喺下面揀，唔使識 code，唔使填表
+        </div>
+      </div>
+
+      <!-- 4-step wizard -->
+      <div class="wiz">
+
+        <!-- STEP 1: 揀派 -->
+        <div class="wiz-step">
+          <div class="wiz-n">01</div>
+          <div class="wiz-q">你撐邊一派？</div>
+          <div class="wiz-options" data-key="faction">
+            <button class="wiz-opt" data-val="duck" data-display="🦆 傳統鴨蛋派">🦆 傳統<br><small>無餡正宗派</small></button>
+            <button class="wiz-opt" data-val="peanut" data-display="🥜 邪惡花生派">🥜 邪惡<br><small>花生爆漿派</small></button>
+          </div>
+        </div>
+
+        <!-- STEP 2: 寫理由 -->
+        <div class="wiz-step">
+          <div class="wiz-n">02</div>
+          <div class="wiz-q">用一兩句講你支持嘅理由</div>
+          <textarea class="wiz-text" id="wiz-reason" placeholder="例：花生醬西多食落超滿足，無花生就好似茶記飲奶茶冇黑白淡奶咁！" rows="2"></textarea>
+        </div>
+
+        <!-- STEP 3: 揀風格 -->
+        <div class="wiz-step">
+          <div class="wiz-n">03</div>
+          <div class="wiz-q">你想個 Site 係咩風格？</div>
+          <div class="wiz-options style" data-key="style">
+            <button class="wiz-opt" data-val="y2k" data-display="Y2K / GeoCities">
+              <div class="emoji">✨</div>
+              <strong>Y2K Chaos</strong>
+              <small>marquee、blink、彩虹</small>
+            </button>
+            <button class="wiz-opt" data-val="hero" data-display="超英漫畫風">
+              <div class="emoji">💥</div>
+              <strong>超英漫畫風</strong>
+              <small>動作、震撼、爆炸</small>
+            </button>
+            <button class="wiz-opt" data-val="anime" data-display="日漫風">
+              <div class="emoji">🌸</div>
+              <strong>日漫風</strong>
+              <small>柔和、Q版、可愛</small>
+            </button>
+            <button class="wiz-opt" data-val="cha" data-display="港式茶記">
+              <div class="emoji">🍳</div>
+              <strong>港式茶記</strong>
+              <small>紙黃、菜牌、街坊</small>
+            </button>
+            <button class="wiz-opt" data-val="minimal" data-display="極簡設計">
+              <div class="emoji">⬜</div>
+              <strong>極簡設計</strong>
+              <small>黑白、留白、靚仔</small>
+            </button>
+            <button class="wiz-opt" data-val="random" data-display="隨機 AI 發揮">
+              <div class="emoji">🎲</div>
+              <strong>隨機</strong>
+              <small>AI 自由發揮</small>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 4: 揀平台 -->
+        <div class="wiz-step">
+          <div class="wiz-n">04</div>
+          <div class="wiz-q">揀一個 AI builder（揀完唔會即跳走，下面先有 GO 掣）</div>
+          <div class="wiz-options tools" data-key="tool">
+            <button type="button" class="wiz-opt tool" data-val="lovable" data-display="Lovable" data-url="https://lovable.dev">
+              <div class="tool-icon lovable">L</div>
+              <strong>Lovable</strong>
+              <small>★ 推薦 · 最易用</small>
+              <span class="tool-host">▸ xxx.lovable.app</span>
+            </button>
+            <button type="button" class="wiz-opt tool" data-val="claude" data-display="Claude" data-url="https://claude.ai/new">
+              <div class="tool-icon claude">C</div>
+              <strong>Claude</strong>
+              <small>傾偈式建站</small>
+              <span class="tool-host">▸ claude.site/xxx</span>
+            </button>
+            <button type="button" class="wiz-opt tool" data-val="v0" data-display="v0" data-url="https://v0.dev">
+              <div class="tool-icon v0">v0</div>
+              <strong>v0</strong>
+              <small>component 靚仔</small>
+              <span class="tool-host">▸ xxx.vercel.app</span>
+            </button>
+            <button type="button" class="wiz-opt tool" data-val="bolt" data-display="Bolt" data-url="https://bolt.new">
+              <div class="tool-icon bolt">⚡</div>
+              <strong>Bolt</strong>
+              <small>鬼馬風</small>
+              <span class="tool-host">▸ xxx.bolt.host</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Generated prompt preview -->
+      <div class="wiz-output" id="wiz-output">
+        <div class="wiz-output-head">
+          <div>
+            <div class="wiz-output-tag">▸ 你嘅 PROMPT · AUTO-GENERATED</div>
+            <h3>已經幫你寫好．Copy → 開 AI builder → 貼入</h3>
+          </div>
+          <button class="wiz-copy" onclick="copyWizPrompt()">⎘ COPY PROMPT</button>
+        </div>
+        <pre class="wiz-prompt" id="wiz-prompt">▸ 完成上面 4 步，呢度會自動出 prompt ◂</pre>
+        <div class="wiz-launch-row">
+          <div class="wiz-launch-step"><strong>① COPY</strong> 上面個 prompt</div>
+          <div class="wiz-arrow">→</div>
+          <div class="wiz-launch-step"><strong>② 開</strong> AI builder</div>
+          <div class="wiz-arrow">→</div>
+          <div class="wiz-launch-step"><strong>③ 貼入</strong> 等 AI 出 site</div>
+        </div>
+        <a class="wiz-go" id="wiz-go" href="#" target="_blank" rel="noopener">▸ 開 AI builder · 新分頁 →</a>
+      </div>
+
+      <!-- mini FAQ -->
+      <div class="ht-faq" style="margin-top: 40px;">
+        <div class="q"><strong>Q · 起完之後點交？</strong>AI builder 右上角會有「Publish / Share」掣．Copy 條 URL 回呢度，scroll 上頂個 hero，貼入「SITE LINK」就交咗。</div>
+        <div class="q"><strong>Q · 唔啱我意可以改嗎？</strong>可以．繼續喺 AI 度打「轉粉紅色」「加多個 emoji」── AI 即場改．</div>
+        <div class="q"><strong>Q · 真係免費？</strong>4 個工具免費版夠用．起一個 site 唔會 over 限額．</div>
+        <div class="q"><strong>Q · 我設計差，個 site 醜怪都得嗎？</strong>越騎呢、越素人、越易 viral．唔係比靚仔，係比熱情同創意。</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RULES BUTTON · 玩法 / FAQ → overlay -->
+  <section class="sec" id="rules">
+    <div class="rules-banner">
+      <div>
+        <h2>玩法．規則．FAQ</h2>
+        <div class="sub">▸ 簡單 3 件事 + 完整規則 + 8 條常問 ── 一份睇晒</div>
+      </div>
+      <button class="rules-open-btn" onclick="openRules()">▸ 開啟玩法 / FAQ</button>
+    </div>
+  </section>
+
+  <!-- Rules overlay (plain text feel) -->
+  <div class="rules-overlay" id="rules-overlay" onclick="if(event.target===this) closeRules()">
+    <div class="rules-modal">
+      <button class="rules-close" onclick="closeRules()" aria-label="Close">✕</button>
+      <div class="rules-modal-head">
+        <div class="rules-modal-tag">▸ TXT · 玩法 + FAQ · v1.0</div>
+        <h2>大快活 SITE 多士大對決<br>· 玩法 / FAQ</h2>
+      </div>
+      <pre class="rules-text">═══════════════════════════════════
+   玩法 (3 件事知 = 識玩)
+═══════════════════════════════════
+
+① 每人最多交 3 個 SITE · 揀一派
+   每個 email 最多 3 個 site．揀咗鴨蛋
+   就唔可以再交花生．唔可以兩面派．
+
+② 每日 6PM 計分 · 6 月 23 日公佈勝方
+   AI 過審 + 小編 approve．當日 6PM 上架，
+   戰況計分板即跳．06/22 11:59pm 截止．
+   06/23 中午公佈勝方．
+
+③ 邊派 SITE 多邊派贏
+   勝出派系全線西多即日 -30% × 7 日．
+   人人成功提交 + 過審即送 $10 大快活
+   App 西多券．大獎係全年免費西多．
+
+
+═══════════════════════════════════
+   ⚠ 唔可以
+═══════════════════════════════════
+
+   ▸ 粗口．政治敏感．人身攻擊
+   ▸ 競爭品牌名（大家樂、麥當勞、KFC 等）
+   ▸ 色情、暴力、血腥
+   ▸ 抄襲別人 site
+   ▸ 商業推廣（推自己生意）
+   ▸ 誤導性內容（假冒大快活官方）
+
+   AI + 小編會審 → 任何一樣即 reject．
+
+
+═══════════════════════════════════
+   獎品 (5 個 tier)
+═══════════════════════════════════
+
+   ★ 大獎：全年免費西多
+     每日 1 件 × 連續 365 日．兩派各 1 名．
+     由評審團評選．
+
+   ★ 學校 Top 1：500 件西多送到校
+     全校學生提交數加埋計．
+
+   ★ 學校 Top 1：HK$5,000 STEM 基金
+     用嚟買 AI 工具或辦 workshop．
+
+   ★ 勝出陣營：全線西多 -30% × 7 日
+     06/23 起即時生效．
+
+   ★ 人人成功提交：$10 大快活 App 西多券
+     大快活 App 一掃即用．30 日有效．
+
+
+═══════════════════════════════════
+   常見問題
+═══════════════════════════════════
+
+Q. 個 SITE 之後失效（被刪 / 免費版 expire）點算？
+A. 大快活系統每日自動 screenshot 你個 site
+   備份．如果 final 評審日 06/22 23:59
+   個 site 已經 down，會自動 disqualify．
+
+Q. iPhone / Android 都做到？
+A. 做到．電腦會易啲，但 mobile 完全得．
+   推薦嘅 AI builder 全部有 mobile UI．
+
+Q. 萬一花生派買大量假 email spam 點算？
+A. 每個 email 最多 3 個 site．系統偵測
+   IP / device pattern．異常 cluster 會
+   freeze 嗰陣營當日票數．
+
+Q. 我可以唔揀派，讚兩派？
+A. 唔可以．呢個 campaign 核心係陣營
+   對立．無清楚立場嘅 site reject．
+
+Q. $10 西多券有效期幾耐？
+A. 30 日．由你收到通知個日起計．
+   只限堂食或外賣選西多時用．
+
+Q. 大獎全年免費西多點執行？
+A. 簽同意書．每月初由大快活 App 自動
+   發 30 張西多券到你 account．連續
+   12 個月．每張 1 件西多任揀．
+
+Q. 大快活員工真係唔可以贏？
+A. 員工 + 同住嘅直系親屬都唔可以贏．
+   可以提交玩 + 計戰況，但 prize ineligible．
+
+Q. 學校 STEM 基金邊個簽收？
+A. 校長 / 副校長 / 電腦科主任 sign．
+   大快活直接 wire transfer 入學校
+   公數戶口．
+
+
+═══════════════════════════════════
+   查詢
+═══════════════════════════════════
+
+   一般 · sitedosi@fairwood.com.hk
+   學校 · school@fairwood.com.hk
+   WhatsApp · +852 6XXX XXXX
+
+
+───────── 完整 PDF 版本 ─────────
+
+   按下面個 link 開完整法律條款版規則：
+   ▸ <a href="完整比賽規則.html" target="_blank" style="color: var(--fairwood); text-decoration: underline;">完整比賽規則 (PDF)</a>
+
+
+─── 終 ───</pre>
+    </div>
+  </div>
+
+  <!-- SCHOOLS DASHBOARD · 重做 -->
+  <section class="sec" id="schools">
+    <div class="sec-row">
+      <div>
+        <h2>學界戰報</h2>
+        <div class="sub">▸ DAY 09 / 21 · 提交得最多嘅學校贏 500 件西多到校</div>
+      </div>
+      <div class="schools-stats">
+        <div class="ss-stat"><strong>108</strong><small>參賽學校</small></div>
+        <div class="ss-stat"><strong>286</strong><small>學生 sites</small></div>
+        <div class="ss-stat"><strong>+38</strong><small>今日新加</small></div>
+      </div>
+    </div>
+
+    <!-- Podium Top 3 -->
+    <div class="podium">
+      <div class="pod-card pos-2">
+        <div class="pod-medal">🥈</div>
+        <div class="pod-rank">02</div>
+        <div class="pod-name">嘉諾撒聖瑪利</div>
+        <div class="pod-tag">中環 · 中學</div>
+        <div class="pod-num">41</div>
+        <div class="pod-bar"><span style="width:85%"></span></div>
+        <div class="pod-delta">▴ +6 today</div>
+      </div>
+      <div class="pod-card pos-1">
+        <div class="pod-crown">👑</div>
+        <div class="pod-medal">🥇</div>
+        <div class="pod-rank">01</div>
+        <div class="pod-name">皇仁書院</div>
+        <div class="pod-tag">銅鑼灣 · 中學</div>
+        <div class="pod-num">48</div>
+        <div class="pod-bar"><span style="width:100%"></span></div>
+        <div class="pod-delta">▴ +9 today</div>
+      </div>
+      <div class="pod-card pos-3">
+        <div class="pod-medal">🥉</div>
+        <div class="pod-rank">03</div>
+        <div class="pod-name">香港中文大學</div>
+        <div class="pod-tag">沙田 · 大學</div>
+        <div class="pod-num">37</div>
+        <div class="pod-bar"><span style="width:77%"></span></div>
+        <div class="pod-delta">▴ +5 today</div>
+      </div>
+    </div>
+
+    <!-- Dashboard split: race chart + district map -->
+    <div class="schools-grid">
+
+      <!-- Bar race -->
+      <div class="sg-card">
+        <div class="sg-head">
+          <h4>▸ Top 10 · 今日排行</h4>
+          <span class="sg-tag mono">每日 18:00 跳動</span>
+        </div>
+        <div class="race">
+          <div class="race-row"><div class="rr-rank">04</div><div class="rr-name">浸會大學傳理</div><div class="rr-bar"><span style="width:71%; background: var(--fairwood);"></span><em>34</em></div></div>
+          <div class="race-row"><div class="rr-rank">05</div><div class="rr-name">理工大學設計學院</div><div class="rr-bar"><span style="width:60%; background: var(--fairwood);"></span><em>29</em></div></div>
+          <div class="race-row"><div class="rr-rank">06</div><div class="rr-name">城市大學商學院</div><div class="rr-bar"><span style="width:54%; background: var(--peanut-hot);"></span><em>26</em></div></div>
+          <div class="race-row"><div class="rr-rank">07</div><div class="rr-name">英華女學校</div><div class="rr-bar"><span style="width:46%; background: var(--fairwood);"></span><em>22</em></div></div>
+          <div class="race-row"><div class="rr-rank">08</div><div class="rr-name">聖保羅男女中學</div><div class="rr-bar"><span style="width:40%; background: var(--peanut-hot);"></span><em>19</em></div></div>
+          <div class="race-row"><div class="rr-rank">09</div><div class="rr-name">拔萃女書院</div><div class="rr-bar"><span style="width:33%; background: var(--fairwood);"></span><em>16</em></div></div>
+          <div class="race-row"><div class="rr-rank">10</div><div class="rr-name">香港大學社會科學</div><div class="rr-bar"><span style="width:29%; background: var(--peanut-hot);"></span><em>14</em></div></div>
+        </div>
+      </div>
+
+      <!-- District distribution -->
+      <div class="sg-card district-card">
+        <div class="sg-head">
+          <h4>▸ 18 區分佈</h4>
+          <span class="sg-tag mono">RT @ DAY 09</span>
+        </div>
+        <div class="district-stack">
+          <div class="dist-row" style="--w:78%"><span>中西區</span><span class="dist-bar"></span><strong>52</strong></div>
+          <div class="dist-row" style="--w:69%"><span>沙田</span><span class="dist-bar"></span><strong>46</strong></div>
+          <div class="dist-row" style="--w:58%"><span>九龍城</span><span class="dist-bar"></span><strong>39</strong></div>
+          <div class="dist-row" style="--w:48%"><span>觀塘</span><span class="dist-bar"></span><strong>32</strong></div>
+          <div class="dist-row" style="--w:42%"><span>葵青</span><span class="dist-bar"></span><strong>28</strong></div>
+          <div class="dist-row" style="--w:33%"><span>深水埗</span><span class="dist-bar"></span><strong>22</strong></div>
+          <div class="dist-row" style="--w:25%"><span>東區</span><span class="dist-bar"></span><strong>17</strong></div>
+          <div class="dist-row" style="--w:18%"><span>元朗</span><span class="dist-bar"></span><strong>12</strong></div>
+          <div class="dist-row" style="--w:12%"><span>其他 10 區</span><span class="dist-bar"></span><strong>38</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom strip: recent submissions stream + IG story preview -->
+    <div class="schools-bottom">
+      <div class="recent-stream">
+        <div class="sg-head">
+          <h4>▸ 最近 6 個學界提交</h4>
+          <span class="sg-tag mono"><span class="live-dot"></span>LIVE</span>
+        </div>
+        <div class="stream-list">
+          <div class="stream-row d"><div class="st-time">14:38</div><div class="st-school">皇仁書院 · F.5</div><div class="st-faction">🦆</div></div>
+          <div class="stream-row p"><div class="st-time">14:31</div><div class="st-school">嘉諾撒聖瑪利 · F.4</div><div class="st-faction">🥜</div></div>
+          <div class="stream-row p"><div class="st-time">14:22</div><div class="st-school">浸大傳理 · Y2</div><div class="st-faction">🥜</div></div>
+          <div class="stream-row d"><div class="st-time">14:15</div><div class="st-school">理大設計 · Y3</div><div class="st-faction">🦆</div></div>
+          <div class="stream-row p"><div class="st-time">14:09</div><div class="st-school">英華女學校 · F.6</div><div class="st-faction">🥜</div></div>
+          <div class="stream-row d"><div class="st-time">14:02</div><div class="st-school">聖保羅男女 · F.3</div><div class="st-faction">🦆</div></div>
+        </div>
+      </div>
+
+      <div class="story-card-wrap">
+        <div class="story-card">
+          <div class="day">📊 DAILY · DAY 09</div>
+          <h3>花生派<br>領先 +12！</h3>
+          <div class="stats">
+            <div class="row d"><span>🦆 鴨蛋</span><span class="n">470</span></div>
+            <div class="row p"><span>🥜 花生</span><span class="n">482</span></div>
+          </div>
+          <div class="punch">鴨蛋友<br>快啲行動 ⚠</div>
+        </div>
+        <div class="story-cap">↑ 每日 6PM 自動產生<br>小編一鍵 download 上 IG Story</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIZE SECTION (redesigned) -->
+  <section class="sec" id="prize">
+    <div class="sec-row">
+      <div>
+        <h2>獎品大放送</h2>
+        <div class="sub">▸ 參與都有獎 · 創意 Site 有大獎 · 學校都有大禮</div>
+      </div>
+    </div>
+
+    <!-- Grand Prize spotlight -->
+    <div class="grand-prize">
+      <div class="gp-ribbon">★ 大 獎 ★</div>
+      <div class="gp-content">
+        <div class="gp-lbl">最具創意 Site 獎 · GRAND PRIZE</div>
+        <h3 class="gp-title">
+          全年免費<br>
+          <span class="gp-hl">大快活西多士</span>
+        </h3>
+        <div class="gp-meta">
+          <span>▸ 每日 1 件．連續 365 日</span>
+          <span>▸ 兩派各設 1 名</span>
+          <span>▸ KOL 評審＋網民投票揀出</span>
+        </div>
+      </div>
+      <div class="gp-visual">
+        <div class="gp-num">365</div>
+        <div class="gp-num-lbl">件西多<br><small>365 DAYS · 全年無休</small></div>
+      </div>
+    </div>
+
+    <!-- Other prizes grid -->
+    <div class="prize-grid">
+      <div class="prize-card">
+        <div class="prize-tag">學界專屬</div>
+        <h4>至踴躍參與學校</h4>
+        <p>提交得最多 site 嘅學校 ── 大快活包起該校下午茶，<strong>送 500 件熱辣辣西多</strong> 上門慶祝。</p>
+        <div class="prize-stat">×500</div>
+      </div>
+
+      <div class="prize-card">
+        <div class="prize-tag">陣營勝出</div>
+        <h4>勝出陣營全線減價</h4>
+        <p>06 月 23 日宣佈勝方．當日起該派系全線西多<strong>限時 7 日特價</strong>．由全港網民推動 promo。</p>
+        <div class="prize-stat">-30%</div>
+      </div>
+
+      <div class="prize-card">
+        <div class="prize-tag">人人有份</div>
+        <h4>全民參與獎</h4>
+        <p>成功提交＋AI 過審＋小編 approve ── 即派<strong>大快活 App 西多券一張</strong>，落舖即用。</p>
+        <div class="prize-stat">$10</div>
+      </div>
+
+      <div class="prize-card">
+        <div class="prize-tag">STEM 教育</div>
+        <h4>學校 STEM 基金</h4>
+        <p>勝出學校＋創意學生所屬學校，各送 <strong>HK$5,000 STEM 基金</strong>．用嚟買 AI 工具或辦 workshop。</p>
+        <div class="prize-stat">$5K</div>
+      </div>
+    </div>
+
+    <div class="prize-footnote">
+      ▸ 所有獎品於 06 月 23 日揭曉勝方後一星期內公佈．得獎名單會發送至參賽者 email．實際領獎方式以大快活官方公佈為準。
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="ms-foot">
+    <div class="big">
+      你揀邊個<br>
+      <span class="y">S</span><span class="p">i</span><span class="y">t</span><span class="p">e</span>？
+    </div>
+    <div>
+      <div style="margin-bottom:8px;">SITE 多士 · A FAIRWOOD UGC CAMPAIGN · 2026</div>
+      <div>© FAIRWOOD FAST FOOD GROUP · ALL SITES SUBMITTED AND REVIEWED</div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-top" id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到頂部">↑</button>
+
+</div>
+
+<script>
+function scrollHL(dir){
+  const el = document.getElementById('hl-scroll');
+  if (!el) return;
+  el.scrollBy({ left: dir * 400, behavior: 'smooth' });
+}
+
+/* ============ Versus dual carousel ============ */
+const vsState = { duck: 0, peanut: 0 };
+function cycleVS(side, dir){
+  const stage = document.getElementById(side + '-stage');
+  if (!stage) return;
+  const cards = stage.querySelectorAll('.vs-card');
+  const total = cards.length;
+  vsState[side] = (vsState[side] + dir + total) % total;
+  cards.forEach((c, i) => c.classList.toggle('active', i === vsState[side]));
+  const idxEl = document.getElementById(side + '-idx');
+  if (idxEl) idxEl.textContent = vsState[side] + 1;
+}
+document.addEventListener('keydown', e => {
+  if (e.target.matches('input, textarea')) return;
+  if (e.key === 'ArrowLeft') cycleVS('duck', -1);
+  if (e.key === 'ArrowRight') cycleVS('duck', 1);
+});
+
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('back-top');
+  if (window.scrollY > 600) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+
+function openRules(){
+  document.getElementById('rules-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeRules(){
+  document.getElementById('rules-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeRules();
+});
+
+function copyPrompt(btn){
+  const text = btn.closest('.ht-prompt').querySelector('.body').innerText;
+  navigator.clipboard.writeText(text);
+  const orig = btn.innerHTML;
+  btn.innerHTML = '✓ COPIED';
+  setTimeout(()=> btn.innerHTML = orig, 1800);
+}
+
+/* ============ Wizard logic ============ */
+const wizState = { faction: null, reason: '', style: null, tool: null, toolUrl: null };
+
+const stylePrompts = {
+  y2k: '極 Y2K / GeoCities chaos 風：marquee、blink、彩虹漸變、visitor counter、emoji 過剩．配色螢光粉/黃/黑，字體 Comic Sans / VT323．越騎呢越好．',
+  hero: '超英漫畫風：粗黑邊框、震撼大字、爆炸特效、紅藍黃對比色、漫畫對話泡泡、動作線．感覺好似 Marvel 預告片．',
+  anime: '日漫風：柔和粉色、Q版插畫、櫻花元素、可愛字體、漸變柔光、剪刀手 emoji．食物拍得 kawaii 感．',
+  cha: '港式茶記紙菜牌風：紙黃底、印章紅、毛筆字、舊式餐牌排版、繁體中文、街坊感．',
+  minimal: '極簡 minimal design：黑白為主、大量留白、襯線字體、攝影級食物相、Awwwards 風格．',
+  random: 'AI 自由發揮 ── 揀一個會 viral 嘅創意風格，越意想不到越好．'
+};
+
+const factionContent = {
+  duck: {
+    name: '傳統鴨蛋派',
+    desc: '大快活經典「無餡鴨蛋西多」',
+    headline: '無餡先係正宗西多！',
+    points: ['鴨蛋蛋黃多，比雞蛋香', '煎 Pan 慢火唔索油', '加餡會掩蓋蛋香'],
+  },
+  peanut: {
+    name: '邪惡花生派',
+    desc: '大快活新推「花生醬流心西多」',
+    headline: '花生醬係靈魂！',
+    points: ['花生醬 + 鴨蛋香 = 終極組合', '流心爆漿口感無敵', '冇花生 = 多士，唔係西多'],
+  }
+};
+
+function wizUpdate(){
+  if (!wizState.faction || !wizState.style || !wizState.tool) {
+    document.getElementById('wiz-prompt').textContent = '▸ 完成上面 4 步，呢度會自動出 prompt ◂';
+    document.getElementById('wiz-output').classList.remove('ready');
+    return;
+  }
+  const f = factionContent[wizState.faction];
+  const styleDesc = stylePrompts[wizState.style];
+  const reason = wizState.reason.trim() || '我覺得呢個派最正！';
+
+  const prompt = `幫我用 AI 起一個 single-page landing page，撐大快活 ${f.desc}，
+參加緊「大快活 SITE 多士大對決」呢個 campaign。
+
+▸ Hero 大字標題：「${f.headline}」
+▸ 副題：我支持嘅理由 ──「${reason}」
+▸ 三個賣點 reason cards：
+   ① ${f.points[0]}
+   ② ${f.points[1]}
+   ③ ${f.points[2]}
+▸ Footer 大 CTA：「為${f.name}投一票！」link 到 https://sitedosi.fairwood.com.hk
+
+✦ 視覺風格：${styleDesc}
+✦ 內容用繁體中文
+✦ 一定要 mobile-friendly responsive
+✦ 唔好用任何競爭品牌名（大家樂、麥當勞等）
+✦ 唔好放任何粗口、政治、暴力內容
+
+起完之後，press「Publish」/「Share」，copy 條 URL 回大快活個 site：
+https://sitedosi.fairwood.com.hk → 貼入 SITE LINK 提交．完成！`;
+
+  document.getElementById('wiz-prompt').textContent = prompt;
+  document.getElementById('wiz-output').classList.add('ready');
+  const go = document.getElementById('wiz-go');
+  go.href = wizState.toolUrl;
+  go.innerHTML = `▸ 開 ${wizState.tool} 起 site → ❯`;
+}
+
+document.addEventListener('click', e => {
+  const opt = e.target.closest('.wiz-opt');
+  if (!opt) return;
+  const grp = opt.closest('.wiz-options');
+  if (!grp) return;
+  const key = grp.dataset.key;
+  grp.querySelectorAll('.wiz-opt').forEach(o => o.classList.remove('selected'));
+  opt.classList.add('selected');
+  wizState[key] = opt.dataset.val;
+  if (key === 'tool') {
+    wizState.tool = opt.querySelector('strong').textContent;
+    wizState.toolUrl = opt.dataset.url;
+  }
+  wizUpdate();
+});
+
+document.getElementById('wiz-reason')?.addEventListener('input', e => {
+  wizState.reason = e.target.value;
+  wizUpdate();
+});
+
+function copyWizPrompt(){
+  const text = document.getElementById('wiz-prompt').textContent;
+  navigator.clipboard.writeText(text);
+  const btn = document.querySelector('.wiz-copy');
+  const orig = btn.innerHTML;
+  btn.innerHTML = '✓ COPIED!';
+  setTimeout(()=> btn.innerHTML = orig, 1800);
+}
+
+function submitSite(e){
+  e.preventDefault();
+  const f = e.target;
+  // POST to GAS web app endpoint (placeholder URL — replace with real deployment)
+  // const GAS_URL = 'https://script.google.com/macros/s/AKfycb.../exec';
+  // fetch(GAS_URL, {method:'POST', body: new FormData(f)});
+  alert('🎉 提交成功！\n\nAI 分析緊你個 site...\n預計今日 6PM 前 review 完，6PM 上 Master Site。\n\n收到你嘅 confirm email 就掂！');
+  f.reset();
+  return false;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<title>大快活 SITE 多士大對決 · 完整比賽規則</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+HK:wght@500;700;900&family=Noto+Sans+HK:wght@400;500;700&display=swap');
+
+body{
+  font-family: "Noto Serif HK", serif;
+  background: #fff; color: #1a1410;
+  max-width: 780px; margin: 0 auto; padding: 60px 56px 80px;
+  line-height: 1.7; font-size: 14pt;
+}
+
+.header{
+  border-bottom: 3px solid #1a1410; padding-bottom: 24px; margin-bottom: 32px;
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+.header .left h1{
+  font-family: "Noto Serif HK", serif; font-weight: 900;
+  font-size: 32pt; line-height: 1; margin: 0 0 12px;
+  letter-spacing: -.02em;
+}
+.header .left .sub{ font-size: 12pt; color: #666;}
+.header .right{ text-align: right; font-size: 10pt; color: #666; font-family: "Noto Sans HK", sans-serif;}
+.header .right strong{ color: #1a1410; display: block; font-size: 11pt;}
+
+.toc{
+  background: #f5ecd9; border-left: 4px solid #f08a00;
+  padding: 18px 24px; margin-bottom: 40px;
+  font-family: "Noto Sans HK", sans-serif; font-size: 11pt;
+}
+.toc strong{ display: block; margin-bottom: 8px; font-family: "Noto Serif HK", serif; font-size: 13pt;}
+.toc ol{ margin: 0; padding-left: 20px; line-height: 1.9;}
+
+h2{
+  font-family: "Noto Serif HK", serif; font-weight: 900;
+  font-size: 20pt; line-height: 1.15; letter-spacing: -.01em;
+  margin: 40px 0 14px;
+  padding-bottom: 8px; border-bottom: 2px solid #1a1410;
+}
+h2 .num{ color: #f08a00; margin-right: 14px;}
+
+h3{
+  font-family: "Noto Serif HK", serif; font-weight: 700;
+  font-size: 14pt; margin: 24px 0 10px; line-height: 1.3;
+}
+
+p{ margin: 8px 0 12px; font-size: 12pt;}
+p strong{ background: linear-gradient(transparent 70%, rgba(240,138,0,.35) 70% 92%, transparent 92%); padding: 0 4px;}
+
+ul, ol{ padding-left: 28px; font-size: 12pt;}
+ul li, ol li{ margin: 6px 0;}
+ul li strong, ol li strong{ background: linear-gradient(transparent 70%, rgba(240,138,0,.3) 70% 92%, transparent 92%); padding: 0 3px;}
+
+.info-box{
+  background: #f5ecd9; border: 1.5px solid #1a1410;
+  padding: 16px 22px; margin: 16px 0;
+  font-size: 11pt;
+}
+.info-box.warn{ background: #fbeae8; border-color: #b8362a;}
+.info-box.warn strong{ color: #b8362a;}
+.info-box.prize{ background: #fff4d6; border-color: #c46d00;}
+.info-box.prize strong{ color: #c46d00;}
+
+.timeline-table{
+  width: 100%; border-collapse: collapse;
+  margin: 18px 0; font-size: 11pt;
+  border: 1.5px solid #1a1410;
+}
+.timeline-table th, .timeline-table td{
+  padding: 10px 14px; border-bottom: 1px solid #ccc; text-align: left;
+}
+.timeline-table th{
+  background: #1a1410; color: #fff;
+  font-family: "Noto Sans HK", sans-serif; font-weight: 700; font-size: 10pt;
+  letter-spacing: .08em;
+}
+.timeline-table td:first-child{
+  font-family: "Noto Sans HK", sans-serif; font-weight: 700; color: #c46d00;
+  white-space: nowrap; width: 140px;
+}
+.timeline-table tr.highlight td{ background: #fff4d6; font-weight: 600;}
+
+.scoring-table{ width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 11pt;}
+.scoring-table th{ background: #f08a00; color: #1a1410; padding: 10px 12px; text-align: left; font-family: "Noto Sans HK", sans-serif;}
+.scoring-table td{ padding: 10px 12px; border-bottom: 1px solid #ddd;}
+.scoring-table td:nth-child(2){ font-weight: 700; color: #c46d00; width: 80px;}
+
+.prize-stack{ display: grid; grid-template-columns: 1fr; gap: 12px; margin: 14px 0;}
+.prize-row{
+  display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center;
+  border: 1.5px solid #1a1410; padding: 14px 18px;
+}
+.prize-row.grand{ background: #1a1410; color: #fff; border: none; padding: 18px 22px;}
+.prize-row.grand strong{ color: #f08a00; background: none; padding: 0;}
+.prize-row .badge{
+  background: #f08a00; color: #1a1410; padding: 4px 10px;
+  font-family: "Noto Sans HK", sans-serif; font-weight: 700; font-size: 10pt;
+  white-space: nowrap;
+}
+.prize-row.grand .badge{ background: #f08a00; color: #1a1410;}
+.prize-row .title{ font-weight: 700; font-size: 12pt;}
+.prize-row .desc{ font-size: 10pt; color: #666; margin-top: 2px;}
+.prize-row.grand .desc{ color: #ccc;}
+.prize-row .value{
+  font-family: "Noto Serif HK", serif; font-weight: 900;
+  font-size: 18pt; color: #c46d00; white-space: nowrap;
+}
+.prize-row.grand .value{ color: #f08a00;}
+
+.faq dl{ margin: 14px 0;}
+.faq dt{
+  font-family: "Noto Serif HK", serif; font-weight: 700;
+  font-size: 12pt; margin: 18px 0 4px;
+}
+.faq dt::before{ content: "Q. "; color: #c46d00; font-weight: 900;}
+.faq dd{ margin: 0 0 14px 24px; font-size: 11pt; color: #444; line-height: 1.65;}
+
+.footer-notes{
+  margin-top: 60px; padding-top: 28px; border-top: 2px solid #1a1410;
+  font-size: 10pt; color: #666;
+  font-family: "Noto Sans HK", sans-serif; line-height: 1.7;
+}
+.footer-notes strong{ color: #1a1410;}
+
+.signoff{
+  margin-top: 32px; padding-top: 24px;
+  text-align: center; font-family: "Noto Serif HK", serif;
+  font-style: italic; color: #666; font-size: 11pt;
+}
+
+@media print {
+  body{ padding: 32mm 25mm; font-size: 11pt; max-width: none;}
+  @page{ size: A4; margin: 0;}
+  h2{ break-before: avoid; break-after: avoid;}
+  .info-box, .prize-row, .timeline-table{ break-inside: avoid;}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="left">
+    <h1>大快活 SITE 多士大對決</h1>
+    <div class="sub">完整比賽規則 · OFFICIAL RULES BOOK</div>
+  </div>
+  <div class="right">
+    <strong>Version 1.0</strong>
+    May 2026<br>
+    Campaign: 02·06·2026 → 23·06·2026<br>
+    sitedosi.fairwood.com.hk
+  </div>
+</header>
+
+<div class="toc">
+  <strong>目錄 · CONTENTS</strong>
+  <ol>
+    <li>比賽概覽</li>
+    <li>時間表</li>
+    <li>參賽資格</li>
+    <li>提交流程</li>
+    <li>Site 內容要求</li>
+    <li>不可接受嘅內容</li>
+    <li>評分準則</li>
+    <li>獎品列表</li>
+    <li>學界組特殊條款</li>
+    <li>免責聲明 / 法律條款</li>
+    <li>常見問題</li>
+  </ol>
+</div>
+
+<h2><span class="num">01</span>比賽概覽</h2>
+<p>
+  「大快活 SITE 多士大對決」係大快活快餐有限公司於 2026 年 6 月舉辦嘅<strong>用戶生成內容 (UGC) 對戰式市場推廣活動</strong>。
+  參賽者用任何 AI 網頁建站工具，起一個 landing page，撐自己揀嘅西多陣營（傳統鴨蛋派 OR 邪惡花生派），
+  每日 18:00 戰況計分板更新，21 日後 Site 數較多嘅一派勝出。
+</p>
+
+<div class="info-box">
+  <strong>核心遊戲機制：</strong>
+  邊一派收到嘅合資格 Site 多，邊一派勝。勝出陣營對應嘅西多會喺勝出當日起 7 日內全線減價 30%，
+  由全港網民共同推動 promo。
+</div>
+
+<h2><span class="num">02</span>時間表</h2>
+
+<table class="timeline-table">
+  <thead><tr><th>日期</th><th>階段</th><th>內容</th></tr></thead>
+  <tbody>
+    <tr><td>05/26 → 06/01</td><td>預熱期</td><td>大快活官方教學片發放 · KOL 預備 sample site · 學校收到邀請函</td></tr>
+    <tr class="highlight"><td>06/02 (Mon)</td><td>★ Day 1 開戰</td><td>Master Site 上線 · 戰況計分板開始跳 · 40 個 seeded site LIVE · 6 位 KOL 同步 drop site</td></tr>
+    <tr><td>06/02 → 06/22</td><td>21 日大戰</td><td>每日 18:00 update · AI 過審 + 小編 approve · 新 site 上架 · IG Story 出戰況卡</td></tr>
+    <tr><td>06/22 23:59</td><td>截止提交</td><td>最後一日 11:59pm 截止</td></tr>
+    <tr><td>06/23 00:00 → 12:00</td><td>Final 評審</td><td>評審團 final scoring · 雙重 AI 檢查所有 site 仍然 live · 防 last-minute 作假</td></tr>
+    <tr class="highlight"><td>06/23 12:00</td><td>★ 公佈勝方</td><td>大快活 IG / FB 官宣 · 即日勝出派系全線西多減價生效 · 得獎名單同日發送至參賽 email</td></tr>
+    <tr><td>06/23 → 06/30</td><td>領獎期</td><td>$10 西多券發送至大快活 App · 大獎得主收 detailed claim instruction</td></tr>
+  </tbody>
+</table>
+
+<h2><span class="num">03</span>參賽資格</h2>
+<ul>
+  <li><strong>地區：</strong>所有持有香港居民身份證 / 學生簽證嘅人士均可參加</li>
+  <li><strong>年齡：</strong>無限制．未滿 18 歲嘅參賽者領獎時需要家長 / 監護人同意</li>
+  <li><strong>每人提交數量：</strong>每個 email 地址<strong>最多提交 3 個 site</strong>．多於 3 個會自動只計頭 3 個</li>
+  <li><strong>陣營限制：</strong>每個 email 地址只可選擇<strong>一個陣營</strong>（鴨蛋 OR 花生），三個 site 都必須撐同一派．唔可以兩面派</li>
+  <li><strong>學界組額外資格：</strong>必須係香港中學 / 大專學生，用 .edu.hk 域名 email 提交 OR 提供學生證明</li>
+  <li><strong>大快活員工 + agency 員工 + 直系親屬：</strong>可以提交 site 玩，但無資格獲得任何獎品</li>
+</ul>
+
+<h2><span class="num">04</span>提交流程</h2>
+<ol>
+  <li>用任何 AI 建站工具起好 site（推薦：Lovable / Claude / v0 / Bolt．完全免費）</li>
+  <li>確保個 site 喺<strong>公開 URL</strong> live 住，外人 click 入去睇到</li>
+  <li>去 <strong>sitedosi.fairwood.com.hk</strong>，scroll 到「我要交 Site」 section</li>
+  <li>揀派系 → 貼 URL → 填 email → 填學校 (optional)</li>
+  <li>提交．AI 1 分鐘 scan，小編 18:00 前 final approve</li>
+  <li>當日 18:00 上架．收 email 通知 + 大快活 App $10 西多券</li>
+</ol>
+
+<div class="info-box">
+  <strong>Tip：</strong>提交後可以 follow up 修改 site，但係<strong>原 URL 必須保持有效到 06/22 23:59</strong>．如果原 URL 失效，會自動 disqualify．
+</div>
+
+<h2><span class="num">05</span>Site 內容要求</h2>
+<ul>
+  <li><strong>原創：</strong>必須係為今次 campaign 新整嘅 site，唔可以 reuse 舊作（domain &gt;6 個月前 first crawled 嘅會 flag review）</li>
+  <li><strong>立場清晰：</strong>必須明顯撐鴨蛋派 OR 撐花生派．無立場 / 兩面派 = reject</li>
+  <li><strong>語言：</strong>繁體中文 / 簡體中文 / 英文 / 廣東話拼音 均可．Mix 都得</li>
+  <li><strong>長度：</strong>最少要有 hero 大字 + 一段 manifesto + 至少 2 個 supporting points．純圖 / 純空白 site = reject</li>
+  <li><strong>Responsive：</strong>必須 mobile-friendly．用 phone 開都要正常 render</li>
+  <li><strong>Loading：</strong>3G 速度下 5 秒內 load 到．過慢 / hang 機 = reject</li>
+  <li><strong>無第三方追蹤：</strong>唔好擺 Google Analytics 或廣告 script．我哋只 trace 純展示內容</li>
+</ul>
+
+<h2><span class="num">06</span>不可接受嘅內容</h2>
+<div class="info-box warn">
+  <strong>以下內容會即時 reject，不退回，亦取消該 email 嘅所有資格：</strong>
+</div>
+<ul>
+  <li>粗口、攻擊性語言、人身攻擊任何個人 / 群體</li>
+  <li>政治敏感言論 / 仇恨言論 / 歧視性內容</li>
+  <li>競爭對手品牌名（包括但不限於：大家樂、麥當勞、肯德基、Pizza Hut、譚仔、KFC、Burger King 等）</li>
+  <li>色情、裸露、暴力、血腥內容</li>
+  <li>抄襲別人嘅 site（AI 會 compare 視覺 hash + 文字 similarity）</li>
+  <li>商業推廣 ── 唔可以 promote 自己嘅生意 / 個人服務</li>
+  <li>誤導性聲稱（例如假冒大快活官方聲明）</li>
+  <li>侵犯第三方版權嘅圖片、字體、音樂</li>
+  <li>邀請或鼓勵其他人作弊 / spam</li>
+</ul>
+
+<h2><span class="num">07</span>評分準則</h2>
+
+<table class="scoring-table">
+  <thead><tr><th>評分項目</th><th>比重</th><th>評審重點</th></tr></thead>
+  <tbody>
+    <tr><td>創意</td><td>40%</td><td>出乎意料、有諗法、唔重覆別人嘅 site</td></tr>
+    <tr><td>熱情</td><td>30%</td><td>真摰、有個人 personality、字裡行間感受到撐</td></tr>
+    <tr><td>視覺</td><td>20%</td><td>視覺執行、配色、layout．騎呢有 charm 都加分</td></tr>
+    <tr><td>傳播力</td><td>10%</td><td>易 share、易 meme、易引發討論</td></tr>
+  </tbody>
+</table>
+
+<h3>評審團組成</h3>
+<ul>
+  <li>3 位 HK Foodie / 創意 KOL（35% weighting）</li>
+  <li>大快活 marketing team（35% weighting）</li>
+  <li>公眾投票（30% weighting，每個 IP 一票，最後 7 日 open）</li>
+</ul>
+
+<h2><span class="num">08</span>獎品列表</h2>
+
+<div class="prize-stack">
+
+  <div class="prize-row grand">
+    <span class="badge">★ 大 獎</span>
+    <div>
+      <div class="title">最具創意 Site 獎 · 全年免費大快活西多</div>
+      <div class="desc">兩派各 1 名 · 每日 1 件 · 連續 365 日 · 由評審團評選</div>
+    </div>
+    <div class="value">×365</div>
+  </div>
+
+  <div class="prize-row">
+    <span class="badge">學校</span>
+    <div>
+      <div class="title">至踴躍參與學校獎</div>
+      <div class="desc">學校所有提交 site 嘅學生加埋計 · 全校送 500 件西多到校</div>
+    </div>
+    <div class="value">×500</div>
+  </div>
+
+  <div class="prize-row">
+    <span class="badge">學校</span>
+    <div>
+      <div class="title">STEM 學校基金</div>
+      <div class="desc">勝出學校 + 創意大獎學生所屬學校各送 HK$5,000 · 買 AI 工具年費或辦 workshop</div>
+    </div>
+    <div class="value">$5K</div>
+  </div>
+
+  <div class="prize-row">
+    <span class="badge">陣營</span>
+    <div>
+      <div class="title">勝出陣營全線減價</div>
+      <div class="desc">06/23 起該派系西多全線 -30% · 7 日內有效 · 由全港網民推動嘅 promo</div>
+    </div>
+    <div class="value">-30%</div>
+  </div>
+
+  <div class="prize-row">
+    <span class="badge">人人</span>
+    <div>
+      <div class="title">全民參與獎 · $10 西多券</div>
+      <div class="desc">每個成功提交 + AI 過審 + 小編 approve = 大快活 App $10 西多券（30 日有效）</div>
+    </div>
+    <div class="value">$10</div>
+  </div>
+
+</div>
+
+<div class="info-box prize">
+  <strong>領獎方式：</strong>得獎名單會發送至參賽者提交時填寫嘅 email 地址．$10 券即時掛到大快活 App．
+  大獎得主需簽署同意書 + 提供身份證明文件．未滿 18 歲嘅得主需家長 / 監護人同行領獎．
+</div>
+
+<h2><span class="num">09</span>學界組特殊條款</h2>
+<ul>
+  <li><strong>學校 verify：</strong>用 .edu.hk email 自動 verify．用其他 email 但填學校名 ── 抽樣由 marketing team 致電學校確認</li>
+  <li><strong>學界 ranking：</strong>所有學生 site 加埋計算 → 排出 Top 20 學校</li>
+  <li><strong>STEM 基金用途限制：</strong>必須用嚟買 AI 工具 / STEM 軟件年費 / 辦 workshop / 買 STEM 教材．唔可以用嚟出 cash 畀老師 / 學生</li>
+  <li><strong>學校老師有疑問：</strong>可加 WhatsApp 老師群組 +852 6XXX XXXX 即時問</li>
+</ul>
+
+<h2><span class="num">10</span>免責聲明 / 法律條款</h2>
+<ul>
+  <li>大快活快餐有限公司有權喺任何時候<strong>修改、暫停或終止</strong>本活動，毋須事先通知．如有任何爭議，大快活快餐有限公司保留<strong>最終決定權</strong></li>
+  <li>所有提交內容嘅版權歸參賽者所有，但參賽者授權大快活喺<strong>任何 marketing material</strong>（IG、FB、廣告、未來 campaign）展示或引用嘅權利</li>
+  <li>大快活對提交 site 上嘅內容唔負法律責任．如收到侵權投訴會即時下架</li>
+  <li>大快活有權喺發現作弊（多 email 投票、bot spam、抄襲）時取消參賽者資格，並追回已發放嘅獎品</li>
+  <li>未經獨立廣告審查機構認可，未滿 18 歲嘅參賽者個人資料只用於本 campaign，campaign 完結後 90 日內銷毀</li>
+  <li>所有獎品<strong>不可轉讓、不可兌換現金</strong>．西多券淨係喺大快活 App 用</li>
+</ul>
+
+<h2><span class="num">11</span>常見問題</h2>
+<div class="faq">
+  <dl>
+    <dt>個 site 之後失效（被刪 / Lovable 免費版 expire）點算？</dt>
+    <dd>大快活系統每日自動 screenshot 你個 site 備份．如果 final 評審日（06/22 23:59）你個 site 已經 down，會自動 disqualify（避免比賽完之後再 enable 嘅作假行為）．</dd>
+
+    <dt>iPhone / Android 做唔做到？</dt>
+    <dd>做到．推薦電腦會易啲，但 mobile 完全做到．4 個推薦 AI builder 都有 mobile UI．</dd>
+
+    <dt>萬一花生派買大量假 email spam 點算？</dt>
+    <dd>每個 email 最多 3 個 site．系統偵測 IP / device fingerprint．異常 cluster freeze 該陣營當日票數．</dd>
+
+    <dt>我可以唔揀派系，讚兩派？</dt>
+    <dd>唔可以．呢個 campaign 核心係陣營對立．無清楚立場嘅 site reject．</dd>
+
+    <dt>$10 西多券有效期幾耐？</dt>
+    <dd>30 日，由你收到通知個日起計．只限堂食或外賣選西多時用．</dd>
+
+    <dt>創意大獎全年免費西多嘅執行細節？</dt>
+    <dd>得獎後簽同意書．每月初由大快活 App 自動發 30 張西多券到你 account．連續 12 個月．每張券 1 件西多任揀（無口味限制）．365 日內任何時間落舖用．</dd>
+
+    <dt>大快活員工真係唔可以贏？</dt>
+    <dd>員工同 agency 同住嘅直系親屬都唔可以贏．員工可以提交 site 玩 + 計戰況，但 prize ineligible．</dd>
+
+    <dt>學校 STEM 基金邊個簽收？</dt>
+    <dd>校長 / 副校長 / 電腦科主任 sign．大快活直接 wire transfer 入學校公數戶口．需要學校提供 invoice + receipt for STEM expense audit．</dd>
+  </dl>
+</div>
+
+<div class="footer-notes">
+  <strong>查詢：</strong><br>
+  Campaign Manager · sitedosi@fairwood.com.hk<br>
+  學校查詢 · school@fairwood.com.hk · WhatsApp +852 6XXX XXXX<br><br>
+  © 2026 大快活快餐有限公司 (Fairwood Fast Food Limited) · 版權所有<br>
+  此份規則文件為大快活「SITE 多士大對決」之官方版本．如中英文有任何不一致，以中文版本為準．
+</div>
+
+<div class="signoff">
+  ─── 終 ───
+</div>
+
+</body>
+</html>

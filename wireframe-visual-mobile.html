@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SITE 多士大對決 · Mobile · 大快活</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ============================================================
+   MOBILE FIRST — 414px-ish width
+   Single iframe view · 50/50 tabs · stacked sections
+============================================================ */
+
+:root{
+  --font-serif: "Noto Serif HK", "Source Han Serif HK", "PingFang HK", "Hiragino Mincho ProN", "Songti TC", "Microsoft JhengHei", serif;
+  --font-sans:  "Noto Sans HK", "PingFang HK", "PingFang TC", "Hiragino Sans CNS3", "Microsoft JhengHei", -apple-system, sans-serif;
+  --font-mono:  "DM Mono", "Menlo", "Consolas", ui-monospace, monospace;
+}
+
+*{ box-sizing: border-box; }
+html, body{
+  margin: 0; padding: 0;
+  background: var(--ink); color: var(--paper);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img{ display: block; max-width: 100%; }
+a, button{ font: inherit; color: inherit; }
+button{ background: none; border: 0; cursor: pointer; }
+
+body::after{
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 2;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .18 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: .35; mix-blend-mode: overlay;
+}
+.shell{ position: relative; z-index: 3; }
+
+/* ============ TOPBAR (mobile) ============ */
+.topbar{
+  position: sticky; top: 0; z-index: 90;
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 10px 14px;
+  height: 56px;
+  background: rgba(10,7,5,.92);
+  backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid rgba(245,236,217,.1);
+  color: var(--paper);
+  box-shadow: 0 6px 20px rgba(0,0,0,.4);
+}
+.tb-brand{ display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+.tb-brand .site{
+  display: inline-block;
+  background: var(--fairwood); color: var(--ink);
+  padding: 3px 8px; border-radius: 4px;
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: 16px; letter-spacing: .04em; line-height: 1;
+  transform: rotate(-3deg);
+  box-shadow: 0 3px 0 rgba(196,109,0,.65);
+}
+.tb-brand .cn{
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: 18px; letter-spacing: -.015em; line-height: 1;
+  color: var(--paper);
+}
+.tb-cta{
+  background: var(--fairwood); color: var(--ink);
+  padding: 8px 14px; border-radius: 999px;
+  font-family: var(--font-serif); font-weight: 900; font-size: 12px;
+  box-shadow: 0 4px 14px rgba(240,138,0,.45);
+}
+
+/* ============ LIVE STRIP — under topbar ============ */
+.live-strip{
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 8px 14px;
+  background: rgba(245,236,217,.04);
+  border-bottom: 1px solid rgba(245,236,217,.06);
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .18em;
+  color: rgba(245,236,217,.7);
+}
+.live-strip .left{ display: inline-flex; align-items: center; gap: 6px; }
+.live-strip .left::before{
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--peanut-lime); box-shadow: 0 0 8px var(--peanut-lime);
+  animation: livePulse 1.4s infinite;
+}
+@keyframes livePulse{ 50%{ opacity: .35; } }
+
+/* ============ BATTLE ============ */
+.battle{
+  position: relative;
+  padding: 14px 14px 24px;
+  background:
+    radial-gradient(500px 400px at 20% 20%, rgba(240,138,0,.16), transparent 60%),
+    radial-gradient(500px 400px at 80% 80%, rgba(196,102,31,.18), transparent 60%),
+    var(--ink);
+}
+
+/* tabs row — 50/50 */
+.btab-row{
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.btab{
+  position: relative;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(245,236,217,.05);
+  border: 1.5px solid rgba(245,236,217,.12);
+  display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: center;
+  text-align: left;
+  transition: all .25s;
+  cursor: pointer;
+}
+.btab .em{
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--ink); border: 1.5px solid rgba(245,236,217,.2);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.btab.duck .em{ border-color: var(--fairwood); color: var(--fairwood); }
+.btab.peanut .em{ border-color: var(--fairwood-light); color: var(--fairwood-light); }
+.btab .info{ display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.btab .info .lbl{
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: .18em;
+  color: rgba(245,236,217,.6);
+}
+.btab .info .n{
+  font-family: var(--font-serif); font-weight: 900; font-size: 26px;
+  letter-spacing: -.04em; line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--paper);
+}
+.btab.duck .info .n{ color: var(--fairwood); }
+.btab.peanut .info .n{ color: var(--fairwood-light); }
+.btab .info .n small{
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: .15em;
+  color: var(--peanut-lime); font-weight: 700; margin-left: 4px;
+}
+/* active tab — strong border + glow */
+.battle.active-duck .btab.duck,
+.battle.active-peanut .btab.peanut{
+  background: rgba(240,138,0,.18);
+  border-color: var(--fairwood);
+  box-shadow: 0 6px 22px rgba(240,138,0,.4);
+}
+.battle.active-peanut .btab.peanut{
+  background: rgba(196,102,31,.22);
+  border-color: var(--fairwood-light);
+  box-shadow: 0 6px 22px rgba(196,102,31,.4);
+}
+
+/* iframe frame */
+.btl-frame{
+  position: relative;
+  border-radius: 14px; overflow: hidden;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 0 18px 40px rgba(0,0,0,.4);
+  aspect-ratio: 3 / 4;     /* mobile preview shape */
+  max-height: 60vh;
+}
+.btl-frame iframe{
+  position: absolute; top: 0; left: 0;
+  width: 1280px; height: 1280px;
+  border: 0; display: block;
+  pointer-events: none;
+  transform: scale(.32);
+  transform-origin: 0 0;
+}
+@media (min-width: 420px){
+  .btl-frame iframe{ transform: scale(.35); }
+}
+
+.btl-corner-tag{
+  position: absolute; top: 8px; left: 8px; z-index: 3;
+  background: var(--ink); color: var(--peanut-lime);
+  padding: 4px 9px; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: .2em;
+}
+.btl-corner-stamp{
+  position: absolute; top: 8px; right: 8px; z-index: 3;
+  background: rgba(245,236,217,.94); border: 1.5px solid var(--stamp); color: var(--stamp);
+  padding: 4px 10px; border-radius: 999px;
+  font-family: "Reggae One", serif; font-size: 11px;
+  transform: rotate(-4deg);
+}
+.btl-frame .open-tap{
+  position: absolute; bottom: 10px; right: 10px; z-index: 4;
+  background: var(--ink); color: var(--paper);
+  padding: 8px 14px; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .15em; font-weight: 700;
+  text-decoration: none;
+  border: 1px solid rgba(245,236,217,.2);
+}
+
+/* meta + controls */
+.btl-meta{
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: rgba(245,236,217,.04);
+  border-radius: 14px;
+  border: 1px solid rgba(245,236,217,.08);
+}
+.btl-meta .title{
+  font-family: var(--font-serif); font-weight: 900; font-size: 18px;
+  line-height: 1.15; color: var(--paper); letter-spacing: -.02em;
+}
+.btl-meta .who{
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em;
+  color: rgba(245,236,217,.55); margin-top: 4px;
+}
+.btl-meta .who strong{ color: var(--fairwood); }
+
+.btl-controls{
+  margin-top: 10px;
+  display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center;
+}
+.btl-arr{
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(245,236,217,.08); border: 1px solid rgba(245,236,217,.18);
+  color: var(--paper);
+  font-family: var(--font-serif); font-weight: 900; font-size: 18px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.btl-count{
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em;
+  color: rgba(245,236,217,.6); text-align: center;
+}
+.btl-count b{ color: var(--fairwood); font-weight: 700; }
+.btl-vote{
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--fairwood); color: var(--ink);
+  padding: 10px 16px; border-radius: 999px;
+  font-family: var(--font-serif); font-weight: 900; font-size: 13px;
+  box-shadow: 0 6px 18px rgba(240,138,0,.45);
+}
+
+/* full-width SWAP CTA */
+.btl-swap{
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  width: 100%; margin-top: 14px;
+  padding: 16px;
+  background: var(--ink); color: var(--paper);
+  border: 2px dashed rgba(245,236,217,.25);
+  border-radius: 14px;
+  font-family: var(--font-serif); font-weight: 900; font-size: 16px;
+  cursor: pointer;
+}
+.btl-swap .arr{
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--fairwood); color: var(--ink);
+  font-size: 14px;
+}
+
+/* ============ SECTION HEADER ============ */
+.sec{
+  padding: 56px 18px;
+  border-top: 1px solid rgba(245,236,217,.08);
+}
+.sec-head{ margin-bottom: 28px; }
+.sec-head .num{
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .22em;
+  color: var(--fairwood); margin-bottom: 10px;
+}
+.sec-head .num::before{ content: ""; width: 22px; height: 2px; background: var(--fairwood); }
+.sec-head h2{
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: 36px; line-height: .9; letter-spacing: -.03em; margin: 0;
+}
+.sec-head h2 .o{ color: var(--fairwood); }
+.sec-head h2 .hl{
+  display: inline-block; background: var(--fairwood); color: var(--ink);
+  padding: 0 .15em; border-radius: 6px;
+}
+.sec-head .side{
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 14px; line-height: 1.5; color: rgba(245,236,217,.65);
+  margin-top: 14px;
+}
+.sec-head .side strong{ color: var(--peanut-lime); font-style: normal; font-weight: 700; }
+
+/* ============ HOWTO ============ */
+.howto-list{ display: flex; flex-direction: column; gap: 10px; }
+.htc{
+  position: relative;
+  padding: 18px 16px 16px 56px;
+  border-radius: 14px;
+  background: rgba(245,236,217,.04);
+  border: 1px solid rgba(245,236,217,.1);
+}
+.htc.final{ background: var(--fairwood); color: var(--ink); border-color: var(--fairwood); }
+.htc::before{
+  content: attr(data-n);
+  position: absolute; left: 14px; top: 14px;
+  font-family: var(--font-serif); font-weight: 900; font-size: 28px;
+  line-height: 1; color: var(--fairwood);
+}
+.htc.final::before{ color: var(--ink); }
+.htc h3{
+  font-family: var(--font-serif); font-weight: 900; font-size: 20px; margin: 0 0 4px;
+  letter-spacing: -.02em;
+}
+.htc .cap{
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em;
+  line-height: 1.6; color: rgba(245,236,217,.6);
+}
+.htc.final .cap{ color: rgba(26,20,16,.7); }
+.htc .cap strong{ color: var(--peanut-lime); }
+.htc.final .cap strong{ color: var(--ink); background: rgba(0,0,0,.1); padding: 0 4px; border-radius: 3px; }
+
+/* ============ SUBMIT ============ */
+.submit{
+  background: linear-gradient(135deg, var(--fairwood-light) 0%, var(--fairwood) 50%, var(--fairwood-deep) 100%);
+  border-radius: 18px;
+  padding: 24px 20px;
+  color: var(--ink);
+}
+.submit h2{
+  font-family: var(--font-serif); font-weight: 900; font-size: 32px;
+  line-height: .92; letter-spacing: -.03em; margin: 0 0 10px;
+}
+.submit p{ font-size: 14px; line-height: 1.5; margin: 0 0 20px; }
+.submit .row{ display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.submit label{
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .18em;
+  font-weight: 700; color: rgba(26,20,16,.65);
+}
+.submit .fac{ display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.submit .fac button{
+  padding: 12px;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  border-radius: 12px;
+  font-family: var(--font-serif); font-weight: 900; font-size: 14px;
+}
+.submit .fac button.active.duck{
+  background: var(--ink); color: var(--fairwood);
+}
+.submit .fac button.active.peanut{
+  background: var(--peanut-hot); color: var(--paper); border-color: var(--peanut-hot);
+}
+.submit input{
+  width: 100%; padding: 12px 14px; border-radius: 10px;
+  border: 1.5px solid var(--ink); background: rgba(255,255,255,.5);
+  font-family: var(--font-mono); font-size: 13px; color: var(--ink);
+}
+.submit input:focus{ outline: 2px solid var(--ink); }
+.submit .submit-btn{
+  width: 100%; margin-top: 6px;
+  padding: 16px; border-radius: 999px;
+  background: var(--ink); color: var(--fairwood);
+  font-family: var(--font-serif); font-weight: 900; font-size: 15px;
+  border: 2px solid var(--ink);
+  box-shadow: 0 8px 22px rgba(0,0,0,.3);
+}
+
+/* ============ BENTO (2 col on mobile) ============ */
+.bento{
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.bn{
+  position: relative;
+  padding: 18px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(245,236,217,.1);
+  min-height: 140px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  text-decoration: none;
+  overflow: hidden;
+}
+.bn .cat{
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: .2em;
+}
+.bn h3{
+  font-family: var(--font-serif); font-weight: 900; line-height: .92;
+  letter-spacing: -.02em; margin: 6px 0 0; font-size: 22px;
+}
+.bn .stat{
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: 36px; line-height: .9; letter-spacing: -.04em;
+  font-variant-numeric: tabular-nums;
+}
+.bn .stat small{
+  display: block; font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: .15em; font-weight: 400; opacity: .7; margin-top: 4px;
+}
+.bn-prize{
+  grid-column: span 2;
+  background: linear-gradient(160deg, var(--fairwood-light) 0%, var(--fairwood-deep) 100%);
+  color: var(--ink);
+}
+.bn-rules{ background: var(--paper); color: var(--ink); }
+.bn-schools{
+  background: linear-gradient(180deg, #1a1410 0%, #2a1f15 100%);
+}
+.bn-schools .cat{ color: var(--duck); }
+.bn-schools .stat{ color: var(--fairwood); }
+.bn-faq{ background: var(--peanut-hot); color: var(--paper); }
+.bn-faq .cat{ color: var(--peanut-lime); }
+
+/* ============ FOOTER ============ */
+.foot{
+  background: var(--ink); padding: 56px 18px 32px;
+  position: relative; overflow: hidden;
+}
+.foot::before{
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(400px 300px at 80% 30%, rgba(240,138,0,.18), transparent 50%);
+  pointer-events: none;
+}
+.foot-inner{ position: relative; z-index: 2; }
+.foot-big{
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: 62px; line-height: .82; letter-spacing: -.05em; margin: 0;
+}
+.foot-big .stem{
+  display: inline-block;
+  background: var(--fairwood); color: var(--ink);
+  padding: 0 .12em; border-radius: 8px;
+  transform: rotate(-3deg);
+  box-shadow: 0 6px 22px rgba(240,138,0,.4);
+}
+.foot-big .o{
+  background: linear-gradient(180deg, var(--fairwood-light), var(--fairwood-deep));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.foot-meta{
+  margin-top: 24px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .15em;
+  color: rgba(245,236,217,.5); line-height: 1.6;
+}
+.foot-chips{ display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.foot-chips .chip{
+  background: rgba(245,236,217,.06); border: 1px solid rgba(245,236,217,.12);
+  padding: 5px 10px; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em;
+  color: rgba(245,236,217,.7);
+}
+.foot-chips .chip.live{
+  background: var(--fairwood); color: var(--ink); border-color: var(--fairwood);
+  font-weight: 700;
+}
+
+/* ============ BOTTOM TAB BAR ============ */
+.tab-bar{
+  position: fixed; bottom: 0; left: 0; right: 0;
+  z-index: 90;
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  background: rgba(10,7,5,.95);
+  backdrop-filter: blur(20px) saturate(1.5);
+  border-top: 1px solid rgba(245,236,217,.12);
+  padding: 6px 4px max(6px, env(safe-area-inset-bottom));
+  box-shadow: 0 -8px 24px rgba(0,0,0,.5);
+}
+.tab-bar a{
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 8px 4px;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: .12em;
+  color: rgba(245,236,217,.55); text-decoration: none;
+}
+.tab-bar a .ic{ font-size: 18px; line-height: 1; }
+.tab-bar a.act{ color: var(--fairwood); }
+.tab-bar a.cta{
+  color: var(--ink); font-weight: 700;
+}
+.tab-bar a.cta .ic{
+  background: var(--fairwood);
+  width: 36px; height: 36px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-top: -16px;
+  box-shadow: 0 6px 18px rgba(240,138,0,.55);
+}
+/* push content so tab-bar doesn't cover footer */
+body{ padding-bottom: 68px; }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <a class="tb-brand" href="#top">
+      <span class="site">SITE</span>
+      <span class="cn">多士大對決</span>
+    </a>
+    <a class="tb-cta" href="#submit">▸ 交</a>
+  </header>
+
+  <!-- LIVE STRIP -->
+  <div class="live-strip">
+    <span class="left">LIVE · DAY 09 / 21</span>
+    <span>NEXT 18:00 · +82 TODAY</span>
+  </div>
+
+  <!-- BATTLE -->
+  <section class="battle active-duck" id="battle">
+
+    <div class="btab-row">
+      <button class="btab duck" id="btabDuck">
+        <span class="em">🦆</span>
+        <div class="info">
+          <span class="lbl">DUCK · 傳統派</span>
+          <span class="n">470<small>+38</small></span>
+        </div>
+      </button>
+      <button class="btab peanut" id="btabPeanut">
+        <span class="em">🥜</span>
+        <div class="info">
+          <span class="lbl">PEANUT · 邪惡派</span>
+          <span class="n">482<small>+44</small></span>
+        </div>
+      </button>
+    </div>
+
+    <div class="btl-frame">
+      <span class="btl-corner-tag" id="btlTag">LOVABLE · D04</span>
+      <span class="btl-corner-stamp" id="btlStamp">真．正宗</span>
+      <iframe id="btlIfr" src="team-duck.html" loading="lazy"
+              sandbox="allow-same-origin allow-scripts"
+              referrerpolicy="no-referrer" title="active faction site"></iframe>
+      <a class="open-tap" id="btlOpen" href="team-duck.html" target="_blank" rel="noopener">↗ 全頁開</a>
+    </div>
+
+    <div class="btl-meta">
+      <div class="title" id="btlTitle">無餡西多保衛聯盟</div>
+      <div class="who" id="btlWho"><strong>@uncle_lam_1962</strong> · 茶記伙計 · 旺角 · 93 票 · 4.8★</div>
+    </div>
+
+    <div class="btl-controls">
+      <button class="btl-arr" id="btlPrev">‹</button>
+      <span class="btl-count"><b id="btlIdx">01</b> / 06</span>
+      <button class="btl-vote"><span>♥</span>VOTE</button>
+    </div>
+
+    <button class="btl-swap" id="btlSwap">
+      <span id="btlSwapLbl">花生醬派</span>
+      <span class="arr" id="btlSwapArr">→</span>
+    </button>
+  </section>
+
+  <!-- HOWTO -->
+  <section class="sec" id="howto">
+    <div class="sec-head">
+      <div class="num">04 / HOW TO</div>
+      <h2>無腦 <span class="o">4 步</span><br>5 分鐘起 SITE。</h2>
+      <p class="side">唔識 code？<strong>由你打字、AI 同你起埋</strong> — 阿公阿婆都做到。</p>
+    </div>
+    <div class="howto-list">
+      <div class="htc" data-n="01"><h3>揀派 🦆🥜</h3><div class="cap">🦆 鴨蛋 OR 🥜 花生．<strong>揀咗唔可以再揀對家</strong></div></div>
+      <div class="htc" data-n="02"><h3>打字起 site 💬</h3><div class="cap">Lovable / Claude / v0 / Bolt．<strong>免費．自動 host</strong></div></div>
+      <div class="htc" data-n="03"><h3>Copy URL 🔗</h3><div class="cap">AI 起完，按 Publish．<strong>Copy xxx.lovable.app</strong></div></div>
+      <div class="htc final" data-n="04"><h3>貼喺下面交 📮</h3><div class="cap">Scroll 落「交 Site」．<strong>貼 URL．完。</strong></div></div>
+    </div>
+  </section>
+
+  <!-- SUBMIT -->
+  <section class="sec" id="submit">
+    <div class="sec-head">
+      <div class="num">05 / SUBMIT</div>
+      <h2>交 Site<br><span class="hl">六點上架</span>。</h2>
+      <p class="side">AI 1 分鐘掃 → 小編 6PM 前 approve → 即日 18:00 上架．<strong>送 $10 西多券</strong>。</p>
+    </div>
+    <form class="submit" onsubmit="event.preventDefault();">
+      <h2>即場交 Site</h2>
+      <p>1 分鐘搞掂。</p>
+      <div class="row">
+        <label>▸ 揀陣營</label>
+        <div class="fac">
+          <button type="button" class="active duck">🦆 傳統派</button>
+          <button type="button" class="peanut">🥜 花生派</button>
+        </div>
+      </div>
+      <div class="row">
+        <label>▸ 你個 SITE URL</label>
+        <input type="url" placeholder="https://my-site.lovable.app">
+      </div>
+      <div class="row">
+        <label>▸ EMAIL</label>
+        <input type="email" placeholder="you@school.edu.hk">
+      </div>
+      <div class="row">
+        <label>▸ 學校 (Optional)</label>
+        <input type="text" placeholder="皇仁書院">
+      </div>
+      <button type="submit" class="submit-btn">▸ 投我一票．SUBMIT</button>
+    </form>
+  </section>
+
+  <!-- BENTO -->
+  <section class="sec" id="bento">
+    <div class="sec-head">
+      <div class="num">06 / EXPLORE</div>
+      <h2>更多<span class="hl">戰場</span>。</h2>
+    </div>
+    <div class="bento">
+      <a class="bn bn-prize" href="#">
+        <div>
+          <div class="cat">🏆 GRAND PRIZE</div>
+          <h3>獎品<br>大放送。</h3>
+        </div>
+        <div class="stat">365<small>件西多 / 1 名 / 食足一年</small></div>
+      </a>
+      <a class="bn bn-rules" href="完整比賽規則.html">
+        <div class="cat">📜 RULES</div>
+        <h3>玩法 +<br>規則。</h3>
+        <div class="stat" style="font-size:24px;">5 + 8</div>
+      </a>
+      <a class="bn bn-schools" href="#">
+        <div class="cat">🎓 SCHOOL</div>
+        <h3>學界<br>戰報。</h3>
+        <div class="stat">108<small>SCHOOLS</small></div>
+      </a>
+      <a class="bn bn-faq" href="#">
+        <div class="cat">❓ HELP</div>
+        <h3>FAQ ×<br>常見問題。</h3>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <div class="foot-inner">
+      <h2 class="foot-big">食得夠<br><span class="stem">STEM</span><span class="o">。</span></h2>
+      <div class="foot-meta">
+        SITE 多士大對決 · 大快活 2026<br>
+        © FAIRWOOD FAST FOOD GROUP
+      </div>
+      <div class="foot-chips">
+        <span class="chip">食得夠尖 · 2024</span>
+        <span class="chip">食得夠 GYM · 2025</span>
+        <span class="chip live">食得夠 STEM · 2026</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- BOTTOM TAB BAR -->
+<nav class="tab-bar">
+  <a href="#battle" class="act"><span class="ic">⚔️</span><span>戰況</span></a>
+  <a href="#howto"><span class="ic">📖</span><span>點玩</span></a>
+  <a href="#submit" class="cta"><span class="ic">▸</span><span>交 SITE</span></a>
+  <a href="#bento"><span class="ic">🏆</span><span>獎品</span></a>
+  <a href="#bento"><span class="ic">🎓</span><span>學界</span></a>
+</nav>
+
+<script>
+// ============ DATA ============
+const SITES = {
+  duck: [
+    { title: '無餡西多保衛聯盟', who: '@uncle_lam_1962', meta: '茶記伙計 · 旺角', votes: 93, rating: 4.8, day: 'D04', tool: 'LOVABLE', url: 'team-duck.html' },
+    { title: '陳師傅口述歷史', who: '@duck_egg_truth', meta: '大角咀街坊', votes: 76, rating: 4.7, day: 'D02', tool: 'V0', url: 'previews/duck-1.html' },
+    { title: '鴨蛋香萬歲', who: '@hong_kong_yolk', meta: '深水埗', votes: 71, rating: 4.6, day: 'D01', tool: 'LOVABLE', url: 'previews/duck-2.html' },
+    { title: '茶記後援會', who: '@cha_chaan_teng', meta: '油麻地', votes: 64, rating: 4.5, day: 'D05', tool: 'CLAUDE', url: 'previews/duck-3.html' },
+    { title: '原味派宣言', who: '@plain_is_best', meta: '黃大仙', votes: 58, rating: 4.4, day: 'D06', tool: 'BOLT', url: 'previews/duck-4.html' },
+    { title: '50 年茶記日記', who: '@uncle_chan_diary', meta: '北角', votes: 52, rating: 4.3, day: 'D03', tool: 'V0', url: 'previews/duck-5.html' },
+  ],
+  peanut: [
+    { title: '邪惡花生派．官方總部', who: '@peanutbutter_god', meta: 'DSE 出爐', votes: 102, rating: 4.9, day: 'D03', tool: 'CLAUDE', url: 'team-peanut.html' },
+    { title: '熔岩花生實驗室', who: '@molten_pb', meta: '觀塘', votes: 88, rating: 4.8, day: 'D05', tool: 'BOLT', url: 'previews/peanut-1.html' },
+    { title: 'Drake 花生 meme 站', who: '@drake_pb', meta: '荃灣', votes: 81, rating: 4.7, day: 'D02', tool: 'LOVABLE', url: 'previews/peanut-2.html' },
+    { title: 'Y2K 花生 GeoCities', who: '@pb_2003', meta: '葵青', votes: 75, rating: 4.6, day: 'D01', tool: 'CLAUDE', url: 'previews/peanut-3.html' },
+    { title: '花生派青年聯盟', who: '@pb_youth', meta: '元朗', votes: 69, rating: 4.5, day: 'D04', tool: 'V0', url: 'previews/peanut-4.html' },
+    { title: '邪惡花生實況', who: '@evil_pb_live', meta: '屯門', votes: 61, rating: 4.4, day: 'D06', tool: 'BOLT', url: 'previews/peanut-5.html' },
+  ],
+};
+
+const state = { side: 'duck', idx: 0 };
+const battle = document.getElementById('battle');
+
+function render() {
+  const arr = SITES[state.side];
+  const s = arr[state.idx];
+  battle.classList.toggle('active-duck', state.side === 'duck');
+  battle.classList.toggle('active-peanut', state.side === 'peanut');
+  document.getElementById('btlIfr').src = s.url;
+  document.getElementById('btlTag').textContent = `${s.tool} · ${s.day}`;
+  document.getElementById('btlStamp').textContent = state.side === 'duck' ? '真．正宗' : '邪惡新派';
+  document.getElementById('btlTitle').textContent = s.title;
+  document.getElementById('btlWho').innerHTML = `<strong>${s.who}</strong> · ${s.meta} · ${s.votes} 票 · ${s.rating}★`;
+  document.getElementById('btlIdx').textContent = String(state.idx + 1).padStart(2, '0');
+  document.getElementById('btlOpen').href = s.url;
+  // swap button label = opposite faction
+  const opp = state.side === 'duck' ? 'peanut' : 'duck';
+  document.getElementById('btlSwapLbl').textContent = opp === 'peanut' ? '花生醬派' : '傳統派';
+  document.getElementById('btlSwapArr').textContent = opp === 'peanut' ? '→' : '←';
+}
+
+function setSide(side) {
+  if (state.side === side) return;
+  state.side = side;
+  state.idx = 0;
+  render();
+  resetRotation();
+}
+function nextSite() {
+  state.idx = (state.idx + 1) % SITES[state.side].length;
+  render();
+}
+function prevSite() {
+  state.idx = (state.idx - 1 + SITES[state.side].length) % SITES[state.side].length;
+  render();
+}
+
+document.getElementById('btabDuck').addEventListener('click', () => setSide('duck'));
+document.getElementById('btabPeanut').addEventListener('click', () => setSide('peanut'));
+document.getElementById('btlPrev').addEventListener('click', () => { prevSite(); resetRotation(); });
+document.getElementById('btlNext')?.addEventListener('click', () => { nextSite(); resetRotation(); });
+document.getElementById('btlSwap').addEventListener('click', () => {
+  setSide(state.side === 'duck' ? 'peanut' : 'duck');
+});
+
+// faction toggle in submit form
+document.querySelectorAll('.submit .fac button').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.submit .fac button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+  });
+});
+
+// auto-rotate when idle
+const ROTATE_MS = 7000;
+let rotateTimer = null;
+function startRotation() { stopRotation(); rotateTimer = setInterval(nextSite, ROTATE_MS); }
+function stopRotation()  { if (rotateTimer) { clearInterval(rotateTimer); rotateTimer = null; } }
+function resetRotation() { startRotation(); }
+startRotation();
+
+render();
+</script>
+
+</body>
+</html>

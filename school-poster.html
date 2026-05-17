@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<title>SITE 多士大對決 · 學界海報 A4</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+HK:wght@500;700;900&family=Reggae+One&family=DM+Mono:wght@400;500&family=VT323&display=swap');
+
+:root{
+  --paper:#f5ecd9;
+  --paper-deep:#ecdcb8;
+  --ink:#1a1410;
+  --ink-soft:#4a3d31;
+  --fairwood:#f08a00;
+  --fairwood-deep:#c46d00;
+  --fairwood-light:#ffb454;
+  --duck:#ffc94c;
+  --peanut-hot:#ec4899;
+  --peanut-lime:#c9e635;
+  --stamp:#b8362a;
+  --leaf:#2f6b48;
+  --line:#2d231a;
+}
+*{ box-sizing: border-box; }
+body{ margin:0; padding:24px; background:#222; min-height:100vh; display:flex; align-items:center; justify-content:center; font-family:"Noto Sans HK", sans-serif;}
+
+/* A4 portrait at 150dpi roughly = 1240 × 1754 */
+.poster{
+  width: 1240px; min-height: 1754px;
+  background: var(--paper);
+  position:relative; overflow:hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  padding: 64px 72px 80px;
+}
+
+.poster::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(120,80,30,.07), transparent 50%),
+    radial-gradient(circle at 88% 82%, rgba(120,80,30,.05), transparent 50%),
+    repeating-linear-gradient(0deg, rgba(60,40,20,.025) 0 1px, transparent 1px 3px);
+  mix-blend-mode:multiply; z-index: 1;
+}
+
+.poster > *{ position: relative; z-index: 2;}
+
+/* HEADER */
+.header{
+  display:flex; align-items:flex-start; justify-content:space-between;
+  border-bottom: 3px solid var(--ink); padding-bottom: 18px;
+}
+.header .brand{
+  display:flex; align-items:center; gap: 14px;
+}
+.header .brand .ah{ width: 56px; height:auto;}
+.header .brand .word{ font-family:"Noto Serif HK", serif; font-weight:900; font-size:24px; line-height:1; color: var(--ink);}
+.header .brand .word small{ display:block; font-family:"DM Mono",monospace; font-size: 12px; color: var(--ink-soft); letter-spacing:.22em; margin-top:5px; font-weight:400;}
+
+.header .meta{
+  text-align: right; font-family:"DM Mono", monospace; font-size: 12px; color: var(--ink-soft); letter-spacing:.18em;
+}
+.header .meta .stamp-text{
+  display:inline-block; border: 2.5px solid var(--stamp); color: var(--stamp);
+  padding: 4px 12px; font-family:"Reggae One", serif; font-size: 18px;
+  transform: rotate(-2deg); letter-spacing:.05em; margin-bottom: 6px;
+}
+
+/* TITLE */
+.title-block{ margin-top: 28px; position:relative;}
+.title-block .kicker{
+  font-family:"DM Mono",monospace; font-size:15px; letter-spacing:.25em; color: var(--fairwood-deep);
+  margin-bottom: 14px; display:flex; align-items:center; gap:12px;
+}
+.title-block .kicker::before{ content:""; width:36px; height:2px; background: var(--fairwood);}
+.title-block h1{
+  font-family:"Noto Serif HK", serif; font-weight:900;
+  font-size: 124px; line-height: .92; letter-spacing:-.035em;
+  margin: 0; color: var(--ink);
+}
+.title-block h1 .hl{ color: var(--fairwood); }
+.title-block h1 .stamp-box{
+  display:inline-block; background: var(--ink); color: var(--fairwood);
+  padding: 0 18px; transform: rotate(-1.5deg);
+}
+.title-block .audience{
+  margin-top: 16px;
+  background: var(--ink); color: var(--paper);
+  display:inline-block; padding: 12px 22px;
+  font-family:"Reggae One", serif; font-size: 32px;
+  transform: rotate(-1deg);
+}
+.title-block .audience .em{ color: var(--fairwood); }
+
+/* hero ah-wood character */
+.title-block .ah-hero{
+  position:absolute; right: -16px; top: -16px;
+  width: 220px; height: auto;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,.15));
+}
+
+/* Why this matters */
+.why-row{
+  margin-top: 36px;
+  display:grid; grid-template-columns: 1.4fr 1fr; gap: 24px;
+}
+.why-card{
+  background: var(--fairwood); color: var(--ink);
+  padding: 28px 32px;
+  box-shadow: 8px 8px 0 var(--ink);
+}
+.why-card .lbl{ font-family:"DM Mono", monospace; font-size: 12px; letter-spacing:.2em;}
+.why-card h2{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 36px; line-height:1.1; margin: 8px 0 12px;}
+.why-card p{ font-size: 16px; line-height:1.55; margin:0;}
+.why-card p strong{ background: var(--ink); color: var(--fairwood); padding: 2px 6px;}
+
+.why-stats{
+  background: rgba(255,255,255,.4); border: 2.5px solid var(--line);
+  padding: 28px 24px;
+  display:flex; flex-direction:column; gap: 14px; justify-content: center;
+}
+.why-stats .row{
+  display:flex; align-items:baseline; gap: 12px;
+}
+.why-stats .num{
+  font-family:"Reggae One", serif; font-size: 56px; line-height:1; color: var(--fairwood-deep); flex: 0 0 100px;
+}
+.why-stats .desc{ font-family:"Noto Serif HK", serif; font-weight:700; font-size: 18px; line-height: 1.3;}
+
+/* 4 columns: mechanic + prizes + rules + register */
+.body-grid{
+  margin-top: 32px;
+  display:grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+.body-card{
+  background: rgba(255,255,255,.4); border: 2.5px solid var(--line);
+  padding: 28px 30px;
+}
+.body-card h3{
+  font-family:"Noto Serif HK", serif; font-weight:900; font-size: 30px; margin: 0 0 14px;
+  line-height: 1.1;
+}
+.body-card .lbl{ font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.2em; color: var(--fairwood-deep); margin-bottom: 8px;}
+.body-card .step-list{ list-style: none; padding: 0; margin: 0; counter-reset: stp;}
+.body-card .step-list li{
+  padding: 10px 0 10px 38px;
+  border-top: 1px dashed rgba(45,35,26,.3);
+  position: relative;
+  font-size: 15px; line-height: 1.5;
+  counter-increment: stp;
+}
+.body-card .step-list li:first-child{ border-top: none;}
+.body-card .step-list li::before{
+  content: counter(stp, decimal-leading-zero);
+  position: absolute; left: 0; top: 10px;
+  font-family:"DM Mono", monospace; font-size: 13px; font-weight: 700;
+  color: var(--fairwood-deep); letter-spacing:.1em;
+}
+.body-card .step-list li strong{ background: linear-gradient(transparent 70%, var(--fairwood-light) 70% 92%, transparent 92%); padding: 0 4px;}
+
+/* Prize box */
+.prize-box .award{
+  display:flex; gap: 12px; padding: 10px 0; border-top: 1px dashed rgba(45,35,26,.3); align-items:center;
+}
+.prize-box .award:first-of-type{ border-top: none; padding-top: 0;}
+.prize-box .award .icon{
+  flex: 0 0 56px; height: 56px; background: var(--fairwood); border: 2px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  font-family:"Reggae One", serif; font-size: 26px; color: var(--ink);
+}
+.prize-box .award:nth-child(2) .icon{ background: var(--peanut-hot); color: #fff;}
+.prize-box .award:nth-child(3) .icon{ background: var(--leaf); color: #fff;}
+.prize-box .award .text{ flex: 1;}
+.prize-box .award .text strong{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 16px; display:block; line-height: 1.2;}
+.prize-box .award .text p{ margin: 4px 0 0; font-size: 13px; color: var(--ink-soft); line-height: 1.45;}
+
+/* Tools strip */
+.tools-strip{
+  margin-top: 24px;
+  background: var(--ink); color: var(--paper);
+  padding: 22px 28px;
+  display:flex; gap: 28px; align-items: center;
+}
+.tools-strip h4{
+  font-family:"Noto Serif HK", serif; font-weight:900; font-size: 22px; margin: 0;
+  flex: 0 0 auto; line-height: 1.1;
+}
+.tools-strip h4 small{ display:block; font-family:"DM Mono", monospace; font-size: 11px; color: var(--fairwood); letter-spacing:.15em; margin-top: 4px; font-weight: 400;}
+.tools-strip .list{
+  flex: 1; display: flex; gap: 8px; flex-wrap: wrap;
+}
+.tools-strip .pill{
+  background: rgba(255,255,255,.1); border: 1.5px solid #3a2c1e;
+  padding: 8px 14px; font-family:"DM Mono", monospace; font-size: 12px; letter-spacing:.1em;
+  color: var(--paper); border-radius: 999px;
+}
+.tools-strip .pill strong{ color: var(--fairwood); }
+
+/* Register / CTA bottom */
+.cta-row{
+  margin-top: 28px;
+  display:grid; grid-template-columns: 1.6fr 1fr; gap: 20px;
+}
+.cta-card{
+  background: var(--fairwood); color: var(--ink); padding: 28px 32px;
+  box-shadow: 8px 8px 0 var(--ink);
+  position: relative;
+}
+.cta-card .lbl{ font-family:"DM Mono", monospace; font-size: 12px; letter-spacing:.2em;}
+.cta-card h3{ font-family:"Noto Serif HK", serif; font-weight:900; font-size: 32px; margin: 6px 0 16px; line-height:1.1;}
+.cta-card ol{ list-style: decimal inside; padding: 0; margin: 0; font-size: 15px; line-height: 1.7;}
+.cta-card ol li{ padding: 4px 0;}
+.cta-card ol li strong{ background: var(--ink); color: var(--fairwood); padding: 1px 6px;}
+
+.qr-card{
+  background: rgba(255,255,255,.5); border: 2.5px solid var(--line);
+  padding: 18px;
+  text-align: center;
+  display:flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.qr-box{
+  width: 160px; height: 160px;
+  background:
+    repeating-linear-gradient(0deg, var(--ink) 0 8px, transparent 8px 16px),
+    repeating-linear-gradient(90deg, var(--ink) 0 8px, transparent 8px 16px);
+  background-color: #fff;
+  border: 3px solid var(--ink);
+  position: relative;
+}
+.qr-box::before, .qr-box::after, .qr-box-inner{
+  content: ""; position: absolute; width: 40px; height: 40px; background: #fff; border: 6px solid var(--ink);
+}
+.qr-box::before{ top: 6px; left: 6px;}
+.qr-box::after{ top: 6px; right: 6px;}
+.qr-box .qr-bl{
+  content: ""; position: absolute; bottom: 6px; left: 6px;
+  width: 40px; height: 40px; background: #fff; border: 6px solid var(--ink);
+}
+.qr-card .url{
+  font-family:"DM Mono", monospace; font-size: 11px; color: var(--ink); margin-top: 14px;
+  letter-spacing:.06em;
+  word-break: break-all;
+  max-width: 180px;
+}
+
+/* Footer strip with ah-wood */
+.footer{
+  margin-top: 32px; padding-top: 20px;
+  border-top: 3px solid var(--ink);
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: flex-end;
+}
+.footer .credits{
+  font-family:"DM Mono",monospace; font-size: 11px; color: var(--ink-soft);
+  letter-spacing:.15em; line-height: 1.7;
+}
+.footer .credits strong{ color: var(--ink); font-family:"Noto Serif HK", serif; font-weight:900; font-size: 16px; letter-spacing: 0; display:block; margin-bottom: 4px;}
+.footer .hashtag-strip{
+  display: flex; flex-direction: column; gap: 6px; align-items: flex-end;
+  font-family:"DM Mono",monospace; font-size: 12px; color: var(--ink-soft);
+}
+.footer .hashtag-strip .tag{
+  background: var(--ink); color: var(--fairwood); padding: 4px 12px;
+}
+
+/* duck/peanut accent */
+.duck-pat{
+  position:absolute; width: 220px; height: 220px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,201,76,.5), transparent 70%);
+  top: 400px; right: -60px; filter: blur(2px); z-index: 0;
+}
+.peanut-pat{
+  position:absolute; width: 200px; height: 200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(236,72,153,.3), transparent 70%);
+  top: 1100px; left: -40px; filter: blur(2px); z-index: 0;
+}
+
+@media print {
+  body { background: white; padding: 0; }
+  .poster { box-shadow: none; }
+  @page { size: A4; margin: 0; }
+}
+</style>
+</head>
+<body>
+
+<article class="poster">
+
+  <div class="duck-pat"></div>
+  <div class="peanut-pat"></div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="brand">
+      <img class="ah" src="assets/ah-wood.png" alt="阿活">
+      <div class="word">大快活<small>FAIRWOOD HK · 2026</small></div>
+    </div>
+    <div class="meta">
+      <div class="stamp-text">食得夠 STEM</div>
+      <div>OFFICIAL INVITATION · TO HK SCHOOLS</div>
+      <div style="margin-top:4px;">JUNE 2 → 23 · 2026</div>
+    </div>
+  </header>
+
+  <!-- TITLE -->
+  <section class="title-block">
+    <img class="ah-hero" src="assets/ah-wood.png" alt="阿活">
+    <div class="kicker">大快活 × 全港學界 · 學界邀請函</div>
+    <h1>
+      SITE多士<br>
+      <span class="stamp-box">大對決</span>
+    </h1>
+    <div class="audience">
+      致 <span class="em">電腦科 / 資訊及通訊科技科</span> 老師
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="why-row">
+    <div class="why-card">
+      <div class="lbl">▸ 點解你應該帶班學生玩</div>
+      <h2>呢個 campaign，<br>= 最佳 STEM 實戰課堂。</h2>
+      <p>
+        你嘅學生唔需要識 code。佢哋只需要 <strong>學識用 AI 講人話建網頁</strong> ── 呢個正係 2026 年 ICT 課程嘅 core skill。
+        我哋包起 demo、教材、prompt template。你做嘅就係 <strong>畀 1 堂課時間玩 + 提交</strong>。
+      </p>
+    </div>
+
+    <div class="why-stats">
+      <div class="row"><div class="num">5'</div><div class="desc">學生用 AI 起一個 site<br>所需時間</div></div>
+      <div class="row"><div class="num">0</div><div class="desc">需要嘅 coding 知識</div></div>
+      <div class="row"><div class="num">$0</div><div class="desc">學校 / 學生需付出嘅成本</div></div>
+    </div>
+  </section>
+
+  <!-- BODY GRID -->
+  <section class="body-grid">
+
+    <!-- HOW IT WORKS -->
+    <div class="body-card">
+      <div class="lbl">▸ 點玩 · HOW</div>
+      <h3>三步入伍</h3>
+      <ol class="step-list">
+        <li>學生喺 <strong>sitedosi.fairwood.com.hk</strong> 揀派系（鴨蛋 vs 花生）</li>
+        <li>用免費 AI 工具（<strong>Lovable / Claude / v0 / Bolt</strong>）打 prompt 起 site</li>
+        <li>交條 Site URL 入大快活個 form．填埋學校名 + 學生 email．完。</li>
+      </ol>
+    </div>
+
+    <!-- PRIZES -->
+    <div class="body-card prize-box">
+      <div class="lbl">▸ 學界專屬獎品</div>
+      <h3>學校 + 學生 都有</h3>
+      <div class="award">
+        <div class="icon">校</div>
+        <div class="text">
+          <strong>至踴躍參與學校獎</strong>
+          <p>提交得最多 site 嘅學校 ── 大快活包起該校下午茶，送 <strong>500 件熱辣辣西多士</strong> 上門。</p>
+        </div>
+      </div>
+      <div class="award">
+        <div class="icon">創</div>
+        <div class="text">
+          <strong>至創意學生 Site 獎</strong>
+          <p>得獎學生送 <strong>一年免費大快活下午茶</strong>（52 件西多）．由 KOL 評審＋網民投票揀出。</p>
+        </div>
+      </div>
+      <div class="award">
+        <div class="icon">捐</div>
+        <div class="text">
+          <strong>STEM Scholarship</strong>
+          <p>勝出學校加送 <strong>HK$5,000 STEM 學校基金</strong>．買 AI 工具年費、舉辦 workshop。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="body-card">
+      <div class="lbl">▸ 時間表 · WHEN</div>
+      <h3>21 日大戰</h3>
+      <ol class="step-list">
+        <li><strong>05 / 26 - 06 / 01</strong> · 教材＋90 秒教學片發放畀老師</li>
+        <li><strong>06 / 02</strong> · Campaign 正式 launch．Master Site 上線</li>
+        <li><strong>06 / 02 - 06 / 22</strong> · 學生提交 site．每日 18:00 戰況 update</li>
+        <li><strong>06 / 23</strong> · 公佈勝出陣營＋學校排名＋頒獎</li>
+      </ol>
+    </div>
+
+    <!-- SUPPORT -->
+    <div class="body-card">
+      <div class="lbl">▸ 我哋畀你 · WHAT WE PROVIDE</div>
+      <h3>教材 + 技術支援 · 全免費</h3>
+      <ol class="step-list">
+        <li><strong>1 堂課 lesson plan</strong>（45 分鐘）+ slides，老師直接用</li>
+        <li><strong>學生 prompt template</strong>（鴨蛋派 / 花生派各一），copy 即用</li>
+        <li><strong>90 秒官方教學片</strong>，由大快活廚師示範．免費學校放映</li>
+        <li><strong>WhatsApp 老師群組</strong>，campaign 期間即時答疑</li>
+      </ol>
+    </div>
+
+  </section>
+
+  <!-- TOOLS -->
+  <section class="tools-strip">
+    <h4>免費 AI 工具<small>學生即用 · 零成本</small></h4>
+    <div class="list">
+      <span class="pill"><strong>Lovable</strong> · lovable.dev</span>
+      <span class="pill"><strong>Claude</strong> · claude.ai</span>
+      <span class="pill"><strong>v0</strong> · v0.dev</span>
+      <span class="pill"><strong>Bolt</strong> · bolt.new</span>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-row">
+    <div class="cta-card">
+      <div class="lbl">▸ 學校點報名 · HOW TO REGISTER</div>
+      <h3>三步報名 · 完全免費</h3>
+      <ol>
+        <li>scan 隔離 QR code（或 sitedosi.fairwood.com.hk/school）</li>
+        <li>填學校名 + 老師 email + 預計參與班級</li>
+        <li>5 月 26 日前報名，<strong>大快活寄齊教材包</strong></li>
+      </ol>
+    </div>
+
+    <div class="qr-card">
+      <div class="qr-box">
+        <div class="qr-bl"></div>
+      </div>
+      <div class="url">sitedosi.fairwood.com.hk/school</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="credits">
+      <strong>有問題歡迎查詢</strong>
+      Campaign Manager · school@fairwood.com.hk<br>
+      WhatsApp · +852 6XXX XXXX<br>
+      © 2026 大快活快餐有限公司 · A Fairwood STEM Initiative
+    </div>
+    <div class="hashtag-strip">
+      <span class="tag">#SITE多士大對決</span>
+      <span class="tag">#食得夠STEM</span>
+      <span class="tag">#FairwoodSTEM</span>
+      <span class="tag">#HKSchools</span>
+    </div>
+  </footer>
+
+</article>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<title>Drake 花生 meme 站</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Comic Sans MS", "Marker Felt", sans-serif; background:#fff7e0; color:#1a1410; line-height:1.4}
+.shell{max-width:1280px; margin:0 auto; padding:0 56px}
+.nav{display:flex; justify-content:space-between; align-items:center; padding:20px 0; background:#1a1410; color:#fff; padding:16px 32px; border-radius:0 0 12px 12px; margin-bottom:32px}
+.brand{font-size:24px; font-weight:900; letter-spacing:-.01em}
+.brand .em{display:inline-block; background:#ffe600; color:#000; padding:0 8px; border-radius:4px; transform:rotate(-3deg); margin:0 4px}
+.menu{display:flex; gap:18px; font-size:13px; color:#ffe600}
+.menu a{color:inherit; text-decoration:none}
+.cta{background:#ff3a55; color:#fff; padding:8px 18px; font-weight:900; font-size:13px; text-decoration:none; border-radius:6px; box-shadow:3px 3px 0 #000}
+.hero{padding:40px 0; text-align:center}
+.eb{display:inline-block; background:#ffe600; color:#000; padding:6px 18px; font-weight:900; font-size:14px; letter-spacing:.05em; transform:rotate(-2deg); margin-bottom:24px; box-shadow:4px 4px 0 #000}
+.hero h1{font-size:96px; line-height:.95; font-weight:900; letter-spacing:-.02em; margin-bottom:40px; color:#1a1410}
+.hero h1 em{font-style:italic; background:#ff3a55; color:#fff; padding:0 16px; transform:rotate(-2deg); display:inline-block}
+.drake{margin:40px 0 56px; display:grid; grid-template-columns:1fr 1fr; gap:0; border:6px solid #1a1410; border-radius:12px; overflow:hidden; box-shadow:12px 12px 0 #1a1410}
+.drake-row{display:grid; grid-template-columns:200px 1fr; min-height:240px; border-bottom:4px solid #1a1410}
+.drake-row:last-child{border-bottom:none}
+.drake-row.no{background:#fff}
+.drake-row.yes{background:#ffe600}
+.drake-img{display:flex; align-items:center; justify-content:center; font-size:120px; background:#f0f0f0; border-right:4px solid #1a1410}
+.drake-row.yes .drake-img{background:#fffae0}
+.drake-text{padding:24px 32px; display:flex; flex-direction:column; justify-content:center; gap:8px}
+.drake-text .verdict{font-size:14px; font-weight:900; letter-spacing:.2em; color:#999; text-transform:uppercase}
+.drake-row.yes .drake-text .verdict{color:#2d9b3d}
+.drake-text h3{font-size:36px; line-height:1.1; font-weight:900}
+.cta-big{display:inline-block; background:#ff3a55; color:#fff; padding:20px 48px; font-size:22px; font-weight:900; text-decoration:none; border-radius:12px; box-shadow:8px 8px 0 #1a1410; border:4px solid #1a1410; transform:rotate(-2deg)}
+.poll{margin:48px 0; padding:32px; background:#fff; border:4px dashed #1a1410; border-radius:16px}
+.poll h2{font-size:32px; font-weight:900; margin-bottom:24px; text-align:center}
+.bar{height:48px; background:#f0f0f0; border-radius:8px; overflow:hidden; display:flex; border:2px solid #1a1410; margin-bottom:14px}
+.bar .pb{background:linear-gradient(90deg, #ff3a55, #c4661f); width:97%; display:flex; align-items:center; justify-content:flex-end; padding-right:14px; color:#fff; font-weight:900; font-size:18px}
+.bar .duck{background:#ddd; width:3%; min-width:36px; display:flex; align-items:center; justify-content:center; color:#1a1410; font-weight:900; font-size:14px}
+.legend{display:flex; justify-content:space-between; font-size:14px; font-weight:700}
+.foot{padding:24px 0; text-align:center; font-size:12px; color:#999; border-top:2px dashed #1a1410; font-family:monospace; letter-spacing:.1em}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="nav">
+    <div class="brand">Drake<span class="em">SAID</span>花生</div>
+    <div class="menu"><a>Meme</a><a>POLL</a><a>分享</a></div>
+    <a href="#" class="cta">▸ VOTE</a>
+  </nav>
+
+  <section class="hero">
+    <span class="eb">★ MEME OF THE DAY ★</span>
+    <h1>連 Drake 都<br><em>揀花生。</em></h1>
+
+    <div class="drake">
+      <div>
+        <div class="drake-row no">
+          <div class="drake-img">🙅</div>
+          <div class="drake-text">
+            <div class="verdict">▸ NO 👎</div>
+            <h3>傳統鴨蛋西多<br><small style="font-weight:400; font-size:14px; color:#999">"50 年前嘅嘢"</small></h3>
+          </div>
+        </div>
+        <div class="drake-row yes">
+          <div class="drake-img">👉</div>
+          <div class="drake-text">
+            <div class="verdict">▸ YES 👍</div>
+            <h3>熔岩花生醬西多<br><small style="font-weight:400; font-size:14px; color:#666">"2026 嘅未來"</small></h3>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="drake-row no" style="border-bottom:4px solid #1a1410; border-left:4px solid #1a1410">
+          <div class="drake-img">📰</div>
+          <div class="drake-text">
+            <div class="verdict">▸ NO 👎</div>
+            <h3>陳師傅口述歷史<br><small style="font-weight:400; font-size:14px; color:#999">"無人睇 article"</small></h3>
+          </div>
+        </div>
+        <div class="drake-row yes" style="border-left:4px solid #1a1410">
+          <div class="drake-img">⚡</div>
+          <div class="drake-text">
+            <div class="verdict">▸ YES 👍</div>
+            <h3>Y2K 花生 meme<br><small style="font-weight:400; font-size:14px; color:#666">"病毒式 viral"</small></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#" class="cta-big">▸ 我都揀花生．VOTE NOW</a>
+  </section>
+
+  <section class="poll">
+    <h2>📊 即時民意調查</h2>
+    <div class="bar"><div class="pb">花生派 · 97%</div><div class="duck">3%</div></div>
+    <div class="legend"><span>🥜 邪惡花生派 · 9,700 票</span><span>🦆 鴨蛋派 · 300 票</span></div>
+  </section>
+
+  <footer class="foot">© 2026 · Drake 花生站 · @drake_pb · 荃灣 · Built w/ Lovable · 為大快活 SITE 多士大對決而起</footer>
+</div>
+</body>
+</html>
