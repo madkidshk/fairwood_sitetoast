@@ -1688,7 +1688,7 @@ body::after{
           <span class="em">🦆</span>
           <div class="bs-name">
             <span class="lbl">傳統 · 鴨蛋香</span>
-            <span class="nm">傳統鴨蛋派</span>
+            <span class="nm">傳統派</span>
           </div>
           <div class="bs-score">
             <div class="n" id="bsScoreDuck">470</div>
@@ -1868,7 +1868,7 @@ body::after{
         <div class="row">
           <label>▸ 揀陣營</label>
           <div class="sub-fac">
-            <button type="button" class="sub-fac-btn active duck">🦆 傳統鴨蛋派</button>
+            <button type="button" class="sub-fac-btn active duck">🦆 傳統派</button>
             <button type="button" class="sub-fac-btn peanut">🥜 邪惡花生派</button>
           </div>
         </div>
@@ -2199,7 +2199,7 @@ function renderPage(){
   const grid = document.getElementById('galleryGrid');
   grid.innerHTML = ALL_SITES.map((s, i) => `
     <div class="g-card ${s.side}" data-idx="${i}">
-      <span class="g-card-fac">${s.side === 'duck' ? '🦆 鴨蛋派' : '🥜 花生派'}</span>
+      <span class="g-card-fac">${s.side === 'duck' ? '🦆 傳統派' : '🥜 花生派'}</span>
       <div class="g-card-iframewrap">
         <iframe src="${s.url}" loading="lazy" sandbox="allow-same-origin allow-scripts"
                 referrerpolicy="no-referrer" title="${s.title}"></iframe>
@@ -2237,7 +2237,7 @@ const lbCount  = document.getElementById('lbCount');
 function renderLightbox(){
   const s = ALL_SITES[lbIdx];
   lbIfr.src = s.url;
-  lbFac.textContent = s.side === 'duck' ? '🦆 鴨蛋派' : '🥜 花生派';
+  lbFac.textContent = s.side === 'duck' ? '🦆 傳統派' : '🥜 花生派';
   lbFac.className = `lb-fac ${s.side}`;
   lbTitle.textContent = s.title;
   lbWho.innerHTML = `<strong>${s.who}</strong> · ${s.school}`;

@@ -57,12 +57,12 @@ body{ padding-right: 80px; } /* reserve room for fixed right side-nav */
 }
 .toast-break.left::before{
   left: -120px;
-  background-image: url("https://d8j0ntlcm91z4.cloudfront.net/user_3DQRwFTsY5KMPWh5VbY7ZU6vbJH/hf_20260517_141852_ed01d625-8a2a-4af8-b0a7-3f1851084e62.png");
+  background-image: url("assets/westoast-traditional.png");
   transform: translateY(-50%) rotate(-14deg);
 }
 .toast-break.right::before{
   right: -120px;
-  background-image: url("https://d8j0ntlcm91z4.cloudfront.net/user_3DQRwFTsY5KMPWh5VbY7ZU6vbJH/hf_20260517_141856_967d43fd-c7cb-4e18-9e35-1f4a607842b6.png");
+  background-image: url("assets/westoast-peanut.png");
   transform: translateY(-50%) rotate(14deg);
 }
 /* gentle scroll-in reveal via IntersectionObserver class */
@@ -73,7 +73,7 @@ body{ padding-right: 80px; } /* reserve room for fixed right side-nav */
 .toast-break.left::before{ transform: translateY(-50%) translateX(-120px) rotate(-30deg); }
 .toast-break.right::before{ transform: translateY(-50%) translateX(120px) rotate(30deg); }
 .toast-break.visible::before{
-  opacity: .9;
+  opacity: .4;
 }
 .toast-break.left.visible::before{  transform: translateY(-50%) translateX(0) rotate(-14deg); }
 .toast-break.right.visible::before{ transform: translateY(-50%) translateX(0) rotate(14deg); }
@@ -1689,7 +1689,7 @@ body::after{
           <span class="em">🦆</span>
           <div class="bs-name">
             <span class="lbl">傳統 · 鴨蛋香</span>
-            <span class="nm">傳統鴨蛋派</span>
+            <span class="nm">傳統派</span>
           </div>
           <div class="bs-score">
             <div class="n" id="bsScoreDuck">470</div>
@@ -1875,7 +1875,7 @@ body::after{
         <div class="row">
           <label>▸ 揀陣營</label>
           <div class="sub-fac">
-            <button type="button" class="sub-fac-btn active duck">🦆 傳統鴨蛋派</button>
+            <button type="button" class="sub-fac-btn active duck">🦆 傳統派</button>
             <button type="button" class="sub-fac-btn peanut">🥜 邪惡花生派</button>
           </div>
         </div>
@@ -2216,7 +2216,7 @@ function renderPage(){
   const grid = document.getElementById('galleryGrid');
   grid.innerHTML = ALL_SITES.map((s, i) => `
     <div class="g-card ${s.side}" data-idx="${i}">
-      <span class="g-card-fac">${s.side === 'duck' ? '🦆 鴨蛋派' : '🥜 花生派'}</span>
+      <span class="g-card-fac">${s.side === 'duck' ? '🦆 傳統派' : '🥜 花生派'}</span>
       <div class="g-card-iframewrap">
         <iframe src="${s.url}" loading="lazy" sandbox="allow-same-origin allow-scripts"
                 referrerpolicy="no-referrer" title="${s.title}"></iframe>
@@ -2254,7 +2254,7 @@ const lbCount  = document.getElementById('lbCount');
 function renderLightbox(){
   const s = ALL_SITES[lbIdx];
   lbIfr.src = s.url;
-  lbFac.textContent = s.side === 'duck' ? '🦆 鴨蛋派' : '🥜 花生派';
+  lbFac.textContent = s.side === 'duck' ? '🦆 傳統派' : '🥜 花生派';
   lbFac.className = `lb-fac ${s.side}`;
   lbTitle.textContent = s.title;
   lbWho.innerHTML = `<strong>${s.who}</strong> · ${s.school}`;
