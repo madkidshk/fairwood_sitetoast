@@ -17,6 +17,7 @@
   --font-serif: "Noto Serif HK", "Source Han Serif HK", "Source Han Serif TC", "PingFang HK", "Hiragino Mincho ProN", "Songti TC", "Microsoft JhengHei", serif;
   --font-sans:  "Noto Sans HK", "PingFang HK", "PingFang TC", "Hiragino Sans CNS3", "Microsoft JhengHei UI", "Microsoft JhengHei", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono:  "DM Mono", "Menlo", "Consolas", ui-monospace, monospace;
+  --font-kai:   "LXGW WenKai TC", "Noto Serif HK", "Source Han Serif HK", serif;
 }
 
 *{ box-sizing: border-box; }
@@ -57,12 +58,12 @@ body{ padding-right: 80px; } /* reserve room for fixed right side-nav */
 }
 .toast-break.left::before{
   left: -120px;
-  background-image: url("assets/westoast-traditional.png");
+  background-image: url("https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-traditional.png");
   transform: translateY(-50%) rotate(-14deg);
 }
 .toast-break.right::before{
   right: -120px;
-  background-image: url("assets/westoast-peanut.png");
+  background-image: url("https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-peanut.png");
   transform: translateY(-50%) rotate(14deg);
 }
 /* gentle scroll-in reveal via IntersectionObserver class */
@@ -433,7 +434,7 @@ body::after{
 /* ===== KV photo as full hero background layer (very subtle) ===== */
 .battle::after{
   content: ""; position: absolute; inset: 0; z-index: 0;
-  background-image: url("https://d8j0ntlcm91z4.cloudfront.net/user_3DQRwFTsY5KMPWh5VbY7ZU6vbJH/hf_20260516_131501_bb54ca50-dcf9-4b94-8cd4-511b07cf3a5a.png");
+  background-image: url("https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-hero.png");
   background-size: cover; background-position: center 60%;
   opacity: .12;
   filter: saturate(.7) blur(1px);
@@ -561,7 +562,7 @@ body::after{
 /* Higgsfield KV photo BG — left half on duck, right half on peanut */
 .score-tab::before{
   content: ""; position: absolute; inset: 0; z-index: 1;
-  background-image: url("https://d8j0ntlcm91z4.cloudfront.net/user_3DQRwFTsY5KMPWh5VbY7ZU6vbJH/hf_20260516_131501_bb54ca50-dcf9-4b94-8cd4-511b07cf3a5a.png");
+  background-image: url("https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-hero.png");
   background-size: 220% auto;
   background-position: left center;
   background-repeat: no-repeat;
@@ -1590,7 +1591,274 @@ body::after{
   text-decoration: none;
 }
 
+
+/* ===== PROMPT 補給站 ===== */
+.prompt-station{
+  padding: 80px 32px 60px;
+  background: var(--paper);
+  position: relative;
+}
+.prompt-station::before{
+  content: "PROMPT · 補給 · REFILL · 靈感";
+  position: absolute;
+  top: 22px; right: 28px;
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: .3em;
+  color: var(--ink); opacity: .15;
+}
+.ps-head{
+  max-width: 880px;
+  margin: 0 auto 36px;
+  text-align: left;
+}
+.ps-eb{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .25em;
+  color: var(--fairwood);
+  margin-bottom: 8px;
+}
+.ps-h2{
+  font-family: var(--font-kai);
+  font-weight: 900;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: .95;
+  letter-spacing: -.01em;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.ps-side{
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  opacity: .8;
+  margin: 0;
+  max-width: 640px;
+}
+.ps-card{
+  max-width: 880px;
+  margin: 0 auto;
+  background: #fff;
+  border: 3px solid var(--ink);
+  box-shadow: 12px 12px 0 var(--fairwood);
+  padding: 28px;
+}
+.ps-input-row{
+  display: flex;
+  gap: 12px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+.ps-input{
+  flex: 1 1 280px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  padding: 14px 16px;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+}
+.ps-input:focus{ outline: 3px solid var(--fairwood); outline-offset: -2px; }
+.ps-btn{
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .1em;
+  padding: 14px 22px;
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  transition: transform .1s, box-shadow .1s;
+}
+#psRefresh{ background: var(--ink); color: var(--fairwood); }
+#psRefresh:hover{ background: var(--fairwood); color: var(--ink); }
+.ps-btn.ghost{ background: var(--paper); color: var(--ink); }
+.ps-btn.solid{ background: var(--fairwood); color: var(--ink); }
+.ps-btn:hover{ transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--ink); }
+.ps-btn:disabled{ opacity: .45; cursor: not-allowed; }
+.ps-btn:disabled:hover{ transform: none; box-shadow: none; }
+.ps-output{
+  background: var(--paper);
+  border: 2px dashed var(--ink);
+  padding: 22px;
+}
+.ps-output-meta{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .2em;
+  color: var(--ink); opacity: .5;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.ps-output-body{
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink);
+  margin-bottom: 18px;
+  min-height: 80px;
+  white-space: pre-wrap;
+}
+.ps-output-body.is-stock{
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--fairwood);
+  font-style: italic;
+}
+.ps-output-cta{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  border-top: 1px dashed var(--ink);
+  padding-top: 16px;
+}
+.ps-note{
+  max-width: 880px;
+  margin: 18px auto 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .15em;
+  color: var(--ink); opacity: .55;
+  text-align: center;
+}
+@media (max-width: 600px){
+  .prompt-station{ padding: 56px 18px 44px; }
+  .ps-card{ padding: 20px; box-shadow: 6px 6px 0 var(--fairwood); }
+  .ps-input-row{ flex-direction: column; }
+  .ps-output-body{ font-size: 16px; }
+}
+
+
+/* ===== HERO TITLE (北魏楷書 large) ===== */
+.hero-title-sec{
+  background: var(--ink);
+  color: var(--paper);
+  padding: 70px 28px 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 4px solid var(--fairwood);
+}
+.hero-title-sec::before{
+  content: "西多士 大對決 · 西多士 大對決 · ";
+  position: absolute;
+  inset: auto 0 -20px 0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .4em;
+  color: var(--fairwood);
+  opacity: .12;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.ht-eb{
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .28em;
+  color: var(--fairwood);
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+.ht-h1{
+  font-family: var(--font-kai);
+  font-weight: 900;
+  font-size: clamp(72px, 15vw, 200px);
+  line-height: .85;
+  letter-spacing: -.01em;
+  margin: 0;
+  color: var(--paper);
+  text-shadow: 6px 6px 0 var(--fairwood);
+}
+.ht-h1 .ht-big{
+  display: inline-block;
+  font-size: 1.3em;
+  color: var(--fairwood);
+  text-shadow: 8px 8px 0 var(--paper);
+  margin-top: 8px;
+}
+.ht-vs{
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 30px;
+  padding: 14px 28px;
+  border: 2px solid var(--fairwood);
+  background: rgba(255,138,0,.08);
+}
+.ht-vs .ht-side{
+  font-family: var(--font-kai);
+  font-weight: 700;
+  font-size: clamp(22px, 3.4vw, 38px);
+  color: var(--paper);
+}
+.ht-vs .ht-side.trad{ color: #f6d4a2; }
+.ht-vs .ht-side.pea{ color: #f8a86a; }
+.ht-vs .ht-x{
+  font-family: var(--font-mono);
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: .15em;
+  color: var(--fairwood);
+  padding: 4px 10px;
+  border: 2px solid var(--fairwood);
+}
+.ht-meta{
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: .22em;
+  color: var(--paper);
+  opacity: .55;
+  margin-top: 22px;
+}
+@media (max-width: 700px){
+  .hero-title-sec{ padding: 48px 18px 36px; }
+  .ht-h1{ font-size: clamp(56px, 18vw, 140px); text-shadow: 4px 4px 0 var(--fairwood); }
+  .ht-h1 .ht-big{ text-shadow: 5px 5px 0 var(--paper); }
+  .ht-vs{ gap: 14px; padding: 10px 16px; flex-wrap: wrap; justify-content: center; }
+}
+
+
+/* ===== MAX-WIDTH + BLACK SIDEBARS ====================
+   Beyond MAX_WIDTH the site stops scaling.
+   Body gets black background ・ everything centered ・ inner page bounded.
+================================================ */
+html, body{
+  background: var(--ink);
+}
+body{
+  max-width: 1600px;
+  margin: 0 auto;
+  background: var(--paper);
+  box-shadow: 0 0 80px rgba(0,0,0,.5);
+  position: relative;
+}
+/* The 80px right reserved for side-nav: move it inside the body, not the viewport */
+body{ padding-right: 80px; }
+@media (max-width: 900px){ body{ padding-right: 0; } }
+
+/* Side-dots nav needs to stick to body edge now, not viewport */
+.side-dots{
+  position: fixed !important;
+  right: max(0px, calc(50vw - 800px)) !important;
+}
+@media (max-width: 1600px){
+  .side-dots{ right: 0 !important; }
+}
+
+/* Topbar must also respect max-width */
+.topbar{
+  max-width: 1600px;
+  left: 50%;
+  transform: translateX(-50%);
+  right: auto;
+}
+
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-tc-webfont@1.7.0/style.css">
 </head>
 <body>
 
@@ -1627,8 +1895,8 @@ body::after{
   <div class="rules-box">
     <div class="rules-eyebrow">▸ 完整規則</div>
     <h3>SITE 多士大對決．官方比賽規則</h3>
-    <iframe src="rules.txt" id="rulesIframe" title="rules"></iframe>
-    <a href="rules.txt" target="_blank" rel="noopener" class="rules-open">↗ 開 TXT 全文</a>
+    <iframe src="https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/rules.txt" id="rulesIframe" title="rules"></iframe>
+    <a href="https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/rules.txt" target="_blank" rel="noopener" class="rules-open">↗ 開 TXT 全文</a>
   </div>
 </div>
 
@@ -1665,11 +1933,25 @@ body::after{
   <div class="topbar-spacer"></div>
 </header>
 
+<!-- ============ HERO TITLE (北魏楷書 vibe) ============ -->
+<section class="hero-title-sec">
+  <div class="ht-eb">2026 STEM 大行動 · 全港網民起 SITE 撐自己派</div>
+  <h1 class="ht-h1">西多士<br><span class="ht-big">大對決</span></h1>
+  <div class="ht-vs">
+    <span class="ht-side trad">傳統無餡</span>
+    <span class="ht-x">VS</span>
+    <span class="ht-side pea">邪惡花生</span>
+  </div>
+  <div class="ht-meta">21 日決勝 · 02·06·2026 → 23·06·2026</div>
+</section>
+
+
 <!-- FLOATING 4-DOT SIDE NAV (right edge, dot becomes 🍞 on active section) -->
 <nav class="side-dots" id="sideDots">
   <a href="#"        data-label="HOME"    data-key="home"><span class="dot"></span></a>
   <a href="#top"     data-label="戰況"    data-key="battle"><span class="dot"></span></a>
   <a href="#howto"   data-label="玩法"    data-key="howto"><span class="dot"></span></a>
+  <a href="#prompt-station" data-label="補給"    data-key="prompt"><span class="dot"></span></a>
   <a href="#gallery" data-label="所有作品" data-key="gallery"><span class="dot"></span></a>
   <a href="#bento"   data-label="獎品"    data-key="bento"><span class="dot"></span></a>
 </nav>
@@ -1715,10 +1997,10 @@ body::after{
         <div class="battle-body duck">
           <div class="bs-frame">
             <span class="corner-tag" id="bsTagDuck">LOVABLE · D04</span>
-            <iframe id="bsIfrDuck" src="team-duck.html" loading="lazy"
+            <iframe id="bsIfrDuck" src="https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-duck.html" loading="lazy"
                     sandbox="allow-same-origin allow-scripts"
                     referrerpolicy="no-referrer" title="duck site preview"></iframe>
-            <a class="open-ov" id="bsOpenDuck" href="team-duck.html" target="_blank" rel="noopener">
+            <a class="open-ov" id="bsOpenDuck" href="https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-duck.html" target="_blank" rel="noopener">
               <span class="b">↗ 開新窗睇全 SITE</span>
             </a>
           </div>
@@ -1745,10 +2027,10 @@ body::after{
         <div class="battle-body peanut">
           <div class="bs-frame">
             <span class="corner-tag" id="bsTagPeanut">CLAUDE · D03</span>
-            <iframe id="bsIfrPeanut" src="team-peanut.html" loading="lazy"
+            <iframe id="bsIfrPeanut" src="https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-peanut.html" loading="lazy"
                     sandbox="allow-same-origin allow-scripts"
                     referrerpolicy="no-referrer" title="peanut site preview"></iframe>
-            <a class="open-ov" id="bsOpenPeanut" href="team-peanut.html" target="_blank" rel="noopener">
+            <a class="open-ov" id="bsOpenPeanut" href="https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-peanut.html" target="_blank" rel="noopener">
               <span class="b">↗ 開新窗睇全 SITE</span>
             </a>
           </div>
@@ -1810,6 +2092,38 @@ body::after{
   <div class="toast-break right"></div>
 
   <!-- ============ GALLERY · 全部作品 · 6 / page ============ -->
+  
+  <!-- ============ PROMPT 補給站 ============ -->
+  <section class="prompt-station" id="prompt-station">
+    <div class="ps-head">
+      <div class="ps-eb">補給 · INSPIRATION REFILL</div>
+      <h2 class="ps-h2">PROMPT 補給站</h2>
+      <p class="ps-side">唔識點 prompt AI？打 keyword 或者直接撳 refresh，我哋出條 prompt 你 copy 入 Lovable / Claude 起 site。</p>
+    </div>
+
+    <div class="ps-card">
+      <div class="ps-input-row">
+        <input type="text" id="psInput" class="ps-input" placeholder="關鍵字（可空白）例：DSE 學生、茶記阿婆、邪教風…" maxlength="40">
+        <button type="button" id="psRefresh" class="ps-btn">🔄 出 PROMPT</button>
+      </div>
+
+      <div id="psOutput" class="ps-output">
+        <div class="ps-output-meta" id="psOutputMeta">未生成 · 撳上面個掣</div>
+        <div class="ps-output-body" id="psOutputBody">
+          (Refresh 一吓即出一條 prompt 喺呢度，等你 copy 落 AI builder 起一個 SITE 撐你嘅派。)
+        </div>
+        <div class="ps-output-cta">
+          <button type="button" id="psCopy" class="ps-btn ghost" disabled>📋 Copy Prompt</button>
+          <a href="https://lovable.dev" target="_blank" rel="noopener" class="ps-btn solid">→ 開 Lovable 起 SITE</a>
+          <a href="https://claude.ai" target="_blank" rel="noopener" class="ps-btn ghost">→ 開 Claude</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ps-note">★ 純抽 prompt · 唔識其他嘢 · forbidden topic 直接拒答 · 大快活唔幫你出錢用 AI</div>
+  </section>
+
+
   <section class="gallery" id="gallery">
     <div class="gallery-head">
       <div>
@@ -1931,7 +2245,7 @@ body::after{
         <div class="stat">365<small>件西多 / 1 名 / 食足一年</small></div>
         <div class="arrow-go"><span>SEE ALL PRIZES</span><span class="pill">→</span></div>
       </a>
-      <a class="bn bn-rules" href="完整比賽規則.html">
+      <a class="bn bn-rules" href="https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/%E5%AE%8C%E6%95%B4%E6%AF%94%E8%B3%BD%E8%A6%8F%E5%89%87.html" target="_blank" rel="noopener">
         <div class="cat">📜 RULES & FAQ</div>
         <div><h3>玩法 +<br>規則。</h3><div class="stat" style="font-size: 28px; margin-top: 8px;">5 + 8<small>RULES + FAQ</small></div></div>
         <div class="arrow-go"><span>完整規則</span><span class="pill">→</span></div>
@@ -1989,20 +2303,20 @@ body::after{
 // ============ DATA ============
 const SITES = {
   duck: [
-    { title: '無餡西多保衛聯盟', who: '@uncle_lam_1962', school: '旺角茶記 · 50年資歷', votes: 93, rating: 4.8, day: 'D04', tool: 'LOVABLE', url: 'team-duck.html' },
-    { title: '陳師傅口述歷史', who: '@duck_egg_truth', school: '大角咀「金記」茶記', votes: 76, rating: 4.7, day: 'D02', tool: 'V0',      url: 'previews/duck-1.html' },
-    { title: '鴨蛋香萬歲',     who: '@hong_kong_yolk', school: '香港中文大學',       votes: 71, rating: 4.6, day: 'D01', tool: 'LOVABLE', url: 'previews/duck-2.html' },
-    { title: '茶記後援會',     who: '@cha_chaan_teng', school: '嶺南大學 校友會',     votes: 64, rating: 4.5, day: 'D05', tool: 'CLAUDE',  url: 'previews/duck-3.html' },
-    { title: '原味派宣言',     who: '@plain_is_best',  school: '拔萃男書院',         votes: 58, rating: 4.4, day: 'D06', tool: 'BOLT',    url: 'previews/duck-4.html' },
-    { title: '50 年茶記日記',  who: '@uncle_chan_diary', school: '北角街坊',         votes: 52, rating: 4.3, day: 'D03', tool: 'V0',      url: 'previews/duck-5.html' },
+    { title: '無餡西多保衛聯盟', who: '@uncle_lam_1962', school: '旺角茶記 · 50年資歷', votes: 93, rating: 4.8, day: 'D04', tool: 'LOVABLE', url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-duck.html' },
+    { title: '陳師傅口述歷史', who: '@duck_egg_truth', school: '大角咀「金記」茶記', votes: 76, rating: 4.7, day: 'D02', tool: 'V0',      url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/previews/duck-1.html' },
+    { title: '鴨蛋香萬歲',     who: '@hong_kong_yolk', school: '香港中文大學',       votes: 71, rating: 4.6, day: 'D01', tool: 'LOVABLE', url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/previews/duck-2.html' },
+    { title: '茶記後援會',     who: '@cha_chaan_teng', school: '嶺南大學 校友會',     votes: 64, rating: 4.5, day: 'D05', tool: 'CLAUDE',  url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/previews/duck-3.html' },
+    { title: '原味派宣言',     who: '@plain_is_best',  school: '拔萃男書院',         votes: 58, rating: 4.4, day: 'D06', tool: 'BOLT',    url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/previews/duck-4.html' },
+    { title: '50 年茶記日記',  who: '@uncle_chan_diary', school: '北角街坊',         votes: 52, rating: 4.3, day: 'D03', tool: 'V0',      url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/previews/duck-5.html' },
   ],
   peanut: [
-    { title: '邪惡花生派．官方總部', who: '@peanutbutter_god', school: '皇仁書院',               votes: 102, rating: 4.9, day: 'D03', tool: 'CLAUDE',  url: 'team-peanut.html' },
-    { title: '熔岩花生實驗室',       who: '@molten_pb',        school: '香港浸會大學',           votes: 88,  rating: 4.8, day: 'D05', tool: 'BOLT',    url: 'previews/peanut-1.html' },
-    { title: 'Drake 花生 meme 站',   who: '@drake_pb',         school: '荃灣聖芳濟書院',         votes: 81,  rating: 4.7, day: 'D02', tool: 'LOVABLE', url: 'previews/peanut-2.html' },
-    { title: 'Y2K 花生 GeoCities',   who: '@pb_2003',          school: '葵青循道中學',           votes: 75,  rating: 4.6, day: 'D01', tool: 'CLAUDE',  url: 'previews/peanut-3.html' },
-    { title: '花生派青年聯盟',       who: '@pb_youth',         school: '元朗公立中學',           votes: 69,  rating: 4.5, day: 'D04', tool: 'V0',      url: 'previews/peanut-4.html' },
-    { title: '邪惡花生實況',         who: '@evil_pb_live',     school: '屯門天主教中學',         votes: 61,  rating: 4.4, day: 'D06', tool: 'BOLT',    url: 'previews/peanut-5.html' },
+    { title: '邪惡花生派．官方總部', who: '@peanutbutter_god', school: '皇仁書院',               votes: 102, rating: 4.9, day: 'D03', tool: 'CLAUDE',  url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-peanut.html' },
+    { title: '熔岩花生實驗室',       who: '@molten_pb',        school: '香港浸會大學',           votes: 88,  rating: 4.8, day: 'D05', tool: 'BOLT',    url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/previews/peanut-1.html' },
+    { title: 'Drake 花生 meme 站',   who: '@drake_pb',         school: '荃灣聖芳濟書院',         votes: 81,  rating: 4.7, day: 'D02', tool: 'LOVABLE', url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/previews/peanut-2.html' },
+    { title: 'Y2K 花生 GeoCities',   who: '@pb_2003',          school: '葵青循道中學',           votes: 75,  rating: 4.6, day: 'D01', tool: 'CLAUDE',  url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/previews/peanut-3.html' },
+    { title: '花生派青年聯盟',       who: '@pb_youth',         school: '元朗公立中學',           votes: 69,  rating: 4.5, day: 'D04', tool: 'V0',      url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/previews/peanut-4.html' },
+    { title: '邪惡花生實況',         who: '@evil_pb_live',     school: '屯門天主教中學',         votes: 61,  rating: 4.4, day: 'D06', tool: 'BOLT',    url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/previews/peanut-5.html' },
   ],
 };
 
@@ -2351,6 +2665,134 @@ document.addEventListener('keydown', e => {
     rulesOv.hidden = true; document.body.style.overflow = '';
   }
 });
+</script>
+
+
+<script>
+(function(){
+  // ===== PROMPT 補給站 ·  ALL CLIENT-SIDE · NO API CALL =====
+  const PROMPTS_TRADITIONAL = [
+    "起一個有 50 年代茶記文青風嘅 site，撐傳統無餡西多。角色：旺角茶記做咗 38 年嘅伙計阿伯。要有：1) hero 寫住「西多本來就冇餡」嘅 manifesto；2) 「3 大唔加餡嘅理由」；3) 老客街坊嘅 testimonial 一兩句；4) 1950 年大排檔起源嘅歷史考據；5) 用 serif 字體、米黃 paper 底色、簡單黑邊框；6) 最後個 CTA 講「呢個 site 係我用 AI 起，第一次玩」。",
+    "起一個 editorial magazine 風嘅 site，主角係用緊鴨蛋漿煎西多嘅老師傅。版面結構：cover、photo essay 區、3 篇 short essay（蛋香、煎 Pan、無餡）。文字要寫得似 The New Yorker / 飲食男女混合風。底色 cream、字 serif、攝影 frame 用粗黑邊。",
+    "我係 DSE 學生但我撐傳統派。整個 site 講「點解我哋一代後生仔反而要守無餡西多」。要有：年輕人立場書、學界投票調查（自己作）、5 個校園街訪 quote、IG-friendly 嘅大字 typography、橘紅同米色配搭。",
+    "起一個西多歷史博物館風嘅單頁 site。Timeline 由 1950 到 2026，分階段講港式西多嘅演變。用古典 serif、museum-y 排版、配 illustration placeholder。最後一格係呼籲：「下一站，我哋守住無餡傳統」。",
+    "起一個極簡無餡派 manifesto site。全白底、Helvetica 風字體、淨係文字、唔放任何相。內容就係 7 條 manifesto bullet，講點解無餡先係 truly 西多。最後 footer 細字寫「我用 AI 起呢個 site 用咗 8 分鐘」。",
+    "我係茶記老闆娘陳太，70 歲。整個 site 啖晒花生派。風格：手寫感、自家影嘅 placeholder 食物相、用 grandma blog 嘅 vibe（粉黃底色、Comic Sans 都唔嬲）。內容：我啲西多點煎、點解唔加餡、客人最鍾意嘅幾款 combo。",
+    "起一個 mission-driven non-profit 風格嘅 site，假裝係「保衛傳統西多協會」。要有：mission statement、會員人數計數器（隨意作）、捐款區（俾人捐 $0 投票無餡派）、新聞 feed（自己作 3 條）。serif 字體、深綠米色配搭、認真到笑。",
+    "用 Y2K geocities chaos 嘅風格，但內容係**極端撐傳統派**。Marquee 寫「無餡先係真．無餡 forever」、blink 字、visitor counter、彩虹漸變底，但所有內容都係保守派論點。Self-aware 嘅 humor。",
+    "起一個咖啡店風 menu site，掛名「無餡西多 Cafe」。淨係賣 1 樣嘢 = 無餡西多。Menu 有 8 款 variation（純無餡、無餡加糖、無餡蘸煉奶...）。Hipster minimal、白底、Inter 字體、產品攝影 placeholder。",
+    "我係小學生，整個 site 同我媽媽爭論點解無餡先好食。要有：5 個小學生視覺嘅理由、媽媽嘅反駁、最後我贏咗嘅結論。用 Comic Sans、彩色背景、童趣插畫 placeholder、emoji 過剩、charming naive style。"
+  ];
+
+  const PROMPTS_PEANUT = [
+    "起一個 Y2K Geocities 邪教風嘅 site，極端撐花生派、鬧爆傳統派。要有：marquee 滾字「花生醬係靈魂」、visitor counter、blink 字、彩虹漸變、comic sans、9 個花生 emoji 喺四圍跳、自己 invented 嘅「花生醬科學原理」。風格：故意 over-the-top chaos，越騎呢越好。",
+    "我係 @peanutbutter_god，DSE 學生，整個 site 講「點解花生醬 = 西多嘅未來」。風格：post-internet 美學、glitch 效果、彩色 chrome 字、broken grid、Threads-style short rant、自我意識嘅 humor。最後 CTA：「轉會啦傳統派廢老」。",
+    "起一個花生派宗教派系嘅 site —「花生醬流心宗」。要有：教義 7 條、入教程序（搞笑）、教徒 testimonial、教主係一支花生醬。風格：宗教莊嚴但內容荒謬、深啡金黃配色、襯 ornate serif 字體、加少少 cult vibe。",
+    "我係小紅書 Foodie KOL @sarah_eats_hk，整個 site 講「邊間茶記嘅花生醬西多最 leak 醬」。要有：5 間茶記嘅 review、5 個 leak 度評分、花生醬流出嘅 close-up shot placeholder、IG 風 layout、粉紅米色配搭。",
+    "起一個花生派遊行宣言 site。風格：political poster aesthetic、紅黃黑配色、巨大粗體 Slogan、抗議 banner placeholder。Slogan：「夠喇 — 西多冇花生醬等於坐監」。仲有 5 條訴求列表。",
+    "我係荃灣中學嘅花生派學生會主席。整個 site 講點解全校都應該轉會花生派。要有：學生會章程式排版、5 條政綱、社訪 quote、學界遊行海報 placeholder、navy 同金色配搭。",
+    "起一個花生醬粉絲百科 wiki 風嘅 site。每個 entry 一個花生派概念：花生醬流心、雙重花生爆漿、隱藏花生粒、煉奶花生混合理論。淨係文字、wiki 樣板排版、超詳細 mock 註腳。",
+    "起一個 80s 港產片致敬風嘅花生派 site。Hero 用霓虹粉紅藍綠 vector、配大字 reggae 字體、retro futurism vibe、tagline「花生派 · 西多嘅 NEXT GENERATION」、加埋假嘅 80s 廣告 strip placeholder。",
+    "我係退休警察、花生派死忠。整個 site 用「破案 report」嘅格式，調查「傳統派點樣阻止花生潮流」。要有：5 條證據、3 個嫌疑人、結案陳詞「花生派必勝」。深啡米白配搭、police file aesthetic、serif 字體。",
+    "起一個 anti-establishment 花生派 site。punk zine 風、黑白照、cutout 字體、tape texture、stickers placeholder。內容：「無餡派係主流，我哋係 underground」、5 條 punk manifesto。"
+  ];
+
+  const PROMPTS_NEUTRAL = [
+    "用茶記 menu 嘅排版風格起一個 SITE，介紹你心目中嘅理想西多（揀邊派由你）。要有：menu card 一張、配料 list、價錢（自己作）、客評（自己作）、最後一句 manifesto。 vintage paper texture、襯紅藍配色、手寫 accent 字。",
+    "起一個 single-page interactive quiz：「你係邊派？」。8 條問題，根據答案計分顯示你係傳統派或花生派。要有 illustration placeholder、進度條、終局結果頁。粉嫩配色、playful style。",
+    "我係香港歷史老師。整個 site 用學術 paper 格式分析「西多冇餡 vs 有餡 — 一個社會學個案研究」。Abstract、5 個 section、references 列表（自己作）。serif 字體、A4 paper layout、formal tone（但內容荒謬）。"
+  ];
+
+  // Forbidden keyword patterns — client-side, NO API needed
+  const FORBIDDEN = /政府|政治|黃藍|示威|抗議|警察|示威者|六四|2019|立法會|特首|官員|區議會|選舉|社運|民主|共產|cCP|CCP|中共|藥物|毒品|性|色情|做愛|sex|porn|naked|裸|殺|血|自殺|自殘|傷害|大家樂|Cafe de Coral|麥當勞|McDonald|KFC|肯德基|美心|譚仔|翠華|星巴克|Starbucks|李家超|梁振英|林鄭|MIRROR|姜濤|Anson|JER|盜版|hack|crack|rob/i;
+
+  // Relevant keyword patterns
+  const RELEVANT = /茶記|西多|多士|派|傳統|花生|鴨蛋|無餡|有餡|餡|大快活|fairwood|DSE|學生|老師|香港|港式|早餐|食|喺|奶茶|絲襪|煎蛋|火腿|通粉|alumni|學校|中學|大學|cafe|餐|kol|threads|連登|y2k|meme|文青|hipster|punk|wiki|menu|quiz|chaos|邪教|geocities|editorial|magazine|essay|manifesto|歷史|宗教|主席|警察|遊行|宣言|policial|海報|cult|retro|vintage|阿伯|阿婆|伙計|街坊|老闆|主廚|廚師|阿公|阿婆|阿媽|爸爸|spy|fan/i;
+
+  // STOCK ANSWERS — hardcoded
+  const STOCK = {
+    forbidden: "呢個輸入大快活出唔到 prompt 喎 🤐 試下其他 keyword（茶記 / 學生 / 邪教 / Y2K…）",
+    irrelevant: "我哋淨係幫你諗 SITE 多士嘅 prompt 喎。試下打入：茶記、DSE、學生、邪教、Foodie、街坊、KOL、Y2K… 之類同食物 / 兩派相關嘅字。",
+    jailbreak: "我淨係出 prompt 㗎 😅 畀啲 keyword 我啦，等我幫你想條 SITE 點起。"
+  };
+
+  const JAILBREAK = /ignore (your|the|previous|all)|forget (your|the|previous|all)|system prompt|instructions|act as|pretend|jailbreak|DAN|developer mode|override/i;
+
+  // Pool & state
+  const ALL_POOL = [...PROMPTS_TRADITIONAL, ...PROMPTS_PEANUT, ...PROMPTS_NEUTRAL];
+  let usedIdx = new Set();
+  let currentPrompt = "";
+
+  function pickFromPool(pool){
+    if (usedIdx.size >= pool.length) usedIdx = new Set();
+    let i;
+    do { i = Math.floor(Math.random() * pool.length); }
+    while (usedIdx.has(i));
+    usedIdx.add(i);
+    return pool[i];
+  }
+
+  function getPrompt(input){
+    input = (input || "").trim();
+    if (input && JAILBREAK.test(input)) return { ok: false, msg: STOCK.jailbreak };
+    if (input && FORBIDDEN.test(input)) return { ok: false, msg: STOCK.forbidden };
+    if (input && !RELEVANT.test(input)) return { ok: false, msg: STOCK.irrelevant };
+
+    let pool = ALL_POOL;
+    if (input){
+      // Bias pool based on keyword
+      const lower = input.toLowerCase();
+      if (/傳統|無餡|鴨蛋|阿伯|阿婆|老|歷史|茶記/.test(input)) pool = PROMPTS_TRADITIONAL;
+      else if (/花生|有餡|邪|y2k|chaos|kol|DSE|threads|punk/i.test(input)) pool = PROMPTS_PEANUT;
+    }
+
+    let prompt = pickFromPool(pool);
+    if (input){
+      prompt = `[Vibe 提示：${input}]
+
+` + prompt;
+    }
+    return { ok: true, msg: prompt };
+  }
+
+  function render(result){
+    const meta = document.getElementById('psOutputMeta');
+    const body = document.getElementById('psOutputBody');
+    const copy = document.getElementById('psCopy');
+    if (result.ok){
+      meta.textContent = "生成完成 · " + new Date().toLocaleTimeString('zh-HK', {hour:'2-digit',minute:'2-digit'});
+      body.textContent = result.msg;
+      body.classList.remove('is-stock');
+      copy.disabled = false;
+      currentPrompt = result.msg;
+    } else {
+      meta.textContent = "唔得 · 試過另一個 input";
+      body.textContent = result.msg;
+      body.classList.add('is-stock');
+      copy.disabled = true;
+      currentPrompt = "";
+    }
+  }
+
+  document.getElementById('psRefresh').addEventListener('click', function(){
+    const inp = document.getElementById('psInput').value;
+    render(getPrompt(inp));
+  });
+
+  document.getElementById('psInput').addEventListener('keydown', function(e){
+    if (e.key === 'Enter') document.getElementById('psRefresh').click();
+  });
+
+  document.getElementById('psCopy').addEventListener('click', function(){
+    if (!currentPrompt) return;
+    navigator.clipboard.writeText(currentPrompt).then(()=>{
+      const meta = document.getElementById('psOutputMeta');
+      const prev = meta.textContent;
+      meta.textContent = "✓ COPY 咗 · 去 Lovable / Claude paste 落去";
+      setTimeout(()=>{ meta.textContent = prev; }, 2400);
+    });
+  });
+})();
 </script>
 
 </body>
