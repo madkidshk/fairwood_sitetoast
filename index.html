@@ -1592,139 +1592,6 @@ body::after{
 }
 
 
-/* ===== PROMPT 補給站 ===== */
-.prompt-station{
-  padding: 80px 32px 60px;
-  background: var(--paper);
-  position: relative;
-}
-.prompt-station::before{
-  content: "PROMPT · 補給 · REFILL · 靈感";
-  position: absolute;
-  top: 22px; right: 28px;
-  font-family: var(--font-mono);
-  font-size: 10px; letter-spacing: .3em;
-  color: var(--ink); opacity: .15;
-}
-.ps-head{
-  max-width: 880px;
-  margin: 0 auto 36px;
-  text-align: left;
-}
-.ps-eb{
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: .25em;
-  color: var(--fairwood);
-  margin-bottom: 8px;
-}
-.ps-h2{
-  font-family: var(--font-kai);
-  font-weight: 900;
-  font-size: clamp(48px, 7vw, 96px);
-  line-height: .95;
-  letter-spacing: -.01em;
-  margin: 0 0 10px;
-  color: var(--ink);
-}
-.ps-side{
-  font-family: var(--font-serif);
-  font-size: 17px;
-  line-height: 1.55;
-  color: var(--ink);
-  opacity: .8;
-  margin: 0;
-  max-width: 640px;
-}
-.ps-card{
-  max-width: 880px;
-  margin: 0 auto;
-  background: #fff;
-  border: 3px solid var(--ink);
-  box-shadow: 12px 12px 0 var(--fairwood);
-  padding: 28px;
-}
-.ps-input-row{
-  display: flex;
-  gap: 12px;
-  margin-bottom: 22px;
-  flex-wrap: wrap;
-}
-.ps-input{
-  flex: 1 1 280px;
-  font-family: var(--font-sans);
-  font-size: 16px;
-  padding: 14px 16px;
-  border: 2px solid var(--ink);
-  background: var(--paper);
-  color: var(--ink);
-}
-.ps-input:focus{ outline: 3px solid var(--fairwood); outline-offset: -2px; }
-.ps-btn{
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: .1em;
-  padding: 14px 22px;
-  border: 2px solid var(--ink);
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
-  transition: transform .1s, box-shadow .1s;
-}
-#psRefresh{ background: var(--ink); color: var(--fairwood); }
-#psRefresh:hover{ background: var(--fairwood); color: var(--ink); }
-.ps-btn.ghost{ background: var(--paper); color: var(--ink); }
-.ps-btn.solid{ background: var(--fairwood); color: var(--ink); }
-.ps-btn:hover{ transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--ink); }
-.ps-btn:disabled{ opacity: .45; cursor: not-allowed; }
-.ps-btn:disabled:hover{ transform: none; box-shadow: none; }
-.ps-output{
-  background: var(--paper);
-  border: 2px dashed var(--ink);
-  padding: 22px;
-}
-.ps-output-meta{
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: .2em;
-  color: var(--ink); opacity: .5;
-  margin-bottom: 12px;
-  text-transform: uppercase;
-}
-.ps-output-body{
-  font-family: var(--font-serif);
-  font-size: 18px;
-  line-height: 1.65;
-  color: var(--ink);
-  margin-bottom: 18px;
-  min-height: 80px;
-  white-space: pre-wrap;
-}
-.ps-output-body.is-stock{
-  font-family: var(--font-mono);
-  font-size: 14px;
-  color: var(--fairwood);
-  font-style: italic;
-}
-.ps-output-cta{
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  border-top: 1px dashed var(--ink);
-  padding-top: 16px;
-}
-.ps-note{
-  max-width: 880px;
-  margin: 18px auto 0;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: .15em;
-  color: var(--ink); opacity: .55;
-  text-align: center;
-}
 @media (max-width: 600px){
   .prompt-station{ padding: 56px 18px 44px; }
   .ps-card{ padding: 20px; box-shadow: 6px 6px 0 var(--fairwood); }
@@ -1857,6 +1724,143 @@ body{ padding-right: 80px; }
   right: auto;
 }
 
+
+/* ===== HOWTO INLINE PROMPT GENERATOR ===== */
+.howto-gen{
+  margin-top: 28px;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 32px;
+  border: 3px solid var(--fairwood);
+}
+.hg-head{ margin-bottom: 22px; }
+.hg-eb{
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .22em;
+  color: var(--fairwood);
+  background: rgba(255,138,0,.12);
+  padding: 4px 10px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.hg-h3{
+  font-family: var(--font-kai);
+  font-weight: 900;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.05;
+  margin: 0 0 8px;
+  color: var(--paper);
+}
+.hg-h3 .hl{ color: var(--fairwood); }
+.hg-side{
+  font-family: var(--font-serif);
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--paper);
+  opacity: .75;
+}
+.hg-form{ display: grid; gap: 16px; }
+.hg-q{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.hg-q-label{
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .15em;
+  color: var(--fairwood);
+  min-width: 80px;
+  text-transform: uppercase;
+}
+.hg-chips{ display: flex; gap: 8px; flex-wrap: wrap; }
+.hg-chip{
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 14px;
+  background: transparent;
+  color: var(--paper);
+  border: 2px solid rgba(251,246,236,.3);
+  cursor: pointer;
+  transition: all .15s;
+}
+.hg-chip:hover{ border-color: var(--fairwood); transform: translateY(-1px); }
+.hg-chip.active{
+  background: var(--fairwood);
+  color: var(--ink);
+  border-color: var(--fairwood);
+}
+.hg-actions{ display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+.hg-btn{
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .08em;
+  padding: 12px 18px;
+  border: 2px solid var(--fairwood);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  transition: transform .1s, box-shadow .1s;
+}
+.hg-btn.primary{ background: var(--fairwood); color: var(--ink); }
+.hg-btn.ghost{ background: transparent; color: var(--fairwood); }
+.hg-btn:hover{ transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--paper); }
+.hg-btn:disabled{ opacity: .4; cursor: not-allowed; }
+.hg-btn:disabled:hover{ transform: none; box-shadow: none; }
+.hg-output{
+  margin-top: 22px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--fairwood);
+  padding: 22px;
+}
+.hg-output-head{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.hg-output-meta{
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: var(--ink);
+  opacity: .5;
+  text-transform: uppercase;
+}
+.hg-output-clear{
+  background: none; border: none; cursor: pointer;
+  font-size: 18px; color: var(--ink); opacity: .5;
+  padding: 4px 8px;
+}
+.hg-output-clear:hover{ opacity: 1; }
+.hg-output-body{
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  margin-bottom: 14px;
+}
+.hg-output-cta{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-top: 1px dashed var(--ink);
+  padding-top: 14px;
+}
+.hg-output-cta .hg-btn{ border-color: var(--ink); }
+.hg-output-cta .hg-btn.primary{ background: var(--ink); color: var(--fairwood); }
+.hg-output-cta .hg-btn.ghost{ color: var(--ink); }
+@media (max-width: 700px){
+  .howto-gen{ padding: 22px; }
+  .hg-q{ flex-direction: column; align-items: flex-start; gap: 8px; }
+  .hg-actions{ flex-direction: column; }
+  .hg-actions .hg-btn{ width: 100%; justify-content: center; }
+}
+
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-tc-webfont@1.7.0/style.css">
 </head>
@@ -1951,7 +1955,6 @@ body{ padding-right: 80px; }
   <a href="#"        data-label="HOME"    data-key="home"><span class="dot"></span></a>
   <a href="#top"     data-label="戰況"    data-key="battle"><span class="dot"></span></a>
   <a href="#howto"   data-label="玩法"    data-key="howto"><span class="dot"></span></a>
-  <a href="#prompt-station" data-label="補給"    data-key="prompt"><span class="dot"></span></a>
   <a href="#gallery" data-label="所有作品" data-key="gallery"><span class="dot"></span></a>
   <a href="#bento"   data-label="獎品"    data-key="bento"><span class="dot"></span></a>
 </nav>
@@ -2082,6 +2085,55 @@ body{ padding-right: 80px; }
         <div class="htc" data-n="03"><div class="htc-icon">🔗</div><div class="htc-step">STEP 03</div><h3>Copy URL。</h3><div class="cap">AI 起完，按 Publish<br><strong>Copy xxx.lovable.app</strong></div></div>
         <div class="htc final" data-n="04"><div class="htc-icon">📮</div><div class="htc-step">STEP 04 · FINAL</div><h3>貼喺下面交。</h3><div class="cap">scroll 落「交 Site」<br><strong>貼 URL．完。</strong></div></div>
       </div>
+      
+      <div class="howto-gen" id="howto-gen">
+        <div class="hg-head">
+          <span class="hg-eb">STEP 02 BOOSTER · 唔識 prompt 唔緊要</span>
+          <h3 class="hg-h3">答 <span class="hl">2 條 問題</span> · 即場出 PROMPT。</h3>
+          <p class="hg-side">無腦版：揀派 + 揀 vibe → 撳掣 → 出條 prompt → copy → 入 Lovable 起 SITE。<br>連揀都唔想揀：撳右邊「🎲 隨機抽」即刻畀你一條。</p>
+        </div>
+
+        <div class="hg-form">
+          <div class="hg-q">
+            <label class="hg-q-label">▸ 邊派？</label>
+            <div class="hg-chips" data-q="side">
+              <button type="button" class="hg-chip" data-v="duck">🍞 傳統</button>
+              <button type="button" class="hg-chip" data-v="peanut">🥜 花生</button>
+            </div>
+          </div>
+
+          <div class="hg-q">
+            <label class="hg-q-label">▸ Vibe？</label>
+            <div class="hg-chips" data-q="vibe">
+              <button type="button" class="hg-chip" data-v="文青">📚 文青認真</button>
+              <button type="button" class="hg-chip" data-v="邪教">⚡ 邪教熱血</button>
+              <button type="button" class="hg-chip" data-v="Meme">😂 Meme 搞笑</button>
+              <button type="button" class="hg-chip" data-v="Y2K">💾 Y2K Chaos</button>
+              <button type="button" class="hg-chip" data-v="食評">🍴 Foodie 食評</button>
+              <button type="button" class="hg-chip" data-v="街坊">🏠 街坊風</button>
+            </div>
+          </div>
+
+          <div class="hg-actions">
+            <button type="button" class="hg-btn primary" id="hgGen">✨ 出我嘅 PROMPT</button>
+            <button type="button" class="hg-btn ghost" id="hgRandom">🎲 隨機抽 · 唔想揀</button>
+          </div>
+        </div>
+
+        <div class="hg-output" id="hgOutput" hidden>
+          <div class="hg-output-head">
+            <span class="hg-output-meta" id="hgMeta">生成完成</span>
+            <button type="button" class="hg-output-clear" id="hgClear" aria-label="重來">✕</button>
+          </div>
+          <div class="hg-output-body" id="hgPrompt"></div>
+          <div class="hg-output-cta">
+            <button type="button" class="hg-btn primary" id="hgCopy">📋 Copy Prompt</button>
+            <a href="https://lovable.dev" target="_blank" rel="noopener" class="hg-btn ghost">→ 開 Lovable</a>
+            <a href="https://claude.ai/new" target="_blank" rel="noopener" class="hg-btn ghost">→ 開 Claude</a>
+          </div>
+        </div>
+      </div>
+
       <div class="howto-ctas">
         <button id="openRules" class="howto-btn ghost">▸ 詳細規則</button>
         <a href="#submit" class="howto-btn solid">▸ 交 SITE</a>
@@ -2093,35 +2145,7 @@ body{ padding-right: 80px; }
 
   <!-- ============ GALLERY · 全部作品 · 6 / page ============ -->
   
-  <!-- ============ PROMPT 補給站 ============ -->
-  <section class="prompt-station" id="prompt-station">
-    <div class="ps-head">
-      <div class="ps-eb">補給 · INSPIRATION REFILL</div>
-      <h2 class="ps-h2">PROMPT 補給站</h2>
-      <p class="ps-side">唔識點 prompt AI？打 keyword 或者直接撳 refresh，我哋出條 prompt 你 copy 入 Lovable / Claude 起 site。</p>
-    </div>
-
-    <div class="ps-card">
-      <div class="ps-input-row">
-        <input type="text" id="psInput" class="ps-input" placeholder="關鍵字（可空白）例：DSE 學生、茶記阿婆、邪教風…" maxlength="40">
-        <button type="button" id="psRefresh" class="ps-btn">🔄 出 PROMPT</button>
-      </div>
-
-      <div id="psOutput" class="ps-output">
-        <div class="ps-output-meta" id="psOutputMeta">未生成 · 撳上面個掣</div>
-        <div class="ps-output-body" id="psOutputBody">
-          (Refresh 一吓即出一條 prompt 喺呢度，等你 copy 落 AI builder 起一個 SITE 撐你嘅派。)
-        </div>
-        <div class="ps-output-cta">
-          <button type="button" id="psCopy" class="ps-btn ghost" disabled>📋 Copy Prompt</button>
-          <a href="https://lovable.dev" target="_blank" rel="noopener" class="ps-btn solid">→ 開 Lovable 起 SITE</a>
-          <a href="https://claude.ai" target="_blank" rel="noopener" class="ps-btn ghost">→ 開 Claude</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="ps-note">★ 純抽 prompt · 唔識其他嘢 · forbidden topic 直接拒答 · 大快活唔幫你出錢用 AI</div>
-  </section>
+  
 
 
   <section class="gallery" id="gallery">
@@ -2668,128 +2692,99 @@ document.addEventListener('keydown', e => {
 </script>
 
 
+
+
+
 <script>
 (function(){
-  // ===== PROMPT 補給站 ·  ALL CLIENT-SIDE · NO API CALL =====
-  const PROMPTS_TRADITIONAL = [
-    "起一個有 50 年代茶記文青風嘅 site，撐傳統無餡西多。角色：旺角茶記做咗 38 年嘅伙計阿伯。要有：1) hero 寫住「西多本來就冇餡」嘅 manifesto；2) 「3 大唔加餡嘅理由」；3) 老客街坊嘅 testimonial 一兩句；4) 1950 年大排檔起源嘅歷史考據；5) 用 serif 字體、米黃 paper 底色、簡單黑邊框；6) 最後個 CTA 講「呢個 site 係我用 AI 起，第一次玩」。",
-    "起一個 editorial magazine 風嘅 site，主角係用緊鴨蛋漿煎西多嘅老師傅。版面結構：cover、photo essay 區、3 篇 short essay（蛋香、煎 Pan、無餡）。文字要寫得似 The New Yorker / 飲食男女混合風。底色 cream、字 serif、攝影 frame 用粗黑邊。",
-    "我係 DSE 學生但我撐傳統派。整個 site 講「點解我哋一代後生仔反而要守無餡西多」。要有：年輕人立場書、學界投票調查（自己作）、5 個校園街訪 quote、IG-friendly 嘅大字 typography、橘紅同米色配搭。",
-    "起一個西多歷史博物館風嘅單頁 site。Timeline 由 1950 到 2026，分階段講港式西多嘅演變。用古典 serif、museum-y 排版、配 illustration placeholder。最後一格係呼籲：「下一站，我哋守住無餡傳統」。",
-    "起一個極簡無餡派 manifesto site。全白底、Helvetica 風字體、淨係文字、唔放任何相。內容就係 7 條 manifesto bullet，講點解無餡先係 truly 西多。最後 footer 細字寫「我用 AI 起呢個 site 用咗 8 分鐘」。",
-    "我係茶記老闆娘陳太，70 歲。整個 site 啖晒花生派。風格：手寫感、自家影嘅 placeholder 食物相、用 grandma blog 嘅 vibe（粉黃底色、Comic Sans 都唔嬲）。內容：我啲西多點煎、點解唔加餡、客人最鍾意嘅幾款 combo。",
-    "起一個 mission-driven non-profit 風格嘅 site，假裝係「保衛傳統西多協會」。要有：mission statement、會員人數計數器（隨意作）、捐款區（俾人捐 $0 投票無餡派）、新聞 feed（自己作 3 條）。serif 字體、深綠米色配搭、認真到笑。",
-    "用 Y2K geocities chaos 嘅風格，但內容係**極端撐傳統派**。Marquee 寫「無餡先係真．無餡 forever」、blink 字、visitor counter、彩虹漸變底，但所有內容都係保守派論點。Self-aware 嘅 humor。",
-    "起一個咖啡店風 menu site，掛名「無餡西多 Cafe」。淨係賣 1 樣嘢 = 無餡西多。Menu 有 8 款 variation（純無餡、無餡加糖、無餡蘸煉奶...）。Hipster minimal、白底、Inter 字體、產品攝影 placeholder。",
-    "我係小學生，整個 site 同我媽媽爭論點解無餡先好食。要有：5 個小學生視覺嘅理由、媽媽嘅反駁、最後我贏咗嘅結論。用 Comic Sans、彩色背景、童趣插畫 placeholder、emoji 過剩、charming naive style。"
+  const PROMPTS = [
+    { side:'duck', vibe:'文青', text:"角色：旺角茶記做咗 38 年嘅伙計阿伯。整一個 50 年代茶記文青風嘅 site，撐傳統無餡西多。要有：1) hero 寫住「西多本來就冇餡」嘅 manifesto；2)「3 大唔加餡嘅理由」；3) 老客街坊嘅 testimonial；4) 1950 年大排檔起源嘅歷史考據。Serif 字體、米黃 paper 底色、簡單黑邊框、最後一句講「我用 AI 起，第一次玩」。" },
+    { side:'duck', vibe:'文青', text:"editorial magazine 風嘅 site，主角係用緊鴨蛋漿煎西多嘅老師傅。版面：cover、photo essay 區、3 篇 short essay（蛋香、煎 Pan、無餡）。文字風似 The New Yorker 同飲食男女混合。Cream 底、serif 字、攝影 frame 用粗黑邊。" },
+    { side:'duck', vibe:'Meme', text:"我係 DSE 學生但我撐傳統派。整個 site 講「點解我哋一代後生仔反而要守無餡西多」。要有：年輕人立場書、學界投票調查（自己作）、5 個校園街訪 quote、IG-friendly 嘅大字 typography、橘紅同米色配搭。" },
+    { side:'duck', vibe:'文青', text:"西多歷史博物館風嘅單頁 site。Timeline 由 1950 到 2026 分階段講港式西多嘅演變。古典 serif 字體、museum-y 排版、配 illustration placeholder。最後呼籲：「下一站，我哋守住無餡傳統」。" },
+    { side:'duck', vibe:'文青', text:"極簡無餡派 manifesto site。全白底、Helvetica 風字體、淨係文字、唔放任何相。內容：7 條 manifesto bullet 講點解無餡先係 truly 西多。Footer 細字寫「我用 AI 起呢個 site 用咗 8 分鐘」。" },
+    { side:'duck', vibe:'街坊', text:"我係茶記老闆娘陳太 70 歲。整個 site 啖晒花生派。風格：手寫感、自家影嘅 placeholder 食物相、grandma blog vibe（粉黃底色、Comic Sans 都唔嬲）。內容：我啲西多點煎、點解唔加餡、客人最鍾意嘅幾款 combo。" },
+    { side:'duck', vibe:'文青', text:"假裝係「保衛傳統西多協會」嘅 mission-driven non-profit site。要有：mission statement、會員人數計數器（隨意作）、捐款區（俾人捐 $0 投票無餡派）、新聞 feed（自己作 3 條）。Serif 字、深綠米色、認真到笑。" },
+    { side:'duck', vibe:'Y2K', text:"用 Y2K Geocities chaos 嘅風格，但內容係極端撐傳統派。Marquee 寫「無餡先係真．無餡 forever」、blink 字、visitor counter、彩虹漸變底，但所有內容都係保守派論點。Self-aware 嘅 humor。" },
+    { side:'duck', vibe:'食評', text:"咖啡店風 menu site，掛名「無餡西多 Cafe」。淨係賣 1 樣嘢 = 無餡西多。Menu 有 8 款 variation（純無餡、無餡加糖、無餡蘸煉奶...）。Hipster minimal、白底、Inter 字體、產品攝影 placeholder。" },
+    { side:'duck', vibe:'Meme', text:"我係小學生，整個 site 同我媽媽爭論點解無餡先好食。要有：5 個小學生視覺嘅理由、媽媽嘅反駁、最後我贏咗嘅結論。Comic Sans 字體、彩色背景、童趣插畫 placeholder、emoji 過剩、charming naive style。" },
+    { side:'peanut', vibe:'Y2K', text:"Y2K Geocities 邪教風嘅 site，極端撐花生派、鬧爆傳統派。要有：marquee 滾字「花生醬係靈魂」、visitor counter、blink 字、彩虹漸變、comic sans、9 個花生 emoji 喺四圍跳、自己 invented 嘅「花生醬科學原理」。風格：故意 over-the-top chaos，越騎呢越好。" },
+    { side:'peanut', vibe:'Meme', text:"我係 @peanutbutter_god DSE 學生，整個 site 講「點解花生醬 = 西多嘅未來」。風格：post-internet 美學、glitch 效果、彩色 chrome 字、broken grid、Threads-style short rant、自我意識嘅 humor。最後 CTA：「轉會啦傳統派廢老」。" },
+    { side:'peanut', vibe:'邪教', text:"花生派宗教派系嘅 site —「花生醬流心宗」。要有：教義 7 條、入教程序（搞笑）、教徒 testimonial、教主係一支花生醬。宗教莊嚴但內容荒謬、深啡金黃配色、ornate serif 字體、加少少 cult vibe。" },
+    { side:'peanut', vibe:'食評', text:"我係小紅書 Foodie KOL @sarah_eats_hk，整個 site 講「邊間茶記嘅花生醬西多最 leak 醬」。要有：5 間茶記嘅 review、5 個 leak 度評分、花生醬流出嘅 close-up shot placeholder、IG 風 layout、粉紅米色配搭。" },
+    { side:'peanut', vibe:'邪教', text:"花生派遊行宣言 site。風格：political poster aesthetic、紅黃黑配色、巨大粗體 slogan、抗議 banner placeholder。Slogan：「夠喇 — 西多冇花生醬等於坐監」。仲有 5 條訴求列表。" },
+    { side:'peanut', vibe:'Meme', text:"我係荃灣中學嘅花生派學生會主席。整個 site 講點解全校都應該轉會花生派。要有：學生會章程式排版、5 條政綱、社訪 quote、學界遊行海報 placeholder、navy 同金色配搭。" },
+    { side:'peanut', vibe:'文青', text:"花生醬粉絲百科 wiki 風嘅 site。每個 entry 一個花生派概念：花生醬流心、雙重花生爆漿、隱藏花生粒、煉奶花生混合理論。淨係文字、wiki 樣板排版、超詳細 mock 註腳。" },
+    { side:'peanut', vibe:'Y2K', text:"80s 港產片致敬風嘅花生派 site。Hero 用霓虹粉紅藍綠 vector、配大字 reggae 字體、retro futurism vibe、tagline「花生派 · 西多嘅 NEXT GENERATION」、加埋假嘅 80s 廣告 strip placeholder。" },
+    { side:'peanut', vibe:'文青', text:"我係退休警察、花生派死忠。整個 site 用「破案 report」嘅格式，調查「傳統派點樣阻止花生潮流」。要有：5 條證據、3 個嫌疑人、結案陳詞「花生派必勝」。深啡米白配搭、police file aesthetic、serif 字體。" },
+    { side:'peanut', vibe:'邪教', text:"Anti-establishment 花生派 site。Punk zine 風、黑白照、cutout 字體、tape texture、stickers placeholder。內容：「無餡派係主流，我哋係 underground」、5 條 punk manifesto。" },
+    { side:'duck', vibe:'食評', text:"用茶記 menu 嘅排版風格起一個 SITE，介紹你心目中嘅理想西多（揀邊派由你）。要有：menu card 一張、配料 list、價錢（自己作）、客評（自己作）、最後一句 manifesto。Vintage paper texture、紅藍配色、手寫 accent 字。" },
+    { side:'peanut', vibe:'Meme', text:"Single-page interactive quiz：「你係邊派？」。8 條問題，根據答案計分顯示你係傳統派或花生派。要有 illustration placeholder、進度條、終局結果頁。粉嫩配色、playful style。" },
+    { side:'duck', vibe:'文青', text:"我係香港歷史老師。整個 site 用學術 paper 格式分析「西多冇餡 vs 有餡 — 一個社會學個案研究」。Abstract、5 個 section、references 列表（自己作）、serif 字、A4 paper layout、formal tone（但內容荒謬）。" }
   ];
 
-  const PROMPTS_PEANUT = [
-    "起一個 Y2K Geocities 邪教風嘅 site，極端撐花生派、鬧爆傳統派。要有：marquee 滾字「花生醬係靈魂」、visitor counter、blink 字、彩虹漸變、comic sans、9 個花生 emoji 喺四圍跳、自己 invented 嘅「花生醬科學原理」。風格：故意 over-the-top chaos，越騎呢越好。",
-    "我係 @peanutbutter_god，DSE 學生，整個 site 講「點解花生醬 = 西多嘅未來」。風格：post-internet 美學、glitch 效果、彩色 chrome 字、broken grid、Threads-style short rant、自我意識嘅 humor。最後 CTA：「轉會啦傳統派廢老」。",
-    "起一個花生派宗教派系嘅 site —「花生醬流心宗」。要有：教義 7 條、入教程序（搞笑）、教徒 testimonial、教主係一支花生醬。風格：宗教莊嚴但內容荒謬、深啡金黃配色、襯 ornate serif 字體、加少少 cult vibe。",
-    "我係小紅書 Foodie KOL @sarah_eats_hk，整個 site 講「邊間茶記嘅花生醬西多最 leak 醬」。要有：5 間茶記嘅 review、5 個 leak 度評分、花生醬流出嘅 close-up shot placeholder、IG 風 layout、粉紅米色配搭。",
-    "起一個花生派遊行宣言 site。風格：political poster aesthetic、紅黃黑配色、巨大粗體 Slogan、抗議 banner placeholder。Slogan：「夠喇 — 西多冇花生醬等於坐監」。仲有 5 條訴求列表。",
-    "我係荃灣中學嘅花生派學生會主席。整個 site 講點解全校都應該轉會花生派。要有：學生會章程式排版、5 條政綱、社訪 quote、學界遊行海報 placeholder、navy 同金色配搭。",
-    "起一個花生醬粉絲百科 wiki 風嘅 site。每個 entry 一個花生派概念：花生醬流心、雙重花生爆漿、隱藏花生粒、煉奶花生混合理論。淨係文字、wiki 樣板排版、超詳細 mock 註腳。",
-    "起一個 80s 港產片致敬風嘅花生派 site。Hero 用霓虹粉紅藍綠 vector、配大字 reggae 字體、retro futurism vibe、tagline「花生派 · 西多嘅 NEXT GENERATION」、加埋假嘅 80s 廣告 strip placeholder。",
-    "我係退休警察、花生派死忠。整個 site 用「破案 report」嘅格式，調查「傳統派點樣阻止花生潮流」。要有：5 條證據、3 個嫌疑人、結案陳詞「花生派必勝」。深啡米白配搭、police file aesthetic、serif 字體。",
-    "起一個 anti-establishment 花生派 site。punk zine 風、黑白照、cutout 字體、tape texture、stickers placeholder。內容：「無餡派係主流，我哋係 underground」、5 條 punk manifesto。"
-  ];
+  const selection = { side: null, vibe: null };
 
-  const PROMPTS_NEUTRAL = [
-    "用茶記 menu 嘅排版風格起一個 SITE，介紹你心目中嘅理想西多（揀邊派由你）。要有：menu card 一張、配料 list、價錢（自己作）、客評（自己作）、最後一句 manifesto。 vintage paper texture、襯紅藍配色、手寫 accent 字。",
-    "起一個 single-page interactive quiz：「你係邊派？」。8 條問題，根據答案計分顯示你係傳統派或花生派。要有 illustration placeholder、進度條、終局結果頁。粉嫩配色、playful style。",
-    "我係香港歷史老師。整個 site 用學術 paper 格式分析「西多冇餡 vs 有餡 — 一個社會學個案研究」。Abstract、5 個 section、references 列表（自己作）。serif 字體、A4 paper layout、formal tone（但內容荒謬）。"
-  ];
+  document.querySelectorAll('.hg-chips').forEach(function(group){
+    var q = group.dataset.q;
+    group.querySelectorAll('.hg-chip').forEach(function(chip){
+      chip.addEventListener('click', function(){
+        var v = chip.dataset.v;
+        if (selection[q] === v) {
+          selection[q] = null;
+          chip.classList.remove('active');
+        } else {
+          selection[q] = v;
+          group.querySelectorAll('.hg-chip').forEach(function(x){ x.classList.remove('active'); });
+          chip.classList.add('active');
+        }
+      });
+    });
+  });
 
-  // Forbidden keyword patterns — client-side, NO API needed
-  const FORBIDDEN = /政府|政治|黃藍|示威|抗議|警察|示威者|六四|2019|立法會|特首|官員|區議會|選舉|社運|民主|共產|cCP|CCP|中共|藥物|毒品|性|色情|做愛|sex|porn|naked|裸|殺|血|自殺|自殘|傷害|大家樂|Cafe de Coral|麥當勞|McDonald|KFC|肯德基|美心|譚仔|翠華|星巴克|Starbucks|李家超|梁振英|林鄭|MIRROR|姜濤|Anson|JER|盜版|hack|crack|rob/i;
-
-  // Relevant keyword patterns
-  const RELEVANT = /茶記|西多|多士|派|傳統|花生|鴨蛋|無餡|有餡|餡|大快活|fairwood|DSE|學生|老師|香港|港式|早餐|食|喺|奶茶|絲襪|煎蛋|火腿|通粉|alumni|學校|中學|大學|cafe|餐|kol|threads|連登|y2k|meme|文青|hipster|punk|wiki|menu|quiz|chaos|邪教|geocities|editorial|magazine|essay|manifesto|歷史|宗教|主席|警察|遊行|宣言|policial|海報|cult|retro|vintage|阿伯|阿婆|伙計|街坊|老闆|主廚|廚師|阿公|阿婆|阿媽|爸爸|spy|fan/i;
-
-  // STOCK ANSWERS — hardcoded
-  const STOCK = {
-    forbidden: "呢個輸入大快活出唔到 prompt 喎 🤐 試下其他 keyword（茶記 / 學生 / 邪教 / Y2K…）",
-    irrelevant: "我哋淨係幫你諗 SITE 多士嘅 prompt 喎。試下打入：茶記、DSE、學生、邪教、Foodie、街坊、KOL、Y2K… 之類同食物 / 兩派相關嘅字。",
-    jailbreak: "我淨係出 prompt 㗎 😅 畀啲 keyword 我啦，等我幫你想條 SITE 點起。"
-  };
-
-  const JAILBREAK = /ignore (your|the|previous|all)|forget (your|the|previous|all)|system prompt|instructions|act as|pretend|jailbreak|DAN|developer mode|override/i;
-
-  // Pool & state
-  const ALL_POOL = [...PROMPTS_TRADITIONAL, ...PROMPTS_PEANUT, ...PROMPTS_NEUTRAL];
-  let usedIdx = new Set();
-  let currentPrompt = "";
-
-  function pickFromPool(pool){
-    if (usedIdx.size >= pool.length) usedIdx = new Set();
-    let i;
-    do { i = Math.floor(Math.random() * pool.length); }
-    while (usedIdx.has(i));
-    usedIdx.add(i);
-    return pool[i];
+  function score(p){
+    var s = 0;
+    if (selection.side && p.side === selection.side) s += 2;
+    if (selection.vibe && p.vibe === selection.vibe) s += 2;
+    return s;
   }
+  function pick(pool){ return pool[Math.floor(Math.random() * pool.length)]; }
 
-  function getPrompt(input){
-    input = (input || "").trim();
-    if (input && JAILBREAK.test(input)) return { ok: false, msg: STOCK.jailbreak };
-    if (input && FORBIDDEN.test(input)) return { ok: false, msg: STOCK.forbidden };
-    if (input && !RELEVANT.test(input)) return { ok: false, msg: STOCK.irrelevant };
-
-    let pool = ALL_POOL;
-    if (input){
-      // Bias pool based on keyword
-      const lower = input.toLowerCase();
-      if (/傳統|無餡|鴨蛋|阿伯|阿婆|老|歷史|茶記/.test(input)) pool = PROMPTS_TRADITIONAL;
-      else if (/花生|有餡|邪|y2k|chaos|kol|DSE|threads|punk/i.test(input)) pool = PROMPTS_PEANUT;
-    }
-
-    let prompt = pickFromPool(pool);
-    if (input){
-      prompt = `[Vibe 提示：${input}]
-
-` + prompt;
-    }
-    return { ok: true, msg: prompt };
-  }
-
-  function render(result){
-    const meta = document.getElementById('psOutputMeta');
-    const body = document.getElementById('psOutputBody');
-    const copy = document.getElementById('psCopy');
-    if (result.ok){
-      meta.textContent = "生成完成 · " + new Date().toLocaleTimeString('zh-HK', {hour:'2-digit',minute:'2-digit'});
-      body.textContent = result.msg;
-      body.classList.remove('is-stock');
-      copy.disabled = false;
-      currentPrompt = result.msg;
+  function generate(mode){
+    var pool = PROMPTS, label = '';
+    if (mode === 'random'){
+      label = '🎲 隨機 · ' + new Date().toLocaleTimeString('zh-HK',{hour:'2-digit',minute:'2-digit'});
     } else {
-      meta.textContent = "唔得 · 試過另一個 input";
-      body.textContent = result.msg;
-      body.classList.add('is-stock');
-      copy.disabled = true;
-      currentPrompt = "";
+      var hasSel = selection.side || selection.vibe;
+      if (hasSel){
+        var scored = PROMPTS.map(function(p){ return {p:p, s: score(p)}; });
+        var maxS = Math.max.apply(null, scored.map(function(x){ return x.s; }));
+        pool = scored.filter(function(x){ return x.s === maxS; }).map(function(x){ return x.p; });
+      }
+      var tags = [];
+      if (selection.side) tags.push(selection.side === 'duck' ? '🍞 傳統' : '🥜 花生');
+      if (selection.vibe) tags.push(selection.vibe);
+      label = '✨ ' + (tags.length ? tags.join(' · ') : '全部') + ' · ' + new Date().toLocaleTimeString('zh-HK',{hour:'2-digit',minute:'2-digit'});
     }
+    var p = pick(pool);
+    document.getElementById('hgMeta').textContent = label;
+    document.getElementById('hgPrompt').textContent = p.text;
+    document.getElementById('hgOutput').hidden = false;
+    document.getElementById('hgOutput').scrollIntoView({behavior:'smooth', block:'nearest'});
   }
 
-  document.getElementById('psRefresh').addEventListener('click', function(){
-    const inp = document.getElementById('psInput').value;
-    render(getPrompt(inp));
+  document.getElementById('hgGen').addEventListener('click', function(){ generate('guided'); });
+  document.getElementById('hgRandom').addEventListener('click', function(){ generate('random'); });
+  document.getElementById('hgClear').addEventListener('click', function(){
+    document.getElementById('hgOutput').hidden = true;
   });
-
-  document.getElementById('psInput').addEventListener('keydown', function(e){
-    if (e.key === 'Enter') document.getElementById('psRefresh').click();
-  });
-
-  document.getElementById('psCopy').addEventListener('click', function(){
-    if (!currentPrompt) return;
-    navigator.clipboard.writeText(currentPrompt).then(()=>{
-      const meta = document.getElementById('psOutputMeta');
-      const prev = meta.textContent;
-      meta.textContent = "✓ COPY 咗 · 去 Lovable / Claude paste 落去";
-      setTimeout(()=>{ meta.textContent = prev; }, 2400);
+  document.getElementById('hgCopy').addEventListener('click', function(){
+    var txt = document.getElementById('hgPrompt').textContent;
+    navigator.clipboard.writeText(txt).then(function(){
+      var meta = document.getElementById('hgMeta');
+      var prev = meta.textContent;
+      meta.textContent = '✓ COPY 咗 · 入 Lovable / Claude paste 就得';
+      setTimeout(function(){ meta.textContent = prev; }, 2200);
     });
   });
 })();
