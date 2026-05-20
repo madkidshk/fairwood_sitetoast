@@ -3,6 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="SITE 多士大對決 · 大快活 2026 STEM 大行動">
+<meta property="og:description" content="全港網民用 AI 起 site 撐自己嘅西多 — 傳統無餡 VS 邪惡花生 · 21 日決勝 02·06·2026 → 23·06·2026">
+<meta property="og:image" content="https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-hero.png">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="960">
+<meta property="og:url" content="https://madkidshk.github.io/fairwood_sitetoast/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="大快活 SITE 多士大對決">
+<meta property="og:locale" content="zh_HK">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SITE 多士大對決 · 大快活">
+<meta name="twitter:description" content="撐傳統無餡 OR 邪惡花生 · 全港網民用 AI 起 site · 21 日決勝">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-hero.png">
+<meta name="description" content="2026 大快活 STEM 大行動：全港網民用 AI 起一個 site 撐自己嘅西多 — 傳統無餡 vs 邪惡花生 · 21 日決勝.">
+
 <title>SITE 多士大對決 · v2 · BATTLE COVERFLOW · 大快活</title>
 <link rel="stylesheet" href="styles.css">
 <style>
@@ -154,10 +169,8 @@ body{ padding-right: 80px; } /* reserve room for fixed right side-nav */
   animation: lp 1.4s infinite;
 }
 
-/* show only on narrow portrait viewports */
-@media (orientation: portrait) and (max-width: 900px) {
-  .rotate-please{ display: flex; }
-}
+/* DISABLED — portrait users now see the responsive site directly */
+.rotate-please{ display: none !important; }
 img{ display: block; max-width: 100%; }
 a{ color: inherit; text-decoration: none; }
 button{ font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
@@ -826,6 +839,7 @@ body::after{
   display: grid;
   grid-template-rows: 1fr auto;
   background: var(--ink);
+  overflow: hidden;
   transition:
     width 1s cubic-bezier(.34, 1.4, .4, 1),
     clip-path 1s cubic-bezier(.34, 1.4, .4, 1),
@@ -847,6 +861,17 @@ body::after{
 }
 
 /* peek body: hide controls only — NO dim (keep both sides visually alive) */
+
+/* INACTIVE side: disable interaction + slight dim so it cannot overlap */
+.battle-split:not(.active-peanut) .battle-body.peanut iframe,
+.battle-split.active-peanut .battle-body.duck iframe{
+  pointer-events: none;
+  filter: brightness(.65);
+}
+.battle-split:not(.active-peanut) .battle-body.peanut{ z-index: 1; }
+.battle-split:not(.active-peanut) .battle-body.duck{ z-index: 2; }
+.battle-split.active-peanut .battle-body.duck{ z-index: 1; }
+.battle-split.active-peanut .battle-body.peanut{ z-index: 2; }
 .battle-split:not(.active-peanut) .battle-body.peanut .bs-foot,
 .battle-split.active-peanut .battle-body.duck .bs-foot{ display: none; }
 .battle-split:not(.active-peanut) .battle-body.peanut,
@@ -1978,6 +2003,42 @@ body{ padding-right: 80px; }
   .hg-actions .hg-btn{ width: 100%; justify-content: center; }
 }
 
+
+/* iframe loading skeleton — shows behind iframe until iframe loads */
+.bs-frame{ position: relative; }
+.bs-frame::before{
+  content: "▸ Loading site …";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .25em;
+  color: var(--fairwood);
+  background:
+    repeating-linear-gradient(45deg, rgba(255,138,0,.04) 0 12px, transparent 12px 24px),
+    var(--ink);
+  z-index: 0;
+  pointer-events: none;
+}
+.bs-frame iframe{ position: relative; z-index: 1; background: var(--paper); }
+
+/* rules content (fetched, not iframe — bypass X-Frame-Options deny) */
+.rules-content{
+  font-family: var(--font-serif);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--paper);
+  padding: 24px;
+  margin: 0;
+  white-space: pre-wrap;
+  max-height: 60vh;
+  overflow-y: auto;
+  border: 2px solid var(--ink);
+}
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-tc-webfont@1.7.0/style.css">
 </head>
@@ -2016,7 +2077,7 @@ body{ padding-right: 80px; }
   <div class="rules-box">
     <div class="rules-eyebrow">▸ 完整規則</div>
     <h3>SITE 多士大對決．官方比賽規則</h3>
-    <iframe src="https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/rules.txt" id="rulesIframe" title="rules"></iframe>
+    <pre id="rulesContent" class="rules-content">載入中… ▸ 規則由 GitHub fetch</pre>
     <a href="https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/rules.txt" target="_blank" rel="noopener" class="rules-open">↗ 開 TXT 全文</a>
   </div>
 </div>
@@ -2824,22 +2885,22 @@ document.addEventListener('keydown', e => {
 
   // ============ 60+ 理據 KEYWORDS ============
   const REASONS = [
-    "健康","營養","蛋白質","Energy","低 GI","好碳水","抗氧化","減肥","補腦","暖胃",
-    "蛋香","焦香","層次","Umami","口感","酥脆","流心","爆漿","回甘","煙韌",
-    "傳統","創新","本地","復古","未來","童年","回憶","家庭","社交","潮流",
-    "早餐","下午茶","宵夜","週末","節日","雨天","通頂","考試","返工","旅行",
-    "簡約","複雜","純粹","豐富","極端","堅持","變化","包容","個性","儀式感",
-    "街知巷聞","米芝蓮","平靚正","性價比","手工","新鮮","慢工","原料","技藝","真心"
+    "鬆軟","香口","焦香","流心","爆漿","滑嫩","軟糯","脆邊","蛋香","糖香",
+    "朝早食","下午茶","放工後","收工攰","考試前","通頂","落雨天","宵夜","屋企食","茶記坐",
+    "童年味","媽媽煎","阿婆教","街口茶記","細個食到大","屋邨味","同學一齊","阿伯推介","舊街坊","屋企人飲茶",
+    "西多就係咁","撐原味","守傳統","新世代","變陣好玩","試咗先講","食慣就明","無餡先 OG","有餡先夠 layer","兩派係 friends",
+    "對家太死板","對家亂咁加","對家盲撐","對家落後","對家太花巧","對家無新意","對家頑固","對家追潮流","對家唔識食","對家奇怪",
+    "茶記常客","街坊味","阿姐 recommend","伙記伯伯","收銀阿婆","同事 break","set lunch","落單一齊","老茶記味","三點三"
   ];
 
   // ============ 60+ 風格 KEYWORDS · HK-themed ============
   const STYLES = [
-    "茶餐廳","大牌檔","辦館","街市","燒臘檔","點心樓","唐樓","士多","菜市場","燒鵝鋪",
-    "天星碼頭","太平山","皇都戲院","灣仔藍屋","中環大會堂","廟街","西貢碼頭","南丫島","長洲","赤柱",
-    "紅 van","叮叮","九巴","地鐵","天星小輪","紅的","綠 van","山頂纜車","電車","渡輪",
-    "雀仔街","波鞋街","女人街","花墟","廟街夜市","旺角行人專用區","深水埗鴨寮街","上環海味街","油麻地果欄","中環蘭桂坊",
-    "TVB 處境劇","王家衞","許冠傑","梅艷芳","張國榮","四大天王","80s 港產片","周潤發","粵劇","金庸",
-    "絲襪奶茶","菠蘿包","雞蛋仔","車仔麵","雲吞麵","蛋撻","碗仔翅","缽仔糕","紅豆冰","糖水鋪"
+    "茶記","大牌檔","冰室","燒臘鋪","雲吞麵店","麵包鋪","涼茶鋪","糖水鋪","士多","辦館",
+    "公眾街市","街口檔","唐樓地舖","後巷食檔","流動小販","鐵皮屋","街頭推車","紙紥鋪","裝裱鋪","五金鋪",
+    "旺角","油麻地","深水埗","土瓜灣","北角","九龍城","葵涌","屯門","元朗","大埔",
+    "紅 van","叮叮","九巴","渡輪","地鐵","雙層巴士","的士","後巷","信箱","燈柱",
+    "許冠傑","周潤發","張國榮","譚詠麟","梅艷芳","四大天王","王家衞","周星馳","TVB 處境劇","80s 港產片",
+    "霓虹招牌","鐵閘","水箱招牌","卡式帶","VHS","BB 機","藤椅","公廁綠磚","舊唐樓","招牌大字"
   ];
 
   // ============ STATE ============
@@ -2980,6 +3041,21 @@ document.addEventListener('keydown', e => {
   renderToast();
   refreshReasons();
   refreshStyles();
+})();
+</script>
+
+
+<script>
+// Fetch rules.txt and inject (iframe blocked by X-Frame-Options: deny)
+(function(){
+  var el = document.getElementById('rulesContent');
+  if (!el) return;
+  fetch('https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/rules.txt')
+    .then(function(r){ return r.text(); })
+    .then(function(t){ el.textContent = t; })
+    .catch(function(e){
+      el.textContent = '載入失敗，請按下面 [↗ 開 TXT 全文] link 直接睇。\n' + e.message;
+    });
 })();
 </script>
 
