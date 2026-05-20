@@ -1600,66 +1600,45 @@ body::after{
 }
 
 
-/* ===== HERO TITLE (北魏楷書 large) ===== */
+/* ===== HERO TITLE (compact: logo top, single-line title, small) ===== */
 .hero-title-sec{
   background: var(--ink);
   color: var(--paper);
-  padding: 70px 28px 56px;
+  padding: 22px 24px 20px;
   text-align: center;
   position: relative;
-  overflow: hidden;
-  border-bottom: 4px solid var(--fairwood);
+  border-bottom: 2px solid var(--fairwood);
 }
-.hero-title-sec::before{
-  content: "西多士 大對決 · 西多士 大對決 · ";
-  position: absolute;
-  inset: auto 0 -20px 0;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: .4em;
-  color: var(--fairwood);
-  opacity: .12;
-  white-space: nowrap;
-  pointer-events: none;
-}
+.ht-brand{ display: inline-block; margin-bottom: 10px; }
+.ht-logo{ height: 38px; width: auto; display: inline-block; filter: brightness(0) invert(1); }
 .ht-eb{
   font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: .28em;
+  font-size: 10px;
+  letter-spacing: .25em;
   color: var(--fairwood);
-  margin-bottom: 18px;
+  margin: 0 0 8px;
   text-transform: uppercase;
 }
 .ht-h1{
   font-family: var(--font-kai);
   font-weight: 900;
-  font-size: clamp(72px, 15vw, 200px);
-  line-height: .85;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.0;
   letter-spacing: -.01em;
-  margin: 0;
+  margin: 0 0 14px;
   color: var(--paper);
-  text-shadow: 6px 6px 0 var(--fairwood);
-}
-.ht-h1 .ht-big{
-  display: inline-block;
-  font-size: 1.3em;
-  color: var(--fairwood);
-  text-shadow: 8px 8px 0 var(--paper);
-  margin-top: 8px;
 }
 .ht-vs{
   display: inline-flex;
   align-items: center;
-  gap: 22px;
-  margin-top: 30px;
-  padding: 14px 28px;
-  border: 2px solid var(--fairwood);
-  background: rgba(255,138,0,.08);
+  gap: 14px;
+  padding: 5px 16px;
+  border: 1.5px solid var(--fairwood);
 }
 .ht-vs .ht-side{
   font-family: var(--font-kai);
   font-weight: 700;
-  font-size: clamp(22px, 3.4vw, 38px);
+  font-size: 15px;
   color: var(--paper);
 }
 .ht-vs .ht-side.trad{ color: #f6d4a2; }
@@ -1667,27 +1646,26 @@ body::after{
 .ht-vs .ht-x{
   font-family: var(--font-mono);
   font-weight: 900;
-  font-size: 18px;
-  letter-spacing: .15em;
+  font-size: 11px;
+  letter-spacing: .12em;
   color: var(--fairwood);
-  padding: 4px 10px;
-  border: 2px solid var(--fairwood);
+  padding: 2px 8px;
+  border: 1px solid var(--fairwood);
 }
 .ht-meta{
   font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: .22em;
+  font-size: 10px;
+  letter-spacing: .18em;
   color: var(--paper);
-  opacity: .55;
-  margin-top: 22px;
+  opacity: .5;
+  margin-top: 10px;
 }
 @media (max-width: 700px){
-  .hero-title-sec{ padding: 48px 18px 36px; }
-  .ht-h1{ font-size: clamp(56px, 18vw, 140px); text-shadow: 4px 4px 0 var(--fairwood); }
-  .ht-h1 .ht-big{ text-shadow: 5px 5px 0 var(--paper); }
-  .ht-vs{ gap: 14px; padding: 10px 16px; flex-wrap: wrap; justify-content: center; }
+  .hero-title-sec{ padding: 18px 16px 16px; }
+  .ht-logo{ height: 32px; }
+  .ht-h1{ font-size: clamp(30px, 8vw, 44px); }
+  .ht-vs .ht-side{ font-size: 13px; }
 }
-
 
 /* ===== MAX-WIDTH + BLACK SIDEBARS ====================
    Beyond MAX_WIDTH the site stops scaling.
@@ -1919,28 +1897,16 @@ body{ padding-right: 80px; }
   <span class="badge">D09 / 21 · LIVE</span>
 </div>
 
-<!-- TOP MENU BAR (sticky · CENTER: brand lock-up · RIGHT: live + cta) -->
-<header class="topbar">
-  <div class="topbar-spacer"></div>
 
-  <a class="topbar-brand" href="#top" aria-label="大快活 SITE 多士大對決 — 首頁">
-    <img src="https://companieslogo.com/img/orig/0052.HK_BIG-c1862b05.png?t=1720244489"
-         alt="大快活 Fairwood" class="fw-logo">
-    <div class="lockup-text">
-      <span class="campaign-eb">2026 STEM 大行動 · BY FAIRWOOD</span>
-      <span class="campaign-title">
-        <span class="site">SITE</span>多士大對決
-      </span>
-    </div>
-  </a>
 
-  <div class="topbar-spacer"></div>
-</header>
 
-<!-- ============ HERO TITLE (北魏楷書 vibe) ============ -->
+<!-- ============ HERO TITLE (compact, logo top-center) ============ -->
 <section class="hero-title-sec">
-  <div class="ht-eb">2026 STEM 大行動 · 全港網民起 SITE 撐自己派</div>
-  <h1 class="ht-h1">西多士<br><span class="ht-big">大對決</span></h1>
+  <a class="ht-brand" href="#top" aria-label="大快活 Fairwood">
+    <img class="ht-logo" src="https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/fairwood-logo.svg" alt="Fairwood">
+  </a>
+  <div class="ht-eb">2026 STEM 大行動 · BY FAIRWOOD</div>
+  <h1 class="ht-h1">西多士大對決</h1>
   <div class="ht-vs">
     <span class="ht-side trad">傳統無餡</span>
     <span class="ht-x">VS</span>
@@ -1948,6 +1914,7 @@ body{ padding-right: 80px; }
   </div>
   <div class="ht-meta">21 日決勝 · 02·06·2026 → 23·06·2026</div>
 </section>
+
 
 
 <!-- FLOATING 4-DOT SIDE NAV (right edge, dot becomes 🍞 on active section) -->
