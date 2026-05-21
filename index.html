@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta property="og:title" content="SITE 多士大對決 · 大快活 2026 STEM 大行動">
-<meta property="og:description" content="全港網民用 AI 起 site 撐自己嘅西多 — 傳統無餡 VS 邪惡花生 · 21 日決勝 02·06·2026 → 23·06·2026">
+<meta property="og:title" content="一SITE一票 · 起SITE表態 — SITE 多士大對決">
+<meta property="og:description" content="一SITE一票 · 起SITE表態。全港網民用 AI 起 site 撐自己嗰派西多 — 傳統無餡 VS 邪惡花生 · 21 日決勝">
 <meta property="og:image" content="https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-hero.png">
 <meta property="og:image:width" content="1920">
 <meta property="og:image:height" content="960">
@@ -13,12 +13,12 @@
 <meta property="og:site_name" content="大快活 SITE 多士大對決">
 <meta property="og:locale" content="zh_HK">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="SITE 多士大對決 · 大快活">
-<meta name="twitter:description" content="撐傳統無餡 OR 邪惡花生 · 全港網民用 AI 起 site · 21 日決勝">
+<meta name="twitter:title" content="一SITE一票 · 起SITE表態 — SITE 多士大對決">
+<meta name="twitter:description" content="一SITE一票 · 起SITE表態。撐傳統無餡 OR 邪惡花生 · 21 日決勝。">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-hero.png">
-<meta name="description" content="2026 大快活 STEM 大行動：全港網民用 AI 起一個 site 撐自己嘅西多 — 傳統無餡 vs 邪惡花生 · 21 日決勝.">
+<meta name="description" content="一SITE一票 · 起SITE表態。2026 大快活 STEM 大行動 — 全港網民用 AI 起 site 撐自己嗰派西多 · 21 日決勝。">
 
-<title>SITE 多士大對決 · v2 · BATTLE COVERFLOW · 大快活</title>
+<title>一SITE一票 · 起SITE表態 — SITE 多士大對決 · 大快活</title>
 <link rel="stylesheet" href="styles.css">
 <style>
 /* ============================================================
@@ -1004,8 +1004,8 @@ body::after{
 .bs-foot{
   position: relative; z-index: 3;
   padding: 12px 16px;
-  display: grid; grid-template-columns: auto 1fr auto auto auto;
-  gap: 8px; align-items: center;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 12px; align-items: center;
   border-top: 1px solid rgba(245,236,217,.1);
   background: rgba(0,0,0,.45);
   backdrop-filter: blur(8px);
@@ -1043,8 +1043,8 @@ body::after{
 .bs-count b{ color: var(--fairwood); font-weight: 700; }
 .battle-body.peanut .bs-count b{ color: var(--fairwood-light); }
 
-.bs-vote{
-  display: inline-flex; align-items: center; gap: 6px;
+.bs-vote{ display:none !important; /* deprecated — submission is the vote */
+  align-items: center; gap: 6px;
   background: var(--fairwood); color: var(--ink);
   padding: 9px 14px; border-radius: 999px;
   font-family:var(--font-serif); font-weight: 900; font-size: 13px;
@@ -1055,8 +1055,156 @@ body::after{
 }
 .bs-vote:hover{ transform: translateY(-2px) scale(1.05); box-shadow: 0 10px 24px rgba(240,138,0,.6); }
 .bs-vote .h{ font-size: 14px; }
-.battle-body.peanut .bs-vote{ background: var(--fairwood-light); box-shadow: 0 6px 18px rgba(196,102,31,.45); }
+.battle-body.peanut .bs-vote{ display:none !important; background: var(--fairwood-light); box-shadow: 0 6px 18px rgba(196,102,31,.45); }
 .battle-body.peanut .bs-vote:hover{ box-shadow: 0 10px 24px rgba(196,102,31,.6); }
+
+/* Phase 1: 50/50 manifesto layout */
+.battle-split.phase1-50-50 .battle-bodies{ --seam: 50% !important; }
+.battle-split.phase1-50-50 .battle-body.duck,
+.battle-split.phase1-50-50 .battle-body.peanut{ cursor: default; z-index: 2 !important; }
+.battle-split.phase1-50-50 .battle-body.duck .bs-foot,
+.battle-split.phase1-50-50 .battle-body.peanut .bs-foot{ display: grid !important; }
+.battle-split.phase1-50-50 .battle-slash{ display: none; }
+
+/* ============ MANIFESTO (Phase 1 default) ============ */
+.manifesto{
+  position: absolute; inset: 0;
+  z-index: 2;
+  padding: clamp(20px, 4vw, 48px);
+  display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: center;
+  gap: clamp(14px, 2vw, 24px);
+  color: var(--paper);
+}
+.duck-manifesto{
+  background:
+    radial-gradient(60% 90% at 25% 35%, rgba(255, 220, 130, .14), transparent 70%),
+    linear-gradient(180deg, rgba(20,15,5,.7), rgba(0,0,0,.85));
+}
+.peanut-manifesto{
+  background:
+    radial-gradient(60% 90% at 70% 40%, rgba(196,102,31,.22), transparent 70%),
+    linear-gradient(180deg, rgba(40,20,10,.7), rgba(0,0,0,.88));
+}
+.mf-eb{
+  font-family: var(--font-mono);
+  font-size: clamp(10px, 1.1vw, 12px);
+  letter-spacing: .22em;
+  opacity: .65;
+}
+.duck-manifesto .mf-eb{ color: #ffe69a; }
+.peanut-manifesto .mf-eb{ color: var(--fairwood-light, #ffb74d); }
+.mf-quote{
+  font-family: 'LXGWWenKaiTC', var(--font-serif), serif;
+  font-weight: 800;
+  font-size: clamp(22px, 3.2vw, 42px);
+  line-height: 1.25;
+  letter-spacing: -.005em;
+  margin: 0;
+  text-shadow: 0 2px 16px rgba(0,0,0,.6);
+}
+.mf-body{
+  font-family: var(--font-sans, sans-serif);
+  font-size: clamp(13px, 1.4vw, 17px);
+  line-height: 1.6;
+  opacity: .9;
+  max-width: 50ch;
+}
+.mf-body p{ margin: 0 0 6px; }
+.mf-body p:last-child{ margin-bottom: 0; }
+.mf-cta{
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 22px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: .12em;
+  font-weight: 700;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform .2s ease, box-shadow .2s ease;
+  margin-top: clamp(4px, 1vw, 12px);
+}
+.duck-manifesto .mf-cta{
+  background: #f5ecd9; color: #1a1408;
+  box-shadow: 0 6px 22px rgba(245,236,217,.25);
+}
+.peanut-manifesto .mf-cta{
+  background: var(--fairwood-light, #ffb74d); color: #2a1505;
+  box-shadow: 0 6px 22px rgba(196,102,31,.45);
+}
+.mf-cta:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0,0,0,.4);
+}
+.picks{
+  position: absolute; inset: 0;
+  z-index: 2;
+  padding: clamp(16px, 2vw, 28px);
+  display: flex; flex-direction: column; gap: 14px;
+  background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.78));
+}
+.picks-eb{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .2em;
+  opacity: .7;
+  color: var(--paper);
+}
+.picks-grid{
+  flex: 1; display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+.pick-card{
+  border-radius: 10px;
+  background: rgba(0,0,0,.45);
+  border: 1px solid rgba(245,236,217,.12);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  cursor: pointer;
+  transition: transform .2s ease, border-color .2s ease;
+}
+.pick-card:hover{
+  transform: translateY(-3px);
+  border-color: rgba(245,236,217,.4);
+}
+.pick-card .pc-thumb{
+  aspect-ratio: 4/3;
+  background: #111 center/cover no-repeat;
+}
+.pick-card .pc-foot{
+  padding: 8px 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .04em;
+  color: var(--paper);
+  opacity: .85;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bs-cta-mini{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform .15s ease;
+}
+.duck-cta.bs-cta-mini{ background:#f5ecd9; color:#1a1408; }
+.peanut-cta.bs-cta-mini{ background:var(--fairwood-light,#ffb74d); color:#2a1505; }
+.bs-cta-mini:hover{ transform: translateY(-1px); }
+@media (max-width: 980px){
+  .picks-grid{ grid-template-columns: repeat(2, 1fr); }
+  .pick-card:nth-child(n+5){ display: none; }
+}
+@media (max-width: 700px){
+  .mf-quote{ font-size: clamp(18px, 5.5vw, 26px); }
+  .mf-body{ font-size: 13px; }
+  .mf-cta{ font-size: 11px; padding: 10px 16px; }
+}
 
 @media (max-width: 900px){
   .battle-split{ grid-template-columns: 1fr; grid-template-rows: 1fr 40px 1fr; }
@@ -1068,7 +1216,7 @@ body::after{
     background: repeating-linear-gradient(90deg, rgba(245,236,217,.18) 0 8px, transparent 8px 16px);
   }
   .bs-foot{ grid-template-columns: auto 1fr auto auto; padding: 10px 12px; gap: 6px; }
-  .bs-vote{ display: none; }
+  .bs-vote{ display:none !important; }
   .bs-score .n{ font-size: 36px; }
 }
 
@@ -1558,7 +1706,7 @@ body::after{
   text-decoration: none; border: 1.5px solid var(--ink);
 }
 .lb-open:hover{ background: var(--ink); color: var(--fairwood); }
-.lb-vote{
+.lb-vote{ display:none !important; /* deprecated — removed UI */
   flex: 1.4;
   background: var(--ink); color: var(--fairwood);
   padding: 14px; border-radius: 12px;
@@ -1673,6 +1821,18 @@ body::after{
   letter-spacing: -.01em;
   margin: 0 0 6px;
   color: var(--paper);
+}
+.ht-tagline{
+  font-family: var(--font-mono);
+  font-size: clamp(12px, 1.6vw, 16px);
+  letter-spacing: .14em;
+  color: var(--fairwood-light, #ffb74d);
+  margin: 4px 0 8px;
+  font-weight: 700;
+  text-shadow: 0 0 12px rgba(255,183,77,.25);
+}
+@media (max-width: 700px){
+  .ht-tagline{ font-size: 11px; letter-spacing: .1em; margin: 3px 0 6px; }
 }
 .ht-meta{
   font-family: var(--font-mono);
@@ -2039,6 +2199,156 @@ body{ padding-right: 80px; }
   overflow-y: auto;
   border: 2px solid var(--ink);
 }
+/* ============ SHARE MODAL ============ */
+.share-overlay{
+  position: fixed; inset: 0;
+  z-index: 9000;
+  background: rgba(8,5,2,.86);
+  backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+}
+.share-overlay[hidden]{ display: none; }
+.share-box{
+  width: min(560px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: linear-gradient(180deg, #1a1408, #0a0703);
+  border: 1px solid rgba(245,236,217,.18);
+  border-radius: 18px;
+  padding: 28px 24px;
+  color: var(--paper);
+  position: relative;
+  box-shadow: 0 30px 80px rgba(0,0,0,.7);
+}
+.share-eb{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .2em;
+  color: #ffd87a;
+  margin-bottom: 8px;
+}
+.share-title{
+  font-family: 'LXGWWenKaiTC', var(--font-serif), serif;
+  font-size: clamp(20px, 3.4vw, 28px);
+  line-height: 1.3;
+  font-weight: 800;
+  margin: 0 0 6px;
+}
+.share-side{ color: var(--fairwood-light, #ffb74d); }
+.share-side.duck{ color: #ffe69a; }
+.share-side.peanut{ color: var(--fairwood-light, #ffb74d); }
+.share-ref{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .04em;
+  opacity: .65;
+  margin: 6px 0 18px;
+}
+.share-ref strong{ color: var(--paper); opacity: 1; }
+.share-card{
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #2a1505;
+  aspect-ratio: 16/9;
+  margin: 0 0 18px;
+  border: 1px solid rgba(245,236,217,.15);
+}
+.share-card-bg{
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(80% 100% at 30% 30%, rgba(255,200,100,.25), transparent 70%),
+    linear-gradient(135deg, #3a1f08, #1a0a02);
+}
+.share-card.duck .share-card-bg{
+  background:
+    radial-gradient(80% 100% at 30% 30%, rgba(255,220,130,.35), transparent 70%),
+    linear-gradient(135deg, #5a3a0a, #1a1408);
+}
+.share-card.peanut .share-card-bg{
+  background:
+    radial-gradient(80% 100% at 70% 40%, rgba(196,102,31,.45), transparent 70%),
+    linear-gradient(135deg, #3a1505, #1a0a02);
+}
+.share-card-text{
+  position: absolute; inset: 0;
+  padding: clamp(14px, 3vw, 22px);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.scc-eb{
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .2em;
+  opacity: .7;
+}
+.scc-side{
+  font-family: 'LXGWWenKaiTC', var(--font-serif), serif;
+  font-size: clamp(20px, 4.5vw, 32px);
+  font-weight: 800;
+  line-height: 1.1;
+}
+.scc-name{
+  font-family: var(--font-mono);
+  font-size: 12px;
+  opacity: .85;
+  letter-spacing: .04em;
+}
+.scc-tag{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  color: var(--fairwood-light, #ffb74d);
+  font-weight: 700;
+}
+.share-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.share-btn{
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 12px 6px;
+  border-radius: 10px;
+  border: 1px solid rgba(245,236,217,.18);
+  background: rgba(245,236,217,.06);
+  color: var(--paper);
+  text-decoration: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+}
+.share-btn:hover{
+  transform: translateY(-2px);
+  background: rgba(245,236,217,.12);
+  border-color: rgba(245,236,217,.45);
+}
+.share-btn.fb:hover{ border-color: #4267B2; }
+.share-btn.threads:hover{ border-color: #f5ecd9; }
+.share-btn.wa:hover{ border-color: #25D366; }
+.share-btn.ig:hover{ border-color: #E1306C; }
+.sb-ic{
+  font-size: 18px;
+  font-weight: 800;
+}
+.sb-lbl{
+  font-size: 10px;
+  letter-spacing: .08em;
+  opacity: .85;
+}
+.share-tip{
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .04em;
+  opacity: .55;
+  line-height: 1.5;
+}
+@media (max-width: 500px){
+  .share-grid{ grid-template-columns: repeat(2, 1fr); }
+  .share-box{ padding: 20px 16px; }
+}
+
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-tc-webfont@1.7.0/style.css">
 </head>
@@ -2063,8 +2373,7 @@ body{ padding-right: 80px; }
       <p class="who"   id="lbWho"></p>
       <p class="stats" id="lbStats"></p>
       <div class="lb-actions">
-        <a class="lb-open" id="lbOpen" target="_blank" rel="noopener">↗ 開新窗</a>
-        <button class="lb-vote">♥ 投佢一票</button>
+        <a class="lb-open" id="lbOpen" target="_blank" rel="noopener">↗ 開新窗睇全 SITE</a>
       </div>
       <div class="lb-count"><span id="lbCount">1 / 12</span> · ← → 鍵切換</div>
     </div>
@@ -2079,6 +2388,42 @@ body{ padding-right: 80px; }
     <h3>SITE 多士大對決．官方比賽規則</h3>
     <pre id="rulesContent" class="rules-content">載入中… ▸ 規則由 GitHub fetch</pre>
     <a href="https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/rules.txt" target="_blank" rel="noopener" class="rules-open">↗ 開 TXT 全文</a>
+  </div>
+</div>
+
+<!-- ============ POST-SUBMIT SHARE MODAL ============ -->
+<div class="share-overlay" id="shareOverlay" hidden>
+  <button class="lb-close" id="shareClose" aria-label="close">✕</button>
+  <div class="share-box">
+    <div class="share-eb">▸ ✓ SITE 已收到 · 加入戰局</div>
+    <h3 class="share-title">同朋友講你已經<br>為 <span id="shareSideLabel" class="share-side">傳統派</span> 起咗 SITE 表態</h3>
+    <div class="share-ref">Ref: <strong id="shareRefNo">F-XXXX</strong> · 平均審核 12hr · 通過即上 gallery + 計入派系實力</div>
+
+    <div class="share-card" id="shareCard">
+      <div class="share-card-bg" id="shareCardBg"></div>
+      <div class="share-card-text">
+        <div class="scc-eb">SITE 多士大對決 · 大快活</div>
+        <div class="scc-side">我撐 <span id="shareCardSide">🍞 傳統派</span></div>
+        <div class="scc-name" id="shareCardName">@anonymous</div>
+        <div class="scc-tag">一SITE一票 · 起SITE表態</div>
+      </div>
+    </div>
+
+    <div class="share-grid">
+      <a class="share-btn fb"       id="shareFB"       href="#" target="_blank" rel="noopener">
+        <span class="sb-ic">f</span><span class="sb-lbl">Facebook</span>
+      </a>
+      <a class="share-btn threads"  id="shareThreads"  href="#" target="_blank" rel="noopener">
+        <span class="sb-ic">@</span><span class="sb-lbl">Threads</span>
+      </a>
+      <a class="share-btn wa"       id="shareWA"       href="#" target="_blank" rel="noopener">
+        <span class="sb-ic">✦</span><span class="sb-lbl">WhatsApp</span>
+      </a>
+      <button class="share-btn ig"  id="shareIG" type="button">
+        <span class="sb-ic">◉</span><span class="sb-lbl">IG Story · Copy</span>
+      </button>
+    </div>
+    <div class="share-tip">▸ IG 暫未開放 web share — 撳「IG Story · Copy」即 copy 文案 + 自己 paste 落 IG。</div>
   </div>
 </div>
 
@@ -2109,6 +2454,7 @@ body{ padding-right: 80px; }
     <div class="ht-text">
       <div class="ht-eb">2026 STEM 大行動 · BY FAIRWOOD</div>
       <h1 class="ht-h1">西多士大對決</h1>
+      <div class="ht-tagline">一SITE一票 · 起SITE表態</div>
       <div class="ht-meta">21 日決勝 · 02·06·2026 → 23·06·2026</div>
     </div>
   </div>
@@ -2161,27 +2507,34 @@ body{ padding-right: 80px; }
         </button>
       </div>
 
-      <!-- BODIES row — 86/14 swap + diagonal slash -->
+      <!-- BODIES row — Phase 1 manifesto / Phase 2 picks (auto switch by JS) -->
       <div class="battle-bodies">
-        <div class="battle-body duck">
-          <div class="bs-frame">
-            <span class="corner-tag" id="bsTagDuck">LOVABLE · D04</span>
-            <iframe id="bsIfrDuck" src="https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-duck.html" loading="lazy"
-                    sandbox="allow-same-origin allow-scripts"
-                    referrerpolicy="no-referrer" title="duck site preview"></iframe>
-            <a class="open-ov" id="bsOpenDuck" href="https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-duck.html" target="_blank" rel="noopener">
-              <span class="b">↗ 開新窗睇全 SITE</span>
-            </a>
-          </div>
-          <div class="bs-foot">
-            <button class="bs-arr" id="bsPrevDuck" aria-label="prev duck site">‹</button>
-            <div class="bs-meta">
-              <div class="t" id="bsTitleDuck">無餡西多保衛聯盟</div>
-              <div class="w" id="bsWhoDuck">@uncle_lam_1962 · 93 票 · 4.8★</div>
+        <div class="battle-body duck" data-phase="1">
+
+          <!-- PHASE 1 · MANIFESTO -->
+          <div class="manifesto duck-manifesto" data-show="phase1">
+            <div class="mf-eb">▸ MANIFESTO · 傳統無餡派</div>
+            <div class="mf-quote">「西多嘅靈魂喺塊多士，<br>唔係夾喺中間嗰啲嘢。」</div>
+            <div class="mf-body">
+              <p>唔需要花樣 · 一塊多士 · 兩面金黃</p>
+              <p>蛋香 · 牛油香 · 糖漿香</p>
+              <p>我哋食嘅係手藝，唔係餡料。<br>我哋撐嘅係原味，唔係噱頭。</p>
             </div>
-            <span class="bs-count"><b id="bsIdxDuck">01</b>/06</span>
-            <button class="bs-arr" id="bsNextDuck" aria-label="next duck site">›</button>
-            <button class="bs-vote" data-side="duck"><span class="h">♥</span>VOTE</button>
+            <a class="mf-cta duck-cta" href="#howto">▸ 加入傳統派 · 起 site 表態</a>
+          </div>
+
+          <!-- PHASE 2 · 5 PICKS (hidden until count ≥ 5) -->
+          <div class="picks duck-picks" data-show="phase2" hidden>
+            <div class="picks-eb">▸ 傳統派 · 大快活精選 5 個</div>
+            <div class="picks-grid" id="duckPicksGrid"><!-- JS render --></div>
+          </div>
+
+          <div class="bs-foot">
+            <div class="bs-meta">
+              <div class="t">傳統無餡派</div>
+              <div class="w" id="bsWhoDuck">已通過審核 · 計入派系實力</div>
+            </div>
+            <a class="bs-cta-mini duck-cta" href="#howto">起 site 表態 →</a>
           </div>
         </div>
 
@@ -2193,25 +2546,32 @@ body{ padding-right: 80px; }
           <span class="arr right" id="swapArrR">→</span>
         </button>
 
-        <div class="battle-body peanut">
-          <div class="bs-frame">
-            <span class="corner-tag" id="bsTagPeanut">CLAUDE · D03</span>
-            <iframe id="bsIfrPeanut" src="https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-peanut.html" loading="lazy"
-                    sandbox="allow-same-origin allow-scripts"
-                    referrerpolicy="no-referrer" title="peanut site preview"></iframe>
-            <a class="open-ov" id="bsOpenPeanut" href="https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-peanut.html" target="_blank" rel="noopener">
-              <span class="b">↗ 開新窗睇全 SITE</span>
-            </a>
-          </div>
-          <div class="bs-foot">
-            <button class="bs-arr" id="bsPrevPeanut" aria-label="prev peanut site">‹</button>
-            <div class="bs-meta">
-              <div class="t" id="bsTitlePeanut">邪惡花生派．官方總部</div>
-              <div class="w" id="bsWhoPeanut">· 102 票 · 4.9★</div>
+        <div class="battle-body peanut" data-phase="1">
+
+          <!-- PHASE 1 · MANIFESTO -->
+          <div class="manifesto peanut-manifesto" data-show="phase1">
+            <div class="mf-eb">▸ MANIFESTO · 花生醬派</div>
+            <div class="mf-quote">「冇花生醬嘅西多多士，<br>等於茶餐廳冇奶茶。」</div>
+            <div class="mf-body">
+              <p>多士 + 花生醬 = 香港人嘅初戀</p>
+              <p>濃 · 滑 · 邪 · 上癮</p>
+              <p>我哋唔係加多一樣嘢，<br>我哋係令塊多士成為完整體。</p>
             </div>
-            <span class="bs-count"><b id="bsIdxPeanut">01</b>/06</span>
-            <button class="bs-arr" id="bsNextPeanut" aria-label="next peanut site">›</button>
-            <button class="bs-vote" data-side="peanut"><span class="h">♥</span>VOTE</button>
+            <a class="mf-cta peanut-cta" href="#howto">▸ 加入花生派 · 起 site 表態</a>
+          </div>
+
+          <!-- PHASE 2 · 5 PICKS -->
+          <div class="picks peanut-picks" data-show="phase2" hidden>
+            <div class="picks-eb">▸ 花生派 · 大快活精選 5 個</div>
+            <div class="picks-grid" id="peanutPicksGrid"><!-- JS render --></div>
+          </div>
+
+          <div class="bs-foot">
+            <div class="bs-meta">
+              <div class="t">花生醬派</div>
+              <div class="w" id="bsWhoPeanut">已通過審核 · 計入派系實力</div>
+            </div>
+            <a class="bs-cta-mini peanut-cta" href="#howto">起 site 表態 →</a>
           </div>
         </div>
       </div>
@@ -2354,8 +2714,8 @@ body{ padding-right: 80px; }
   <section class="submit-wrap" id="submit">
     <div class="sec-head" style="max-width: 1440px; margin: 0 auto 24px; padding: 0;">
       <div>
-        <div class="num">交 SITE</div>
-        <h2>即場交 Site · <span class="hl">六點上架</span>。</h2>
+        <div class="num">交 SITE · 一SITE一票</div>
+        <h2>起一個 SITE · 為你嗰派 <span class="hl">落一票</span>。</h2>
       </div>
       <p class="side">AI 1 分鐘掃描 → 小編 6PM 前 final approve → 即日 18:00 上架 → 戰況板即時跳動 → <strong>送 $10 大快活 App 西多券</strong>。</p>
     </div>
@@ -2363,7 +2723,7 @@ body{ padding-right: 80px; }
       <div class="sub-art">
         <div>
           <span class="sub-art-eb"><span class="dot"></span>▸ 1 分鐘搞掂</span>
-          <h2>即場交 Site<br><em>六點上架。</em></h2>
+          <h2>起 site 表態<br><em>一SITE一票。</em></h2>
         </div>
         <div class="sub-trust">
           <span>AI 過審 30 秒</span>
@@ -2376,8 +2736,8 @@ body{ padding-right: 80px; }
       </div>
 
       <form class="sub-form" onsubmit="event.preventDefault();">
-        <div class="sub-form-eb">▸ SUBMIT YOUR SITE</div>
-        <h3>1 分鐘表單</h3>
+        <div class="sub-form-eb">▸ SUBMIT YOUR SITE · 一SITE一票</div>
+        <h3>1 分鐘表單 · 起 site 表態</h3>
         <div class="row">
           <label>▸ 揀陣營</label>
           <div class="sub-fac">
@@ -2399,7 +2759,7 @@ body{ padding-right: 80px; }
             <input class="sub-input" type="text" placeholder="皇仁書院">
           </div>
         </div>
-        <button type="submit" class="sub-btn">▸ 投我一票．SUBMIT<span class="arrow">→</span></button>
+        <button type="submit" class="sub-btn">▸ 提交 SITE · 加入戰局<span class="arrow">→</span></button>
       </form>
     </div>
   </section>
@@ -2516,39 +2876,29 @@ const SITES = {
 const state = { duck: 0, peanut: 0 };
 const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
 
-// ============ RENDER PER SIDE ============
+// ============ RENDER PER SIDE (manifesto layout — carousel disabled) ============
 function renderSide(side) {
-  const idx = state[side];
   const arr = SITES[side];
-  const s = arr[idx];
+  if (!arr || !arr.length) return;
+  // Phase 1 (manifesto): just update bs-foot subtitle. Other DOM nodes removed.
   const C = cap(side);
-  document.getElementById('bsIfr' + C).src = s.url;
-  document.getElementById('bsTag' + C).textContent = `${s.tool} · ${s.day}`;
-  document.getElementById('bsTitle' + C).textContent = s.title;
-  document.getElementById('bsWho' + C).textContent = `${s.who} · ${s.school} · ${s.votes} 票 · ${s.rating}★`;
-  document.getElementById('bsIdx' + C).textContent = String(idx + 1).padStart(2, '0');
-  document.getElementById('bsOpen' + C).href = s.url;
+  const whoEl = document.getElementById('bsWho' + C);
+  if (whoEl) whoEl.textContent = '已通過審核 · 計入派系實力';
 }
 
-function prevSide(side) {
-  const total = SITES[side].length;
-  state[side] = (state[side] - 1 + total) % total;
-  renderSide(side);
-}
-function nextSide(side) {
-  const total = SITES[side].length;
-  state[side] = (state[side] + 1) % total;
-  renderSide(side);
-}
+function prevSide(side) { /* carousel disabled */ }
+function nextSide(side) { /* carousel disabled */ }
 
 ['duck', 'peanut'].forEach(side => {
   const C = cap(side);
-  document.getElementById('bsPrev' + C).addEventListener('click', () => prevSide(side));
-  document.getElementById('bsNext' + C).addEventListener('click', () => nextSide(side));
+  const prevBtn = document.getElementById('bsPrev' + C);
+  const nextBtn = document.getElementById('bsNext' + C);
+  if (prevBtn) prevBtn.addEventListener('click', () => prevSide(side));
+  if (nextBtn) nextBtn.addEventListener('click', () => nextSide(side));
   renderSide(side);
 });
 
-// vote button (cosmetic) — turn heart red, bump scale
+// (vote button removed — submission is the vote)
 document.querySelectorAll('.bs-vote').forEach(btn => {
   btn.addEventListener('click', e => {
     btn.style.transform = 'scale(.94)';
@@ -2629,10 +2979,11 @@ updateSwapBtn();
 tabEls.duck.addEventListener('click', () => setActive('duck'));
 tabEls.peanut.addEventListener('click', () => setActive('peanut'));
 
-// click peek body also swaps
+// click peek body also swaps — disabled in Phase 1 (50/50 manifesto layout)
 ['duck', 'peanut'].forEach(side => {
   bodyEls[side].addEventListener('click', e => {
-    if (e.target.closest('.bs-arr, .bs-vote, .open-ov, iframe, .bs-foot button')) return;
+    if (split.classList.contains('phase1-50-50')) return;
+    if (e.target.closest('.bs-arr, .bs-vote, .open-ov, iframe, .bs-foot button, .mf-cta, .bs-cta-mini')) return;
     if (activeOf() === side) return;
     setActive(side);
   });
@@ -2764,7 +3115,7 @@ function renderLightbox(){
   lbFac.className = `lb-fac ${s.side}`;
   lbTitle.textContent = s.title;
   lbWho.innerHTML = `<strong>${s.who}</strong> · ${s.school}`;
-  lbStats.textContent = `${s.votes} 票 · ${s.rating}★ · ${s.tool} · ${s.day}`;
+  lbStats.textContent = `${s.tool} · ${s.day} · ✓ 已通過審核`;
   lbOpen.href = s.url;
   lbCount.textContent = `${lbIdx + 1} / ${ALL_SITES.length}`;
 }
@@ -3012,7 +3363,7 @@ document.addEventListener('keydown', e => {
       "主角西多："+tCurrent.name+" — "+tCurrent.desc+"\n\n" +
       "理據（重點圍繞）："+reasonsPhrase+"。寫 5 條論點 grid 展開呢啲 angle。\n\n" +
       "呈現風格："+stylesPhrase+" — 揉合呢幾個香港元素變一個 coherent aesthetic，包括色彩、字體、圖像 placeholder、layout 都要呼應。\n\n" +
-      "要有：hero（大字 + 一句 manifesto）、3-5 條論點 grid、相關 testimonial 或 quote、CTA「投"+(tCurrent.side==='duck'?'傳統':'花生')+"派一票」、footer。\n\n" +
+      "要有：hero（大字 + 一句 manifesto）、3-5 條論點 grid、相關 testimonial 或 quote、CTA「撐"+(tCurrent.side==='duck'?'傳統':'花生')+"派 · 起 site 加入戰局」、footer。\n\n" +
       "Tone：自己根據揀咗嘅風格元素 infer，要 coherent。";
 
     const tagsLine = '✨ '+tCurrent.name+' · '+rs.length+' 理據 · '+ss.length+' 風格 · '+new Date().toLocaleTimeString('zh-HK',{hour:'2-digit',minute:'2-digit'});
@@ -3056,6 +3407,155 @@ document.addEventListener('keydown', e => {
     .catch(function(e){
       el.textContent = '載入失敗，請按下面 [↗ 開 TXT 全文] link 直接睇。\n' + e.message;
     });
+})();
+</script>
+
+
+<script>
+/* ============ SHARE MODAL + SUBMIT HOOK + PHASE SWITCH ============ */
+(function(){
+  const overlay = document.getElementById('shareOverlay');
+  const closeBtn = document.getElementById('shareClose');
+  const form = document.querySelector('.sub-form');
+  if (!overlay || !form) return;
+
+  const sideLabel = document.getElementById('shareSideLabel');
+  const cardSide  = document.getElementById('shareCardSide');
+  const cardName  = document.getElementById('shareCardName');
+  const refNoEl   = document.getElementById('shareRefNo');
+  const cardEl    = document.getElementById('shareCard');
+
+  // ---- ref no. gen ----
+  function genRef(side){
+    const prefix = side === 'peanut' ? 'P' : 'D';
+    const n = Math.floor(1000 + Math.random()*9000);
+    return prefix + '-' + n;
+  }
+
+  // ---- compose share URLs ----
+  const SITE_URL  = 'https://madkidshk.github.io/fairwood_sitetoast/';
+  const HASHTAG   = '#site多士大對決 #一SITE一票 #起SITE表態 #大快活';
+
+  function composeText(side){
+    const sideTxt = side === 'peanut' ? '🥜 花生醬派' : '🍞 傳統無餡派';
+    return '我撐 ' + sideTxt + ' · 已起咗 site 表態！\n一SITE一票 · 起SITE表態\n' + HASHTAG;
+  }
+
+  function openShare(side, nick){
+    const sideTxt = side === 'peanut' ? '🥜 花生派' : '🍞 傳統派';
+    const sideName = side === 'peanut' ? '花生醬派' : '傳統無餡派';
+    sideLabel.textContent = sideName;
+    sideLabel.className = 'share-side ' + side;
+    cardSide.textContent = sideTxt;
+    cardName.textContent = nick ? '@' + nick : '@anonymous';
+    refNoEl.textContent = genRef(side);
+    cardEl.className = 'share-card ' + side;
+
+    const txt = composeText(side);
+    const enc = encodeURIComponent(txt + '\n' + SITE_URL);
+    const url = encodeURIComponent(SITE_URL);
+
+    document.getElementById('shareFB').href =
+      'https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + encodeURIComponent(txt);
+    document.getElementById('shareThreads').href =
+      'https://www.threads.net/intent/post?text=' + enc;
+    document.getElementById('shareWA').href =
+      'https://wa.me/?text=' + enc;
+    document.getElementById('shareIG').onclick = function(){
+      const blob = txt + '\n' + SITE_URL;
+      if (navigator.clipboard){
+        navigator.clipboard.writeText(blob).then(function(){
+          document.getElementById('shareIG').querySelector('.sb-lbl').textContent = '已 copy ✓';
+        });
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = blob;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch(e){}
+        document.body.removeChild(ta);
+        document.getElementById('shareIG').querySelector('.sb-lbl').textContent = '已 copy ✓';
+      }
+    };
+
+    overlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeBtn.addEventListener('click', function(){
+    overlay.hidden = true;
+    document.body.style.overflow = '';
+  });
+  overlay.addEventListener('click', function(e){
+    if (e.target === overlay){
+      overlay.hidden = true;
+      document.body.style.overflow = '';
+    }
+  });
+
+  // ---- hook form submit ----
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    // detect active side
+    const duckActive = document.querySelector('.sub-fac-btn.duck.active');
+    const side = duckActive ? 'duck' : 'peanut';
+    // try to get nickname from form (school field or email prefix as fallback)
+    const inputs = form.querySelectorAll('.sub-input');
+    let nick = '';
+    inputs.forEach(function(i){
+      if (i.type === 'text' && i.value.trim()) nick = i.value.trim();
+      else if (!nick && i.type === 'email' && i.value.includes('@')) nick = i.value.split('@')[0];
+    });
+    openShare(side, nick);
+  });
+
+  // ---- side picker toggle (in case not already wired) ----
+  document.querySelectorAll('.sub-fac-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.sub-fac-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+    });
+  });
+})();
+
+/* ============ PHASE SWITCH (manifesto ↔ picks based on site counts) ============ */
+(function(){
+  const THRESHOLD = 5;
+  const duckScoreEl = document.getElementById('bsScoreDuck');
+  const peanutScoreEl = document.getElementById('bsScorePeanut');
+  const duckBody = document.querySelector('.battle-body.duck');
+  const peanutBody = document.querySelector('.battle-body.peanut');
+  const split = document.getElementById('battleSplit');
+  const bodies = document.querySelector('.battle-bodies');
+  const swapBtn = document.getElementById('swapBtn');
+
+  function getCount(el){
+    if (!el) return 0;
+    const n = parseInt((el.textContent || '0').replace(/[^0-9]/g, ''), 10);
+    return isNaN(n) ? 0 : n;
+  }
+
+  function setPhase(body, phase){
+    if (!body) return;
+    body.dataset.phase = phase;
+    const mf  = body.querySelector('[data-show="phase1"]');
+    const pks = body.querySelector('[data-show="phase2"]');
+    if (mf)  mf.hidden  = (phase === '2');
+    if (pks) pks.hidden = (phase === '1');
+  }
+
+  const duckPhase   = getCount(duckScoreEl)   >= THRESHOLD ? '2' : '1';
+  const peanutPhase = getCount(peanutScoreEl) >= THRESHOLD ? '2' : '1';
+  setPhase(duckBody, duckPhase);
+  setPhase(peanutBody, peanutPhase);
+
+  // Phase 1 (both manifestos): force 50/50 seam + hide swap toggle
+  const bothPhase1 = duckPhase === '1' && peanutPhase === '1';
+  if (bothPhase1 && bodies){
+    bodies.style.setProperty('--seam', '50%');
+    if (split) split.classList.add('phase1-50-50');
+    if (swapBtn) swapBtn.style.display = 'none';
+  }
 })();
 </script>
 
