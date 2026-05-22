@@ -444,57 +444,44 @@ body::after{
     var(--ink);
 }
 
-/* === BATTLE TOAST POP-IN (matches boundary toast pattern) === */
-.battle{ position: relative; }
+/* === BATTLE TOAST POP-IN — fixed at viewport edges (matches .toast-break pattern) === */
 .battle-toast{
-  position: absolute;
+  position: fixed;
   top: 50%;
-  width: 460px; height: 460px;
+  width: 380px; height: 380px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  filter: drop-shadow(0 18px 48px rgba(0,0,0,.55));
+  filter: drop-shadow(0 20px 50px rgba(0,0,0,.55));
   pointer-events: none;
-  z-index: 0;
+  z-index: 4;
   opacity: 0;
-  transition: opacity .6s cubic-bezier(.16,1,.3,1),
-              transform .85s cubic-bezier(.16,1,.3,1);
+  transition: opacity 1s cubic-bezier(.16,1,.3,1),
+              transform 1.4s cubic-bezier(.16,1,.3,1);
 }
 .battle-toast.left{
-  left: -160px;
+  left: -120px;
   background-image: url("https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-traditional.png");
-  transform: translateY(-50%) translateX(-160px) rotate(-30deg);
+  transform: translateY(-50%) translateX(-120px) rotate(-30deg);
 }
 .battle-toast.right{
-  right: -160px;
+  right: -120px;
   background-image: url("https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-peanut.png");
-  transform: translateY(-50%) translateX(160px) rotate(30deg);
+  transform: translateY(-50%) translateX(120px) rotate(30deg);
 }
-/* Active state: pop in to its corner */
-.battle.show-duck .battle-toast.left{
-  opacity: .55;
+/* Visible only when battle is in viewport AND its side is active */
+body.battle-in-view.show-duck   .battle-toast.left{
+  opacity: .9;
   transform: translateY(-50%) translateX(0) rotate(-14deg);
 }
-.battle.show-peanut .battle-toast.right{
-  opacity: .55;
+body.battle-in-view.show-peanut .battle-toast.right{
+  opacity: .9;
   transform: translateY(-50%) translateX(0) rotate(14deg);
 }
-/* Slight float idle anim once visible */
-@keyframes battle-toast-float-l{
-  0%,100%{ transform: translateY(-50%) translateX(0) rotate(-14deg); }
-  50%    { transform: translateY(calc(-50% - 8px)) translateX(0) rotate(-12deg); }
-}
-@keyframes battle-toast-float-r{
-  0%,100%{ transform: translateY(-50%) translateX(0) rotate(14deg); }
-  50%    { transform: translateY(calc(-50% - 8px)) translateX(0) rotate(16deg); }
-}
-.battle.show-duck   .battle-toast.left{  animation: battle-toast-float-l 5s ease-in-out 1s infinite; }
-.battle.show-peanut .battle-toast.right{ animation: battle-toast-float-r 5s ease-in-out 1s infinite; }
-
 @media (max-width: 900px){
-  .battle-toast{ width: 280px; height: 280px; }
-  .battle-toast.left{ left: -100px; }
-  .battle-toast.right{ right: -100px; }
+  .battle-toast{ width: 240px; height: 240px; }
+  .battle-toast.left{ left: -80px; }
+  .battle-toast.right{ right: -80px; }
 }
 
 /* ===== Hero panoramic removed — battle toast pop-ins are the BG focus ===== */
@@ -2655,6 +2642,10 @@ body{ padding-right: 80px; }
 </head>
 <body>
 
+<!-- ============ BATTLE TOAST POP-INS — viewport-edge pinned, fires when battle is in view ============ -->
+<div class="battle-toast left"  id="battleToastLeft"  aria-hidden="true"></div>
+<div class="battle-toast right" id="battleToastRight" aria-hidden="true"></div>
+
 <div class="cur" id="cur"></div>
 <div class="sp"><div class="f" id="spFill"></div></div>
 
@@ -2791,10 +2782,6 @@ body{ padding-right: 80px; }
 
   <!-- ============ BATTLE HERO ============ -->
   <section class="battle" id="top">
-
-    <!-- Left/Right toast images — slide in based on active side -->
-    <div class="battle-toast left"  aria-hidden="true"></div>
-    <div class="battle-toast right" aria-hidden="true"></div>
 
     <!-- SPLIT BATTLE — tabs (50/50 fixed) + bodies (86/14 swap + diagonal slash) -->
     <div class="battle-split" id="battleSplit">
@@ -3294,12 +3281,9 @@ function setActive(side) {
   // Sync manifesto ribbon band
   const band = document.getElementById('mfBand');
   if (band) band.dataset.side = side;
-  // Sync battle toast pop-in (left = duck, right = peanut)
-  const battleSec = document.querySelector('.battle');
-  if (battleSec){
-    battleSec.classList.toggle('show-duck',   side === 'duck');
-    battleSec.classList.toggle('show-peanut', side === 'peanut');
-  }
+  // Sync battle toast pop-in via body classes
+  document.body.classList.toggle('show-duck',   side === 'duck');
+  document.body.classList.toggle('show-peanut', side === 'peanut');
 }
 
 // ============ SCROLL-DRIVEN BG TOASTS — slow bob + scroll parallax ============
@@ -3344,10 +3328,21 @@ if (swapBtn) {
 }
 updateSwapBtn();
 
-// Init battle toast pop-in: default duck active
+// Init battle toast pop-in via body class + IntersectionObserver for in-view detection
 (function(){
-  const battleSec = document.querySelector('.battle');
-  if (battleSec) battleSec.classList.add('show-duck');
+  document.body.classList.add('show-duck');
+  const battleEl = document.querySelector('.battle');
+  if (battleEl && window.IntersectionObserver){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        document.body.classList.toggle('battle-in-view', e.isIntersecting);
+      });
+    }, { threshold: 0.15 });
+    io.observe(battleEl);
+  } else {
+    // fallback: always considered in-view
+    document.body.classList.add('battle-in-view');
+  }
 })();
 tabEls.duck.addEventListener('click', () => setActive('duck'));
 tabEls.peanut.addEventListener('click', () => setActive('peanut'));
