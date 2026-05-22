@@ -2731,6 +2731,19 @@ body{ padding-right: 80px; }
   .share-box{ padding: 20px 16px; }
 }
 
+
+.foot-wa-cta{
+  display: inline-flex !important; align-items: center; gap: 8px;
+  background: #25D366; color: #fff !important;
+  padding: 10px 16px; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+  letter-spacing: .08em;
+  margin-bottom: 10px;
+  transition: transform .15s ease, box-shadow .15s ease;
+  width: max-content;
+}
+.foot-wa-cta:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37,211,102,.4); }
+
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-tc-webfont@1.7.0/style.css">
 </head>
@@ -2871,7 +2884,7 @@ body{ padding-right: 80px; }
   <a href="#submit"  data-label="立即交 SITE"    data-key="submit"><span class="dot"></span></a>
   <a href="#gallery" data-label="全部作品"       data-key="gallery"><span class="dot"></span></a>
   <a href="#bento"   data-label="獎品"           data-key="bento"><span class="dot"></span></a>
-  <a href="https://wa.me/85299999999?text=%E6%9C%89%E9%97%9C%E5%A4%A7%E5%BF%AB%E6%B4%BB%20SITE%20%E5%A4%9A%E5%A3%AB%E5%A4%A7%E5%B0%8D%E6%B1%BA%E6%9F%A5%E8%A9%A2" data-label="WhatsApp 查詢" data-key="faq" target="_blank" rel="noopener"><span class="dot"></span></a>
+  <a href="#foot" data-label="查詢" data-key="foot"><span class="dot"></span></a>
 </nav>
 
 
@@ -3207,7 +3220,7 @@ body{ padding-right: 80px; }
   <div class="toast-break right"></div>
 
   <!-- ============ FOOTER ============ -->
-  <footer class="foot">
+  <footer class="foot" id="foot">
     <div class="foot-inner">
       <h2 class="foot-big">食得夠<br><span class="stem">STEM</span><span class="o">。</span></h2>
       <div class="foot-grid">
@@ -3232,7 +3245,13 @@ body{ padding-right: 80px; }
         </div>
         <div class="foot-col"><h4>▸ 戰況</h4><a href="#top">派系對戰</a><a href="#gallery">全部作品</a></div>
         <div class="foot-col"><h4>▸ 入伍</h4><a href="#howto">PROMPT 生成器</a><a href="#submit">交 SITE</a><a href="https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/rules.txt" target="_blank" rel="noopener">完整規則</a></div>
-        <div class="foot-col"><h4>▸ 聯絡</h4><a href="mailto:hi@fairwood.hk">hi@fairwood.hk</a><a href="#">@fairwoodhk · IG</a><a href="#">FB · Fairwood</a><a href="#">Press / 媒體</a></div>
+        <div class="foot-col"><h4>▸ 聯絡</h4>
+          <a href="https://wa.me/85299999999?text=%E6%9C%89%E9%97%9C%E5%A4%A7%E5%BF%AB%E6%B4%BB%20SITE%20%E5%A4%9A%E5%A3%AB%E5%A4%A7%E5%B0%8D%E6%B1%BA%E6%9F%A5%E8%A9%A2" target="_blank" rel="noopener" class="foot-wa-cta">💬 WhatsApp 查詢</a>
+          <a href="mailto:hi@fairwood.hk">hi@fairwood.hk</a>
+          <a href="#">@fairwoodhk · IG</a>
+          <a href="#">FB · Fairwood</a>
+          <a href="#">Press / 媒體</a>
+        </div>
       </div>
       <div class="foot-bot">
         <span>© FAIRWOOD FAST FOOD GROUP · 2026 · ALL RIGHTS</span>
