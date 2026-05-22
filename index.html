@@ -462,25 +462,27 @@ body::after{
 }
 /* LEFT: toast extends OUTSIDE battle to the left (visible portion is in viewport sidebar) */
 .battle-toast.left{
-  left: -240px;
+  left: -120px;
   background-image: url("https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-traditional.png");
-  transform: translateY(-50%) translateX(-100px) rotate(-30deg);
+  transform: translateY(-50%) translateX(-120px) rotate(-30deg);
 }
 .battle-toast.right{
-  right: -240px;
+  right: -120px;
   background-image: url("https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-peanut.png");
-  transform: translateY(-50%) translateX(100px) rotate(30deg);
+  transform: translateY(-50%) translateX(120px) rotate(30deg);
 }
 .battle.show-duck   .battle-toast.left{
-  opacity: .85;
+  opacity: .4;
   transform: translateY(-50%) translateX(0) rotate(-14deg);
 }
 .battle.show-peanut .battle-toast.right{
-  opacity: .85;
+  opacity: .4;
   transform: translateY(-50%) translateX(0) rotate(14deg);
 }
-@media (max-width: 1100px){
-  .battle-toast{ display: none; }  /* hide on narrow viewports where battle fills viewport */
+@media (max-width: 900px){
+  .battle-toast{ width: 240px; height: 240px; }
+  .battle-toast.left{ left: -80px; }
+  .battle-toast.right{ right: -80px; }
 }
 
 /* ===== Hero panoramic removed — battle toast pop-ins are the BG focus ===== */
@@ -962,10 +964,10 @@ body::after{
   left: var(--seam);
   transform: translate(-50%, -50%) rotate(-1.5deg);
   z-index: 20;
-  display: flex; flex-direction: column;
+  display: flex; flex-direction: row;
   align-items: center; justify-content: center;
-  gap: 4px;
-  padding: 10px 22px;
+  gap: 10px;
+  padding: 10px 18px;
   background: var(--paper);
   color: var(--ink);
   border: 2.5px solid var(--ink);
@@ -978,7 +980,28 @@ body::after{
               background .35s ease, color .35s ease, border-color .35s ease;
   animation: swapBob 3s ease-in-out infinite;
   white-space: nowrap;
+  pointer-events: auto;
 }
+.sp-text{
+  display: flex; flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  pointer-events: none;
+}
+.sp-arr{
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--ink); color: var(--paper);
+  font-size: 13px; font-weight: 900;
+  flex-shrink: 0;
+  pointer-events: none;
+  transition: transform .2s ease, opacity .2s ease;
+}
+.swap-pill:hover .sp-arr.right{ transform: translateX(3px); }
+.swap-pill:hover .sp-arr.left{  transform: translateX(-3px); }
+/* All inner children pass clicks to the parent button (no weird hit zones) */
+.swap-pill > *{ pointer-events: none; }
 .swap-pill:hover{ transform: translate(-50%, -50%) rotate(-1.5deg) scale(1.05); }
 .swap-pill:active{ transform: translate(-50%, -50%) rotate(-1.5deg) scale(.97); }
 .sp-eb{
@@ -2818,8 +2841,12 @@ body{ padding-right: 80px; }
         <div class="battle-slash"></div>
 
         <button class="swap-pill" id="swapBtn" type="button" aria-label="切換陣營">
-          <span class="sp-eb"   id="swapEb">PEANUT · 邪惡</span>
-          <span class="sp-name" id="swapName">花生醬派</span>
+          <span class="sp-arr left"  id="swapArrL">←</span>
+          <span class="sp-text">
+            <span class="sp-eb"   id="swapEb">PEANUT · 邪惡</span>
+            <span class="sp-name" id="swapName">花生醬派</span>
+          </span>
+          <span class="sp-arr right" id="swapArrR">→</span>
         </button>
         <!-- hidden tabs to keep JS hooks alive (tabDuck/tabPeanut click handlers) -->
         <button id="tabDuck"   type="button" hidden aria-hidden="true"></button>
@@ -3305,20 +3332,26 @@ function updateBgToasts(){
 window.addEventListener('scroll', updateBgToasts, { passive: true });
 updateBgToasts();
 
-// swap pill — shows OPPOSITE side's content (what you swap TO); click toggles
+// swap pill — shows OPPOSITE side's content + arrow direction
 function updateSwapBtn(){
   const active = activeOf();
   const ebEl = document.getElementById('swapEb');
   const nmEl = document.getElementById('swapName');
+  const arrL = document.getElementById('swapArrL');
+  const arrR = document.getElementById('swapArrR');
   if (!ebEl || !nmEl) return;
   if (active === 'duck'){
-    // Currently showing duck → invite to peanut
+    // duck on LEFT is active → opposite (peanut) is on RIGHT → show right arrow
     ebEl.textContent = 'PEANUT · 邪惡';
     nmEl.textContent = '花生醬派';
+    if (arrL) arrL.style.display = 'none';
+    if (arrR) arrR.style.display = '';
   } else {
-    // Currently showing peanut → invite to duck
+    // peanut on RIGHT is active → opposite (duck) is on LEFT → show left arrow
     ebEl.textContent = 'CLASSIC · 原味';
     nmEl.textContent = '傳統派';
+    if (arrL) arrL.style.display = '';
+    if (arrR) arrR.style.display = 'none';
   }
 }
 updateSwapBtn();
