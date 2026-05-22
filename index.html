@@ -1086,14 +1086,10 @@ body.battle-in-view.show-peanut .battle-toast.right{
   transition: opacity .45s ease-out, transform .55s cubic-bezier(.34, 1.5, .4, 1);
 }
 .bs-frame iframe{
-  position: absolute;
-  top: 0; left: 0;
-  width: 1440px; height: 1440px;
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
   border: 0; display: block;
   pointer-events: none;
-  transform-origin: 0 0;
-  transform: scale(var(--bs-scale, 1));
-  transition: transform .35s ease;
 }
 .bs-frame .corner-tag{
   position: absolute; top: 10px; left: 10px; z-index: 4;
@@ -3057,7 +3053,7 @@ body{ padding-right: 80px; }
     </div>
   </div>
 
-  <div class="toast-break right"></div>
+  <div class="toast-break left"></div>
 
   <!-- ============ GALLERY · 全部作品 · 6 / page ============ -->
   
@@ -3086,7 +3082,7 @@ body{ padding-right: 80px; }
     </div>
   </section>
 
-  <div class="toast-break left"></div>
+  <div class="toast-break right"></div>
 
   <!-- divider marquee -->
   <div class="mq brown">
@@ -3104,7 +3100,7 @@ body{ padding-right: 80px; }
     </div>
   </div>
 
-  <div class="toast-break right"></div>
+  <div class="toast-break left"></div>
 
   <!-- ============ SUBMIT ============ -->
   <section class="submit-wrap" id="submit">
@@ -3176,7 +3172,7 @@ body{ padding-right: 80px; }
     </div>
   </div>
 
-  <div class="toast-break left"></div>
+  <div class="toast-break right"></div>
 
   <!-- ============ BENTO ============ -->
   <section class="bento" id="bento">
@@ -3215,6 +3211,9 @@ body{ padding-right: 80px; }
       </a>
     </div>
   </section>
+
+  <div class="toast-break right"></div>
+  <div class="toast-break right"></div>
 
   <!-- ============ FOOTER ============ -->
   <footer class="foot">
@@ -3312,27 +3311,7 @@ function nextSide(side) {
   renderSide(side);
 }
 
-// ============ DYNAMIC IFRAME SCALE — fits 1440px virtual viewport to bs-frame ============
-(function(){
-  const VIRTUAL_W = 1440;
-  function fitIframe(frame){
-    if (!frame) return;
-    const w = frame.clientWidth;
-    if (!w) return;
-    const s = w / VIRTUAL_W;
-    frame.style.setProperty('--bs-scale', s);
-  }
-  const frames = document.querySelectorAll('.bs-frame');
-  frames.forEach(f => fitIframe(f));
-  if (window.ResizeObserver){
-    const ro = new ResizeObserver(entries => {
-      entries.forEach(e => fitIframe(e.target));
-    });
-    frames.forEach(f => ro.observe(f));
-  } else {
-    window.addEventListener('resize', () => frames.forEach(fitIframe));
-  }
-})();
+// (iframe dynamic scaling removed — iframes render at 100% width/height)
 
 ['duck', 'peanut'].forEach(side => {
   const C = cap(side);
