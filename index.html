@@ -3731,36 +3731,27 @@ document.addEventListener('keydown', e => {
   ];
 
   // ============ 60+ 理據 KEYWORDS · grouped for coherent random combos ============
-  const REASONS = [
-    // 1 · 質感口味 (texture/flavor)
-    "鬆軟","脆邊","蛋香","糖香","牛油香","煉奶滑","金黃","熱辣","軟糯","焦邊",
-    // 2 · 食嗰刻場景
-    "朝早食","下午茶","放工後","通頂","考試前","落雨天","宵夜","茶記坐","屋企食","三點三",
-    // 3 · 童年記憶
-    "童年味","媽媽煎","阿婆教","屋邨味","街口茶記","細個食到大","同學一齊","屋企人飲茶","婆婆煎","舊街坊",
-    // 4 · 立場宣言
-    "西多就係咁","撐原味","守傳統","食慣就明","無餡先 OG","試咗先講","原味勝餡料","兩面金黃就夠","唔需要花樣","一塊多士",
-    // 5 · 對家批評
-    "對家亂咁加","對家落後","對家盲撐","對家奇怪","對家太花巧","對家頑固","對家無新意","對家追潮流","對家唔識食","對家太死板",
-    // 6 · 茶記人物
-    "茶記常客","街坊味","阿姐 recommend","伙記伯伯","收銀阿婆","同事 break","老茶記味","落單一齊","set lunch","三點三阿伯"
-  ];
+  // GROUPED: keys = category labels for prompt output structure
+  const REASONS_GROUPS = {
+    "質感口味":["鬆軟","脆邊","脆卜卜","蛋香","糖香","牛油香","煉奶滑","焦邊","一咬流心","咖啡香"],
+    "食嗰刻場景":["朝早食","下午茶","放工後","通頂","考試前","落雨天","宵夜","茶記坐低嘆","屋企食","三點三"],
+    "童年記憶":["童年味","媽媽煎","阿婆教","屋邨味","街口茶記","細個食到大","同學一齊","屋企人飲茶","婆婆煎","老街坊"],
+    "立場宣言":["西多就係咁","撐原味","守傳統","食慣就明","無餡先 OG","流心先係靈魂","加咗就唔係西多","餡料先誠意","新派啱我","試咗先講"],
+    "對家批評":["對家亂咁加","對家落後","對家奇怪","對家太花巧","對家無新意","對家追潮流","對家唔識食","對家太死板","對家太守舊","對家唔夠誠意"],
+    "茶記人物":["茶記常客","街坊味","阿姐 recommend","伙記伯伯","收銀阿婆","同事 break","老茶記味","set lunch","三點三阿伯","茶餐廳 OG"]
+  };
+  const REASONS = Object.values(REASONS_GROUPS).flat();
 
   // ============ 60+ 風格 KEYWORDS · HK-themed, grouped ============
-  const STYLES = [
-    // 1 · 茶記/街頭舖頭
-    "茶記","大牌檔","冰室","燒臘鋪","雲吞麵店","麵包鋪","涼茶鋪","糖水鋪","士多","辦館",
-    // 2 · 街頭場景
-    "公眾街市","街口檔","唐樓地舖","後巷食檔","流動小販","鐵皮屋","街頭推車","五金鋪","紙紥鋪","裝裱鋪",
-    // 3 · 香港地區
-    "旺角","油麻地","深水埗","土瓜灣","北角","九龍城","葵涌","屯門","元朗","大埔",
-    // 4 · 交通/物件
-    "紅 van","叮叮","九巴","渡輪","地鐵","雙層巴士","的士","後巷","信箱","燈柱",
-    // 5 · 港式人物/作品
-    "許冠傑","周潤發","張國榮","譚詠麟","梅艷芳","四大天王","王家衞","周星馳","TVB 處境劇","80s 港產片",
-    // 6 · 港式美學細節
-    "霓虹招牌","鐵閘","水箱招牌","卡式帶","VHS","BB 機","藤椅","公廁綠磚","舊唐樓","招牌大字"
-  ];
+  const STYLES_GROUPS = {
+    "茶記街舖":["茶記","大牌檔","冰室","燒臘鋪","雲吞麵店","麵包鋪","涼茶鋪","糖水鋪","士多","辦館"],
+    "街頭場景":["公眾街市","街口檔","唐樓地舖","後巷食檔","流動小販","鐵皮屋","街頭推車","霓虹街","唐樓窗花","招牌叢林"],
+    "地區":["旺角","油麻地","深水埗","土瓜灣","北角","九龍城","葵涌","屯門","元朗","大埔"],
+    "交通物件":["紅 van","叮叮","九巴","渡輪","地鐵","雙層巴士","的士","後巷","信箱","燈柱"],
+    "人物作品":["許冠傑","周潤發","張國榮","譚詠麟","梅艷芳","四大天王","王家衞","周星馳","TVB 處境劇","80s 港產片"],
+    "美學細節":["霓虹招牌","鐵閘","直立招牌","卡式帶","VHS","BB call","藤椅","舊唐樓","招牌大字","紅白藍"]
+  };
+  const STYLES = Object.values(STYLES_GROUPS).flat();
 
   // ============ STATE ============
   let toastIdx = 0;
@@ -3776,6 +3767,28 @@ document.addEventListener('keydown', e => {
       [a[i],a[j]] = [a[j],a[i]];
     }
     return a;
+  }
+
+  // Group an array of selected chips back into their category buckets.
+  // Returns { "群組 A": ["chip1","chip2"], "群組 B": [...] } skipping empty groups.
+  function groupSelected(selected, groups){
+    const out = {};
+    for (const [cat, items] of Object.entries(groups)){
+      const picks = selected.filter(s => items.includes(s));
+      if (picks.length) out[cat] = picks;
+    }
+    return out;
+  }
+
+  // Pick a testimonial archetype based on reasons selected.
+  function personaFromReasons(rs){
+    const has = (k) => rs.some(r => r.includes(k));
+    if (has("童年") || has("阿婆") || has("媽媽") || has("屋邨") || has("老街坊")) return "老街坊（50+，茶記常客）";
+    if (has("通頂") || has("考試") || has("同學")) return "中學生（DSE 備戰期）";
+    if (has("set lunch") || has("放工") || has("同事")) return "OL（中環 lunch break）";
+    if (has("流心") || has("新派") || has("餡料")) return "後生仔（Gen Z food blogger）";
+    if (has("茶記坐") || has("三點三") || has("阿姐") || has("伙記")) return "茶記伯伯（50 年熟客）";
+    return "街坊（典型香港人）";
   }
 
   // ============ TOAST CAROUSEL ============
@@ -3846,11 +3859,15 @@ document.addEventListener('keydown', e => {
     let ss = Array.from(selStyles);
 
     if (mode === 'random'){
-      // 全部隨機 — overwrite selections
+      // 全部隨機 — overwrite selections, balance across groups
       toastIdx = Math.floor(Math.random()*TOASTS.length);
       renderToast();
-      rs = shuffle(REASONS).slice(0, 4);
-      ss = shuffle(STYLES).slice(0, 3);
+      // 1 chip from each of 4 random reason groups
+      const reasonCats = shuffle(Object.keys(REASONS_GROUPS)).slice(0, 4);
+      rs = reasonCats.map(c => shuffle(REASONS_GROUPS[c])[0]);
+      // 1 chip from each of 3 random style groups
+      const styleCats = shuffle(Object.keys(STYLES_GROUPS)).slice(0, 3);
+      ss = styleCats.map(c => shuffle(STYLES_GROUPS[c])[0]);
       // update visual selection
       selReasons = new Set(rs);
       selStyles = new Set(ss);
@@ -3858,23 +3875,54 @@ document.addEventListener('keydown', e => {
       refreshStyles();
     } else {
       // 用揀咗嘅；如果無揀就 fallback
-      if (rs.length === 0) rs = shuffle(REASONS).slice(0, 4);
-      if (ss.length === 0) ss = shuffle(STYLES).slice(0, 3);
+      if (rs.length === 0){
+        const reasonCats = shuffle(Object.keys(REASONS_GROUPS)).slice(0, 4);
+        rs = reasonCats.map(c => shuffle(REASONS_GROUPS[c])[0]);
+      }
+      if (ss.length === 0){
+        const styleCats = shuffle(Object.keys(STYLES_GROUPS)).slice(0, 3);
+        ss = styleCats.map(c => shuffle(STYLES_GROUPS[c])[0]);
+      }
     }
 
     const tCurrent = TOASTS[toastIdx];
-    const reasonsPhrase = rs.join('、');
-    const stylesPhrase = ss.join(' + ');
+    const side = tCurrent.side === 'duck' ? '傳統' : '花生';
+    const opp = side === '傳統' ? '花生' : '傳統';
+
+    // Group selections back by category for richer prompt structure
+    const rGroups = groupSelected(rs, REASONS_GROUPS);
+    const sGroups = groupSelected(ss, STYLES_GROUPS);
+
+    // Format grouped chunks like "【質感口味】鬆軟、脆卜卜　【立場宣言】撐原味"
+    const fmtGroups = (g, sep) => Object.entries(g).map(([cat, items]) => '【'+cat+'】'+items.join(sep||'、')).join('　');
+
+    const reasonsBlock = Object.keys(rGroups).length ? fmtGroups(rGroups) : rs.join('、');
+    const stylesBlock  = Object.keys(sGroups).length ? fmtGroups(sGroups) : ss.join(' + ');
+
+    const persona = personaFromReasons(rs);
 
     const prompt =
-      "整個 website 參加大快活「SITE 多士大對決」比賽，"+tCurrent.sideLabel+"。\n\n" +
-      "主角西多："+tCurrent.name+" — "+tCurrent.desc+"\n\n" +
-      "理據（重點圍繞）："+reasonsPhrase+"。寫 5 條論點 grid 展開呢啲 angle。\n\n" +
-      "呈現風格："+stylesPhrase+" — 揉合呢幾個香港元素變一個 coherent aesthetic，包括色彩、字體、圖像 placeholder、layout 都要呼應。\n\n" +
-      "要有：hero（大字 + 一句 manifesto）、3-5 條論點 grid、相關 testimonial 或 quote、CTA「撐"+(tCurrent.side==='duck'?'傳統':'花生')+"派 · 起 site 加入戰局」、footer。\n\n" +
-      "Tone：自己根據揀咗嘅風格元素 infer，要 coherent。";
+      "你係 senior product designer，幫我整一個 single-page website 參加大快活「SITE 多士大對決」比賽，"+tCurrent.sideLabel+"。\n\n" +
+      "── 主角 ──\n" +
+      tCurrent.name+"（"+side+"派）：" + tCurrent.desc + "\n\n" +
+      "── 論述角度（覆蓋以下 category，務求 coherent，唔好變散沙）──\n" +
+      reasonsBlock + "\n\n" +
+      "── 視覺風格（揉合以下香港元素變一個統一 aesthetic）──\n" +
+      stylesBlock + "\n\n" +
+      "── Layout 要求 ──\n" +
+      "1. Hero：大字 manifesto（一句話打中"+side+"派靈魂，要夠 punchy，禁忌 cliché）+ visual hook\n" +
+      "2. 論點 grid（5 條）：每條配 micro-headline + 1-2 句說明，圍繞上面嘅 category 展開\n" +
+      "3. Testimonial（1 條）：扮 "+persona+" 嘅口吻，30-60 字，要 sound natural、有港式語氣（口語 OK）\n" +
+      "4. 對比 callout：點解" + opp + "派搞錯咗（短短 2-3 句，自嘲但唔惡毒）\n" +
+      "5. CTA：「撐"+side+"派 · 起 site 加入戰局」按鈕\n" +
+      "6. Footer：標明 #SITE多士大對決、大快活 logo 位\n\n" +
+      "── Tone & 字體 ──\n" +
+      "Cantonese 繁體中文（香港用法，必要時可英文穿插，例如 OG、vibes）。整個 site 要 read 得似 HK insider 寫，唔可以似 ChatGPT 翻譯腔。\n" +
+      "字體：可揀 Noto Serif HK / 思源宋體 / sans-serif 都得，但要同 aesthetic 一致。\n\n" +
+      "── 技術 ──\n" +
+      "用 HTML + CSS（可加少量 vanilla JS）。Mobile-first，要 responsive。色彩、字體、layout 自己根據上面風格 infer，唔需要再問我。";
 
-    const tagsLine = '✨ '+tCurrent.name+' · '+rs.length+' 理據 · '+ss.length+' 風格 · '+new Date().toLocaleTimeString('zh-HK',{hour:'2-digit',minute:'2-digit'});
+    const tagsLine = '✨ '+tCurrent.name+' · '+Object.keys(rGroups).length+' category · '+rs.length+' 理據 · '+ss.length+' 風格 · '+new Date().toLocaleTimeString('zh-HK',{hour:'2-digit',minute:'2-digit'});
     document.getElementById('hgMeta').textContent = tagsLine;
     document.getElementById('hgPrompt').textContent = prompt;
     document.getElementById('hgOutput').hidden = false;
