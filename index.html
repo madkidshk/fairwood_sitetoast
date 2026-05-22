@@ -1517,6 +1517,10 @@ body.battle-in-view.show-peanut .battle-toast.right{
 .foot{ position: relative; background: var(--ink); color: var(--paper); padding: 80px 24px 32px; overflow: hidden; border-top: 1px solid rgba(245,236,217,.08); }
 .foot::before{ content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(800px 600px at 80% 30%, rgba(240,138,0,.16), transparent 45%), radial-gradient(500px 400px at 10% 80%, rgba(184,54,42,.15), transparent 50%); }
 .foot-inner{ max-width: 1440px; margin: 0 auto; position: relative; z-index: 2; }
+.foot-legacy{ display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.chip-arrow{ font-family: var(--font-mono); font-size: 18px; color: var(--fairwood-light, #ffb74d); font-weight: 800; opacity: .55; }
+.chip-bang{ font-family: var(--font-mono); color: var(--paper); margin-left: 3px; }
+
 /* Footer hero-style brand block (mirrors top hero design) */
 .foot-hero{
   display: flex; align-items: center; gap: 16px;
@@ -3172,7 +3176,7 @@ body{ padding-right: 80px; }
     </div>
   </div>
 
-  <div class="toast-break right"></div>
+  <div class="toast-break left"></div>
 
   <!-- ============ BENTO ============ -->
   <section class="bento" id="bento">
@@ -3229,13 +3233,15 @@ body{ padding-right: 80px; }
           </a>
           <p class="foot-tag">用 AI 起個 Site 撐你揀嘅西多。邊派 Site 多邊派贏。<em>唔識 code 都得。</em></p>
           <div class="foot-legacy">
-            <span class="chip">食得夠尖 · 2024</span>
-            <span class="chip">食得夠 GYM · 2025</span>
-            <span class="chip live">食得夠 STEM · 2026</span>
+            <span class="chip">食得夠尖</span>
+            <span class="chip-arrow">»</span>
+            <span class="chip">食得夠GYM</span>
+            <span class="chip-arrow">»</span>
+            <span class="chip live">食得夠STEM<span class="chip-bang">!!</span></span>
           </div>
         </div>
-        <div class="foot-col"><h4>▸ 戰況</h4><a href="#top">今日精選</a><a href="#top">即時計分板</a><a href="#bento">學界排行</a><a href="#">歷史回顧</a></div>
-        <div class="foot-col"><h4>▸ 入伍</h4><a href="#howto">點玩教學</a><a href="#submit">交 Site Form</a><a href="#bento">完整規則</a><a href="#bento">FAQ</a></div>
+        <div class="foot-col"><h4>▸ 戰況</h4><a href="#top">派系對戰</a><a href="#gallery">全部作品</a></div>
+        <div class="foot-col"><h4>▸ 入伍</h4><a href="#howto">PROMPT 生成器</a><a href="#submit">交 SITE</a><a href="https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/rules.txt" target="_blank" rel="noopener">完整規則</a></div>
         <div class="foot-col"><h4>▸ 聯絡</h4><a href="mailto:hi@fairwood.hk">hi@fairwood.hk</a><a href="#">@fairwoodhk · IG</a><a href="#">FB · Fairwood</a><a href="#">Press / 媒體</a></div>
       </div>
       <div class="foot-bot">
