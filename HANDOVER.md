@@ -160,6 +160,12 @@
 - `assets/` — fairwood-logo.svg / westoast-traditional.png / westoast-peanut.png / westoast-hero.png / ah-wood.png
 - `CHANGELOG.md` — 改動記錄
 - `HANDOVER.md` — 呢個檔（read first）
+- `VET_BACKEND.md` — GAS vet pipeline spec (hand to dev)
+- `CAMPAIGN_OUTREACH.md` — school emails + KOL scripts (fill placeholders)
+- `AI_PROMPT_PROXY.md` — option C GAS proxy spec
+- `teacher-brief.html` — 1-page A4 brief for school emails
+- `schools-tracker-template.csv` — Google Sheets starter
+- `DAY0_LAUNCH_CHECKLIST.md` — T-7 / T-3 / T-1 / D0 runbook
 
 ---
 
@@ -230,7 +236,8 @@ Per orchestrator: **enable GitHub Pages + provide real WhatsApp number** — bot
 - `https://[archive-url]` × 1 in thank-you template
 - KOL contact placeholders: `[Agent / 主理人]`, `[phone]`, `[email]`, `[試當真 manager / 阿祖]`, `[信報 副刊主編]`, `[點 Cook Guide team]` — all need real contacts
 - Ownership table H: `[Ops 1]` `[Ops 2]` `[Marketing Lead]` `[PR Lead]` `[Ops Lead]` — assign people
-- Slide 27 of deck mentions "比賽 deck（PDF）" + "教師 brief（1 頁 A4）" attachments — neither exists yet; either export deck to PDF or strip from email
+- ✅ `teacher-brief.html` now exists (1-page A4, print-ready) — attach printed PDF to school emails
+- Slide 27 of deck still mentions "比賽 deck（PDF）" attachment — export deck via browser print-to-PDF if needed
 
 ### `VET_BACKEND.md`
 - Apps Script web app URL — only known post-deploy
