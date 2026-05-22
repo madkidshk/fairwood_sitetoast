@@ -444,9 +444,10 @@ body::after{
     var(--ink);
 }
 
-/* === BATTLE TOAST POP-IN — fixed at viewport edges (matches .toast-break pattern) === */
+/* === BATTLE TOAST POP-IN — sits BEHIND iframe (z-index 0), only the portion outside battle is visible === */
+.battle{ overflow: visible !important; }
 .battle-toast{
-  position: fixed;
+  position: absolute;
   top: 50%;
   width: 380px; height: 380px;
   background-size: contain;
@@ -454,34 +455,32 @@ body::after{
   background-position: center;
   filter: drop-shadow(0 20px 50px rgba(0,0,0,.55));
   pointer-events: none;
-  z-index: 4;
+  z-index: 0;  /* BEHIND .battle-split (iframe area) */
   opacity: 0;
   transition: opacity 1s cubic-bezier(.16,1,.3,1),
               transform 1.4s cubic-bezier(.16,1,.3,1);
 }
+/* LEFT: toast extends OUTSIDE battle to the left (visible portion is in viewport sidebar) */
 .battle-toast.left{
-  left: -120px;
+  left: -240px;
   background-image: url("https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-traditional.png");
-  transform: translateY(-50%) translateX(-120px) rotate(-30deg);
+  transform: translateY(-50%) translateX(-100px) rotate(-30deg);
 }
 .battle-toast.right{
-  right: -120px;
+  right: -240px;
   background-image: url("https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-peanut.png");
-  transform: translateY(-50%) translateX(120px) rotate(30deg);
+  transform: translateY(-50%) translateX(100px) rotate(30deg);
 }
-/* Visible only when battle is in viewport AND its side is active */
-body.battle-in-view.show-duck   .battle-toast.left{
-  opacity: .9;
+.battle.show-duck   .battle-toast.left{
+  opacity: .85;
   transform: translateY(-50%) translateX(0) rotate(-14deg);
 }
-body.battle-in-view.show-peanut .battle-toast.right{
-  opacity: .9;
+.battle.show-peanut .battle-toast.right{
+  opacity: .85;
   transform: translateY(-50%) translateX(0) rotate(14deg);
 }
-@media (max-width: 900px){
-  .battle-toast{ width: 240px; height: 240px; }
-  .battle-toast.left{ left: -80px; }
-  .battle-toast.right{ right: -80px; }
+@media (max-width: 1100px){
+  .battle-toast{ display: none; }  /* hide on narrow viewports where battle fills viewport */
 }
 
 /* ===== Hero panoramic removed — battle toast pop-ins are the BG focus ===== */
@@ -956,55 +955,61 @@ body.battle-in-view.show-peanut .battle-toast.right{
 /* slash removed — clip-path cut IS the divider */
 .battle-slash{ display: none; }
 
-/* ===== SWAP BUTTON — prominent CTA pinned on the cut ===== */
-.swap-btn{
+/* ===== SWAP PILL — single side display, click to swap ===== */
+.swap-pill{
   position: absolute;
   top: 50%;
   left: var(--seam);
-  transform: translate(-50%, -50%) rotate(-4deg);
+  transform: translate(-50%, -50%) rotate(-1.5deg);
   z-index: 20;
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 14px 22px;
-  background: var(--fairwood); color: var(--ink);
-  border: 3px solid var(--paper);
-  border-radius: 999px;
-  font-family:var(--font-serif); font-weight: 900; font-size: 16px;
-  letter-spacing: -.01em;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 4px;
+  padding: 10px 22px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2.5px solid var(--ink);
+  border-radius: 18px;
+  box-shadow: 0 14px 44px rgba(0,0,0,.6), 0 0 0 1px rgba(245,236,217,.08);
+  font-family: var(--font-serif);
   cursor: pointer;
-  box-shadow:
-    0 0 0 4px var(--stamp),
-    0 0 0 6px rgba(184,54,42,.4),
-    0 16px 40px rgba(0,0,0,.6),
-    0 0 24px rgba(240,138,0,.5);
-  transition: left 1s cubic-bezier(.34, 1.4, .4, 1),
-              transform .25s cubic-bezier(.34, 1.6, .4, 1),
-              background .2s, box-shadow .2s;
-  animation: swapBob 2.4s ease-in-out infinite;
+  transition: left 1s cubic-bezier(.34,1.4,.4,1),
+              transform .25s cubic-bezier(.34,1.6,.4,1),
+              background .35s ease, color .35s ease, border-color .35s ease;
+  animation: swapBob 3s ease-in-out infinite;
   white-space: nowrap;
 }
-.swap-btn:hover{
-  background: var(--fairwood-light);
-  transform: translate(-50%, -50%) rotate(-4deg) scale(1.08);
-  box-shadow:
-    0 0 0 4px var(--stamp),
-    0 0 0 6px rgba(184,54,42,.55),
-    0 22px 50px rgba(0,0,0,.7),
-    0 0 36px rgba(240,138,0,.7);
+.swap-pill:hover{ transform: translate(-50%, -50%) rotate(-1.5deg) scale(1.05); }
+.swap-pill:active{ transform: translate(-50%, -50%) rotate(-1.5deg) scale(.97); }
+.sp-eb{
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .22em;
+  font-weight: 700;
+  opacity: .65;
 }
-.swap-btn:active{ transform: translate(-50%, -50%) rotate(-4deg) scale(.96); }
-.swap-btn .lbl{ font-weight: 900; }
-.swap-btn .arr{
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 22px; height: 22px; border-radius: 50%;
-  background: var(--ink); color: var(--fairwood);
-  font-size: 12px; line-height: 1;
-  transition: transform .2s;
+.sp-name{
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: -.005em;
+  line-height: 1;
 }
-.swap-btn:hover .arr.right{ transform: translateX(3px); }
-.swap-btn:hover .arr.left{  transform: translateX(-3px); }
+/* Peanut active state: amber pill */
+.battle-split.active-peanut .swap-pill{
+  background: var(--fairwood-light, #ffb74d);
+  color: #2a1505;
+  border-color: #2a1505;
+}
 @keyframes swapBob{
-  0%, 100% { transform: translate(-50%, -50%) rotate(-4deg) scale(1); }
-  50%      { transform: translate(-50%, -50%) rotate(-4deg) scale(1.035); }
+  0%, 100% { transform: translate(-50%, -50%) rotate(-1.5deg) scale(1); }
+  50%      { transform: translate(-50%, -50%) rotate(-1.5deg) scale(1.025); }
+}
+@media (max-width: 700px){
+  .swap-pill{ padding: 7px 14px; }
+  .sp-eb{ font-size: 8px; letter-spacing: .15em; }
+  .sp-name{ font-size: 14px; }
+}
 }
 
 /* iframe area inside body — fixed-pixel iframe, anchored to far edge
@@ -1072,7 +1077,7 @@ body.battle-in-view.show-peanut .battle-toast.right{
 .bs-foot{
   position: relative; z-index: 3;
   padding: 12px 16px;
-  display: grid; grid-template-columns: auto 1fr auto auto;
+  display: grid; grid-template-columns: auto 1fr auto auto auto;
   gap: 10px; align-items: center;
   border-top: 1px solid rgba(245,236,217,.1);
   background: rgba(0,0,0,.45);
@@ -2407,10 +2412,9 @@ body{ padding-right: 80px; }
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 3px 9px;
-  margin-left: 8px;
+  padding: 6px 12px;
   font-family: var(--font-mono, monospace);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .12em;
   font-weight: 700;
   background: rgba(245,236,217,.12);
@@ -2481,11 +2485,7 @@ body{ padding-right: 80px; }
 /* Hide the bs-score block default styling cleanup */
 .bs-tab .bs-score{ display: none; }
 
-/* Stack title + view button cleanly */
-.bs-meta .t{
-  display: flex; align-items: center; flex-wrap: wrap;
-  gap: 4px;
-}
+
 
 /* ============ SHARE MODAL ============ */
 .share-overlay{
@@ -2642,10 +2642,6 @@ body{ padding-right: 80px; }
 </head>
 <body>
 
-<!-- ============ BATTLE TOAST POP-INS — viewport-edge pinned, fires when battle is in view ============ -->
-<div class="battle-toast left"  id="battleToastLeft"  aria-hidden="true"></div>
-<div class="battle-toast right" id="battleToastRight" aria-hidden="true"></div>
-
 <div class="cur" id="cur"></div>
 <div class="sp"><div class="f" id="spFill"></div></div>
 
@@ -2783,27 +2779,12 @@ body{ padding-right: 80px; }
   <!-- ============ BATTLE HERO ============ -->
   <section class="battle" id="top">
 
+    <!-- Side toast pop-ins — anchored inside battle, behind iframe (z-index 0), extends to viewport sidebar -->
+    <div class="battle-toast left"  id="battleToastLeft"  aria-hidden="true"></div>
+    <div class="battle-toast right" id="battleToastRight" aria-hidden="true"></div>
+
     <!-- SPLIT BATTLE — tabs (50/50 fixed) + bodies (86/14 swap + diagonal slash) -->
     <div class="battle-split" id="battleSplit">
-
-      <!-- TABS row — always 50/50, click to swap dominance below -->
-      <div class="battle-tabs">
-        <button class="bs-tab duck" id="tabDuck" aria-label="switch to duck">
-          <span class="em">🍞</span>
-          <div class="bs-name">
-            <span class="lbl">CLASSIC · 原味</span>
-            <span class="nm">傳統派</span>
-          </div>
-        </button>
-
-        <button class="bs-tab peanut" id="tabPeanut" aria-label="switch to peanut">
-          <span class="em">🥜</span>
-          <div class="bs-name">
-            <span class="lbl">PEANUT · 邪惡派</span>
-            <span class="nm">邪惡花生派</span>
-          </div>
-        </button>
-      </div>
 
       <!-- BODIES row — Phase 1 manifesto / Phase 2 picks (auto switch by JS) -->
       <div class="battle-bodies">
@@ -2819,11 +2800,10 @@ body{ padding-right: 80px; }
           <div class="bs-foot">
             <button class="bs-arr" id="bsPrevDuck" aria-label="prev duck site">‹</button>
             <div class="bs-meta">
-              <div class="t" id="bsTitleDuck">無餡西多保衛聯盟
-                <button class="bs-view" data-side="duck" aria-label="view full site">↗ 睇全 SITE</button>
-              </div>
+              <div class="t" id="bsTitleDuck">無餡西多保衛聯盟</div>
               <div class="w" id="bsWhoDuck">@uncle_lam_1962 · 旺角茶記 · D04</div>
             </div>
+            <button class="bs-view" data-side="duck" aria-label="view full site">↗ 睇全 SITE</button>
             <span class="bs-count"><b id="bsIdxDuck">01</b>/06</span>
             <button class="bs-arr" id="bsNextDuck" aria-label="next duck site">›</button>
           </div>
@@ -2831,11 +2811,13 @@ body{ padding-right: 80px; }
 
         <div class="battle-slash"></div>
 
-        <button class="swap-btn" id="swapBtn" aria-label="切換到對家">
-          <span class="arr left" id="swapArrL">←</span>
-          <span class="lbl" id="swapLbl">花生醬派</span>
-          <span class="arr right" id="swapArrR">→</span>
+        <button class="swap-pill" id="swapBtn" type="button" aria-label="切換陣營">
+          <span class="sp-eb"   id="swapEb">CLASSIC · 原味</span>
+          <span class="sp-name" id="swapName">傳統派</span>
         </button>
+        <!-- hidden tabs to keep JS hooks alive (tabDuck/tabPeanut click handlers) -->
+        <button id="tabDuck"   type="button" hidden aria-hidden="true"></button>
+        <button id="tabPeanut" type="button" hidden aria-hidden="true"></button>
 
         <div class="battle-body peanut">
           <div class="bs-frame">
@@ -2849,11 +2831,10 @@ body{ padding-right: 80px; }
           <div class="bs-foot">
             <button class="bs-arr" id="bsPrevPeanut" aria-label="prev peanut site">‹</button>
             <div class="bs-meta">
-              <div class="t" id="bsTitlePeanut">邪惡花生派．官方總部
-                <button class="bs-view" data-side="peanut" aria-label="view full site">↗ 睇全 SITE</button>
-              </div>
+              <div class="t" id="bsTitlePeanut">邪惡花生派．官方總部</div>
               <div class="w" id="bsWhoPeanut">@official · 皇仁書院 · D03</div>
             </div>
+            <button class="bs-view" data-side="peanut" aria-label="view full site">↗ 睇全 SITE</button>
             <span class="bs-count"><b id="bsIdxPeanut">01</b>/06</span>
             <button class="bs-arr" id="bsNextPeanut" aria-label="next peanut site">›</button>
           </div>
@@ -3276,14 +3257,23 @@ function setActive(side) {
   const want = side === 'peanut';
   if (split.classList.contains('active-peanut') === want) return;
   split.classList.toggle('active-peanut', want);
-  bodies.style.removeProperty('--seam');   // let CSS drive the swap transition
+  bodies.style.removeProperty('--seam');
   updateSwapBtn();
-  // Sync manifesto ribbon band
+const swapBtnEl = document.getElementById('swapBtn');
+if (swapBtnEl){
+  swapBtnEl.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setActive(activeOf() === 'duck' ? 'peanut' : 'duck');
+  });
+}
   const band = document.getElementById('mfBand');
   if (band) band.dataset.side = side;
-  // Sync battle toast pop-in via body classes
-  document.body.classList.toggle('show-duck',   side === 'duck');
-  document.body.classList.toggle('show-peanut', side === 'peanut');
+  // Toggle .show-duck / .show-peanut on .battle section
+  const battleSec = document.querySelector('.battle');
+  if (battleSec){
+    battleSec.classList.toggle('show-duck',   side === 'duck');
+    battleSec.classList.toggle('show-peanut', side === 'peanut');
+  }
 }
 
 // ============ SCROLL-DRIVEN BG TOASTS — slow bob + scroll parallax ============
@@ -3309,22 +3299,19 @@ function updateBgToasts(){
 window.addEventListener('scroll', updateBgToasts, { passive: true });
 updateBgToasts();
 
-// swap button shows the OPPOSITE faction by NAME (what you swap to)
+// swap pill — shows ACTIVE side's eyebrow + name; click toggles
 function updateSwapBtn(){
-  const opposite = activeOf() === 'duck' ? 'peanut' : 'duck';
-  const lbl = document.getElementById('swapLbl');
-  const arrL = document.getElementById('swapArrL');
-  const arrR = document.getElementById('swapArrR');
-  if (lbl) lbl.textContent = opposite === 'peanut' ? '花生醬派' : '傳統派';
-  if (arrL) arrL.style.display = opposite === 'duck' ? '' : 'none';
-  if (arrR) arrR.style.display = opposite === 'peanut' ? '' : 'none';
-}
-const swapBtn = document.getElementById('swapBtn');
-if (swapBtn) {
-  swapBtn.addEventListener('click', e => {
-    e.stopPropagation();
-    setActive(activeOf() === 'duck' ? 'peanut' : 'duck');
-  });
+  const active = activeOf();
+  const ebEl = document.getElementById('swapEb');
+  const nmEl = document.getElementById('swapName');
+  if (!ebEl || !nmEl) return;
+  if (active === 'duck'){
+    ebEl.textContent = 'CLASSIC · 原味';
+    nmEl.textContent = '傳統派';
+  } else {
+    ebEl.textContent = 'PEANUT · 邪惡';
+    nmEl.textContent = '花生醬派';
+  }
 }
 updateSwapBtn();
 
