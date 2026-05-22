@@ -40,11 +40,19 @@ html, body{
   margin: 0; padding: 0;
   background: var(--ink); color: var(--paper);
   font-family: var(--font-sans);
-  scroll-behavior: smooth; overflow-x: hidden;
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-body{ padding-right: 80px; } /* reserve room for fixed right side-nav */
+html{ overflow-x: auto; }
+body{
+  min-width: 1024px;       /* below 1024 → horizontal scroll, no further shrink */
+  max-width: 1600px;       /* above 1600 → page stops growing, side gutters */
+  margin: 0 auto;          /* center on ultra-wide */
+  padding-right: 80px;     /* reserve room for fixed right side-nav */
+  overflow-x: hidden;      /* body-level: hide overflow once min-width sets viewport */
+  position: relative;      /* fixed elements anchored to body */
+}
 @media (max-width: 900px){ body{ padding-right: 0; } }
 
 /* fixed bg-toasts removed in favor of boundary toasts between sections */
@@ -3212,7 +3220,6 @@ body{ padding-right: 80px; }
     </div>
   </section>
 
-  <div class="toast-break right"></div>
   <div class="toast-break right"></div>
 
   <!-- ============ FOOTER ============ -->
