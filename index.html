@@ -2089,10 +2089,11 @@ body{
 body{ padding-right: 80px; }
 @media (max-width: 900px){ body{ padding-right: 0; } }
 
-/* Side-dots nav needs to stick to body edge now, not viewport */
+/* Side-dots nav needs to stick to body edge + high z-index for click */
 .side-dots{
   position: fixed !important;
   right: max(0px, calc(50vw - 800px)) !important;
+  z-index: 80 !important;
 }
 @media (max-width: 1600px){
   .side-dots{ right: 0 !important; }
