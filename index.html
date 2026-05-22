@@ -46,7 +46,7 @@ html, body{
 }
 html{ overflow-x: auto; }
 body{
-  min-width: 1024px;       /* below 1024 → horizontal scroll, no further shrink */
+  min-width: 360px;       /* below 1024 → horizontal scroll, no further shrink */
   max-width: 1600px;       /* above 1600 → page stops growing, side gutters */
   margin: 0 auto;          /* center on ultra-wide */
   padding-right: 80px;     /* reserve room for fixed right side-nav */
@@ -3108,8 +3108,6 @@ body{ padding-right: 80px; }
     </div>
   </div>
 
-  <div class="toast-break left"></div>
-
   <!-- ============ SUBMIT ============ -->
   <section class="submit-wrap" id="submit">
     <div class="sec-head" style="max-width: 1440px; margin: 0 auto 24px; padding: 0;">
@@ -3180,7 +3178,7 @@ body{ padding-right: 80px; }
     </div>
   </div>
 
-  <div class="toast-break right"></div>
+  <div class="toast-break left"></div>
 
   <!-- ============ BENTO ============ -->
   <section class="bento" id="bento">
@@ -3635,10 +3633,12 @@ document.addEventListener('keydown', e => {
   else if (e.key === 'ArrowRight') lbNext();
 });
 
-// ============ BOUNDARY TOASTS · IntersectionObserver fade-in ============
+// ============ BOUNDARY TOASTS · pop-in AND retract on scroll past ============
 const breaks = document.querySelectorAll('.toast-break');
 const brObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  entries.forEach(e => {
+    e.target.classList.toggle('visible', e.isIntersecting);
+  });
 }, { threshold: 0.15 });
 breaks.forEach(b => brObs.observe(b));
 
