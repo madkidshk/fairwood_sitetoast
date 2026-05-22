@@ -1117,44 +1117,7 @@ body::after{
 .battle-body.peanut .bs-vote{ display:none !important; background: var(--fairwood-light); box-shadow: 0 6px 18px rgba(196,102,31,.45); }
 .battle-body.peanut .bs-vote:hover{ box-shadow: 0 10px 24px rgba(196,102,31,.6); }
 
-/* Phase 1: 50/50 manifesto layout — full clean reset (no clip-path / no overlap) */
-.battle-split.phase1-50-50 .battle-bodies{
-  --seam: 50% !important;
-  --overlap: 0px !important;
-}
-.battle-split.phase1-50-50 .battle-body.duck{
-  width: 50% !important;
-  left: 0 !important;
-  clip-path: none !important;
-  z-index: 2 !important;
-  cursor: default !important;
-  background: linear-gradient(170deg, rgba(240,138,0,.08) 0%, transparent 40%), var(--ink) !important;
-}
-.battle-split.phase1-50-50 .battle-body.peanut{
-  width: 50% !important;
-  left: 50% !important;
-  right: auto !important;
-  clip-path: none !important;
-  z-index: 2 !important;
-  cursor: default !important;
-  background: linear-gradient(190deg, rgba(196,102,31,.1) 0%, transparent 40%), #14100a !important;
-}
-.battle-split.phase1-50-50 .battle-body.duck .bs-foot,
-.battle-split.phase1-50-50 .battle-body.peanut .bs-foot{ display: grid !important; }
-.battle-split.phase1-50-50 .battle-slash{ display: none !important; }
-/* Subtle vertical seam between the two manifestos */
-.battle-split.phase1-50-50 .battle-bodies::after{
-  content: "";
-  position: absolute;
-  left: 50%; top: 0; bottom: 0;
-  width: 1px;
-  background: linear-gradient(180deg, transparent, rgba(245,236,217,.18) 20%, rgba(245,236,217,.18) 80%, transparent);
-  z-index: 3;
-  pointer-events: none;
-}
-/* Hide inactive-side dim filters in Phase 1 */
-.battle-split.phase1-50-50:not(.active-peanut) .battle-body.peanut iframe,
-.battle-split.phase1-50-50.active-peanut .battle-body.duck iframe{ filter: none !important; }
+
 
 /* ============ MANIFESTO (Phase 1 default) ============ */
 /* === HTML manifesto (Phase 1) — container queries for uniform scaling === */
@@ -2345,7 +2308,7 @@ body{ padding-right: 80px; }
   overflow-y: auto;
   border: 2px solid var(--ink);
 }
-/* ============ MANIFESTO RIBBON BAND ============ */
+/* ============ MANIFESTO RIBBON BAND (scrolling) ============ */
 .mf-band{
   position: relative;
   overflow: hidden;
@@ -2359,14 +2322,26 @@ body{ padding-right: 80px; }
   inset: 0;
   display: flex; align-items: center;
   gap: 28px;
-  padding: 0 32px;
+  padding: 0;
   white-space: nowrap;
   font-family: var(--font-mono, monospace);
   font-size: 13px;
   letter-spacing: .04em;
-  transition: opacity .4s ease, transform .5s ease;
   overflow: hidden;
+  transition: opacity .4s ease;
+  will-change: transform;
 }
+.mf-band-track > * { padding: 0 14px; }
+@keyframes mf-scroll-rtl{ from{ transform: translateX(0); } to{ transform: translateX(-50%); } }
+@keyframes mf-scroll-ltr{ from{ transform: translateX(-50%); } to{ transform: translateX(0); } }
+.mf-band[data-side="duck"]   .mf-band-track.duck   > .mf-track-inner{ animation: mf-scroll-rtl 36s linear infinite; }
+.mf-band[data-side="peanut"] .mf-band-track.peanut > .mf-track-inner{ animation: mf-scroll-ltr 36s linear infinite; }
+.mf-track-inner{
+  display: flex; align-items: center; gap: 28px;
+  flex-shrink: 0;
+  min-width: 100%;
+}
+
 .mf-band-track.duck{
   background: linear-gradient(90deg, #f5ecd9 0%, #ffe69a 50%, #f5ecd9 100%);
   color: #1a1408;
@@ -2790,41 +2765,17 @@ body{ padding-right: 80px; }
     </div>
   </section>
 
-  <!-- ============ MANIFESTO RIBBON BAND · swaps with active battle side ============ -->
+  <!-- ============ MANIFESTO RIBBON BAND · scrolls per active side ============ -->
   <div class="mf-band" id="mfBand" data-side="duck">
     <div class="mf-band-track duck" data-track="duck">
-      <span class="mf-band-eb">▸ 傳統無餡派宣言</span>
-      <span class="mf-band-q">「西多嘅靈魂喺塊多士，唔係夾喺中間嗰啲嘢。」</span>
-      <span class="mf-band-tag">唔需要花樣 · 一塊多士 · 兩面金黃</span>
-      <span class="mf-band-tag">蛋香 · 牛油香 · 糖漿香</span>
-      <span class="mf-band-tag">手藝勝餡料 · 原味勝噱頭</span>
-      <span class="mf-band-cta"><a href="#howto">▸ 加入傳統派 · 起 site 表態</a></span>
+      <div class="mf-track-inner"><span class="mf-band-eb">▸ 傳統無餡派宣言</span><span class="mf-band-q">「西多嘅靈魂喺塊多士，唔係夾喺中間嗰啲嘢。」</span><span class="mf-band-tag">唔需要花樣 · 一塊多士 · 兩面金黃</span><span class="mf-band-tag">蛋香 · 牛油香 · 糖漿香</span><span class="mf-band-tag">手藝勝餡料 · 原味勝噱頭</span><span class="mf-band-cta"><a href="#howto">▸ 加入傳統派 · 起 site 表態</a></span><span class="mf-band-eb">▸ 傳統無餡派宣言</span><span class="mf-band-q">「西多嘅靈魂喺塊多士，唔係夾喺中間嗰啲嘢。」</span><span class="mf-band-tag">唔需要花樣 · 一塊多士 · 兩面金黃</span><span class="mf-band-tag">蛋香 · 牛油香 · 糖漿香</span><span class="mf-band-tag">手藝勝餡料 · 原味勝噱頭</span><span class="mf-band-cta"><a href="#howto">▸ 加入傳統派 · 起 site 表態</a></span></div>
     </div>
     <div class="mf-band-track peanut" data-track="peanut">
-      <span class="mf-band-eb">▸ 花生醬派宣言</span>
-      <span class="mf-band-q">「冇花生醬嘅西多多士，等於茶餐廳冇奶茶。」</span>
-      <span class="mf-band-tag">多士 + 花生醬 = 香港人嘅初戀</span>
-      <span class="mf-band-tag">濃 · 滑 · 邪 · 上癮</span>
-      <span class="mf-band-tag">唔係加多一樣 · 係令塊多士成為完整體</span>
-      <span class="mf-band-cta"><a href="#howto">▸ 加入花生派 · 起 site 表態</a></span>
+      <div class="mf-track-inner"><span class="mf-band-eb">▸ 花生醬派宣言</span><span class="mf-band-q">「冇花生醬嘅西多多士，等於茶餐廳冇奶茶。」</span><span class="mf-band-tag">多士 + 花生醬 = 香港人嘅初戀</span><span class="mf-band-tag">濃 · 滑 · 邪 · 上癮</span><span class="mf-band-tag">唔係加多一樣 · 係令塊多士成為完整體</span><span class="mf-band-cta"><a href="#howto">▸ 加入花生派 · 起 site 表態</a></span><span class="mf-band-eb">▸ 花生醬派宣言</span><span class="mf-band-q">「冇花生醬嘅西多多士，等於茶餐廳冇奶茶。」</span><span class="mf-band-tag">多士 + 花生醬 = 香港人嘅初戀</span><span class="mf-band-tag">濃 · 滑 · 邪 · 上癮</span><span class="mf-band-tag">唔係加多一樣 · 係令塊多士成為完整體</span><span class="mf-band-cta"><a href="#howto">▸ 加入花生派 · 起 site 表態</a></span></div>
     </div>
   </div>
 
-  <!-- divider marquee · campaign info -->
-  <div class="mq invert">
-    <div class="mqt fast">
-      <span>一SITE一票 · 起SITE表態</span>
-      <span>21 日決勝 · 02·06·2026 → 23·06·2026</span>
-      <span>傳統無餡 VS 邪惡花生</span>
-      <span>大快活 2026 食得夠STEM</span>
-    </div>
-    <div class="mqt fast" aria-hidden="true">
-      <span>一SITE一票 · 起SITE表態</span>
-      <span>21 日決勝 · 02·06·2026 → 23·06·2026</span>
-      <span>傳統無餡 VS 邪惡花生</span>
-      <span>大快活 2026 食得夠STEM</span>
-    </div>
-  </div>
+
 
   <!-- ============ HOWTO ============ -->
   <section class="howto" id="howto">
@@ -3241,11 +3192,10 @@ updateSwapBtn();
 tabEls.duck.addEventListener('click', () => setActive('duck'));
 tabEls.peanut.addEventListener('click', () => setActive('peanut'));
 
-// click peek body also swaps — disabled in Phase 1 (50/50 manifesto layout)
+// click peek body to swap dominance
 ['duck', 'peanut'].forEach(side => {
   bodyEls[side].addEventListener('click', e => {
-    if (split.classList.contains('phase1-50-50')) return;
-    if (e.target.closest('.bs-arr, .bs-vote, .open-ov, iframe, .bs-foot button, .mf-cta, .bs-cta-mini')) return;
+    if (e.target.closest('.bs-arr, .open-ov, iframe, .bs-foot button')) return;
     if (activeOf() === side) return;
     setActive(side);
   });
@@ -3806,45 +3756,7 @@ document.addEventListener('keydown', e => {
   });
 })();
 
-/* ============ PHASE SWITCH (manifesto ↔ picks based on site counts) ============ */
-(function(){
-  const THRESHOLD = 5;
-  const duckScoreEl = document.getElementById('bsScoreDuck');
-  const peanutScoreEl = document.getElementById('bsScorePeanut');
-  const duckBody = document.querySelector('.battle-body.duck');
-  const peanutBody = document.querySelector('.battle-body.peanut');
-  const split = document.getElementById('battleSplit');
-  const bodies = document.querySelector('.battle-bodies');
-  const swapBtn = document.getElementById('swapBtn');
-
-  function getCount(el){
-    if (!el) return 0;
-    const n = parseInt((el.textContent || '0').replace(/[^0-9]/g, ''), 10);
-    return isNaN(n) ? 0 : n;
-  }
-
-  function setPhase(body, phase){
-    if (!body) return;
-    body.dataset.phase = phase;
-    const mf  = body.querySelector('[data-show="phase1"]');
-    const pks = body.querySelector('[data-show="phase2"]');
-    if (mf)  mf.hidden  = (phase === '2');
-    if (pks) pks.hidden = (phase === '1');
-  }
-
-  const duckPhase   = getCount(duckScoreEl)   >= THRESHOLD ? '2' : '1';
-  const peanutPhase = getCount(peanutScoreEl) >= THRESHOLD ? '2' : '1';
-  setPhase(duckBody, duckPhase);
-  setPhase(peanutBody, peanutPhase);
-
-  // Phase 1 (both manifestos): force 50/50 seam + hide swap toggle
-  const bothPhase1 = duckPhase === '1' && peanutPhase === '1';
-  if (bothPhase1 && bodies){
-    bodies.style.setProperty('--seam', '50%');
-    if (split) split.classList.add('phase1-50-50');
-    if (swapBtn) swapBtn.style.display = 'none';
-  }
-})();
+/* Phase switch removed — battle is iframe coverflow with 86/14 dominance */
 </script>
 
 </body>
