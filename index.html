@@ -1737,8 +1737,9 @@ body.battle-in-view.show-peanut .battle-toast.right{
   position: relative;
   border: 2px solid rgba(245,236,217,.12);
   border-radius: 14px; overflow: hidden;
-  background: var(--paper);
+  background: #f5ecd9 !important;
   cursor: pointer;
+  z-index: 3;
   transition: transform .25s, box-shadow .25s, border-color .25s;
 }
 .g-card:hover{
@@ -1750,7 +1751,8 @@ body.battle-in-view.show-peanut .battle-toast.right{
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: var(--paper);
+  background: #f5ecd9 !important;  /* hard-coded cream — covers toast */
+  z-index: 3;
 }
 .g-card-iframewrap iframe{
   position: absolute; top: 0; left: 0;
@@ -1813,8 +1815,10 @@ body.battle-in-view.show-peanut .battle-toast.right{
 .g-card.peanut .g-card-fac{ background: var(--peanut-hot); color: var(--paper); }
 .g-card-meta{
   padding: 14px 14px 16px;
-  background: var(--ink);
+  background: #000 !important;  /* hard-coded black — covers toast underneath */
   border-top: 1px solid rgba(245,236,217,.08);
+  position: relative;
+  z-index: 3;
 }
 .g-card-title{
   font-family: var(--font-serif); font-weight: 900;
