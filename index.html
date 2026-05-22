@@ -995,11 +995,17 @@ body::after{
   letter-spacing: -.005em;
   line-height: 1;
 }
-/* Peanut active state: amber pill */
+/* Default (duck active) — pill = peanut/amber (shows what you swap TO) */
+.swap-pill{
+  background: var(--fairwood-light, #ffb74d) !important;
+  color: #2a1505 !important;
+  border-color: #2a1505 !important;
+}
+/* When peanut active — pill = duck/cream */
 .battle-split.active-peanut .swap-pill{
-  background: var(--fairwood-light, #ffb74d);
-  color: #2a1505;
-  border-color: #2a1505;
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+  border-color: var(--ink) !important;
 }
 @keyframes swapBob{
   0%, 100% { transform: translate(-50%, -50%) rotate(-1.5deg) scale(1); }
@@ -2812,8 +2818,8 @@ body{ padding-right: 80px; }
         <div class="battle-slash"></div>
 
         <button class="swap-pill" id="swapBtn" type="button" aria-label="切換陣營">
-          <span class="sp-eb"   id="swapEb">CLASSIC · 原味</span>
-          <span class="sp-name" id="swapName">傳統派</span>
+          <span class="sp-eb"   id="swapEb">PEANUT · 邪惡</span>
+          <span class="sp-name" id="swapName">花生醬派</span>
         </button>
         <!-- hidden tabs to keep JS hooks alive (tabDuck/tabPeanut click handlers) -->
         <button id="tabDuck"   type="button" hidden aria-hidden="true"></button>
@@ -3299,18 +3305,20 @@ function updateBgToasts(){
 window.addEventListener('scroll', updateBgToasts, { passive: true });
 updateBgToasts();
 
-// swap pill — shows ACTIVE side's eyebrow + name; click toggles
+// swap pill — shows OPPOSITE side's content (what you swap TO); click toggles
 function updateSwapBtn(){
   const active = activeOf();
   const ebEl = document.getElementById('swapEb');
   const nmEl = document.getElementById('swapName');
   if (!ebEl || !nmEl) return;
   if (active === 'duck'){
-    ebEl.textContent = 'CLASSIC · 原味';
-    nmEl.textContent = '傳統派';
-  } else {
+    // Currently showing duck → invite to peanut
     ebEl.textContent = 'PEANUT · 邪惡';
     nmEl.textContent = '花生醬派';
+  } else {
+    // Currently showing peanut → invite to duck
+    ebEl.textContent = 'CLASSIC · 原味';
+    nmEl.textContent = '傳統派';
   }
 }
 updateSwapBtn();
