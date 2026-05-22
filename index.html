@@ -471,35 +471,33 @@ body::after{
   transform: translateY(-50%) translateX(160px) rotate(30deg);
 }
 /* Active state: pop in to its corner */
-.battle .battle-split:not(.active-peanut) ~ .battle-toast.left,
-.battle:has(.battle-split:not(.active-peanut)) .battle-toast.left{
-  opacity: .45;
+.battle.show-duck .battle-toast.left{
+  opacity: .55;
   transform: translateY(-50%) translateX(0) rotate(-14deg);
 }
-.battle .battle-split.active-peanut ~ .battle-toast.right,
-.battle:has(.battle-split.active-peanut) .battle-toast.right{
-  opacity: .45;
+.battle.show-peanut .battle-toast.right{
+  opacity: .55;
   transform: translateY(-50%) translateX(0) rotate(14deg);
 }
-/* Tone down the hero panoramic so toast pop-in is the focus */
-.battle::after{
-  opacity: .08 !important;
+/* Slight float idle anim once visible */
+@keyframes battle-toast-float-l{
+  0%,100%{ transform: translateY(-50%) translateX(0) rotate(-14deg); }
+  50%    { transform: translateY(calc(-50% - 8px)) translateX(0) rotate(-12deg); }
 }
+@keyframes battle-toast-float-r{
+  0%,100%{ transform: translateY(-50%) translateX(0) rotate(14deg); }
+  50%    { transform: translateY(calc(-50% - 8px)) translateX(0) rotate(16deg); }
+}
+.battle.show-duck   .battle-toast.left{  animation: battle-toast-float-l 5s ease-in-out 1s infinite; }
+.battle.show-peanut .battle-toast.right{ animation: battle-toast-float-r 5s ease-in-out 1s infinite; }
+
 @media (max-width: 900px){
   .battle-toast{ width: 280px; height: 280px; }
   .battle-toast.left{ left: -100px; }
   .battle-toast.right{ right: -100px; }
 }
 
-/* ===== KV photo as full hero background layer (very subtle) ===== */
-.battle::after{
-  content: ""; position: absolute; inset: 0; z-index: 0;
-  background-image: url("https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-hero.png");
-  background-size: cover; background-position: center 60%;
-  opacity: .12;
-  filter: saturate(.7) blur(1px);
-  pointer-events: none;
-}
+/* ===== Hero panoramic removed — battle toast pop-ins are the BG focus ===== */
 
 /* ===== watermark text ===== */
 .battle::before{
@@ -3296,6 +3294,12 @@ function setActive(side) {
   // Sync manifesto ribbon band
   const band = document.getElementById('mfBand');
   if (band) band.dataset.side = side;
+  // Sync battle toast pop-in (left = duck, right = peanut)
+  const battleSec = document.querySelector('.battle');
+  if (battleSec){
+    battleSec.classList.toggle('show-duck',   side === 'duck');
+    battleSec.classList.toggle('show-peanut', side === 'peanut');
+  }
 }
 
 // ============ SCROLL-DRIVEN BG TOASTS — slow bob + scroll parallax ============
@@ -3340,6 +3344,11 @@ if (swapBtn) {
 }
 updateSwapBtn();
 
+// Init battle toast pop-in: default duck active
+(function(){
+  const battleSec = document.querySelector('.battle');
+  if (battleSec) battleSec.classList.add('show-duck');
+})();
 tabEls.duck.addEventListener('click', () => setActive('duck'));
 tabEls.peanut.addEventListener('click', () => setActive('peanut'));
 
