@@ -189,22 +189,31 @@
 
 Every few turns (or natural pause): Claude reads HANDOVER + task list, lists ALL outstanding items, asks user to confirm next priority. Don't proceed without explicit confirm.
 
-## ⚠️ OUTSTANDING ITEMS (last updated: this session)
+## ⚠️ OUTSTANDING ITEMS (last updated: 2026-05-22, after Tracks A/B/C + orchestrator pass)
 
-### Pending — user confirm needed
-- [ ] **WhatsApp number**: placeholder `85299999999` — replace with real Fairwood number
-- [ ] **GitHub Pages**: enable (one-click on GitHub settings, gives live `madkidshk.github.io/fairwood_sitetoast/`)
-- [ ] **Toast position fine-tuning**: 3 remaining toast-break positions (howto→submit / submit→gallery / gallery→bento) — confirm each looks right
-- [ ] **Vet backend**: GAS endpoint + 24h SLA tracking + approve/reject email (not yet built)
-- [ ] **AI prompt generator (option C from earlier)**: Haiku API integration to generate coherent prompts on-the-fly (option A — chip regrouping — done; C not yet)
-- [ ] **Sample previews `previews/*.html`**: still have old VOTE buttons (will phase out as real submissions replace)
-- [ ] **$10 大快活 App 西多券 redemption flow**: vet 通過後 trigger（not yet built）
+### Blocked — only the human can unblock (THIS WEEK)
+- [ ] **WhatsApp number**: placeholder `85299999999` (index.html L3249) — replace with real Fairwood inquiry number
+- [ ] **GitHub Pages**: enable (one-click on GitHub repo Settings → Pages → main / root) → unlocks `madkidshk.github.io/fairwood_sitetoast/`
+- [ ] **Vet backend**: hand `VET_BACKEND.md` to developer (2-day Apps Script build) — also coordinate voucher CSV with Fairwood App team
+
+### High-impact code/copy items Claude can still do
+- [ ] **Toast position fine-tuning**: 3 remaining (howto→submit / submit→gallery / gallery→bento) — needs visual review
+- [ ] **AI prompt generator option C**: Haiku/GPT-4o-mini API call via GAS proxy with rate-limited daily quota
+- [ ] **"30 秒簡易模式" in-site builder**: template picker + Haiku polish (decide v1 or v2)
+- [ ] **$10 大快活 App 西多券 redemption**: wired in VET_BACKEND spec, needs App team coordination
+
+### Ops items (orchestrator surfaced)
+- [ ] KOL shortlist refinement: 5 names in deck slide 29, need confirmation + outreach scripts
+- [ ] In-store activation print files: receipt back-print art, table card art, drinks-station QR
+- [ ] School outreach email v1 + WhatsApp blurb (drafted in deck slide 27, needs final copy)
 
 ### Recently completed (this session)
-- 交SITE投票 heading + section swap (submit ↔ gallery)
-- 6-dot side nav + click fix (z-index 80)
-- WhatsApp inquiry CTA in footer 聯絡 col
-- Gallery cards opaque z-index 3 (toast hidden behind cards)
-- Footer bg transparent (toast bg color unified)
-- Sections transparent bg (toast shows through section gaps)
-- Self-push workflow via PAT established
+- **Track A** · Prompt generator overhaul: 6-group REASONS / STYLES with balanced random, `groupSelected()` + `personaFromReasons()` helpers, new 6-section prompt template with opp-faction callout, persona infer; chip cleanup (drop 11 generic / dark, add 6 new, rename 4)
+- **Track B** · Proposal.html Chapter 4 added: 6 new slides (Section header / 21-Day Battle Plan / 學界戰術 108 schools / Own Channels / Paid Channels / KPI Matrix + kill criteria) — deck now 31 slides
+- **Track C** · Orchestrator agent pass — produced 14-item punch-list, integrated into this doc
+- **Track D** · Strip VOTE buttons from 9 preview/*.html sample sites
+- **Track E** · Renumber all 31 deck slides sequentially (was inconsistent /19/22/23/24, had duplicate 15/18/19)
+- **Track F** · `VET_BACKEND.md` spec written (deployable, 2-day build estimate)
+
+### This week's single unblock for human
+Per orchestrator: **enable GitHub Pages + provide real WhatsApp number** — both sub-5-minute decisions, both gate everything downstream (backend, OG cards, KOLs all need the real URL; footer needs the real number).
