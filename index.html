@@ -2865,11 +2865,12 @@ body{ padding-right: 80px; }
 
 <!-- FLOATING 4-DOT SIDE NAV (right edge, dot becomes 🍞 on active section) -->
 <nav class="side-dots" id="sideDots">
-  <a href="#"        data-label="HOME"    data-key="home"><span class="dot"></span></a>
-  <a href="#top"     data-label="戰況"    data-key="battle"><span class="dot"></span></a>
-  <a href="#howto"   data-label="玩法"    data-key="howto"><span class="dot"></span></a>
-  <a href="#gallery" data-label="所有作品" data-key="gallery"><span class="dot"></span></a>
-  <a href="#bento"   data-label="獎品"    data-key="bento"><span class="dot"></span></a>
+  <a href="#top"     data-label="首頁"          data-key="home"><span class="dot"></span></a>
+  <a href="#howto"   data-label="PROMPT 生成器"  data-key="howto"><span class="dot"></span></a>
+  <a href="#submit"  data-label="立即交 SITE"    data-key="submit"><span class="dot"></span></a>
+  <a href="#gallery" data-label="全部作品"       data-key="gallery"><span class="dot"></span></a>
+  <a href="#bento"   data-label="獎品"           data-key="bento"><span class="dot"></span></a>
+  <a href="#faq"     data-label="查詢"           data-key="faq"><span class="dot"></span></a>
 </nav>
 
 
@@ -3052,52 +3053,11 @@ body{ padding-right: 80px; }
   
 
 
-  <section class="gallery" id="gallery">
-    <div class="gallery-head">
-      <div>
-        <div class="num">所有作品</div>
-        <h2>全部作品。</h2>
-      </div>
-      <div class="gallery-filter" role="tablist" aria-label="filter by faction">
-        <button class="gf-btn active" data-filter="all">全部作品</button>
-        <button class="gf-btn duck" data-filter="duck">傳統派</button>
-        <button class="gf-btn peanut" data-filter="peanut">花生派</button>
-      </div>
-      <div class="gallery-pager">
-        <button class="gp-arr" id="gpPrev" aria-label="上一批">‹</button>
-        <button class="gp-arr" id="gpNext" aria-label="下一批">›</button>
-      </div>
-    </div>
-    <div class="gallery-grid" id="galleryGrid"><!-- JS render: 6 cards/page --></div>
-    <div class="gallery-empty" id="galleryEmpty" hidden>
-      <p>呢個派系仲未有作品 — <a href="#submit">起 site 做第一個</a>。</p>
-    </div>
-  </section>
-
-  <div class="toast-break right"></div>
-
-  <!-- divider marquee -->
-  <div class="mq brown">
-    <div class="mqt">
-      <span>05 / SUBMIT · 六點上架</span>
-      <span>AI 過審 30 秒</span>
-      <span>小編 final approve</span>
-      <span>送 $10 大快活 App 西多券</span>
-    </div>
-    <div class="mqt" aria-hidden="true">
-      <span>05 / SUBMIT · 六點上架</span>
-      <span>AI 過審 30 秒</span>
-      <span>小編 final approve</span>
-      <span>送 $10 大快活 App 西多券</span>
-    </div>
-  </div>
-
-  <!-- ============ SUBMIT ============ -->
   <section class="submit-wrap" id="submit">
     <div class="sec-head" style="max-width: 1440px; margin: 0 auto 24px; padding: 0;">
       <div>
         <div class="num">交 SITE · 一SITE一票</div>
-        <h2>起一個 SITE · 為你嗰派 <span class="hl">落一票</span>。</h2>
+        <h2>交SITE投票。</h2>
       </div>
       <p class="side">AI 1 分鐘掃描 → 小編 6PM 前 final approve → 即日 18:00 上架 → 戰況板即時跳動 → <strong>送 $10 大快活 App 西多券</strong>。</p>
     </div>
@@ -3143,6 +3103,47 @@ body{ padding-right: 80px; }
         </div>
         <button type="submit" class="sub-btn">▸ 提交 SITE · 加入戰局<span class="arrow">→</span></button>
       </form>
+    </div>
+  </section>
+
+  <div class="toast-break right"></div>
+
+  <!-- divider marquee -->
+  <div class="mq brown">
+    <div class="mqt">
+      <span>05 / SUBMIT · 六點上架</span>
+      <span>AI 過審 30 秒</span>
+      <span>小編 final approve</span>
+      <span>送 $10 大快活 App 西多券</span>
+    </div>
+    <div class="mqt" aria-hidden="true">
+      <span>05 / SUBMIT · 六點上架</span>
+      <span>AI 過審 30 秒</span>
+      <span>小編 final approve</span>
+      <span>送 $10 大快活 App 西多券</span>
+    </div>
+  </div>
+
+  <!-- ============ SUBMIT ============ -->
+  <section class="gallery" id="gallery">
+    <div class="gallery-head">
+      <div>
+        <div class="num">所有作品</div>
+        <h2>全部作品。</h2>
+      </div>
+      <div class="gallery-filter" role="tablist" aria-label="filter by faction">
+        <button class="gf-btn active" data-filter="all">全部作品</button>
+        <button class="gf-btn duck" data-filter="duck">傳統派</button>
+        <button class="gf-btn peanut" data-filter="peanut">花生派</button>
+      </div>
+      <div class="gallery-pager">
+        <button class="gp-arr" id="gpPrev" aria-label="上一批">‹</button>
+        <button class="gp-arr" id="gpNext" aria-label="下一批">›</button>
+      </div>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"><!-- JS render: 6 cards/page --></div>
+    <div class="gallery-empty" id="galleryEmpty" hidden>
+      <p>呢個派系仲未有作品 — <a href="#submit">起 site 做第一個</a>。</p>
     </div>
   </section>
 
