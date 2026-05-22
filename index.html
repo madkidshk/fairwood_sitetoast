@@ -2385,6 +2385,91 @@ body{ padding-right: 80px; }
   .mf-band-tag{ display: none; }
 }
 
+/* ============ BS-VIEW BUTTON in bs-foot ============ */
+.bs-view{
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  margin-left: 8px;
+  font-family: var(--font-mono, monospace);
+  font-size: 10px;
+  letter-spacing: .12em;
+  font-weight: 700;
+  background: rgba(245,236,217,.12);
+  color: var(--paper);
+  border: 1px solid rgba(245,236,217,.25);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .15s ease;
+  vertical-align: middle;
+}
+.bs-view:hover{ background: rgba(245,236,217,.22); border-color: rgba(245,236,217,.5); }
+.battle-body.peanut .bs-view{ color: #ffe69a; }
+
+/* ============ FULL-SITE PREVIEW MODAL ============ */
+.site-overlay{
+  position: fixed; inset: 0;
+  z-index: 9500;
+  background: rgba(0,0,0,.85);
+  backdrop-filter: blur(8px);
+  display: flex; flex-direction: column;
+  padding: 28px;
+  box-sizing: border-box;
+}
+.site-overlay[hidden]{ display: none; }
+.so-close{
+  position: absolute; top: 16px; right: 16px;
+  width: 44px; height: 44px;
+  background: rgba(245,236,217,.15);
+  border: 1px solid rgba(245,236,217,.3);
+  color: var(--paper, #f5ecd9);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 2;
+  transition: background .15s ease;
+}
+.so-close:hover{ background: rgba(245,236,217,.3); }
+.so-frame{
+  flex: 1;
+  min-height: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--paper, #f5ecd9);
+  box-shadow: 0 30px 80px rgba(0,0,0,.5);
+}
+.so-frame iframe{
+  width: 100%; height: 100%;
+  border: 0; display: block;
+}
+.so-foot{
+  margin-top: 14px;
+  display: flex; justify-content: center;
+}
+.so-open-new{
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  letter-spacing: .12em;
+  color: var(--paper, #f5ecd9);
+  opacity: .7;
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid rgba(245,236,217,.25);
+  border-radius: 999px;
+  transition: opacity .15s ease;
+}
+.so-open-new:hover{ opacity: 1; }
+
+/* Hide the bs-score block default styling cleanup */
+.bs-tab .bs-score{ display: none; }
+
+/* Stack title + view button cleanly */
+.bs-meta .t{
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: 4px;
+}
+
 /* ============ SHARE MODAL ============ */
 .share-overlay{
   position: fixed; inset: 0;
@@ -2577,6 +2662,20 @@ body{ padding-right: 80px; }
   </div>
 </div>
 
+<!-- ============ FULL-SITE PREVIEW MODAL ============ -->
+<div class="site-overlay" id="siteOverlay" hidden>
+  <button class="so-close" id="siteOverlayClose" aria-label="close">✕</button>
+  <div class="so-frame">
+    <iframe id="siteOverlayIframe"
+            src="about:blank"
+            sandbox="allow-same-origin allow-scripts allow-popups"
+            referrerpolicy="no-referrer" title="full site preview"></iframe>
+  </div>
+  <div class="so-foot">
+    <a id="siteOverlayOpen" href="#" target="_blank" rel="noopener" class="so-open-new">↗ 開新窗</a>
+  </div>
+</div>
+
 <!-- ============ POST-SUBMIT SHARE MODAL ============ -->
 <div class="share-overlay" id="shareOverlay" hidden>
   <button class="lb-close" id="shareClose" aria-label="close">✕</button>
@@ -2674,10 +2773,6 @@ body{ padding-right: 80px; }
             <span class="lbl">CLASSIC · 原味</span>
             <span class="nm">傳統派</span>
           </div>
-          <div class="bs-score">
-            <div class="n" id="bsScoreDuck">0</div>
-            <div class="d">D01 開賽</div>
-          </div>
         </button>
 
         <button class="bs-tab peanut" id="tabPeanut" aria-label="switch to peanut">
@@ -2685,10 +2780,6 @@ body{ padding-right: 80px; }
           <div class="bs-name">
             <span class="lbl">PEANUT · 邪惡派</span>
             <span class="nm">邪惡花生派</span>
-          </div>
-          <div class="bs-score">
-            <div class="n" id="bsScorePeanut">0</div>
-            <div class="d">D01 開賽</div>
           </div>
         </button>
       </div>
@@ -2703,16 +2794,13 @@ body{ padding-right: 80px; }
                     loading="lazy"
                     sandbox="allow-same-origin allow-scripts"
                     referrerpolicy="no-referrer" title="duck site preview"></iframe>
-            <a class="open-ov" id="bsOpenDuck"
-               href="https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-duck.html"
-               target="_blank" rel="noopener">
-              <span class="b">↗ 開新窗睇全 SITE</span>
-            </a>
           </div>
           <div class="bs-foot">
             <button class="bs-arr" id="bsPrevDuck" aria-label="prev duck site">‹</button>
             <div class="bs-meta">
-              <div class="t" id="bsTitleDuck">無餡西多保衛聯盟</div>
+              <div class="t" id="bsTitleDuck">無餡西多保衛聯盟
+                <button class="bs-view" data-side="duck" aria-label="view full site">↗ 睇全 SITE</button>
+              </div>
               <div class="w" id="bsWhoDuck">@uncle_lam_1962 · 旺角茶記 · D04</div>
             </div>
             <span class="bs-count"><b id="bsIdxDuck">01</b>/06</span>
@@ -2736,16 +2824,13 @@ body{ padding-right: 80px; }
                     loading="lazy"
                     sandbox="allow-same-origin allow-scripts"
                     referrerpolicy="no-referrer" title="peanut site preview"></iframe>
-            <a class="open-ov" id="bsOpenPeanut"
-               href="https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-peanut.html"
-               target="_blank" rel="noopener">
-              <span class="b">↗ 開新窗睇全 SITE</span>
-            </a>
           </div>
           <div class="bs-foot">
             <button class="bs-arr" id="bsPrevPeanut" aria-label="prev peanut site">‹</button>
             <div class="bs-meta">
-              <div class="t" id="bsTitlePeanut">邪惡花生派．官方總部</div>
+              <div class="t" id="bsTitlePeanut">邪惡花生派．官方總部
+                <button class="bs-view" data-side="peanut" aria-label="view full site">↗ 睇全 SITE</button>
+              </div>
               <div class="w" id="bsWhoPeanut">@official · 皇仁書院 · D03</div>
             </div>
             <span class="bs-count"><b id="bsIdxPeanut">01</b>/06</span>
@@ -3787,6 +3872,48 @@ document.addEventListener('keydown', e => {
 })();
 
 /* Phase switch removed — battle is iframe coverflow with 86/14 dominance */
+</script>
+
+
+<script>
+/* ============ SITE PREVIEW MODAL ============ */
+(function(){
+  const overlay = document.getElementById('siteOverlay');
+  const iframe  = document.getElementById('siteOverlayIframe');
+  const openNew = document.getElementById('siteOverlayOpen');
+  const closeBtn = document.getElementById('siteOverlayClose');
+  if (!overlay || !iframe || !closeBtn) return;
+
+  function openSite(url){
+    iframe.src = url;
+    if (openNew) openNew.href = url;
+    overlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSite(){
+    overlay.hidden = true;
+    iframe.src = 'about:blank';
+    document.body.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', closeSite);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeSite(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !overlay.hidden) closeSite(); });
+
+  // Wire bs-view buttons in battle
+  document.querySelectorAll('.bs-view').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const side = btn.dataset.side;
+      const idx = (typeof state !== 'undefined' && state[side] !== undefined) ? state[side] : 0;
+      const arr = (typeof SITES !== 'undefined' && SITES[side]) ? SITES[side] : [];
+      const s = arr[idx];
+      if (s && s.url) openSite(s.url);
+    });
+  });
+
+  // Wire gallery cards to use overlay instead of lightbox if desired (kept lightbox separate)
+})();
 </script>
 
 </body>
