@@ -85,10 +85,7 @@ footer.foot, .mq, .topbar, .nav, .side-dots, .side-nav{
   position: relative;
   z-index: 2 !important;
 }
-section.battle, section.howto, section.gallery, section.submit-wrap, section.bento,
-footer.foot{
-  background: var(--ink);  /* opaque so toast hidden in overlap */
-}
+/* (sections kept transparent bg — toast visible in section gap areas, hidden behind cards) */
 .toast-break.left::before{
   left: -120px;
   background-image: url("https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-traditional.png");
