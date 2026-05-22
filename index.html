@@ -1011,22 +1011,14 @@ body::after{
   transition: opacity .45s ease-out, transform .55s cubic-bezier(.34, 1.5, .4, 1);
 }
 .bs-frame iframe{
-  position: absolute; top: 0;
+  position: absolute;
+  top: 0; left: 0;
   width: 1440px; height: 1440px;
   border: 0; display: block;
   pointer-events: none;
-}
-/* duck iframe anchored to RIGHT of its container, scale around top-right */
-.battle-body.duck .bs-frame iframe{
-  right: 0;
-  transform: scale(.55);
-  transform-origin: 100% 0;
-}
-/* peanut iframe anchored to LEFT of its container, scale around top-left */
-.battle-body.peanut .bs-frame iframe{
-  left: 0;
-  transform: scale(.55);
   transform-origin: 0 0;
+  transform: scale(var(--bs-scale, 1));
+  transition: transform .35s ease;
 }
 .bs-frame .corner-tag{
   position: absolute; top: 10px; left: 10px; z-index: 4;
@@ -2782,7 +2774,7 @@ body{ padding-right: 80px; }
     <div class="howto-inner">
       <div class="sec-head" style="padding: 0;">
         <div>
-          <div class="num">04 / PROMPT 生成器</div>
+          <div class="num">PROMPT 生成器</div>
           <h2>揀 <span class="o">西多</span> + 揀 <span class="o">理據</span> + 揀 <span class="o">風格</span><br>· 即出 PROMPT。</h2>
         </div>
         <p class="side">3 個 col 揀幾粒掣，或者直接 <strong>🎲 全部隨機</strong> — copy 個 prompt 入 Lovable / Claude 起 site。</p>
@@ -2850,6 +2842,22 @@ body{ padding-right: 80px; }
       </div>
     </div>
   </section>
+
+  <!-- divider marquee · campaign info -->
+  <div class="mq invert">
+    <div class="mqt fast">
+      <span>一SITE一票 · 起SITE表態</span>
+      <span>21 日決勝 · 02·06·2026 → 23·06·2026</span>
+      <span>傳統無餡 VS 邪惡花生</span>
+      <span>大快活 2026 食得夠STEM</span>
+    </div>
+    <div class="mqt fast" aria-hidden="true">
+      <span>一SITE一票 · 起SITE表態</span>
+      <span>21 日決勝 · 02·06·2026 → 23·06·2026</span>
+      <span>傳統無餡 VS 邪惡花生</span>
+      <span>大快活 2026 食得夠STEM</span>
+    </div>
+  </div>
 
   <div class="toast-break right"></div>
 
@@ -3098,6 +3106,28 @@ function nextSide(side) {
   state[side] = (state[side] + 1) % total;
   renderSide(side);
 }
+
+// ============ DYNAMIC IFRAME SCALE — fits 1440px virtual viewport to bs-frame ============
+(function(){
+  const VIRTUAL_W = 1440;
+  function fitIframe(frame){
+    if (!frame) return;
+    const w = frame.clientWidth;
+    if (!w) return;
+    const s = w / VIRTUAL_W;
+    frame.style.setProperty('--bs-scale', s);
+  }
+  const frames = document.querySelectorAll('.bs-frame');
+  frames.forEach(f => fitIframe(f));
+  if (window.ResizeObserver){
+    const ro = new ResizeObserver(entries => {
+      entries.forEach(e => fitIframe(e.target));
+    });
+    frames.forEach(f => ro.observe(f));
+  } else {
+    window.addEventListener('resize', () => frames.forEach(fitIframe));
+  }
+})();
 
 ['duck', 'peanut'].forEach(side => {
   const C = cap(side);
