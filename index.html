@@ -1517,7 +1517,7 @@ body.battle-in-view.show-peanut .battle-toast.right{
 .foot{ position: relative; background: var(--ink); color: var(--paper); padding: 80px 24px 32px; overflow: hidden; border-top: 1px solid rgba(245,236,217,.08); }
 .foot::before{ content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(800px 600px at 80% 30%, rgba(240,138,0,.16), transparent 45%), radial-gradient(500px 400px at 10% 80%, rgba(184,54,42,.15), transparent 50%); }
 .foot-inner{ max-width: 1440px; margin: 0 auto; position: relative; z-index: 2; }
-.foot-big{ font-family:var(--font-serif); font-weight: 900; font-size: clamp(72px, 13vw, 220px); line-height: .82; letter-spacing: -.06em; margin: 0; }
+.foot-big{ font-family:var(--font-kai); font-weight: 900; font-size: clamp(72px, 13vw, 220px); line-height: .82; letter-spacing: -.06em; margin: 0; }
 .foot-big .o{ background: linear-gradient(180deg, var(--fairwood-light), var(--fairwood-deep)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .foot-big .stem{ display: inline-block; background: var(--fairwood); color: var(--ink); padding: 0 .12em; transform: rotate(-3deg); border-radius: 12px; box-shadow: 0 12px 40px rgba(240,138,0,.4); }
 .foot-grid{ margin-top: 56px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; border-top: 1px solid rgba(245,236,217,.15); padding-top: 36px; }
@@ -3316,18 +3316,20 @@ function setActive(side) {
   split.classList.toggle('active-peanut', want);
   bodies.style.removeProperty('--seam');
   updateSwapBtn();
+  const band = document.getElementById('mfBand');
+  if (band) band.dataset.side = side;
+  // Toggle .show-duck / .show-peanut on body (for toast pop-in CSS)
+  document.body.classList.toggle('show-duck',   side === 'duck');
+  document.body.classList.toggle('show-peanut', side === 'peanut');
+}
+
+// === SWAP PILL click handler — attached ONCE on init ===
 const swapBtnEl = document.getElementById('swapBtn');
 if (swapBtnEl){
   swapBtnEl.addEventListener('click', (e) => {
     e.stopPropagation();
     setActive(activeOf() === 'duck' ? 'peanut' : 'duck');
   });
-}
-  const band = document.getElementById('mfBand');
-  if (band) band.dataset.side = side;
-  // Toggle .show-duck / .show-peanut on body (for toast pop-in CSS)
-  document.body.classList.toggle('show-duck',   side === 'duck');
-  document.body.classList.toggle('show-peanut', side === 'peanut');
 }
 
 // ============ SCROLL-DRIVEN BG TOASTS — slow bob + scroll parallax ============
