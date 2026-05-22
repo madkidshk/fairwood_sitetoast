@@ -1470,7 +1470,7 @@ body.battle-in-view.show-peanut .battle-toast.right{
 /* ============ BENTO ============ */
 .bento{ padding: 80px 24px 60px; background: transparent; border-top: 1px solid rgba(245,236,217,.08); }
 .bento-grid{ max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 200px); gap: 14px; }
-.bn{ position: relative; border-radius: 22px; overflow: hidden; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; transition: transform .25s cubic-bezier(.34,1.56,.64,1); border: 1px solid rgba(245,236,217,.08); cursor: pointer; }
+.bn{ position: relative; z-index: 3; border-radius: 22px; overflow: hidden; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; transition: transform .25s cubic-bezier(.34,1.56,.64,1); border: 1px solid rgba(245,236,217,.08); cursor: pointer; }
 .bn:hover{ transform: translateY(-4px) scale(1.01); }
 .bn::before{ content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(135deg, rgba(0,0,0,.025) 0 4px, transparent 4px 9px); }
 .bn .cat{ font-family:var(--font-mono); font-size: 10px; letter-spacing: .22em; position: relative; z-index: 2; }
@@ -1561,6 +1561,7 @@ body.battle-in-view.show-peanut .battle-toast.right{
 .foot-big .o{ background: linear-gradient(180deg, var(--fairwood-light), var(--fairwood-deep)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .foot-big .stem{ display: inline-block; background: var(--fairwood); color: var(--ink); padding: 0 .12em; transform: rotate(-3deg); border-radius: 12px; box-shadow: 0 12px 40px rgba(240,138,0,.4); }
 .foot-grid{ margin-top: 56px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; border-top: 1px solid rgba(245,236,217,.15); padding-top: 36px; }
+.foot-col{ position: relative; z-index: 3; }
 .foot-col h4{ font-family:var(--font-mono); font-size: 11px; letter-spacing: .25em; color: var(--fairwood); margin: 0 0 14px; font-weight: 700; }
 .foot-col a{ display: block; padding: 6px 0; font-family:var(--font-sans); font-size: 14px; color: rgba(245,236,217,.7); transition: color .15s; }
 .foot-col a:hover{ color: var(--fairwood); }
