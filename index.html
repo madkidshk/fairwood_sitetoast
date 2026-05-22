@@ -78,7 +78,7 @@ body{
   background-repeat: no-repeat;
   background-position: center;
   filter: drop-shadow(0 20px 50px rgba(0,0,0,.55));
-  z-index: 5;  /* above adjacent section bg */
+  z-index: 1;  /* behind adjacent section foreground */
 }
 .toast-break.left::before{
   left: -120px;
@@ -212,13 +212,13 @@ body::after{
   display: flex;
 }
 .mq.invert{ background: var(--fairwood); color: var(--ink); border-color: transparent; padding: 9px 0; font-size: 13px; }
-.mq.brown{ background: var(--peanut-hot); color: var(--paper); padding: 9px 0; font-size: 13px; }
+.mq.brown{ background: var(--fairwood); color: var(--ink); padding: 9px 0; font-size: 13px; }
 .mqt{ display: inline-flex; gap: 32px; padding-right: 32px; flex-shrink: 0; animation: mqs 32s linear infinite; }
 .mqt.fast{ animation-duration: 18s; }
 .mqt span{ display: inline-flex; align-items: center; gap: 12px; }
 .mqt span::after{ content: "✦"; color: var(--fairwood); opacity: .7; font-size: 14px; }
 .mq.invert .mqt span::after{ color: var(--ink); opacity: .35; }
-.mq.brown .mqt span::after{ color: var(--peanut-lime); opacity: .8; }
+.mq.brown .mqt span::after{ color: var(--ink); opacity: .35; }
 @keyframes mqs{ to{ transform: translateX(-100%); } }
 
 /* ============ TOP MENU BAR (sticky, 3-zone layout) ============
@@ -989,9 +989,9 @@ body.battle-in-view.show-peanut .battle-toast.right{
   pointer-events: auto;
 }
 .sp-text{
-  display: flex; flex-direction: column;
+  display: flex; flex-direction: row;
   align-items: center;
-  gap: 3px;
+  gap: 10px;
   pointer-events: none;
 }
 .sp-arr{
@@ -1012,10 +1012,11 @@ body.battle-in-view.show-peanut .battle-toast.right{
 .swap-pill:active{ transform: translate(-50%, -50%) rotate(-1.5deg) scale(.97); }
 .sp-eb{
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: .22em;
+  font-size: 11px;
+  letter-spacing: .18em;
   font-weight: 700;
-  opacity: .65;
+  opacity: .7;
+  white-space: nowrap;
 }
 .sp-name{
   font-family: var(--font-serif);
