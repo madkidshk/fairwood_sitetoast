@@ -217,3 +217,44 @@ Every few turns (or natural pause): Claude reads HANDOVER + task list, lists ALL
 
 ### This week's single unblock for human
 Per orchestrator: **enable GitHub Pages + provide real WhatsApp number** — both sub-5-minute decisions, both gate everything downstream (backend, OG cards, KOLs all need the real URL; footer needs the real number).
+
+---
+
+## ⚠️ PLACEHOLDERS in delivered docs that ops MUST fill before sending
+
+### `CAMPAIGN_OUTREACH.md`
+- `[校長／STEM 主任]` `[姓名]` `[date]` — sender + recipient salutation slots
+- `[ops@fairwood.com.hk]` × 1 — canonical email TBD (also see VET_BACKEND: `ops-lead@fairwood.com.hk`, index.html: `hi@fairwood.hk` — pick one)
+- `[+852 xxxx xxxx]` × 5 — real WhatsApp number for ops
+- `https://[live-url]` × 2 — replace once GitHub Pages enabled
+- `https://[archive-url]` × 1 in thank-you template
+- KOL contact placeholders: `[Agent / 主理人]`, `[phone]`, `[email]`, `[試當真 manager / 阿祖]`, `[信報 副刊主編]`, `[點 Cook Guide team]` — all need real contacts
+- Ownership table H: `[Ops 1]` `[Ops 2]` `[Marketing Lead]` `[PR Lead]` `[Ops Lead]` — assign people
+- Slide 27 of deck mentions "比賽 deck（PDF）" + "教師 brief（1 頁 A4）" attachments — neither exists yet; either export deck to PDF or strip from email
+
+### `VET_BACKEND.md`
+- Apps Script web app URL — only known post-deploy
+- `OPENAI_KEY` script property — set after key obtained
+- `AI_LOG_SHEET_ID` — created during deploy
+- `ops-lead@fairwood.com.hk` — verify domain
+
+### `AI_PROMPT_PROXY.md`
+- `GAS_PROMPT_ENDPOINT` URL — set after GAS deploy
+- `OPENAI_KEY` script property — same as above
+
+### `index.html`
+- WhatsApp `wa.me/85299999999` placeholder still in footer (L3249)
+
+---
+
+## 📋 DECK AUDIT PASS (2026-05-22)
+
+Orchestrator agent reviewed Proposal.html post-Chapter-4-add and flagged:
+- ✅ H1 fixed: dup Chapter 4 → renumbered new GTM to Chapter 6
+- ✅ H2 fixed: old KPI slide 21 reframed as Conservative baseline (hands off to new KPI Matrix slide 30 for full tier breakdown)
+- ✅ M1 fixed: cover crt-bar "22 SLIDES" → "31 SLIDES"
+- ✅ M5 fixed: 食得夠STEM spacing unified (no space, canonical, 11 instances kept; 4 inconsistent fixed)
+- ⏳ M2 deferred: deck uses `sitedosi.fairwood.hk` (no DNS) vs real `madkidshk.github.io/...` — kept as aspirational, will swap when domain provisioned
+- ⏳ M3 deferred: 3 different email domains across docs — needs ops decision on canonical address
+- ⏳ M4 deferred: 6 月 22 (campaign end) vs 6 月 23 (reveal day) — clarified in thank-you, others left as-is since the distinction is real
+- ⏳ L1: school emails reference PDF deck attachment that doesn't exist — flagged in placeholders list above
