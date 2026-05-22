@@ -16,7 +16,7 @@
 <meta name="twitter:title" content="一SITE一票 · 起SITE表態 — SITE 多士大對決">
 <meta name="twitter:description" content="一SITE一票 · 起SITE表態。撐傳統無餡 OR 邪惡花生 · 21 日決勝。">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-hero.png">
-<meta name="description" content="一SITE一票 · 起SITE表態。2026 大快活 STEM 大行動 — 全港網民用 AI 起 site 撐自己嗰派西多 · 21 日決勝。">
+<meta name="description" content="一SITE一票 · 起SITE表態。2026 大快活 食得夠STEM — 全港網民用 AI 起 site 撐自己嗰派西多 · 21 日決勝。">
 
 <title>一SITE一票 · 起SITE表態 — SITE 多士大對決 · 大快活</title>
 <link rel="stylesheet" href="styles.css">
@@ -444,6 +444,21 @@ body::after{
     var(--ink);
 }
 
+/* Battle BG: show side-specific toast image based on active side */
+.battle:has(.battle-split:not(.active-peanut))::after{
+  background-image: url("https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-traditional.png") !important;
+  opacity: .28 !important;
+  filter: saturate(.9) !important;
+}
+.battle:has(.battle-split.active-peanut)::after{
+  background-image: url("https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-peanut.png") !important;
+  opacity: .28 !important;
+  filter: saturate(.9) !important;
+}
+.battle::after{
+  transition: background-image .6s ease, opacity .6s ease !important;
+}
+
 /* ===== KV photo as full hero background layer (very subtle) ===== */
 .battle::after{
   content: ""; position: absolute; inset: 0; z-index: 0;
@@ -860,6 +875,50 @@ body::after{
   background: linear-gradient(190deg, rgba(196,102,31,.14) 0%, transparent 28%), #14100a;
 }
 
+/* === SPLIT LAYOUT (Phase 1) — manifesto top + iframe bottom + foot === */
+.battle-body.split-layout{
+  grid-template-rows: auto 1fr auto !important;
+}
+.battle-body.split-layout .manifesto{
+  position: relative !important;
+  inset: auto !important;
+  z-index: 2;
+  container-type: inline-size;
+  padding: 4cqw 6cqw 3cqw;
+  display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: center;
+  gap: 1.6cqw;
+  min-height: 28cqw;
+  border-bottom: 1px solid rgba(245,236,217,.1);
+}
+.battle-body.split-layout .manifesto .mf-quote{
+  font-size: 4cqw;
+  line-height: 1.25;
+  margin: 0;
+}
+.battle-body.split-layout .manifesto .mf-eb{
+  font-size: 1.6cqw;
+  letter-spacing: .2em;
+  opacity: .7;
+}
+.battle-body.split-layout .manifesto .mf-cta{
+  font-size: 1.5cqw;
+  padding: 1.2cqw 2.4cqw;
+  letter-spacing: .12em;
+  border-radius: 999px;
+  margin-top: 0.6cqw;
+}
+.battle-body.split-layout .bs-frame{
+  min-height: 0;
+  background: var(--paper);
+}
+/* Safety min sizes for very small viewports */
+@media (max-width: 700px){
+  .battle-body.split-layout .manifesto .mf-quote{ font-size: max(4cqw, 14px); }
+  .battle-body.split-layout .manifesto .mf-eb{ font-size: max(1.6cqw, 9px); }
+  .battle-body.split-layout .manifesto .mf-cta{ font-size: max(1.5cqw, 10px); padding: max(1.2cqw, 7px) max(2.4cqw, 14px); }
+}
+
 /* peek body: hide controls only — NO dim (keep both sides visually alive) */
 
 /* INACTIVE side: disable interaction + slight dim so it cannot overlap */
@@ -1004,8 +1063,8 @@ body::after{
 .bs-foot{
   position: relative; z-index: 3;
   padding: 12px 16px;
-  display: grid; grid-template-columns: 1fr auto;
-  gap: 12px; align-items: center;
+  display: grid; grid-template-columns: auto 1fr auto auto;
+  gap: 10px; align-items: center;
   border-top: 1px solid rgba(245,236,217,.1);
   background: rgba(0,0,0,.45);
   backdrop-filter: blur(8px);
@@ -1098,76 +1157,87 @@ body::after{
 .battle-split.phase1-50-50.active-peanut .battle-body.duck iframe{ filter: none !important; }
 
 /* ============ MANIFESTO (Phase 1 default) ============ */
-/* === SVG manifesto container (Phase 1) === */
-.manifesto-svg{
+/* === HTML manifesto (Phase 1) — container queries for uniform scaling === */
+.manifesto{
   position: absolute; inset: 0;
-  width: 100%; height: 100%;
   z-index: 2;
-  display: block;
-}
-/* The HTML inside foreignObject — coords are in viewBox units (600×675), so use pixel sizes here */
-.mf-inner{
-  width: 600px; height: 675px;
-  box-sizing: border-box;
-  padding: 56px 60px;
+  container-type: inline-size;  /* enables cqw units inside */
+  container-name: mf;
+  padding: 6cqw 8cqw;
   display: flex; flex-direction: column;
   align-items: flex-start; justify-content: center;
-  gap: 22px;
+  gap: 3cqw;
   color: var(--paper, #f5ecd9);
   font-family: var(--font-sans, sans-serif);
 }
-.duck-inner .mf-eb{ color: #ffe69a; }
-.peanut-inner .mf-eb{ color: #ffb74d; }
-.mf-inner .mf-eb{
+.duck-manifesto{
+  background:
+    radial-gradient(60% 90% at 25% 35%, rgba(255, 220, 130, .14), transparent 70%),
+    linear-gradient(180deg, rgba(20,15,5,.7), rgba(0,0,0,.85));
+}
+.peanut-manifesto{
+  background:
+    radial-gradient(60% 90% at 70% 40%, rgba(196,102,31,.22), transparent 70%),
+    linear-gradient(180deg, rgba(40,20,10,.7), rgba(0,0,0,.88));
+}
+.manifesto .mf-eb{
   font-family: var(--font-mono, monospace);
-  font-size: 13px;
+  font-size: 1.8cqw;
   letter-spacing: .22em;
   opacity: .75;
   font-weight: 700;
+  min-font-size: 10px;
 }
-.mf-inner .mf-quote{
+.duck-manifesto .mf-eb{ color: #ffe69a; }
+.peanut-manifesto .mf-eb{ color: #ffb74d; }
+.manifesto .mf-quote{
   font-family: 'LXGWWenKaiTC', var(--font-serif), serif;
   font-weight: 800;
-  font-size: 42px;
-  line-height: 1.28;
+  font-size: 5.6cqw;
+  line-height: 1.25;
   letter-spacing: -.005em;
   margin: 0;
-  text-shadow: 0 2px 12px rgba(0,0,0,.55);
+  color: var(--paper, #f5ecd9);
 }
-.mf-inner .mf-body{
-  font-size: 17px;
+.manifesto .mf-body{
+  font-size: 2.3cqw;
   line-height: 1.65;
   opacity: .92;
   max-width: 100%;
+  color: var(--paper, #f5ecd9);
 }
-.mf-inner .mf-body p{ margin: 0 0 8px; }
-.mf-inner .mf-body p:last-child{ margin-bottom: 0; }
-.mf-inner .mf-cta{
+.manifesto .mf-body p{ margin: 0 0 .4cqw; }
+.manifesto .mf-body p:last-child{ margin-bottom: 0; }
+.manifesto .mf-cta{
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 14px 26px;
+  padding: 1.6cqw 3cqw;
   font-family: var(--font-mono, monospace);
-  font-size: 15px;
-  letter-spacing: .14em;
+  font-size: 1.9cqw;
+  letter-spacing: .12em;
   font-weight: 700;
   border-radius: 999px;
   text-decoration: none;
   transition: transform .2s ease, box-shadow .2s ease;
-  margin-top: 6px;
+  margin-top: 1cqw;
 }
-.duck-inner .mf-cta{
+.duck-manifesto .mf-cta{
   background: #f5ecd9; color: #1a1408;
   box-shadow: 0 6px 22px rgba(245,236,217,.3);
 }
-.peanut-inner .mf-cta{
+.peanut-manifesto .mf-cta{
   background: #ffb74d; color: #2a1505;
   box-shadow: 0 6px 22px rgba(196,102,31,.5);
 }
-.mf-inner .mf-cta:hover{
+.manifesto .mf-cta:hover{
   transform: translateY(-2px);
   box-shadow: 0 10px 28px rgba(0,0,0,.4);
 }
+/* Safety floor on very small viewports — min font sizes */
 @media (max-width: 700px){
-  .mf-inner{ padding: 40px 36px; gap: 18px; }
+  .manifesto .mf-eb{ font-size: max(1.8cqw, 9px); }
+  .manifesto .mf-quote{ font-size: max(5.6cqw, 18px); }
+  .manifesto .mf-body{ font-size: max(2.3cqw, 11px); }
+  .manifesto .mf-cta{ font-size: max(1.9cqw, 10px); padding: max(1.6cqw, 10px) max(3cqw, 16px); }
 }
 .picks{
   position: absolute; inset: 0;
@@ -1622,6 +1692,49 @@ body::after{
   transform-origin: 0 0;
   pointer-events: none;
 }
+/* === GALLERY FILTER (faction sort) === */
+.gallery-filter{
+  display: flex; gap: 8px;
+  margin: 0 auto;
+}
+.gf-btn{
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  letter-spacing: .12em;
+  font-weight: 700;
+  padding: 10px 18px;
+  border: 1px solid rgba(245,236,217,.2);
+  background: transparent;
+  color: var(--paper);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.gf-btn:hover{ background: rgba(245,236,217,.08); border-color: rgba(245,236,217,.45); }
+.gf-btn.active{
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+.gf-btn.duck.active{ background: #f5ecd9; color: #1a1408; border-color: #ffe69a; }
+.gf-btn.peanut.active{ background: #ffb74d; color: #2a1505; border-color: #ffb74d; }
+.gallery-empty{
+  padding: 60px 20px;
+  text-align: center;
+  font-family: var(--font-mono, monospace);
+  color: var(--paper);
+  opacity: .65;
+}
+.gallery-empty a{ color: var(--fairwood, #ffb74d); text-decoration: underline; }
+/* Boost faction label on cards */
+.g-card .g-card-fac{
+  font-size: 11px !important;
+  padding: 5px 11px !important;
+  letter-spacing: .18em;
+}
+.g-card.duck .g-card-fac{ background: #f5ecd9 !important; color: #1a1408 !important; }
+.g-card.peanut .g-card-fac{ background: #c4661f !important; color: #f5ecd9 !important; }
+
 .g-card-fac{
   position: absolute; top: 8px; left: 8px; z-index: 3;
   background: var(--fairwood); color: var(--ink);
@@ -2232,6 +2345,79 @@ body{ padding-right: 80px; }
   overflow-y: auto;
   border: 2px solid var(--ink);
 }
+/* ============ MANIFESTO RIBBON BAND ============ */
+.mf-band{
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 64px;
+  border-top: 1px solid rgba(245,236,217,.12);
+  border-bottom: 1px solid rgba(245,236,217,.12);
+}
+.mf-band-track{
+  position: absolute;
+  inset: 0;
+  display: flex; align-items: center;
+  gap: 28px;
+  padding: 0 32px;
+  white-space: nowrap;
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  letter-spacing: .04em;
+  transition: opacity .4s ease, transform .5s ease;
+  overflow: hidden;
+}
+.mf-band-track.duck{
+  background: linear-gradient(90deg, #f5ecd9 0%, #ffe69a 50%, #f5ecd9 100%);
+  color: #1a1408;
+}
+.mf-band-track.peanut{
+  background: linear-gradient(90deg, #c4661f 0%, #ffb74d 50%, #c4661f 100%);
+  color: #1a0a02;
+}
+.mf-band[data-side="duck"]   .mf-band-track.duck{   opacity: 1; transform: translateX(0); z-index: 2; }
+.mf-band[data-side="duck"]   .mf-band-track.peanut{ opacity: 0; transform: translateX(8%); z-index: 1; pointer-events: none; }
+.mf-band[data-side="peanut"] .mf-band-track.peanut{ opacity: 1; transform: translateX(0); z-index: 2; }
+.mf-band[data-side="peanut"] .mf-band-track.duck{   opacity: 0; transform: translateX(-8%); z-index: 1; pointer-events: none; }
+.mf-band-eb{
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: .14em;
+}
+.mf-band-q{
+  font-family: 'LXGWWenKaiTC', var(--font-serif), serif;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: -.005em;
+}
+.mf-band-tag{
+  opacity: .8;
+  font-size: 12px;
+  letter-spacing: .04em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.08);
+}
+.mf-band-cta a{
+  background: #1a1408;
+  color: #f5ecd9;
+  padding: 6px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .12em;
+  transition: transform .15s ease;
+}
+.mf-band-track.peanut .mf-band-cta a{ background: #2a1505; color: #ffe69a; }
+.mf-band-cta a:hover{ transform: translateY(-1px); }
+@media (max-width: 700px){
+  .mf-band{ height: 56px; }
+  .mf-band-track{ gap: 16px; padding: 0 16px; font-size: 11px; }
+  .mf-band-q{ font-size: 13px; }
+  .mf-band-tag{ display: none; }
+}
+
 /* ============ SHARE MODAL ============ */
 .share-overlay{
   position: fixed; inset: 0;
@@ -2485,7 +2671,7 @@ body{ padding-right: 80px; }
       <img class="ht-logo" src="https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/fairwood-logo.svg" alt="Fairwood">
     </a>
     <div class="ht-text">
-      <div class="ht-eb">2026 STEM 大行動 · BY FAIRWOOD</div>
+      <div class="ht-eb">2026 食得夠STEM · BY FAIRWOOD</div>
       <h1 class="ht-h1">西多士大對決</h1>
       <div class="ht-tagline">一SITE一票 · 起SITE表態</div>
       <div class="ht-meta">21 日決勝 · 02·06·2026 → 23·06·2026</div>
@@ -2516,9 +2702,9 @@ body{ padding-right: 80px; }
       <!-- TABS row — always 50/50, click to swap dominance below -->
       <div class="battle-tabs">
         <button class="bs-tab duck" id="tabDuck" aria-label="switch to duck">
-          <span class="em">🦆</span>
+          <span class="em">🍞</span>
           <div class="bs-name">
-            <span class="lbl">傳統 · 鴨蛋香</span>
+            <span class="lbl">CLASSIC · 原味</span>
             <span class="nm">傳統派</span>
           </div>
           <div class="bs-score">
@@ -2542,51 +2728,28 @@ body{ padding-right: 80px; }
 
       <!-- BODIES row — Phase 1 manifesto / Phase 2 picks (auto switch by JS) -->
       <div class="battle-bodies">
-        <div class="battle-body duck" data-phase="1">
-
-          <!-- PHASE 1 · MANIFESTO (SVG viewBox · uniform scaling) -->
-          <svg class="manifesto-svg duck-manifesto-svg" viewBox="0 0 600 675"
-               preserveAspectRatio="xMidYMid meet" data-show="phase1"
-               xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <radialGradient id="duckBgGrad" cx="25%" cy="35%" r="60%">
-                <stop offset="0%" stop-color="rgb(255,220,130)" stop-opacity=".18"/>
-                <stop offset="70%" stop-color="rgb(255,220,130)" stop-opacity="0"/>
-              </radialGradient>
-              <linearGradient id="duckBgFade" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgb(20,15,5)" stop-opacity=".7"/>
-                <stop offset="100%" stop-color="rgb(0,0,0)" stop-opacity=".88"/>
-              </linearGradient>
-            </defs>
-            <rect width="600" height="675" fill="#14100a"/>
-            <rect width="600" height="675" fill="url(#duckBgFade)"/>
-            <rect width="600" height="675" fill="url(#duckBgGrad)"/>
-            <foreignObject x="0" y="0" width="600" height="675">
-              <div xmlns="http://www.w3.org/1999/xhtml" class="mf-inner duck-inner">
-                <div class="mf-eb">▸ MANIFESTO · 傳統無餡派</div>
-                <div class="mf-quote">「西多嘅靈魂喺塊多士，<br/>唔係夾喺中間嗰啲嘢。」</div>
-                <div class="mf-body">
-                  <p>唔需要花樣 · 一塊多士 · 兩面金黃</p>
-                  <p>蛋香 · 牛油香 · 糖漿香</p>
-                  <p>我哋食嘅係手藝，唔係餡料。<br/>我哋撐嘅係原味，唔係噱頭。</p>
-                </div>
-                <a class="mf-cta duck-cta" href="#howto">▸ 加入傳統派 · 起 site 表態</a>
-              </div>
-            </foreignObject>
-          </svg>
-
-          <!-- PHASE 2 · 5 PICKS (hidden until count ≥ 5) -->
-          <div class="picks duck-picks" data-show="phase2" hidden>
-            <div class="picks-eb">▸ 傳統派 · 大快活精選 5 個</div>
-            <div class="picks-grid" id="duckPicksGrid"><!-- JS render --></div>
+        <div class="battle-body duck">
+          <div class="bs-frame">
+            <span class="corner-tag" id="bsTagDuck">LOVABLE · D04</span>
+            <iframe id="bsIfrDuck"
+                    src="https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-duck.html"
+                    loading="lazy"
+                    sandbox="allow-same-origin allow-scripts"
+                    referrerpolicy="no-referrer" title="duck site preview"></iframe>
+            <a class="open-ov" id="bsOpenDuck"
+               href="https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-duck.html"
+               target="_blank" rel="noopener">
+              <span class="b">↗ 開新窗睇全 SITE</span>
+            </a>
           </div>
-
           <div class="bs-foot">
+            <button class="bs-arr" id="bsPrevDuck" aria-label="prev duck site">‹</button>
             <div class="bs-meta">
-              <div class="t">傳統無餡派</div>
-              <div class="w" id="bsWhoDuck">已通過審核 · 計入派系實力</div>
+              <div class="t" id="bsTitleDuck">無餡西多保衛聯盟</div>
+              <div class="w" id="bsWhoDuck">@uncle_lam_1962 · 旺角茶記 · D04</div>
             </div>
-            <a class="bs-cta-mini duck-cta" href="#howto">起 site 表態 →</a>
+            <span class="bs-count"><b id="bsIdxDuck">01</b>/06</span>
+            <button class="bs-arr" id="bsNextDuck" aria-label="next duck site">›</button>
           </div>
         </div>
 
@@ -2598,51 +2761,28 @@ body{ padding-right: 80px; }
           <span class="arr right" id="swapArrR">→</span>
         </button>
 
-        <div class="battle-body peanut" data-phase="1">
-
-          <!-- PHASE 1 · MANIFESTO (SVG viewBox · uniform scaling) -->
-          <svg class="manifesto-svg peanut-manifesto-svg" viewBox="0 0 600 675"
-               preserveAspectRatio="xMidYMid meet" data-show="phase1"
-               xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <radialGradient id="peanutBgGrad" cx="70%" cy="40%" r="60%">
-                <stop offset="0%" stop-color="rgb(196,102,31)" stop-opacity=".26"/>
-                <stop offset="70%" stop-color="rgb(196,102,31)" stop-opacity="0"/>
-              </radialGradient>
-              <linearGradient id="peanutBgFade" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgb(40,20,10)" stop-opacity=".7"/>
-                <stop offset="100%" stop-color="rgb(0,0,0)" stop-opacity=".9"/>
-              </linearGradient>
-            </defs>
-            <rect width="600" height="675" fill="#14100a"/>
-            <rect width="600" height="675" fill="url(#peanutBgFade)"/>
-            <rect width="600" height="675" fill="url(#peanutBgGrad)"/>
-            <foreignObject x="0" y="0" width="600" height="675">
-              <div xmlns="http://www.w3.org/1999/xhtml" class="mf-inner peanut-inner">
-                <div class="mf-eb">▸ MANIFESTO · 花生醬派</div>
-                <div class="mf-quote">「冇花生醬嘅西多多士，<br/>等於茶餐廳冇奶茶。」</div>
-                <div class="mf-body">
-                  <p>多士 + 花生醬 = 香港人嘅初戀</p>
-                  <p>濃 · 滑 · 邪 · 上癮</p>
-                  <p>我哋唔係加多一樣嘢，<br/>我哋係令塊多士成為完整體。</p>
-                </div>
-                <a class="mf-cta peanut-cta" href="#howto">▸ 加入花生派 · 起 site 表態</a>
-              </div>
-            </foreignObject>
-          </svg>
-
-          <!-- PHASE 2 · 5 PICKS -->
-          <div class="picks peanut-picks" data-show="phase2" hidden>
-            <div class="picks-eb">▸ 花生派 · 大快活精選 5 個</div>
-            <div class="picks-grid" id="peanutPicksGrid"><!-- JS render --></div>
+        <div class="battle-body peanut">
+          <div class="bs-frame">
+            <span class="corner-tag" id="bsTagPeanut">CLAUDE · D03</span>
+            <iframe id="bsIfrPeanut"
+                    src="https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-peanut.html"
+                    loading="lazy"
+                    sandbox="allow-same-origin allow-scripts"
+                    referrerpolicy="no-referrer" title="peanut site preview"></iframe>
+            <a class="open-ov" id="bsOpenPeanut"
+               href="https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-peanut.html"
+               target="_blank" rel="noopener">
+              <span class="b">↗ 開新窗睇全 SITE</span>
+            </a>
           </div>
-
           <div class="bs-foot">
+            <button class="bs-arr" id="bsPrevPeanut" aria-label="prev peanut site">‹</button>
             <div class="bs-meta">
-              <div class="t">花生醬派</div>
-              <div class="w" id="bsWhoPeanut">已通過審核 · 計入派系實力</div>
+              <div class="t" id="bsTitlePeanut">邪惡花生派．官方總部</div>
+              <div class="w" id="bsWhoPeanut">@official · 皇仁書院 · D03</div>
             </div>
-            <a class="bs-cta-mini peanut-cta" href="#howto">起 site 表態 →</a>
+            <span class="bs-count"><b id="bsIdxPeanut">01</b>/06</span>
+            <button class="bs-arr" id="bsNextPeanut" aria-label="next peanut site">›</button>
           </div>
         </div>
       </div>
@@ -2650,19 +2790,39 @@ body{ padding-right: 80px; }
     </div>
   </section>
 
-  <!-- divider marquee -->
+  <!-- ============ MANIFESTO RIBBON BAND · swaps with active battle side ============ -->
+  <div class="mf-band" id="mfBand" data-side="duck">
+    <div class="mf-band-track duck" data-track="duck">
+      <span class="mf-band-eb">▸ 傳統無餡派宣言</span>
+      <span class="mf-band-q">「西多嘅靈魂喺塊多士，唔係夾喺中間嗰啲嘢。」</span>
+      <span class="mf-band-tag">唔需要花樣 · 一塊多士 · 兩面金黃</span>
+      <span class="mf-band-tag">蛋香 · 牛油香 · 糖漿香</span>
+      <span class="mf-band-tag">手藝勝餡料 · 原味勝噱頭</span>
+      <span class="mf-band-cta"><a href="#howto">▸ 加入傳統派 · 起 site 表態</a></span>
+    </div>
+    <div class="mf-band-track peanut" data-track="peanut">
+      <span class="mf-band-eb">▸ 花生醬派宣言</span>
+      <span class="mf-band-q">「冇花生醬嘅西多多士，等於茶餐廳冇奶茶。」</span>
+      <span class="mf-band-tag">多士 + 花生醬 = 香港人嘅初戀</span>
+      <span class="mf-band-tag">濃 · 滑 · 邪 · 上癮</span>
+      <span class="mf-band-tag">唔係加多一樣 · 係令塊多士成為完整體</span>
+      <span class="mf-band-cta"><a href="#howto">▸ 加入花生派 · 起 site 表態</a></span>
+    </div>
+  </div>
+
+  <!-- divider marquee · campaign info -->
   <div class="mq invert">
     <div class="mqt fast">
-      <span>04 / HOW TO · 5 MINS · 4 STEPS · NO CODE</span>
-      <span>由打字 → 到 SITE LIVE</span>
-      <span>阿公阿婆都做到</span>
-      <span>免費 · 自動 host</span>
+      <span>一SITE一票 · 起SITE表態</span>
+      <span>21 日決勝 · 02·06·2026 → 23·06·2026</span>
+      <span>傳統無餡 VS 邪惡花生</span>
+      <span>大快活 2026 食得夠STEM</span>
     </div>
     <div class="mqt fast" aria-hidden="true">
-      <span>04 / HOW TO · 5 MINS · 4 STEPS · NO CODE</span>
-      <span>由打字 → 到 SITE LIVE</span>
-      <span>阿公阿婆都做到</span>
-      <span>免費 · 自動 host</span>
+      <span>一SITE一票 · 起SITE表態</span>
+      <span>21 日決勝 · 02·06·2026 → 23·06·2026</span>
+      <span>傳統無餡 VS 邪惡花生</span>
+      <span>大快活 2026 食得夠STEM</span>
     </div>
   </div>
 
@@ -2753,12 +2913,20 @@ body{ padding-right: 80px; }
         <div class="num">所有作品</div>
         <h2>全部作品。</h2>
       </div>
+      <div class="gallery-filter" role="tablist" aria-label="filter by faction">
+        <button class="gf-btn active" data-filter="all">全部作品</button>
+        <button class="gf-btn duck" data-filter="duck">傳統派</button>
+        <button class="gf-btn peanut" data-filter="peanut">花生派</button>
+      </div>
       <div class="gallery-pager">
         <button class="gp-arr" id="gpPrev" aria-label="上一批">‹</button>
         <button class="gp-arr" id="gpNext" aria-label="下一批">›</button>
       </div>
     </div>
     <div class="gallery-grid" id="galleryGrid"><!-- JS render: 6 cards/page --></div>
+    <div class="gallery-empty" id="galleryEmpty" hidden>
+      <p>呢個派系仲未有作品 — <a href="#submit">起 site 做第一個</a>。</p>
+    </div>
   </section>
 
   <div class="toast-break left"></div>
@@ -2812,8 +2980,8 @@ body{ padding-right: 80px; }
         <div class="row">
           <label>▸ 揀陣營</label>
           <div class="sub-fac">
-            <button type="button" class="sub-fac-btn active duck">🦆 傳統派</button>
-            <button type="button" class="sub-fac-btn peanut">🥜 邪惡花生派</button>
+            <button type="button" class="sub-fac-btn active duck">傳統派</button>
+            <button type="button" class="sub-fac-btn peanut">邪惡花生派</button>
           </div>
         </div>
         <div class="row">
@@ -2928,7 +3096,7 @@ const SITES = {
   duck: [
     { title: '無餡西多保衛聯盟', who: '@uncle_lam_1962', school: '旺角茶記 · 50年資歷', votes: 93, rating: 4.8, day: 'D04', tool: 'LOVABLE', url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/team-duck.html' },
     { title: '陳師傅口述歷史', who: '@duck_egg_truth', school: '大角咀「金記」茶記', votes: 76, rating: 4.7, day: 'D02', tool: 'V0',      url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/previews/duck-1.html' },
-    { title: '鴨蛋香萬歲',     who: '@hong_kong_yolk', school: '香港中文大學',       votes: 71, rating: 4.6, day: 'D01', tool: 'LOVABLE', url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/previews/duck-2.html' },
+    { title: '無餡原味萬歲',     who: '@hong_kong_yolk', school: '香港中文大學',       votes: 71, rating: 4.6, day: 'D01', tool: 'LOVABLE', url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/previews/duck-2.html' },
     { title: '茶記後援會',     who: '@cha_chaan_teng', school: '嶺南大學 校友會',     votes: 64, rating: 4.5, day: 'D05', tool: 'CLAUDE',  url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/previews/duck-3.html' },
     { title: '原味派宣言',     who: '@plain_is_best',  school: '拔萃男書院',         votes: 58, rating: 4.4, day: 'D06', tool: 'BOLT',    url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/previews/duck-4.html' },
     { title: '50 年茶記日記',  who: '@uncle_chan_diary', school: '北角街坊',         votes: 52, rating: 4.3, day: 'D03', tool: 'V0',      url: 'https://htmlpreview.github.io/?https://github.com/madkidshk/fairwood_sitetoast/blob/main/previews/duck-5.html' },
@@ -2947,18 +3115,38 @@ const SITES = {
 const state = { duck: 0, peanut: 0 };
 const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
 
-// ============ RENDER PER SIDE (manifesto layout — carousel disabled) ============
+// ============ RENDER PER SIDE — iframe coverflow restored ============
 function renderSide(side) {
+  const idx = state[side];
   const arr = SITES[side];
   if (!arr || !arr.length) return;
-  // Phase 1 (manifesto): just update bs-foot subtitle. Other DOM nodes removed.
+  const s = arr[idx];
   const C = cap(side);
-  const whoEl = document.getElementById('bsWho' + C);
-  if (whoEl) whoEl.textContent = '已通過審核 · 計入派系實力';
+  const set = (id, val, attr) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (attr === 'src')  el.src = val;
+    else if (attr === 'href') el.href = val;
+    else el.textContent = val;
+  };
+  set('bsIfr'   + C, s.url,                                   'src');
+  set('bsTag'   + C, `${s.tool} · ${s.day}`);
+  set('bsTitle' + C, s.title);
+  set('bsWho'   + C, `${s.who || '@anonymous'} · ${s.school || ''} · ${s.day}`);
+  set('bsIdx'   + C, String(idx + 1).padStart(2, '0'));
+  set('bsOpen'  + C, s.url,                                   'href');
 }
 
-function prevSide(side) { /* carousel disabled */ }
-function nextSide(side) { /* carousel disabled */ }
+function prevSide(side) {
+  const total = SITES[side].length;
+  state[side] = (state[side] - 1 + total) % total;
+  renderSide(side);
+}
+function nextSide(side) {
+  const total = SITES[side].length;
+  state[side] = (state[side] + 1) % total;
+  renderSide(side);
+}
 
 ['duck', 'peanut'].forEach(side => {
   const C = cap(side);
@@ -3003,6 +3191,9 @@ function setActive(side) {
   split.classList.toggle('active-peanut', want);
   bodies.style.removeProperty('--seam');   // let CSS drive the swap transition
   updateSwapBtn();
+  // Sync manifesto ribbon band
+  const band = document.getElementById('mfBand');
+  if (band) band.dataset.side = side;
 }
 
 // ============ SCROLL-DRIVEN BG TOASTS — slow bob + scroll parallax ============
@@ -3127,24 +3318,39 @@ document.querySelectorAll('.sub-fac-btn').forEach(btn => {
   });
 });
 
-// ============ GALLERY · 6 件 / page · prev/next paginate ============
+// ============ GALLERY · 6 件 / page · prev/next paginate + faction filter ============
 const POOL = [
   ...SITES.duck.map(s   => ({...s, side: 'duck'})),
   ...SITES.peanut.map(s => ({...s, side: 'peanut'}))
 ];  // 12 真實 items, cycle to fake more pages
 const PAGE_SIZE = 6;
 let pageOffset = 0;
+let currentFilter = 'all';  // 'all' | 'duck' | 'peanut'
 const ALL_SITES = []; // current visible page items, exposed to lightbox
+
+function filteredPool(){
+  return currentFilter === 'all' ? POOL : POOL.filter(s => s.side === currentFilter);
+}
 
 function renderPage(){
   ALL_SITES.length = 0;
-  for (let i = 0; i < PAGE_SIZE; i++){
-    ALL_SITES.push(POOL[(pageOffset + i) % POOL.length]);
+  const pool = filteredPool();
+  const emptyEl = document.getElementById('galleryEmpty');
+  const gridEl  = document.getElementById('galleryGrid');
+  if (pool.length === 0){
+    if (gridEl)  gridEl.innerHTML = '';
+    if (emptyEl) emptyEl.hidden = false;
+    return;
   }
-  const grid = document.getElementById('galleryGrid');
+  if (emptyEl) emptyEl.hidden = true;
+  const limit = Math.min(PAGE_SIZE, pool.length);
+  for (let i = 0; i < limit; i++){
+    ALL_SITES.push(pool[(pageOffset + i) % pool.length]);
+  }
+  const grid = gridEl;
   grid.innerHTML = ALL_SITES.map((s, i) => `
     <div class="g-card ${s.side}" data-idx="${i}">
-      <span class="g-card-fac">${s.side === 'duck' ? '🦆 傳統派' : '🥜 花生派'}</span>
+      <span class="g-card-fac">${s.side === 'duck' ? '傳統派' : '花生派'}</span>
       <div class="g-card-iframewrap">
         <iframe src="${s.url}" loading="lazy" sandbox="allow-same-origin allow-scripts"
                 referrerpolicy="no-referrer" title="${s.title}"></iframe>
@@ -3159,6 +3365,17 @@ function renderPage(){
     c.addEventListener('click', () => openLightbox(+c.dataset.idx));
   });
 }
+// ===== Filter button hookup =====
+document.querySelectorAll('.gf-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.gf-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    pageOffset = 0;
+    renderPage();
+  });
+});
+
 document.getElementById('gpPrev').addEventListener('click', () => {
   pageOffset = (pageOffset - PAGE_SIZE + POOL.length * 100) % POOL.length;
   renderPage();
@@ -3182,7 +3399,7 @@ const lbCount  = document.getElementById('lbCount');
 function renderLightbox(){
   const s = ALL_SITES[lbIdx];
   lbIfr.src = s.url;
-  lbFac.textContent = s.side === 'duck' ? '🦆 傳統派' : '🥜 花生派';
+  lbFac.textContent = s.side === 'duck' ? '傳統派' : '花生派';
   lbFac.className = `lb-fac ${s.side}`;
   lbTitle.textContent = s.title;
   lbWho.innerHTML = `<strong>${s.who}</strong> · ${s.school}`;
@@ -3294,7 +3511,7 @@ document.addEventListener('keydown', e => {
       side: "duck",
       sideLabel: "撐傳統派（無餡）",
       img: "https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/westoast-traditional.png",
-      desc: "兩塊金黃西多疊埋，鴨蛋漿、慢火煎 Pan、煉奶搽頂，1950 年茶記原始做法。"
+      desc: "兩塊金黃西多疊埋，蛋漿、慢火煎 Pan、煉奶搽頂，1950 年茶記原始做法。"
     },
     {
       name: "邪惡花生流心",
