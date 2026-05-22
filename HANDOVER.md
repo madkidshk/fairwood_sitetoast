@@ -183,4 +183,28 @@
 | `af17870` | Reset counters to 0 |
 | `b57c1e8` | First manifesto + share modal push |
 | `131d9c8` | 5 production fixes (portrait/iframe/rules/skeleton/OG) |
+---
 
+## 🫀 HEARTBEAT PROTOCOL (User requested)
+
+Every few turns (or natural pause): Claude reads HANDOVER + task list, lists ALL outstanding items, asks user to confirm next priority. Don't proceed without explicit confirm.
+
+## ⚠️ OUTSTANDING ITEMS (last updated: this session)
+
+### Pending — user confirm needed
+- [ ] **WhatsApp number**: placeholder `85299999999` — replace with real Fairwood number
+- [ ] **GitHub Pages**: enable (one-click on GitHub settings, gives live `madkidshk.github.io/fairwood_sitetoast/`)
+- [ ] **Toast position fine-tuning**: 3 remaining toast-break positions (howto→submit / submit→gallery / gallery→bento) — confirm each looks right
+- [ ] **Vet backend**: GAS endpoint + 24h SLA tracking + approve/reject email (not yet built)
+- [ ] **AI prompt generator (option C from earlier)**: Haiku API integration to generate coherent prompts on-the-fly (option A — chip regrouping — done; C not yet)
+- [ ] **Sample previews `previews/*.html`**: still have old VOTE buttons (will phase out as real submissions replace)
+- [ ] **$10 大快活 App 西多券 redemption flow**: vet 通過後 trigger（not yet built）
+
+### Recently completed (this session)
+- 交SITE投票 heading + section swap (submit ↔ gallery)
+- 6-dot side nav + click fix (z-index 80)
+- WhatsApp inquiry CTA in footer 聯絡 col
+- Gallery cards opaque z-index 3 (toast hidden behind cards)
+- Footer bg transparent (toast bg color unified)
+- Sections transparent bg (toast shows through section gaps)
+- Self-push workflow via PAT established
