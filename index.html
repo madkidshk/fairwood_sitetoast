@@ -1058,83 +1058,116 @@ body::after{
 .battle-body.peanut .bs-vote{ display:none !important; background: var(--fairwood-light); box-shadow: 0 6px 18px rgba(196,102,31,.45); }
 .battle-body.peanut .bs-vote:hover{ box-shadow: 0 10px 24px rgba(196,102,31,.6); }
 
-/* Phase 1: 50/50 manifesto layout */
-.battle-split.phase1-50-50 .battle-bodies{ --seam: 50% !important; }
-.battle-split.phase1-50-50 .battle-body.duck,
-.battle-split.phase1-50-50 .battle-body.peanut{ cursor: default; z-index: 2 !important; }
+/* Phase 1: 50/50 manifesto layout — full clean reset (no clip-path / no overlap) */
+.battle-split.phase1-50-50 .battle-bodies{
+  --seam: 50% !important;
+  --overlap: 0px !important;
+}
+.battle-split.phase1-50-50 .battle-body.duck{
+  width: 50% !important;
+  left: 0 !important;
+  clip-path: none !important;
+  z-index: 2 !important;
+  cursor: default !important;
+  background: linear-gradient(170deg, rgba(240,138,0,.08) 0%, transparent 40%), var(--ink) !important;
+}
+.battle-split.phase1-50-50 .battle-body.peanut{
+  width: 50% !important;
+  left: 50% !important;
+  right: auto !important;
+  clip-path: none !important;
+  z-index: 2 !important;
+  cursor: default !important;
+  background: linear-gradient(190deg, rgba(196,102,31,.1) 0%, transparent 40%), #14100a !important;
+}
 .battle-split.phase1-50-50 .battle-body.duck .bs-foot,
 .battle-split.phase1-50-50 .battle-body.peanut .bs-foot{ display: grid !important; }
-.battle-split.phase1-50-50 .battle-slash{ display: none; }
+.battle-split.phase1-50-50 .battle-slash{ display: none !important; }
+/* Subtle vertical seam between the two manifestos */
+.battle-split.phase1-50-50 .battle-bodies::after{
+  content: "";
+  position: absolute;
+  left: 50%; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(245,236,217,.18) 20%, rgba(245,236,217,.18) 80%, transparent);
+  z-index: 3;
+  pointer-events: none;
+}
+/* Hide inactive-side dim filters in Phase 1 */
+.battle-split.phase1-50-50:not(.active-peanut) .battle-body.peanut iframe,
+.battle-split.phase1-50-50.active-peanut .battle-body.duck iframe{ filter: none !important; }
 
 /* ============ MANIFESTO (Phase 1 default) ============ */
-.manifesto{
+/* === SVG manifesto container (Phase 1) === */
+.manifesto-svg{
   position: absolute; inset: 0;
+  width: 100%; height: 100%;
   z-index: 2;
-  padding: clamp(20px, 4vw, 48px);
+  display: block;
+}
+/* The HTML inside foreignObject — coords are in viewBox units (600×675), so use pixel sizes here */
+.mf-inner{
+  width: 600px; height: 675px;
+  box-sizing: border-box;
+  padding: 56px 60px;
   display: flex; flex-direction: column;
   align-items: flex-start; justify-content: center;
-  gap: clamp(14px, 2vw, 24px);
-  color: var(--paper);
+  gap: 22px;
+  color: var(--paper, #f5ecd9);
+  font-family: var(--font-sans, sans-serif);
 }
-.duck-manifesto{
-  background:
-    radial-gradient(60% 90% at 25% 35%, rgba(255, 220, 130, .14), transparent 70%),
-    linear-gradient(180deg, rgba(20,15,5,.7), rgba(0,0,0,.85));
-}
-.peanut-manifesto{
-  background:
-    radial-gradient(60% 90% at 70% 40%, rgba(196,102,31,.22), transparent 70%),
-    linear-gradient(180deg, rgba(40,20,10,.7), rgba(0,0,0,.88));
-}
-.mf-eb{
-  font-family: var(--font-mono);
-  font-size: clamp(10px, 1.1vw, 12px);
+.duck-inner .mf-eb{ color: #ffe69a; }
+.peanut-inner .mf-eb{ color: #ffb74d; }
+.mf-inner .mf-eb{
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
   letter-spacing: .22em;
-  opacity: .65;
+  opacity: .75;
+  font-weight: 700;
 }
-.duck-manifesto .mf-eb{ color: #ffe69a; }
-.peanut-manifesto .mf-eb{ color: var(--fairwood-light, #ffb74d); }
-.mf-quote{
+.mf-inner .mf-quote{
   font-family: 'LXGWWenKaiTC', var(--font-serif), serif;
   font-weight: 800;
-  font-size: clamp(22px, 3.2vw, 42px);
-  line-height: 1.25;
+  font-size: 42px;
+  line-height: 1.28;
   letter-spacing: -.005em;
   margin: 0;
-  text-shadow: 0 2px 16px rgba(0,0,0,.6);
+  text-shadow: 0 2px 12px rgba(0,0,0,.55);
 }
-.mf-body{
-  font-family: var(--font-sans, sans-serif);
-  font-size: clamp(13px, 1.4vw, 17px);
-  line-height: 1.6;
-  opacity: .9;
-  max-width: 50ch;
+.mf-inner .mf-body{
+  font-size: 17px;
+  line-height: 1.65;
+  opacity: .92;
+  max-width: 100%;
 }
-.mf-body p{ margin: 0 0 6px; }
-.mf-body p:last-child{ margin-bottom: 0; }
-.mf-cta{
+.mf-inner .mf-body p{ margin: 0 0 8px; }
+.mf-inner .mf-body p:last-child{ margin-bottom: 0; }
+.mf-inner .mf-cta{
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 12px 22px;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: .12em;
+  padding: 14px 26px;
+  font-family: var(--font-mono, monospace);
+  font-size: 15px;
+  letter-spacing: .14em;
   font-weight: 700;
   border-radius: 999px;
   text-decoration: none;
   transition: transform .2s ease, box-shadow .2s ease;
-  margin-top: clamp(4px, 1vw, 12px);
+  margin-top: 6px;
 }
-.duck-manifesto .mf-cta{
+.duck-inner .mf-cta{
   background: #f5ecd9; color: #1a1408;
-  box-shadow: 0 6px 22px rgba(245,236,217,.25);
+  box-shadow: 0 6px 22px rgba(245,236,217,.3);
 }
-.peanut-manifesto .mf-cta{
-  background: var(--fairwood-light, #ffb74d); color: #2a1505;
-  box-shadow: 0 6px 22px rgba(196,102,31,.45);
+.peanut-inner .mf-cta{
+  background: #ffb74d; color: #2a1505;
+  box-shadow: 0 6px 22px rgba(196,102,31,.5);
 }
-.mf-cta:hover{
+.mf-inner .mf-cta:hover{
   transform: translateY(-2px);
   box-shadow: 0 10px 28px rgba(0,0,0,.4);
+}
+@media (max-width: 700px){
+  .mf-inner{ padding: 40px 36px; gap: 18px; }
 }
 .picks{
   position: absolute; inset: 0;
@@ -2511,17 +2544,36 @@ body{ padding-right: 80px; }
       <div class="battle-bodies">
         <div class="battle-body duck" data-phase="1">
 
-          <!-- PHASE 1 · MANIFESTO -->
-          <div class="manifesto duck-manifesto" data-show="phase1">
-            <div class="mf-eb">▸ MANIFESTO · 傳統無餡派</div>
-            <div class="mf-quote">「西多嘅靈魂喺塊多士，<br>唔係夾喺中間嗰啲嘢。」</div>
-            <div class="mf-body">
-              <p>唔需要花樣 · 一塊多士 · 兩面金黃</p>
-              <p>蛋香 · 牛油香 · 糖漿香</p>
-              <p>我哋食嘅係手藝，唔係餡料。<br>我哋撐嘅係原味，唔係噱頭。</p>
-            </div>
-            <a class="mf-cta duck-cta" href="#howto">▸ 加入傳統派 · 起 site 表態</a>
-          </div>
+          <!-- PHASE 1 · MANIFESTO (SVG viewBox · uniform scaling) -->
+          <svg class="manifesto-svg duck-manifesto-svg" viewBox="0 0 600 675"
+               preserveAspectRatio="xMidYMid meet" data-show="phase1"
+               xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="duckBgGrad" cx="25%" cy="35%" r="60%">
+                <stop offset="0%" stop-color="rgb(255,220,130)" stop-opacity=".18"/>
+                <stop offset="70%" stop-color="rgb(255,220,130)" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="duckBgFade" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgb(20,15,5)" stop-opacity=".7"/>
+                <stop offset="100%" stop-color="rgb(0,0,0)" stop-opacity=".88"/>
+              </linearGradient>
+            </defs>
+            <rect width="600" height="675" fill="#14100a"/>
+            <rect width="600" height="675" fill="url(#duckBgFade)"/>
+            <rect width="600" height="675" fill="url(#duckBgGrad)"/>
+            <foreignObject x="0" y="0" width="600" height="675">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="mf-inner duck-inner">
+                <div class="mf-eb">▸ MANIFESTO · 傳統無餡派</div>
+                <div class="mf-quote">「西多嘅靈魂喺塊多士，<br/>唔係夾喺中間嗰啲嘢。」</div>
+                <div class="mf-body">
+                  <p>唔需要花樣 · 一塊多士 · 兩面金黃</p>
+                  <p>蛋香 · 牛油香 · 糖漿香</p>
+                  <p>我哋食嘅係手藝，唔係餡料。<br/>我哋撐嘅係原味，唔係噱頭。</p>
+                </div>
+                <a class="mf-cta duck-cta" href="#howto">▸ 加入傳統派 · 起 site 表態</a>
+              </div>
+            </foreignObject>
+          </svg>
 
           <!-- PHASE 2 · 5 PICKS (hidden until count ≥ 5) -->
           <div class="picks duck-picks" data-show="phase2" hidden>
@@ -2548,17 +2600,36 @@ body{ padding-right: 80px; }
 
         <div class="battle-body peanut" data-phase="1">
 
-          <!-- PHASE 1 · MANIFESTO -->
-          <div class="manifesto peanut-manifesto" data-show="phase1">
-            <div class="mf-eb">▸ MANIFESTO · 花生醬派</div>
-            <div class="mf-quote">「冇花生醬嘅西多多士，<br>等於茶餐廳冇奶茶。」</div>
-            <div class="mf-body">
-              <p>多士 + 花生醬 = 香港人嘅初戀</p>
-              <p>濃 · 滑 · 邪 · 上癮</p>
-              <p>我哋唔係加多一樣嘢，<br>我哋係令塊多士成為完整體。</p>
-            </div>
-            <a class="mf-cta peanut-cta" href="#howto">▸ 加入花生派 · 起 site 表態</a>
-          </div>
+          <!-- PHASE 1 · MANIFESTO (SVG viewBox · uniform scaling) -->
+          <svg class="manifesto-svg peanut-manifesto-svg" viewBox="0 0 600 675"
+               preserveAspectRatio="xMidYMid meet" data-show="phase1"
+               xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="peanutBgGrad" cx="70%" cy="40%" r="60%">
+                <stop offset="0%" stop-color="rgb(196,102,31)" stop-opacity=".26"/>
+                <stop offset="70%" stop-color="rgb(196,102,31)" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="peanutBgFade" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgb(40,20,10)" stop-opacity=".7"/>
+                <stop offset="100%" stop-color="rgb(0,0,0)" stop-opacity=".9"/>
+              </linearGradient>
+            </defs>
+            <rect width="600" height="675" fill="#14100a"/>
+            <rect width="600" height="675" fill="url(#peanutBgFade)"/>
+            <rect width="600" height="675" fill="url(#peanutBgGrad)"/>
+            <foreignObject x="0" y="0" width="600" height="675">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="mf-inner peanut-inner">
+                <div class="mf-eb">▸ MANIFESTO · 花生醬派</div>
+                <div class="mf-quote">「冇花生醬嘅西多多士，<br/>等於茶餐廳冇奶茶。」</div>
+                <div class="mf-body">
+                  <p>多士 + 花生醬 = 香港人嘅初戀</p>
+                  <p>濃 · 滑 · 邪 · 上癮</p>
+                  <p>我哋唔係加多一樣嘢，<br/>我哋係令塊多士成為完整體。</p>
+                </div>
+                <a class="mf-cta peanut-cta" href="#howto">▸ 加入花生派 · 起 site 表態</a>
+              </div>
+            </foreignObject>
+          </svg>
 
           <!-- PHASE 2 · 5 PICKS -->
           <div class="picks peanut-picks" data-show="phase2" hidden>
