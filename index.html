@@ -1517,6 +1517,56 @@ body.battle-in-view.show-peanut .battle-toast.right{
 .foot{ position: relative; background: var(--ink); color: var(--paper); padding: 80px 24px 32px; overflow: hidden; border-top: 1px solid rgba(245,236,217,.08); }
 .foot::before{ content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(800px 600px at 80% 30%, rgba(240,138,0,.16), transparent 45%), radial-gradient(500px 400px at 10% 80%, rgba(184,54,42,.15), transparent 50%); }
 .foot-inner{ max-width: 1440px; margin: 0 auto; position: relative; z-index: 2; }
+/* Footer hero-style brand block (mirrors top hero design) */
+.foot-hero{
+  display: flex; align-items: center; gap: 16px;
+  text-decoration: none;
+  margin-bottom: 18px;
+}
+.foot-hero .foot-logo{
+  width: 60px; height: auto;
+  flex-shrink: 0;
+}
+.foot-hero .foot-text{
+  display: flex; flex-direction: column;
+  gap: 4px;
+}
+.foot-hero .foot-eb{
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .22em;
+  color: var(--paper);
+  opacity: .55;
+  font-weight: 700;
+}
+.foot-hero .foot-h1{
+  font-family: var(--font-kai);
+  font-weight: 900;
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1;
+  color: var(--paper);
+  margin: 0;
+}
+.foot-hero .foot-tagline{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  color: var(--fairwood-light, #ffb74d);
+  font-weight: 700;
+  margin: 2px 0 0;
+}
+.foot-hero .foot-meta{
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .18em;
+  color: var(--paper);
+  opacity: .45;
+}
+@media (max-width: 700px){
+  .foot-hero .foot-logo{ width: 44px; }
+  .foot-hero .foot-h1{ font-size: 22px; }
+}
+
 .foot-big{ font-family:var(--font-kai); font-weight: 900; font-size: clamp(72px, 13vw, 220px); line-height: .82; letter-spacing: -.06em; margin: 0; }
 .foot-big .o{ background: linear-gradient(180deg, var(--fairwood-light), var(--fairwood-deep)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .foot-big .stem{ display: inline-block; background: var(--fairwood); color: var(--ink); padding: 0 .12em; transform: rotate(-3deg); border-radius: 12px; box-shadow: 0 12px 40px rgba(240,138,0,.4); }
@@ -3168,10 +3218,15 @@ body{ padding-right: 80px; }
       <h2 class="foot-big">食得夠<br><span class="stem">STEM</span><span class="o">。</span></h2>
       <div class="foot-grid">
         <div>
-          <div class="foot-brand">
-            <img src="assets/ah-wood.png" alt="">
-            <div><strong>SITE 多士大對決</strong><small>BY 大快活 · 2026 STEM CAMPAIGN</small></div>
-          </div>
+          <a class="foot-brand foot-hero" href="#top">
+            <img class="foot-logo" src="https://raw.githubusercontent.com/madkidshk/fairwood_sitetoast/main/assets/fairwood-logo.svg" alt="Fairwood">
+            <div class="foot-text">
+              <div class="foot-eb">2026 食得夠STEM · BY FAIRWOOD</div>
+              <div class="foot-h1">西多士大對決</div>
+              <div class="foot-tagline">一SITE一票 · 起SITE表態</div>
+              <div class="foot-meta">21 日決勝 · 02·06·2026 → 23·06·2026</div>
+            </div>
+          </a>
           <p class="foot-tag">用 AI 起個 Site 撐你揀嘅西多。邊派 Site 多邊派贏。<em>唔識 code 都得。</em></p>
           <div class="foot-legacy">
             <span class="chip">食得夠尖 · 2024</span>
