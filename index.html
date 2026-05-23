@@ -226,6 +226,9 @@ body::after{
 .mq.invert .mqt span::after{ color: var(--ink); opacity: .35; }
 .mq.brown .mqt span::after{ color: var(--ink); opacity: .35; }
 @keyframes mqs{ to{ transform: translateX(-100%); } }
+.mqt.rev{ animation: mqs-rev 32s linear infinite; }
+.mqt.rev.fast{ animation-duration: 18s; }
+@keyframes mqs-rev{ from{ transform: translateX(-100%); } to{ transform: translateX(0); } }
 
 /* ============ TOP MENU BAR (sticky, 3-zone layout) ============
    LEFT: brand · CENTER: nav links · RIGHT: live D-day + CTA
@@ -1326,13 +1329,27 @@ body.battle-in-view.show-peanut .battle-toast.right{
 }
 
 @media (max-width: 900px){
-  .battle-split{ grid-template-columns: 1fr; grid-template-rows: 1fr 40px 1fr; }
-  .battle-seam{
-    border: 0; border-top: 2px solid var(--paper); border-bottom: 2px solid var(--paper);
-    background: linear-gradient(90deg, rgba(184,54,42,.92), rgba(184,54,42,.7), rgba(184,54,42,.92));
+  /* === MOBILE BATTLE — stack vertical (傳統上 / 花生下) === */
+  .battle-bodies{
+    display: flex !important;
+    flex-direction: column !important;
+    --seam: 50% !important;
+    --overlap: 0 !important;
   }
-  .battle-seam::before{
-    background: repeating-linear-gradient(90deg, rgba(245,236,217,.18) 0 8px, transparent 8px 16px);
+  .battle-body{
+    position: relative !important;
+    top: auto !important; bottom: auto !important; left: auto !important; right: auto !important;
+    width: 100% !important;
+    height: 50%;
+    flex: 1 1 50%;
+    clip-path: none !important;
+    border-bottom: 1.5px solid rgba(245,236,217,.18);
+  }
+  .battle-body.peanut{ border-bottom: 0; border-top: 1.5px solid rgba(245,236,217,.18); }
+  /* swap-pill positions at seam (now horizontal) */
+  .swap-pill{
+    left: 50% !important; top: 50% !important;
+    transform: translate(-50%, -50%) !important;
   }
   .bs-foot{ grid-template-columns: auto 1fr auto auto; padding: 10px 12px; gap: 6px; }
   .bs-vote{ display:none !important; }
@@ -1355,6 +1372,11 @@ body.battle-in-view.show-peanut .battle-toast.right{
   font-family:var(--font-kai); font-weight: 900;
   font-size: clamp(48px, 6vw, 88px); line-height: .88;
   letter-spacing: -.04em; margin: 0;
+}
+/* Mobile: unify all section h2 to match hero .ht-h1 size */
+@media (max-width: 700px){
+  .sec-head h2{ font-size: clamp(28px, 7vw, 40px); line-height: 1.0; }
+  .foot-big{ font-size: clamp(40px, 12vw, 64px) !important; line-height: .95 !important; }
 }
 .sec-head h2 .o{ color: var(--fairwood); }
 .sec-head h2 .hl{
@@ -2976,7 +2998,7 @@ body{ padding-right: 80px; }
       <div class="sec-head" style="padding: 0;">
         <div>
           <div class="num">PROMPT 生成器</div>
-          <h2>揀 <span class="o">西多</span> + 揀 <span class="o">理據</span> + 揀 <span class="o">風格</span><br>· 即出 PROMPT。</h2>
+          <h2><span class="o">3 揀</span> · 1 prompt。</h2>
         </div>
         <p class="side">3 個 col 揀幾粒掣，或者直接 <strong>🎲 全部隨機</strong> — copy 個 prompt 入 Lovable / Claude 起 site。</p>
       </div>
@@ -3122,15 +3144,15 @@ body{ padding-right: 80px; }
 
   <div class="toast-break right"></div>
 
-  <!-- divider marquee -->
+  <!-- divider marquee · L→R direction (alternating with #1 / #3) -->
   <div class="mq brown">
-    <div class="mqt">
+    <div class="mqt rev">
       <span>05 / SUBMIT · 六點上架</span>
       <span>AI 過審 30 秒</span>
       <span>小編 final approve</span>
       <span>送 $10 大快活 App 西多券</span>
     </div>
-    <div class="mqt" aria-hidden="true">
+    <div class="mqt rev" aria-hidden="true">
       <span>05 / SUBMIT · 六點上架</span>
       <span>AI 過審 30 秒</span>
       <span>小編 final approve</span>
@@ -3218,6 +3240,34 @@ body{ padding-right: 80px; }
   </section>
 
   <div class="toast-break right"></div>
+
+  <!-- divider marquee · 4th = L→R · lineage chips -->
+  <div class="mq invert">
+    <div class="mqt rev">
+      <span>2007 食得夠尖</span>
+      <span>»</span>
+      <span>2022 食得夠GYM</span>
+      <span>»</span>
+      <span>2026 食得夠STEM</span>
+      <span>—</span>
+      <span>大快活年度文化定位</span>
+      <span>由 1972 街坊飯堂開始</span>
+      <span>每年一次 · 持續做</span>
+      <span>2027 Vol.2 — 食字題目待定</span>
+    </div>
+    <div class="mqt rev" aria-hidden="true">
+      <span>2007 食得夠尖</span>
+      <span>»</span>
+      <span>2022 食得夠GYM</span>
+      <span>»</span>
+      <span>2026 食得夠STEM</span>
+      <span>—</span>
+      <span>大快活年度文化定位</span>
+      <span>由 1972 街坊飯堂開始</span>
+      <span>每年一次 · 持續做</span>
+      <span>2027 Vol.2 — 食字題目待定</span>
+    </div>
+  </div>
 
   <!-- ============ FOOTER ============ -->
   <footer class="foot" id="foot">
