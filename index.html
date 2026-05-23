@@ -1378,8 +1378,8 @@ body.battle-in-view.show-peanut .battle-toast.right{
     border-radius: 8px;
     background: var(--ink) !important;
   }
-  /* Each iframe locked at 86px tall
-     Total: 2 × 86 + 2 × 46 footer + 12 gap + 16 padding ≈ 292px */
+  /* Each iframe locked at 86px tall · iframe rendered at desktop 1280×800 then scaled
+     to fit container width — shows FULL site as a thumbnail, not just top strip */
   .battle-body .bs-frame{
     position: relative !important;
     aspect-ratio: auto !important;
@@ -1388,12 +1388,21 @@ body.battle-in-view.show-peanut .battle-toast.right{
     max-height: 86px !important;
     flex: 0 0 86px !important;
     width: 100% !important;
+    overflow: hidden !important;
   }
   .battle-body .bs-frame iframe{
-    position: absolute !important; inset: 0 !important;
-    width: 100% !important; height: 100% !important;
-    pointer-events: auto !important;
+    position: absolute !important;
+    top: 0 !important; left: 0 !important;
+    width: 1280px !important;
+    height: 800px !important;
+    transform: scale(0.27) !important;
+    transform-origin: top left !important;
+    pointer-events: none !important;
   }
+  /* responsive scale: tweak per breakpoint for full-width fit */
+  @media (max-width: 420px){ .battle-body .bs-frame iframe{ transform: scale(0.30) !important; } }
+  @media (max-width: 380px){ .battle-body .bs-frame iframe{ transform: scale(0.28) !important; } }
+  @media (max-width: 360px){ .battle-body .bs-frame iframe{ transform: scale(0.26) !important; } }
   /* Both bs-foots VISIBLE */
   .battle-body .bs-foot,
   .battle-split:not(.active-peanut) .battle-body.peanut .bs-foot,
