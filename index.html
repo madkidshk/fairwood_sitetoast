@@ -226,9 +226,10 @@ body::after{
 .mq.invert .mqt span::after{ color: var(--ink); opacity: .35; }
 .mq.brown .mqt span::after{ color: var(--ink); opacity: .35; }
 @keyframes mqs{ to{ transform: translateX(-100%); } }
-.mqt.rev{ animation: mqs-rev 32s linear infinite; }
-.mqt.rev.fast{ animation-duration: 18s; }
+.mqt.rev{ animation: mqs-rev 32s linear infinite !important; }
+.mqt.rev.fast{ animation-duration: 18s !important; }
 @keyframes mqs-rev{ from{ transform: translateX(-100%); } to{ transform: translateX(0); } }
+/* cache-bust marker: build 2026-05-23-1 — alternating marquee directions */
 
 /* ============ TOP MENU BAR (sticky, 3-zone layout) ============
    LEFT: brand · CENTER: nav links · RIGHT: live D-day + CTA
