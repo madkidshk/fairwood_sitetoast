@@ -1330,49 +1330,80 @@ body.battle-in-view.show-peanut .battle-toast.right{
 }
 
 @media (max-width: 900px){
-  /* === MOBILE BATTLE — stack vertical · each iframe shown FULL (no clip, no overlap, full aspect) === */
+  /* === MOBILE BATTLE — stack vertical · each iframe shown FULL (no clip, no overlap) === */
   .battle{
     aspect-ratio: auto !important;
     width: 100% !important;
     height: auto !important;
     min-height: auto !important;
+    padding: 8px !important;
   }
   .battle-split{
     height: auto !important;
     flex: 0 0 auto !important;
+    overflow: visible !important;
   }
   .battle-bodies{
     display: flex !important;
     flex-direction: column !important;
     height: auto !important;
     flex: 0 0 auto !important;
+    overflow: visible !important;
+    gap: 12px !important;
     --seam: 50% !important;
     --overlap: 0 !important;
   }
-  .battle-body{
+  .battle-body,
+  .battle-body.duck,
+  .battle-body.peanut,
+  .battle-split.active-peanut .battle-body.duck,
+  .battle-split.active-peanut .battle-body.peanut,
+  .battle-split:not(.active-peanut) .battle-body.duck,
+  .battle-split:not(.active-peanut) .battle-body.peanut{
     position: relative !important;
     top: auto !important; bottom: auto !important; left: auto !important; right: auto !important;
     width: 100% !important;
     height: auto !important;
     flex: 0 0 auto !important;
-    aspect-ratio: 4 / 5 !important;
     clip-path: none !important;
-    border-bottom: 1.5px solid rgba(245,236,217,.18);
-  }
-  .battle-body.peanut{ border-bottom: 0; border-top: 1.5px solid rgba(245,236,217,.18); }
-  /* Both bodies fully active on mobile (no dim, no pointer-events block) */
-  .battle-split:not(.active-peanut) .battle-body.peanut,
-  .battle-split.active-peanut .battle-body.duck{
+    -webkit-clip-path: none !important;
+    z-index: auto !important;
     filter: none !important;
     pointer-events: auto !important;
     cursor: default !important;
+    overflow: hidden;
+    border-radius: 8px;
+    background: var(--ink) !important;
   }
+  /* Each iframe gets a fixed-height frame so content renders fully */
+  .battle-body .bs-frame{
+    position: relative !important;
+    height: 70vh !important;
+    min-height: 460px !important;
+    max-height: 560px !important;
+  }
+  .battle-body .bs-frame iframe{
+    position: absolute !important; inset: 0 !important;
+    width: 100% !important; height: 100% !important;
+    pointer-events: auto !important;
+  }
+  /* Both bs-foots VISIBLE */
+  .battle-body .bs-foot,
   .battle-split:not(.active-peanut) .battle-body.peanut .bs-foot,
-  .battle-split.active-peanut .battle-body.duck .bs-foot{ display: grid !important; }
-  /* swap-pill HIDDEN on mobile — no need to switch when both visible */
-  .swap-pill{ display: none !important; }
-  .bs-foot{ grid-template-columns: auto 1fr auto auto; padding: 10px 12px; gap: 6px; }
-  .bs-vote{ display:none !important; }
+  .battle-split.active-peanut .battle-body.duck .bs-foot{
+    display: grid !important;
+    grid-template-columns: auto 1fr auto auto auto !important;
+    padding: 10px 12px !important;
+    gap: 6px !important;
+  }
+  /* swap-pill HIDDEN — no need to switch when both fully visible */
+  .swap-pill, #swapBtn{
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+  .battle-slash{ display: none !important; }
+  .bs-vote{ display: none !important; }
   .bs-score .n{ font-size: 36px; }
 }
 
