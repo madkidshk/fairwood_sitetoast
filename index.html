@@ -1395,14 +1395,12 @@ body.battle-in-view.show-peanut .battle-toast.right{
     top: 0 !important; left: 0 !important;
     width: 1280px !important;
     height: 800px !important;
-    transform: scale(0.27) !important;
+    /* responsive scale: container width / 1280 to exactly fit width
+       Container = 100vw - 32px(.battle margin) - 16px(.battle padding) = 100vw - 48px */
+    transform: scale(calc((100vw - 48px) / 1280px)) !important;
     transform-origin: top left !important;
     pointer-events: none !important;
   }
-  /* responsive scale: tweak per breakpoint for full-width fit */
-  @media (max-width: 420px){ .battle-body .bs-frame iframe{ transform: scale(0.30) !important; } }
-  @media (max-width: 380px){ .battle-body .bs-frame iframe{ transform: scale(0.28) !important; } }
-  @media (max-width: 360px){ .battle-body .bs-frame iframe{ transform: scale(0.26) !important; } }
   /* Both bs-foots VISIBLE */
   .battle-body .bs-foot,
   .battle-split:not(.active-peanut) .battle-body.peanut .bs-foot,
