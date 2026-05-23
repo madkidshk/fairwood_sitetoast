@@ -1330,10 +1330,22 @@ body.battle-in-view.show-peanut .battle-toast.right{
 }
 
 @media (max-width: 900px){
-  /* === MOBILE BATTLE — stack vertical (傳統上 / 花生下) === */
+  /* === MOBILE BATTLE — stack vertical · each iframe shown FULL (no clip, no overlap, full aspect) === */
+  .battle{
+    aspect-ratio: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+  .battle-split{
+    height: auto !important;
+    flex: 0 0 auto !important;
+  }
   .battle-bodies{
     display: flex !important;
     flex-direction: column !important;
+    height: auto !important;
+    flex: 0 0 auto !important;
     --seam: 50% !important;
     --overlap: 0 !important;
   }
@@ -1341,17 +1353,24 @@ body.battle-in-view.show-peanut .battle-toast.right{
     position: relative !important;
     top: auto !important; bottom: auto !important; left: auto !important; right: auto !important;
     width: 100% !important;
-    height: 50%;
-    flex: 1 1 50%;
+    height: auto !important;
+    flex: 0 0 auto !important;
+    aspect-ratio: 4 / 5 !important;
     clip-path: none !important;
     border-bottom: 1.5px solid rgba(245,236,217,.18);
   }
   .battle-body.peanut{ border-bottom: 0; border-top: 1.5px solid rgba(245,236,217,.18); }
-  /* swap-pill positions at seam (now horizontal) */
-  .swap-pill{
-    left: 50% !important; top: 50% !important;
-    transform: translate(-50%, -50%) !important;
+  /* Both bodies fully active on mobile (no dim, no pointer-events block) */
+  .battle-split:not(.active-peanut) .battle-body.peanut,
+  .battle-split.active-peanut .battle-body.duck{
+    filter: none !important;
+    pointer-events: auto !important;
+    cursor: default !important;
   }
+  .battle-split:not(.active-peanut) .battle-body.peanut .bs-foot,
+  .battle-split.active-peanut .battle-body.duck .bs-foot{ display: grid !important; }
+  /* swap-pill HIDDEN on mobile — no need to switch when both visible */
+  .swap-pill{ display: none !important; }
   .bs-foot{ grid-template-columns: auto 1fr auto auto; padding: 10px 12px; gap: 6px; }
   .bs-vote{ display:none !important; }
   .bs-score .n{ font-size: 36px; }
