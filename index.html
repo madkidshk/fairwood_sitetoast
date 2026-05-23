@@ -1330,13 +1330,16 @@ body.battle-in-view.show-peanut .battle-toast.right{
 }
 
 @media (max-width: 900px){
-  /* === MOBILE BATTLE — stack vertical · each iframe shown FULL (no clip, no overlap) === */
+  /* === MOBILE BATTLE — stack vertical · two iframes fit within ONE mobile screen height · width has margin === */
   .battle{
     aspect-ratio: auto !important;
-    width: 100% !important;
+    width: calc(100% - 32px) !important;
+    max-width: calc(100% - 32px) !important;
+    margin: 12px auto 20px !important;
     height: auto !important;
     min-height: auto !important;
     padding: 8px !important;
+    box-sizing: border-box !important;
   }
   .battle-split{
     height: auto !important;
@@ -1375,12 +1378,14 @@ body.battle-in-view.show-peanut .battle-toast.right{
     border-radius: 8px;
     background: var(--ink) !important;
   }
-  /* Each iframe gets a fixed-height frame so content renders fully */
+  /* Each iframe locked height so TOP + bs-foot + gap + BOTTOM + bs-foot ≤ 1 mobile screen
+     Calc: 2 × bs-frame (36vh) + 2 × bs-foot (~46px) + gap 12px + battle padding 16px ≈ 88vh */
   .battle-body .bs-frame{
     position: relative !important;
-    height: 70vh !important;
-    min-height: 460px !important;
-    max-height: 560px !important;
+    height: 36vh !important;
+    min-height: 36vh !important;
+    max-height: 36vh !important;
+    flex: 0 0 36vh !important;
   }
   .battle-body .bs-frame iframe{
     position: absolute !important; inset: 0 !important;
