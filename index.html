@@ -1329,8 +1329,8 @@ body.battle-in-view.show-peanut .battle-toast.right{
   .mf-cta{ font-size: 11px; padding: 10px 16px; }
 }
 
-@media (max-width: 900px){
-  /* === MOBILE BATTLE — stack vertical · two iframes fit within ONE mobile screen height · width has margin === */
+@media (max-width: 640px){
+  /* === TRUE MOBILE BATTLE — stack vertical · only phone, not tablet · two iframes fit within ONE screen · width has margin === */
   .battle{
     aspect-ratio: auto !important;
     width: calc(100% - 32px) !important;
@@ -1378,15 +1378,15 @@ body.battle-in-view.show-peanut .battle-toast.right{
     border-radius: 8px;
     background: var(--ink) !important;
   }
-  /* Each iframe locked at 115px tall
-     Total: 2 × 115 + 2 × 46 footer + 12 gap + 16 padding ≈ 350px */
+  /* Each iframe locked at 86px tall
+     Total: 2 × 86 + 2 × 46 footer + 12 gap + 16 padding ≈ 292px */
   .battle-body .bs-frame{
     position: relative !important;
     aspect-ratio: auto !important;
-    height: 115px !important;
-    min-height: 115px !important;
-    max-height: 115px !important;
-    flex: 0 0 115px !important;
+    height: 86px !important;
+    min-height: 86px !important;
+    max-height: 86px !important;
+    flex: 0 0 86px !important;
     width: 100% !important;
   }
   .battle-body .bs-frame iframe{
