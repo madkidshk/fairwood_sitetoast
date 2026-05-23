@@ -1378,12 +1378,12 @@ body.battle-in-view.show-peanut .battle-toast.right{
     border-radius: 8px;
     background: var(--ink) !important;
   }
-  /* Each iframe = 16:9 preview · width-driven height keeps consistent aspect
-     On 360px-wide mobile: ~344px iframe width × 9/16 ≈ 194px tall
-     Total: 2 × 194 + 2 × 46 footer + 12 gap + 16 padding ≈ 510px (fits any mobile) */
+  /* Each iframe = 21:9 cinematic preview · short
+     On 360px mobile: ~344px width × 9/21 ≈ 147px tall
+     Total: 2 × 147 + 2 × 46 footer + 12 gap + 16 padding ≈ 414px */
   .battle-body .bs-frame{
     position: relative !important;
-    aspect-ratio: 16 / 9 !important;
+    aspect-ratio: 21 / 9 !important;
     height: auto !important;
     min-height: 0 !important;
     max-height: none !important;
